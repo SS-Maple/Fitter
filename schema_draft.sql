@@ -16,7 +16,9 @@ CREATE TABLE users (
   password       VARCHAR   NOT NULL,
   shareBirthday  BOOLEAN   NOT NULL,
   birthday       VARCHAR,
-  picture        VARCHAR
+  picture        VARCHAR,
+  securityQuestion VARCHAR NOT NULL,
+  securityAnswer VARCHAR   NOT NULL
 );
 
 CREATE TABLE friends (
