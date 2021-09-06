@@ -1,11 +1,22 @@
 import React from 'react';
+import '../../../../dist/style.css';
 
-const Logo = () => {
-  return (
-    <div id="logo">
-      This is the logo
-    </div>
-  )
+class Logo extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+
+    };
+  }
+
+  render() {
+    return (
+      <div id="logo">
+        FITTER
+      </div>
+    )
+}
 };
 
 export default Logo;

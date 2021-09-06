@@ -1,0 +1,46 @@
+/* TOP BAR STYLES */
+
+#topbar {
+  background-color: #e25786;
+  width: 94vw;
+  height: 10vh;
+  display: flex;
+  margin: auto;
+}
+
+#emptyDiv {
+  width: 15vw
+}
+
+#logo {
+  color: white;
+  width: 70vw;
+  font-family: 'Courier Prime', monospace;
+  font-size: 6vh;
+  font-weight: bold;
+  margin: auto;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#notificationIcon {
+  color: #494949;
+  width: 15vw;
+  font-size: 4vh;
+  font: sans-serif;
+  justify-content: center;
+  vertical-align: middle;
+  display: inline;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+#notificationButton {
+  background-color: #e25786;
+  border: none;
+  padding: none;
+  margin: none;
+}
