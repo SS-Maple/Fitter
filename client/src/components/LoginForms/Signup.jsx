@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Signup = () => {
+const Signup = ({setView}) => {
   return (
     <div className='form-page'>
-      <div className='form-content'>
+      <div className='form-content' style={{marginTop: '10%'}}>
         <form>
           <input type='text' placeholder='First Name'></input>
           <input type='text' placeholder='Last Name'></input>
@@ -16,7 +16,7 @@ const Signup = () => {
         </form>
       </div>
       <div className='form-content'>
-        <p style={{fontSize: 'smaller'}}>Have an account? <u>Log in Here</u></p>
+        <p style={{fontSize: 'smaller'}}>Have an account? <u onClick={e => setView('login')}>Log in Here</u></p>
       </div>
     </div>
   )

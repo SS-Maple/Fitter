@@ -6,7 +6,7 @@ const Login = () => {
   const [view, setView] = useState('login')
 
   if (view === 'signup') {
-    return <Signup />
+    return <Signup setView={setView}/>
   }
 
   if (view === 'forgot') {
@@ -16,7 +16,7 @@ const Login = () => {
   if (view === 'login') {
     return (
       <div className='form-page'>
-        <div className='form-content'>
+        <div className='form-content' style={{marginTop: '25%'}}>
           <form>
             <input type='text' placeholder='Email'></input>
             <input type='text' placeholder='Password'></input>

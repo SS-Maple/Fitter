@@ -8,7 +8,7 @@ const ForgotPW = () => {
   if (!userExists) {
     return (
       <div className='form-page'>
-        <div className='form-content'>
+        <div className='form-content' style={{marginTop: '20%'}}>
           <form>
             <label>Please enter the email address for your account</label>
             <input type='email' placeholder='Email'></input>
@@ -21,7 +21,7 @@ const ForgotPW = () => {
 
   return (
     <div className='form-page'>
-        <div className='form-content'>
+        <div className='form-content' style={{marginTop: '20%'}}>
           <form>
             <label style={{margin: '10px'}}>Complete your security question and create a new password</label>
             <label>What was your first pet?</label>
