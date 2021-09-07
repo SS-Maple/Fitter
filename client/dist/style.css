@@ -1,3 +1,60 @@
+
+/* APP STYLES*/
+#app {
+  margin: none;
+  padding: none;
+  border: none;
+}
+
+/* TOP BAR STYLES */
+#topbar {
+  background-color: #e25786;
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  padding: none;
+  margin: none;
+}
+
+#emptyDiv {
+  width: 15vw;
+  display: flex;
+}
+
+#logoButton {
+  color: white;
+  display: flex;
+  width: 70vw;
+  font-family: 'Courier Prime', monospace;
+  font-size: 6vh;
+  font-weight: bold;
+  margin: auto;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background-color: #e25786;
+  border: none;
+  padding: none;
+  margin: none;
+}
+
+#notificationIcon {
+  color: #494949;
+  display: flex;
+  width: 15vw;
+  font-size: 4vh;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+}
+
+#notificationButton {
+  background-color: #e25786;
+  border: none;
+  padding: none;
+  margin: none;
+}
+
 body {
   margin: 0;
   background-color: #6ec0c3;
@@ -44,4 +101,3 @@ body {
 }
 
 /*User Profile*/
-
