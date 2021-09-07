@@ -1,4 +1,5 @@
 import React from 'react';
+import TopBar from './SharedComponents/TopBar.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,7 +11,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>HELLO</div>
+      <div>
+        <TopBar />
+      </div>
     )
   }
 }
