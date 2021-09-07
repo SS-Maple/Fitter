@@ -10,11 +10,15 @@ class Logo extends React.Component {
     };
   }
 
+  onClick() {
+    console.log('Logo click');
+  }
+
   render() {
     return (
-      <div id="logo">
-        FITTER
-      </div>
+      <button id="logoButton" onClick={this.onClick.bind(this)}>
+          FITTER
+      </button>
     )
 }
 };

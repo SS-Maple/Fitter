@@ -8,6 +8,12 @@ class NotificationIcon extends React.Component {
     this.state = {
 
     }
+
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick() {
+    console.log('Notification click');
   }
 
   render() {
@@ -16,11 +22,11 @@ class NotificationIcon extends React.Component {
       <>
         {newNotifications ?
           (
-            <button id="notificationButton">
+            <button id="notificationButton" onClick={this.onClick}>
               <div id="notificationIcon" dangerouslySetInnerHTML={{__html: '&#33'}} />
             </button>
           ) : (
-            <button id="notificationButton">
+            <button id="notificationButton" onClick={this.onClick}>
               <div id="notificationIcon" dangerouslySetInnerHTML={{__html: '&#9742'}} />
             </button>
           )

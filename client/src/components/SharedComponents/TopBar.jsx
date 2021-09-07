@@ -17,7 +17,7 @@ class TopBar extends React.Component {
   render () {
     return (
       <div id="topbar">
-        <div id="emptyDiv" />
+        <div id="emptyDiv"/>
         <Logo id="logo"/>
         <NotificationIcon id="notificaitonIcon" />
       </div>

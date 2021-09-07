@@ -1,19 +1,29 @@
-/* TOP BAR STYLES */
 
+/* APP STYLES*/
+#app {
+  margin: none;
+  padding: none;
+  border: none;
+}
+
+/* TOP BAR STYLES */
 #topbar {
   background-color: #e25786;
-  width: 94vw;
+  width: 100vw;
   height: 10vh;
   display: flex;
-  margin: auto;
+  padding: none;
+  margin: none;
 }
 
 #emptyDiv {
-  width: 15vw
+  width: 15vw;
+  display: flex;
 }
 
-#logo {
+#logoButton {
   color: white;
+  display: flex;
   width: 70vw;
   font-family: 'Courier Prime', monospace;
   font-size: 6vh;
@@ -22,20 +32,20 @@
   text-align: center;
   align-items: center;
   justify-content: center;
-
+  background-color: #e25786;
+  border: none;
+  padding: none;
+  margin: none;
 }
 
 #notificationIcon {
   color: #494949;
+  display: flex;
   width: 15vw;
   font-size: 4vh;
-  font: sans-serif;
-  justify-content: center;
   vertical-align: middle;
-  display: inline;
   align-items: center;
   justify-content: center;
-  margin: auto;
 }
 
 #notificationButton {
