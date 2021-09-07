@@ -1,4 +1,6 @@
 import React from 'react';
+import BottomNav from './bottomNav.jsx'
+import UserProfile from './userProfile/userProfile.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -6,11 +8,19 @@ class App extends React.Component {
     this.state = {
       test: []
     }
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(e){
+    console.log(e.target.alt)
   }
 
   render() {
     return (
-      <div>HELLO</div>
+      <div>
+        <UserProfile />
+        <BottomNav handleClick={this.handleClick} />
+      </div>
     )
   }
 }
