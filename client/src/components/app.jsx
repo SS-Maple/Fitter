@@ -1,6 +1,7 @@
 import React from 'react';
 import TopBar from './SharedComponents/TopBar.jsx';
 import BottomNav from './SharedComponents/BottomNav/bottomNav.jsx';
+import FriendsList from './FriendsList/FriendsList.jsx';
 
 
 class App extends React.Component {
@@ -20,6 +21,7 @@ class App extends React.Component {
     return (
       <div>
         <TopBar />
+        <FriendsList />
         <BottomNav handleClick={this.handleClick} />
       </div>
     )
