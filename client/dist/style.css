@@ -1,0 +1,103 @@
+
+/* APP STYLES*/
+#app {
+  margin: none;
+  padding: none;
+  border: none;
+}
+
+/* TOP BAR STYLES */
+#topbar {
+  background-color: #e25786;
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  padding: none;
+  margin: none;
+}
+
+#emptyDiv {
+  width: 15vw;
+  display: flex;
+}
+
+#logoButton {
+  color: white;
+  display: flex;
+  width: 70vw;
+  font-family: 'Courier Prime', monospace;
+  font-size: 6vh;
+  font-weight: bold;
+  margin: auto;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background-color: #e25786;
+  border: none;
+  padding: none;
+  margin: none;
+}
+
+#notificationIcon {
+  color: #494949;
+  display: flex;
+  width: 15vw;
+  font-size: 4vh;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+}
+
+#notificationButton {
+  background-color: #e25786;
+  border: none;
+  padding: none;
+  margin: none;
+}
+
+body {
+  margin: 0;
+  background-color: #6ec0c3;
+}
+/* Bottom Nav */
+.bottom-nav {
+  background-color: #e25786;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding-top: .5rem;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Bottom Nav */
+
+/*User Profile*/
+.user-profile {
+  display: flex;
+  background-color: white;
+  border: black;
+  margin-top: 60px;
+  margin-left: 5px;
+  margin-right: 5px;
+  height: auto;
+  width: auto;
+  border-radius: 1rem;
+}
+
+.profile-pic {
+  padding:1rem;
+}
+.profile-img {
+  max-width: 75px;
+  max-height: 750px;
+}
+
+/*User Profile*/
