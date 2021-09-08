@@ -34,16 +34,20 @@ function FriendsList() {
       </div>
       {/* Friend's List Tile */}
       {friends.map((friend, index) => (
-        <div className='gs-friend-tile' key={index}>
-            {/* Profile Picture */}
-            <div className='gs-friend-left-pic'>
-              <img src={friend.picture} alt="Italian Trulli"></img>
-            </div> 
-            {/* Friend Information */}
-            <div className='gs-friend-right-info'>
-              <b>{friend.firstname} {friend.lastname}</b><p></p>
-              {friend.descriptionmessage}
-            </div>
+        <div 
+          className='gs-friend-tile' 
+          key={index} 
+          onClick={() => console.log('you clicked on ', friend.firstname, `'s tile`)}
+        >
+          {/* Profile Picture */}
+          <div className='gs-friend-left-pic'>
+            <img src={friend.picture} alt="Italian Trulli"></img>
+          </div> 
+          {/* Friend Information */}
+          <div className='gs-friend-right-info'>
+            <b>{friend.firstname} {friend.lastname}</b><p></p>
+            {friend.descriptionmessage}
+          </div>
         </div>
       ))}
     </div>
