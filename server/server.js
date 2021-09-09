@@ -45,15 +45,6 @@ app.get('/friends', (req, res) => {
 
 app.get('/rankings', (req, res) => {
   let friendId = 1;
-  // SELECT * FROM friends 
-  // JOIN users
-  // ON friends.friendid = users.id
-  // JOIN goals
-  // ON goals.userId = users.id
-  // JOIN dailyData
-  // ON dailyData.userId = users.id
-  // WHERE friends.userID = 1
-
 
   db.client.query(`
   
@@ -61,22 +52,38 @@ app.get('/rankings', (req, res) => {
       (
         select array_to_json(array_agg(row_to_json(d)))
         from (
-          select *, (
+          select *, 
+          (
+            select picture
+            from users
+            where users.id = friends.friendId
+          ) as profilephoto ,
+          (
+            select firstname
+            from users
+            where users.id = friends.friendId
+          ) as friendfirst ,
+          (
+            select lastname
+            from users
+            where users.id = friends.friendId
+          ) as friendlast ,
+          (
             select array_to_json(array_agg(row_to_json(d)))
             from (
-              select userid, watergoal, caloriegoal, weightgoal,
+              select watergoal, caloriegoal, weightgoal,
               (
-                select avg(water)
+                select avg(water)/watergoal
                 from dailyData
                 where dailyData.userId = friendId
               ) as wateraverage ,
               (
-                select avg(calories)
+                select avg(calories)/caloriegoal
                 from dailyData
                 where dailyData.userId = friendId
               ) as caloriesaverage ,
               (
-                select avg(weight)
+                select avg(weight)/weightgoal
                 from dailyData
                 where dailyData.userId = friendId
               ) as weightaverage
@@ -89,14 +96,21 @@ app.get('/rankings', (req, res) => {
         ) d
       ) as friends
     from users
-    where users.id = 1
+    where users.id = ${friendId}
 
-  
   `, (err, data) => {
     if (err) {
       console.log('error from server -', err)
       res.send(err);
     } else {
+      let info = data.rows;
+      info.forEach(user => {
+        let friends = user.friends;
+        friends.forEach(friend => {
+          let goals = friend.goals
+
+        })
+      })
       res.send(data.rows);
     }
   })
