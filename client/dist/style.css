@@ -59,6 +59,45 @@ body {
   margin: none;
 }
 
+/* <----- Home Page  */
+
+#home-page {
+  font-family: sans-serif;
+}
+
+.home-page-header {
+  margin-top: 3%;
+  background: white;
+  padding: 3%
+}
+
+.home-page-header input {
+  width: 80%;
+  margin: auto;
+  display: block;
+  padding-left: 10px;
+}
+
+.home-placeholder {
+  margin-top: 3%;
+  background: white;
+  padding: 15%;
+  text-align: center
+}
+
+#home-page h4 {
+  color: white;
+  margin-left: 5%
+}
+
+.pic-tile-ranking {
+  margin-left: 5%;
+
+}
+
+
+/* Home Page -----> */
+
 
 /* <---- Friend's List */
 
