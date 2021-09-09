@@ -24,7 +24,7 @@ function FriendsList() {
   return (
     <div>
       {/* Friend's List Header */}
-      <div className='gs-friend-header'>
+      <div className='pic-tile-friend-header'>
         <img 
           className='icon' 
           src="https://img.icons8.com/ios-filled/50/000000/left.png"
@@ -35,16 +35,16 @@ function FriendsList() {
       {/* Friend's List Tile */}
       {friends.map((friend, index) => (
         <div 
-          className='gs-friend-tile' 
+          className='pic-tile-friend-tile' 
           key={index} 
           onClick={() => console.log('you clicked on ', friend.firstname, `'s tile`)}
         >
           {/* Profile Picture */}
-          <div className='gs-friend-left-pic'>
-            <img src={friend.picture} alt="Italian Trulli"></img>
+          <div className='pic-tile-friend-left-pic'>
+            <img src={friend.picture}></img>
           </div> 
           {/* Friend Information */}
-          <div className='gs-friend-right-info'>
+          <div className='pic-tile-friend-right-info'>
             <b>{friend.firstname} {friend.lastname}</b><p></p>
             {friend.descriptionmessage}
           </div>

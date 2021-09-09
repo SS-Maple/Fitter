@@ -62,7 +62,7 @@ body {
 
 /* <---- Friend's List */
 
-.gs-friend-header {
+.pic-tile-friend-header {
   margin-top: 3%;
   display: flex;
   font-family: sans-serif;
@@ -70,17 +70,17 @@ body {
   vertical-align: center;
 }
 
-.gs-friend-header img {
+.pic-tile-friend-header img {
   margin-left: 8%;
   margin-top: 3%;
 }
 
-.gs-friend-header h3 {
+.pic-tile-friend-header h3 {
   margin-left: 15%;
   text-align: center;
 }
 
-.gs-friend-tile {
+.pic-tile-friend-tile {
   font-family: sans-serif;
   display: flex;
   background: white;
@@ -88,19 +88,19 @@ body {
   margin: 5%;
 }
 
-.gs-friend-left-pic {
+.pic-tile-friend-left-pic {
   background: white;
   border-radius: 15px;
   width: 30%;
   padding: 3%
 }
 
-.gs-friend-left-pic img {
+.pic-tile-friend-left-pic img {
   border-radius: 50%;
   max-height: 75px
 }
 
-.gs-friend-right-info {
+.pic-tile-friend-right-info {
   background: white;
   border-radius: 15px;
   width: 70%;
