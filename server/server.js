@@ -55,43 +55,51 @@ app.get('/rankings', (req, res) => {
   // WHERE friends.userID = 1
 
 
-  // SELECT row_to_json(info) results
-  // FROM (
-  //   SELECT id, firstname, lastname, picture, (
-  //       SELECT array_to_json(array_agg(row_to_json(row)))
-  //       FROM (
-  //         SELECT *
-  //         FROM goals
-  //         WHERE goals.userId = users.id
-  //       ) row
-  //     ) as goals
-  //   FROM users
-  //   WHERE id = 1
-  // ) info
+  // select row_to_json(t)
+  // from (
+  //   select *,
+  //     (
+  //       select array_to_json(array_agg(row_to_json(d)))
+  //       from (
+  //         select *, (
+  //           select array_to_json(array_agg(row_to_json(d)))
+  //           from (
+  //             select *
+  //             from goals
+  //             where goals.userId = users.id
+  //           ) d
+  //         ) as goals
+  //         from friends
+  //         where friends.friendid = users.id
+  //       ) d 
+  //     ) as friends
+  //   from users
+  //   where users.id = 1
+  // ) t
 
-  
   db.client.query(`
   
-  SELECT row_to_json(info) results
-  FROM (
-    SELECT id, firstname, lastname, picture, (
-        SELECT array_to_json(array_agg(row_to_json(row)))
-        FROM (
-          SELECT *
-          FROM friends
-          WHERE friends.friendid = users.id
-        ) row
-      ) as friends,
-      SELECT array_to_json(array_agg(row_to_json(row)))
-        FROM (
-          SELECT *
-          FROM goals
-          WHERE goals.userId = users.id
-        ) rows
-      ) as goals
-    FROM users 
-    WHERE users.id = 1
-  ) info
+  select row_to_json(t)
+  from (
+    select *,
+      (
+        select array_to_json(array_agg(row_to_json(d)))
+        from (
+          select *, (
+            select array_to_json(array_agg(row_to_json(d)))
+            from (
+              select *
+              from goals
+              where goals.userId = users.id
+            ) d
+          ) as goals
+          from friends
+          where friends.userID = users.id 
+        ) d 
+      ) as friends
+    from users
+    where users.id = 1
+  ) t
   
   `, (err, data) => {
     if (err) {
