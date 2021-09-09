@@ -88,7 +88,15 @@ app.get('/rankings', (req, res) => {
           select *, (
             select array_to_json(array_agg(row_to_json(d)))
             from (
-              select *
+              select *, 
+              (
+                select array_to_json(array_agg(row_to_json(d)))
+                from (
+                  select *
+                  from dailyData
+                  where dailyData.userId = users.id
+                ) d
+              ) as dailyData
               from goals
               where goals.userId = users.id
             ) d
