@@ -57,8 +57,6 @@ app.get('/rankings', (req, res) => {
 
   db.client.query(`
   
-  select row_to_json(t)
-  from (
     select id, firstname, lastname, picture, descriptionmessage,
       (
         select array_to_json(array_agg(row_to_json(d)))
@@ -66,39 +64,45 @@ app.get('/rankings', (req, res) => {
           select *, (
             select array_to_json(array_agg(row_to_json(d)))
             from (
-              select userid, watergoal, caloriegoal, weightgoal, 
+              select userid, watergoal, caloriegoal, weightgoal,
               (
-                select array_to_json(array_agg(row_to_json(d)))
-                from (
-                  select userid, timestamp, water, calories, weight
-                  from dailyData
-                  where dailyData.userId = friendId
-                ) d
-              ) as dailyData
-              from goals 
+                select avg(water)
+                from dailyData
+                where dailyData.userId = friendId
+              ) as wateraverage ,
+              (
+                select avg(calories)
+                from dailyData
+                where dailyData.userId = friendId
+              ) as caloriesaverage ,
+              (
+                select avg(weight)
+                from dailyData
+                where dailyData.userId = friendId
+              ) as weightaverage
+              from goals
               where goals.userId = friendId
             ) d
           ) as goals
           from friends
-          where friends.userID = users.id 
-        ) d 
+          where friends.userID = users.id
+        ) d
       ) as friends
     from users
     where users.id = 1
-  ) t
+
   
   `, (err, data) => {
     if (err) {
       console.log('error from server -', err)
       res.send(err);
     } else {
-      console.log('rows from server /rankings - ', data.rows)
       res.send(data.rows);
     }
   })
 });
 
 
-app.listen(port, function() {
+app.listen(port, function () {
   console.log(`listening on port ${port}`);
 });
