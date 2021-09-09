@@ -1,4 +1,5 @@
 import React from 'react';
+import MessageButton from './messageButton.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,7 +11,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>HELLO</div>
+      <div>HELLO
+
+        <MessageButton />
+      </div>
     )
   }
 }
