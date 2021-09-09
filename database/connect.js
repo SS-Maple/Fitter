@@ -1,5 +1,6 @@
 const { Client } = require('pg');
-const connectionString = `postgres://pscheutzow:password@localhost:5432/fitterdb`;
+const dotenv = require('dotenv').config({path: __dirname + '/..' + '/.env'});
+const connectionString = process.env.connectionString;
 
 const client = new Client({
   connectionString: connectionString

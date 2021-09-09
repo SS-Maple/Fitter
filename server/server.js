@@ -15,10 +15,10 @@ app.get('/user', (req, res) => {
     WHERE id = ${userId}
   `, (err, data) => {
     if (err) {
-      console.log('error from server -', err)
+      // console.log('error from server -', err)
       res.send(err);
     } else {
-      console.log('rows from server /users - ', data.rows)
+      // console.log('rows from server /users - ', data.rows)
       res.send(data.rows);
     }
   })
@@ -37,12 +37,11 @@ app.get('/friends', (req, res) => {
       // console.log('error from server -', err)
       res.send(err);
     } else {
-      console.log('rows from server /friends - ', data.rows)
+      // console.log('rows from server /friends - ', data.rows)
       res.send(data.rows);
     }
   })
 });
-
 
 
 app.listen(port, function() {

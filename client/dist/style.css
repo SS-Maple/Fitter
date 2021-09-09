@@ -91,18 +91,19 @@ body {
 .gs-friend-left-pic {
   background: white;
   border-radius: 15px;
-  width: 35%;
+  width: 30%;
   padding: 3%
 }
 
 .gs-friend-left-pic img {
   border-radius: 50%;
+  max-height: 75px
 }
 
 .gs-friend-right-info {
   background: white;
   border-radius: 15px;
-  width: 65%;
+  width: 70%;
   padding: 3%
 }
 
