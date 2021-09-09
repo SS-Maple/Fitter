@@ -55,50 +55,28 @@ app.get('/rankings', (req, res) => {
   // WHERE friends.userID = 1
 
 
-  // select row_to_json(t)
-  // from (
-  //   select *,
-  //     (
-  //       select array_to_json(array_agg(row_to_json(d)))
-  //       from (
-  //         select *, (
-  //           select array_to_json(array_agg(row_to_json(d)))
-  //           from (
-  //             select *
-  //             from goals
-  //             where goals.userId = users.id
-  //           ) d
-  //         ) as goals
-  //         from friends
-  //         where friends.friendid = users.id
-  //       ) d 
-  //     ) as friends
-  //   from users
-  //   where users.id = 1
-  // ) t
-
   db.client.query(`
   
   select row_to_json(t)
   from (
-    select *,
+    select id, firstname, lastname, picture, descriptionmessage,
       (
         select array_to_json(array_agg(row_to_json(d)))
         from (
           select *, (
             select array_to_json(array_agg(row_to_json(d)))
             from (
-              select *, 
+              select userid, watergoal, caloriegoal, weightgoal, 
               (
                 select array_to_json(array_agg(row_to_json(d)))
                 from (
-                  select *
+                  select userid, timestamp, water, calories, weight
                   from dailyData
-                  where dailyData.userId = users.id
+                  where dailyData.userId = friendId
                 ) d
               ) as dailyData
-              from goals
-              where goals.userId = users.id
+              from goals 
+              where goals.userId = friendId
             ) d
           ) as goals
           from friends
