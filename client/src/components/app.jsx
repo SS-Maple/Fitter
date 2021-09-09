@@ -1,7 +1,7 @@
 import React from 'react';
 import TopBar from './SharedComponents/TopBar.jsx';
 import BottomNav from './SharedComponents/BottomNav/bottomNav.jsx';
-
+import MyProfile from './myProfile/myProfile.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,6 +20,7 @@ class App extends React.Component {
     return (
       <div>
         <TopBar />
+        <MyProfile />
         <BottomNav handleClick={this.handleClick} />
       </div>
     )
