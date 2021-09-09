@@ -23,10 +23,10 @@ class App extends React.Component {
     return (
       <div>
         <TopBar />
-        {/* temporarily hidding FriendsList */}
+        {/* temporarily hidding FriendsList, HomeFeed */}
         {/* <FriendsList />  */}
-        <HomeFeed />
-        {/* <Login /> */}
+        {/* <HomeFeed /> */}
+        <Login />
         <BottomNav handleClick={this.handleClick} />
       </div>
     )

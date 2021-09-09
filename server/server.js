@@ -53,6 +53,11 @@ app.get('/rankings', (req, res) => {
         from (
           select *, 
           (
+            select username
+            from users
+            where users.id = friends.friendId
+          ) as friendusername ,
+          (
             select picture
             from users
             where users.id = friends.friendId
@@ -101,14 +106,7 @@ app.get('/rankings', (req, res) => {
       console.log('error from server -', err)
       res.send(err);
     } else {
-      let info = data.rows;
-      info.forEach(user => {
-        let friends = user.friends;
-        friends.forEach(friend => {
-          let goals = friend.goals
-
-        })
-      })
+      console.log('rows from server /rankings - ', data.rows)
       res.send(data.rows);
     }
   })

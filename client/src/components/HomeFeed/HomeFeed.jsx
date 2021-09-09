@@ -52,7 +52,7 @@ function HomeFeed() {
           onClick={() => console.log({ friend })}
         >
           <div className='pic-tile-ranking'>
-            #{index + 1}<p>{friend.sorting}</p>
+            #{index + 1}<p style={{'fontSize': '10px'}}>{friend.sorting}</p>
           </div>
           {/* Profile Picture */}
           <div className='pic-tile-friend-left-pic' style={{ 'width': '15%', }}>
@@ -63,7 +63,7 @@ function HomeFeed() {
             className='pic-tile-friend-right-info'
             style={{ 'fontSize': '14px', 'width': '85%' }}
           >
-            <b>{friend.friendfirst}'s stats:</b>
+            <b>{friend.friendusername}:</b>
             <li>
               {Math.round(friend.goals[0].wateraverage * 100)}% of my water goal.
             </li>
