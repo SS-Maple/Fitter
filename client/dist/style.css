@@ -1,8 +1,13 @@
 /* APP STYLES*/
 #app {
-  margin: none;
-  padding: none;
-  border: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  margin: 0;
+  background-color: #6ec0c3;
 }
 
 /* TOP BAR STYLES */
@@ -54,32 +59,8 @@
   margin: none;
 }
 
-body {
-  margin: 0;
-  background-color: #6ec0c3;
-}
-/* Bottom Nav */
-.bottom-nav {
-  background-color: #e25786;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  padding-top: .5rem;
-  justify-content: space-around;
-  display: flex;
-  flex-direction: row;
-}
 
-.icon {
-  width: 2rem;
-  height: 2rem;
-}
-
-/* Bottom Nav */
-
-
-/* Friend's List Start */
+/* <---- Friend's List */
 
 .gs-friend-header {
   margin-top: 3%;
@@ -125,11 +106,10 @@ body {
   padding: 3%
 }
 
-
-/* Friend's List End */
-
+/* Friend's List ----> */
 
 /*User Profile*/
+
 .user-profile {
   display: flex;
   background-color: white;
@@ -151,3 +131,23 @@ body {
 }
 
 /*User Profile*/
+
+/* Bottom Nav */
+.bottom-nav {
+  background-color: #e25786;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding-top: .5rem;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Bottom Nav */

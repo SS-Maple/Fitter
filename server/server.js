@@ -41,7 +41,6 @@ app.get('/friends', (req, res) => {
       res.send(data.rows);
     }
   })
-
 });
 
 
