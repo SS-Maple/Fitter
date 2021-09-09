@@ -47,7 +47,6 @@ app.get('/rankings', (req, res) => {
   let friendId = 1;
 
   db.client.query(`
-  
     select id, firstname, lastname, picture, descriptionmessage,
       (
         select array_to_json(array_agg(row_to_json(d)))
@@ -97,7 +96,6 @@ app.get('/rankings', (req, res) => {
       ) as friends
     from users
     where users.id = ${friendId}
-
   `, (err, data) => {
     if (err) {
       console.log('error from server -', err)
