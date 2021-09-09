@@ -27,3 +27,19 @@ describe('Renders navigationButton', () => {
     render(<NotificationIcon />);
   });
 });
+
+describe('logoButton event handler fires when clicked', () => {
+  fireEvent(node: HTMLElement, event: Event);
+  fireEvent(
+    getByText(container, 'FITTER'),
+    new MouseEvent('click', {
+
+    })
+  )
+});
+
+// describe('notificationButton event handler fires when clicked', () => {
+//   fireEvent(
+//     getByText(container, 'Fitter')
+//   )
+// });

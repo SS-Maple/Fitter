@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS goals;
 DROP TABLE IF EXISTS dailyData;
 DROP TABLE IF EXISTS friendsMessages;
 DROP TABLE IF EXISTS publicMessages;
+DROP TABLE IF EXISTS notifications;
 
 CREATE TABLE users (
   id                  INT       NOT NULL   PRIMARY KEY,
@@ -60,12 +61,20 @@ CREATE TABLE friendMessages (
   timestamp       TIMESTAMP DEFAULT now()
 );
 
+CREATE TABLE notifications (
+  id                     INT       NOT NULL    PRIMARY KEY,
+  userId                 INT       NOT NULL    REFERENCES users(id),
+  notificationText       VARCHAR   NOT NULL,
+  notificationTimestamp  TIMESTAMP DEFAULT now()
+);
+
 -- DATA LOAD
 \COPY users(id,firstName,lastName,email,descriptionMessage,userPassword,shareBirthday,birthday,picture,securityQuestion,securityAnswer) FROM 'data/fitterUsers.csv' DELIMITER ',' CSV HEADER;
 \COPY friends(id,userID,friendID) FROM 'data/fitterFriends.csv' DELIMITER ',' CSV HEADER;
 \COPY goals(id,userId,waterGoal,calorieGoal,weightGoal,shareBoolean) FROM 'data/goals.csv' DELIMITER ',' CSV HEADER;
 \COPY dailyData(id,userId,timestamp,water,calories,weight,shareBoolean) FROM 'data/dailyData.csv' DELIMITER ',' CSV HEADER;
 \COPY friendMessages(id,userID,friendID,message,timestamp) FROM 'data/friendMessages.csv' DELIMITER ',' CSV HEADER;
+\COPY notifications(id,userId,notificationText,notificationTimestamp) FROM 'data/notifications.csv' DELIMITER ',' CSV HEADER;
 
 
 -- STRETCH GOALS: public forum
