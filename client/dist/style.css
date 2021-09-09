@@ -92,7 +92,7 @@ body {
 
 .pic-tile-ranking {
   margin-left: 5%;
-
+  padding-top: 5%
 }
 
 
@@ -123,7 +123,7 @@ body {
   font-family: sans-serif;
   display: flex;
   background: white;
-  border-radius: 50px;
+  border-radius: 15px;
   margin: 5%;
 }
 

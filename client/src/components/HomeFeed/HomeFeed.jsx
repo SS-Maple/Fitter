@@ -13,6 +13,32 @@ function HomeFeed() {
       .then(result => setFriends(result[0].friends))
       .catch(error => error)
     }, [])
+    
+  sortFriends()
+
+  function sortFriends() {
+    console.log('running sort friends', friends.length)
+    
+    friends.forEach(friend => {
+      let calculate = (
+        // figure out water calculation
+        friend['goals'][0]['wateraverage'] * 0.33
+        ) + (
+        // figure out calories calculation
+        friend['goals'][0]['caloriesaverage'] * 0.33
+        ) + (
+        // figure out weight calculation
+        friend['goals'][0]['weightaverage'] * 0.33
+        );
+      friend['sorting'] = calculate; // will help sort ranking order
+      friends.sort(function (a, b) {
+        return b.sorting - a.sorting;
+      });
+      console.log('new', friends)
+    })
+
+    console.log('end')
+  }
   
   return (
     <div id='home-page'> 
@@ -30,23 +56,31 @@ function HomeFeed() {
       {/* Friend's List Tile */}
       {friends.map((friend, index) => (
         <div 
-        className='pic-tile-friend-tile' 
-        key={index}
-        onClick={() => console.log('you clicked on a tile')}
+          className='pic-tile-friend-tile' 
+          key={index}
+          onClick={() => console.log({friend})}
         >
-          {console.log(friend)}
           <div className='pic-tile-ranking'>
-            #{index + 1}
+            #{index + 1}<p></p>
           </div>
           {/* Profile Picture */}
-          <div className='pic-tile-friend-left-pic'>
-            <img src={friend.profilephoto}></img>
+          <div className='pic-tile-friend-left-pic' style={{'width': '15%', }}>
+            <img style={{'maxHeight': '50px'}} src={friend.profilephoto}></img>
           </div> 
           {/* Friend Information */}
-          <div className='pic-tile-friend-right-info'>
+          <div 
+            className='pic-tile-friend-right-info' 
+            style={{'fontSize': '14px', 'width': '85%'}}
+          >
             <b>{friend.friendfirst}'s stats:</b>
             <li>
-              Reached
+              {Math.round(friend.goals[0].wateraverage * 100)}% of my water goal.
+            </li>
+            <li>
+              {Math.round(friend.goals[0].caloriesaverage * 100)}% of my calories goal.
+            </li>
+            <li>
+              {Math.round(friend.goals[0].weightaverage * 100)}% of the way to my weight goal.
             </li>
           </div>
         </div>
