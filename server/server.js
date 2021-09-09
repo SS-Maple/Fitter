@@ -45,7 +45,6 @@ app.get('/friends', (req, res) => {
 
 app.get('/rankings', (req, res) => {
   let friendId = 1;
-
   db.client.query(`
     select id, firstname, lastname, picture, descriptionmessage,
       (
@@ -103,10 +102,10 @@ app.get('/rankings', (req, res) => {
     where users.id = ${friendId}
   `, (err, data) => {
     if (err) {
-      console.log('error from server -', err)
+      // console.log('error from server -', err)
       res.send(err);
     } else {
-      console.log('rows from server /rankings - ', data.rows)
+      // console.log('rows from server /rankings - ', data.rows)
       res.send(data.rows);
     }
   })
