@@ -25,8 +25,8 @@ class App extends React.Component {
         <TopBar />
         {/* temporarily hidding FriendsList, HomeFeed */}
         {/* <FriendsList />  */}
-        {/* <HomeFeed /> */}
-        <Login />
+        <HomeFeed />
+        {/* <Login /> */}
         <BottomNav handleClick={this.handleClick} />
       </div>
     )

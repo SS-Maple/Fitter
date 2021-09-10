@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-
+import SearchUsernames from './SearchUsernames.jsx';
 
 function HomeFeed() {
 
@@ -29,9 +29,7 @@ function HomeFeed() {
   return (
     <div id='home-page'>
       {/* Home Feed Search */}
-      <div className='home-page-header'>
-        <input placeholder='Search Username...'></input>
-      </div>
+      <SearchUsernames />
 
       {/* Placeholder for Personal Stats [Simon] */}
       <div className='home-placeholder'>
@@ -49,7 +47,7 @@ function HomeFeed() {
         <div
           className='pic-tile-friend-tile'
           key={index}
-          onClick={() => console.log({ friend })}
+          onClick={() => console.log(friend.friendfirst)}
         >
           <div className='pic-tile-ranking'>
             #{index + 1}<p style={{'fontSize': '10px'}}>{friend.sorting}</p>
