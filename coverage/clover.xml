@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1631150029415" clover="3.2.0">
-  <project timestamp="1631150029415" name="All files">
-    <metrics statements="16" coveredstatements="14" conditionals="2" coveredconditionals="1" methods="9" coveredmethods="7" elements="27" coveredelements="22" complexity="0" loc="16" ncloc="16" packages="4" files="5" classes="5"/>
+<coverage generated="1631251757614" clover="3.2.0">
+  <project timestamp="1631251757614" name="All files">
+    <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="2" methods="4" coveredmethods="4" elements="19" coveredelements="17" complexity="0" loc="11" ncloc="11" packages="4" files="5" classes="5"/>
     <package name="Fitter">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="sum.js" path="/Users/tim/Desktop/rpp28/Fitter/sum.js">
@@ -18,31 +18,26 @@
       </file>
     </package>
     <package name="Fitter.client.src.components.SharedComponents">
-      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <file name="TopBar.jsx" path="/Users/tim/Desktop/rpp28/Fitter/client/src/components/SharedComponents/TopBar.jsx">
-        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
       </file>
     </package>
     <package name="Fitter.client.src.components.SharedComponents.TopBarComponents">
-      <metrics statements="10" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="6" coveredmethods="4"/>
+      <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
       <file name="Logo.jsx" path="/Users/tim/Desktop/rpp28/Fitter/client/src/components/SharedComponents/TopBarComponents/Logo.jsx">
-        <metrics statements="4" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="18" count="2" type="stmt"/>
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
       </file>
       <file name="NotificationIcon.jsx" path="/Users/tim/Desktop/rpp28/Fitter/client/src/components/SharedComponents/TopBarComponents/NotificationIcon.jsx">
-        <metrics statements="6" coveredstatements="5" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="2"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="20" count="2" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
+        <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
       </file>
     </package>
   </project>

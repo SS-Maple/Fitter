@@ -4,7 +4,8 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 
 const Notifications = (props) => {
-  let { notifications } = props;
+  let { notifications, deleteNotifications } = props;
+  console.log('props: ', props);
   let notificationsLabel = 'Notifications'
   let deleteMessage = 'Clear All Notifications'
   if (notifications.length > 0) {
@@ -14,13 +15,13 @@ const Notifications = (props) => {
           {notificationsLabel}
         </div>
         {
-          notifications.forEach((notification, index) => (
+          notifications.map((notification, index) => (
             <div id="notificationsTile">
-
+              {notification}
             </div>
           ))
         }
-        <button id="deleteNotifications">
+        <button id="deleteNotifications" onClick={deleteNotifications}>
           {deleteMessage}
         </button>
       </div>

@@ -55,24 +55,44 @@
   margin: none;
 }
 
-/* END OF TOP BAR */
+/* END OF TOP BAR STYLES */
 
-/* NOTIFICATIONS */
+/* NOTIFICATIONS STYLES */
 
 #notificationsPage {
-
+  background-color: #6ec0c3;
+  width: 99vw;
+  height: 90vh;
 }
 
 #notificationsHeader {
-
+  font-size: 5vh;
+  text-align: center;
+  justify-content: center;
+  color: white;
 }
 
 #notificationsTile {
-
+  background-color: #494949;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  margin: 1vh;
 }
 
 #deleteNotifications {
-
+  background-color: #e25786;
+  color: white;
+  border: none;
+  padding: none;
+  border-radius: 5px;
+  height: 5vh;
+  text-align: center;
+  justify-content: center;
+  margin: auto;
+  display:flex;
+  align-items: center;
 }
 
-/* END OF NOTIFICATIONS */
+/* END OF NOTIFICATIONS STYLES */

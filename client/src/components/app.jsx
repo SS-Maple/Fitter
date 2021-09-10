@@ -12,7 +12,7 @@ class App extends React.Component {
       notificationClick: false,
       logoClick: false,
       newNotifications: false,
-      notifications: [],
+      notifications: ['This is a notification', 'This is another notification'],
       successfulLogin: true
     }
   }
@@ -74,6 +74,17 @@ class App extends React.Component {
       });
   }
 
+  deleteNotifications() {
+    console.log('Clear notifications click');
+    axios.delete(`/notifications?userId=${this.state.userId}`)
+      .then((data) => {
+        console.log('Deleted');
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  }
+
   render() {
     const { notificationClick, logoClick, newNotifications, notifications, successfulLogin } = this.state;
     return (
@@ -86,7 +97,9 @@ class App extends React.Component {
         />
         {
           notificationClick ? (
-            <Notifications notifications={notifications}/>
+            <Notifications
+              notifications={notifications}
+              deleteNotifications={this.deleteNotifications.bind(this)}/>
           ) : null
         }
         {
