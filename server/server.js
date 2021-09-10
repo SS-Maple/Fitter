@@ -31,7 +31,7 @@ app.get('/notifications', (req, res) => {
       throw new Error(err);
       res.send(err);
     } else {
-      res.send(data);
+      res.send();
     }
   });
 });
@@ -46,7 +46,7 @@ app.post('/notifications', (req, res) => {
       throw new Error;
       res.send(err);
     } else {
-      res.send(data);
+      res.send();
     }
   })
 
@@ -56,7 +56,7 @@ app.put('/notifications', (req, res) => {
   let userId = 1;
   db.client.query(`
     DELETE FROM notifications
-    WHERE userId = $(userId);
+    WHERE userId = ${userId};
   `, (err, data) => {
     if (err) {
       throw new Error(err);

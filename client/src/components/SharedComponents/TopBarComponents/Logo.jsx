@@ -3,7 +3,7 @@ import '../../../../dist/style.css';
 
 const Logo = (props) => {
   return (
-    <button id="logoButton" onClick={this.props.onClick}>
+    <button id="logoButton" onClick={props.onClick}>
         FITTER
     </button>
   );

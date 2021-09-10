@@ -2,7 +2,7 @@ import React from 'react';
 import '../../../../dist/style.css';
 
 const NotificationIcon = (props) => {
-  let { onClick, newNotifications } = this.props;
+  let { onClick, newNotifications } = props;
   return (
     <>
       {newNotifications ?

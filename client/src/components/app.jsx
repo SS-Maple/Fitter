@@ -1,6 +1,7 @@
 import React from 'react';
-import TopBar from './SharedComponents/TopBar.jsx';
 import axios from 'axios';
+import TopBar from './SharedComponents/TopBar.jsx';
+import Notifications from './notifications/Notifications.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,23 +12,47 @@ class App extends React.Component {
       notificationClick: false,
       logoClick: false,
       newNotifications: false,
-      notifications: []
+      notifications: [],
+      successfulLogin: true
     }
   }
 
   notificationEventHandler() {
-    this.setState = {
+    console.log('Notification CLick');
+    this.setState({
       notificationClick: !this.state.notificationClick,
       newNotifications: false
-    };
+    });
+    console.log('this.state.noticicationClick: ', this.state.notificationClick);
   }
 
   logoEventHandler() {
-    this.setState = {
+    console.log('Logo CLick');
+    this.setState({
       logoClick: !this.state.logoClick
-    };
+    });
+    console.log('this.state.logoClick: ', this.state.logoClick);
   }
 
+  // This needs to be called upon successful login
+  generateNewNotifications() {
+    // axios.get user's target goals and current values
+    // If calories.goal is empty && last updated 3 days ago
+    //   axios.post 'Remember to enter a calorie goal to stay on track!', userId, new, etc
+    // If water.goal is empty && last updated 3 days ago
+    //   axios.post 'Remember to enter a water goal to stay on track!', userId, new, etc
+    // If weight.goal is empty && last updated 3 days ago
+    //   axios.post 'Remember to enter a weight goal to stay on track!', userId, new, etc
+
+    // If water.current < water.goal
+    //   axios.post 'You need to drink more water to stay on track!', userId, new, etc
+    // If calories.current > calories.goal
+    //   axios.post 'You have exceeded your daily calorie intake!', userId, new, etc
+    // If weight.current < weight.goal || weight.current > weight.goal
+    //   axios.post 'What do I put here that doesn\'t sound mean!', userId, new, etc
+  }
+
+  // This needs to be called upon successful login
   getNotifications() {
     axios.get(`/notifications?userId=${this.props.userId}`)
       .then(data => {
@@ -42,13 +67,14 @@ class App extends React.Component {
   }
 
   render() {
-    const { userId, notificationClick, logoClick, newNotifications, notifications } = this.state;
+    const { notificationClick, logoClick, newNotifications, notifications, successfulLogin } = this.state;
     return (
       <div>
-        <TopBar userId={userId}
+        <TopBar
           logoOnClick={this.logoEventHandler.bind(this)}
           notificationOnClick={this.notificationEventHandler.bind(this)}
           newNotifications={newNotifications}
+          loggedIn={successfulLogin}
         />
         {
           notificationClick ? (
