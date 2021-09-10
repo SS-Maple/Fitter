@@ -1,5 +1,5 @@
 node_modules/
 bundle.js
 coverage/
-coverage/lcov-report
+coverage/lcov-report/
 .env
