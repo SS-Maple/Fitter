@@ -4,7 +4,7 @@ import BottomNav from './SharedComponents/BottomNav/bottomNav.jsx';
 import FriendsList from './FriendsList/FriendsList.jsx';
 import HomeFeed from './HomeFeed/HomeFeed.jsx';
 import Login from './LoginForms/Login.jsx';
-
+import Main from './Main.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,8 +25,9 @@ class App extends React.Component {
         <TopBar />
         {/* temporarily hidding FriendsList, HomeFeed */}
         {/* <FriendsList />  */}
-        <HomeFeed />
+        {/* <HomeFeed /> */}
         {/* <Login /> */}
+        <Main />
         <BottomNav handleClick={this.handleClick} />
       </div>
     )

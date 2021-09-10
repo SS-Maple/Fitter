@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 
 function SearchUsernames() {
@@ -12,17 +13,18 @@ function SearchUsernames() {
       .then(response => response.data)
       .then(result => setUsers(result))
       .catch(error => error);
-    console.log('running effect')
   }, [])
-
 
   return (
     <div className='home-page-header'>
-      {console.log(users)}
       <input placeholder='Search Username...' onChange={() => setTerm(event.target.value)}></input>
-        <div>{users.filter(name => name.username.includes(term)).map((user => (
-          <li>{user.firstname} {user.lastname}: {user.username}</li>
-        )))}</div>
+      <div>{users.filter(name => name.username.includes(term)).map(((user, index) => (
+       <Link to={{ pathname: '/user' }}>
+       <div className='search-user-result' key={index} onClick={() => console.log(user.firstname)}>{user.firstname} {user.lastname}: {user.username}
+        </div>
+        </Link>
+      )))}</div>
+      
     </div>
   );
 }

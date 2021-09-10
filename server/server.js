@@ -14,6 +14,7 @@ app.get('/users', (req, res) => {
   let userId = 1;
   db.client.query(`
     SELECT * FROM users
+    ORDER BY firstname
   `, (err, data) => {
     if (err) {
       // console.log('error from server -', err)

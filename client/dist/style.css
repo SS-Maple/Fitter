@@ -95,6 +95,11 @@ body {
   padding-top: 5%
 }
 
+.search-user-result {
+  background-color: rgb(197, 197, 228);
+  height: 30px;
+  margin: 2%;
+}
 
 /* Home Page -----> */
 

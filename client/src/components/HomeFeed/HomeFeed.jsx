@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import SearchUsernames from './SearchUsernames.jsx';
+import { Link } from 'react-router-dom'
+
 
 function HomeFeed() {
 
@@ -30,7 +32,7 @@ function HomeFeed() {
     <div id='home-page'>
       {/* Home Feed Search */}
       <SearchUsernames />
-
+      
       {/* Placeholder for Personal Stats [Simon] */}
       <div className='home-placeholder'>
         Placeholder for Daily/Weekly Status
