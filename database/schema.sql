@@ -75,7 +75,7 @@ CREATE TABLE notifications (
 \COPY goals(id,userId,waterGoal,calorieGoal,weightGoal,shareBoolean) FROM 'data/goals.csv' DELIMITER ',' CSV HEADER;
 \COPY dailyData(id,userId,timestamp,water,calories,weight,shareBoolean) FROM 'data/dailyData.csv' DELIMITER ',' CSV HEADER;
 \COPY friendMessages(id,userID,friendID,message,timestamp) FROM 'data/friendMessages.csv' DELIMITER ',' CSV HEADER;
-\COPY notifications(id,userId,notificationText,notificationTimestamp) FROM 'data/notifications.csv' DELIMITER ',' CSV HEADER;
+\COPY notifications(id,userId,notificationText,notificationTimestamp,new) FROM 'data/notifications.csv' DELIMITER ',' CSV HEADER;
 
 
 -- STRETCH GOALS: public forum
