@@ -96,9 +96,13 @@ body {
 }
 
 .search-user-result {
-  background-color: rgb(197, 197, 228);
   height: 30px;
   margin: 2%;
+  background-color: blue
+}
+
+.search-user-result div:hover {
+  background-color: blue
 }
 
 /* Home Page -----> */

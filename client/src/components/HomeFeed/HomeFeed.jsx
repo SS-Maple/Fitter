@@ -31,8 +31,15 @@ function HomeFeed() {
   return (
     <div id='home-page'>
       {/* Home Feed Search */}
+
+      *** TEMPS REMOVE
+      <p><Link to={{ pathname: '/login' }} >Login</Link></p>
+      <p><Link to={{ pathname: '/signup' }} >Signup</Link></p>
+      <p><Link to={{ pathname: '/forgot' }} >Forgot Password</Link></p>
+      TEMPS REMOVE ***
+
       <SearchUsernames />
-      
+
       {/* Placeholder for Personal Stats [Simon] */}
       <div className='home-placeholder'>
         Placeholder for Daily/Weekly Status
@@ -43,36 +50,38 @@ function HomeFeed() {
       {friends.filter(friend => friend.sorting >= 0)
         .sort((a, b) => a.sorting - b.sorting)
         .concat(friends
-        .filter(friend => friend.sorting < 0)
-        .sort((a, b) => b.sorting - a.sorting))
+          .filter(friend => friend.sorting < 0)
+          .sort((a, b) => b.sorting - a.sorting))
         .map((friend, index) => (
-        <div
-          className='pic-tile-friend-tile'
-          key={index}
-          onClick={() => console.log(friend.friendfirst)}
-        >
-          <div className='pic-tile-ranking'>
-            #{index + 1}<p style={{'fontSize': '10px'}}>{friend.sorting}</p>
-          </div>
-          {/* Profile Picture */}
-          <div className='pic-tile-friend-left-pic' style={{ 'width': '15%', }}>
-            <img style={{ 'maxHeight': '50px' }} src={friend.profilephoto}></img>
-          </div>
-          {/* Friend Information */}
-          <div
-            className='pic-tile-friend-right-info'
-            style={{ 'fontSize': '14px', 'width': '85%' }}
-          >
-            <b>{friend.friendusername}:</b>
-            <li>
-              {Math.round(friend.goals[0].wateraverage * 100)}% of my water goal.
-            </li>
-            <li>
-              {Math.round(friend.goals[0].caloriesaverage * 100)}% of my calories goal.
-            </li>
-          </div>
-        </div>
-      ))}
+          <Link key={index} to={{ pathname: '/user' }} style={{ 'textDecoration': 'none', 'color': 'black' }}>
+            <div
+              className='pic-tile-friend-tile'
+              key={index}
+              onClick={() => console.log(friend.friendfirst)}
+            >
+              <div className='pic-tile-ranking'>
+                #{index + 1}<p style={{ 'fontSize': '10px' }}>{friend.sorting}</p>
+              </div>
+              {/* Profile Picture */}
+              <div className='pic-tile-friend-left-pic' style={{ 'width': '15%', }}>
+                <img style={{ 'maxHeight': '50px' }} src={friend.profilephoto}></img>
+              </div>
+              {/* Friend Information */}
+              <div
+                className='pic-tile-friend-right-info'
+                style={{ 'fontSize': '14px', 'width': '85%' }}
+              >
+                <b>{friend.friendusername}:</b>
+                <li>
+                  {Math.round(friend.goals[0].wateraverage * 100)}% of my water goal.
+                </li>
+                <li>
+                  {Math.round(friend.goals[0].caloriesaverage * 100)}% of my calories goal.
+                </li>
+              </div>
+            </div>
+          </Link>
+        ))}
     </div>
 
   );
