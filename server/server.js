@@ -8,6 +8,8 @@ const db = require('../database/connect.js');
 app.use(express.urlencoded());
 app.use(express.static(__dirname + '/../client/dist'));
 
+/* NOTIFICATIONS ROUTES */
+
 app.get('/notifications', (req, res) => {
   let { userId } = req.query;
   db.client.query(`
@@ -22,6 +24,10 @@ app.get('/notifications', (req, res) => {
       res.send(data);
     }
   });
+});
+
+app.put('/notifications', (req, res) => {
+  let { userId } = req.query;
   db.client.query(`
     UPDATE notifications
     SET new = false
@@ -31,7 +37,7 @@ app.get('/notifications', (req, res) => {
       throw new Error(err);
       res.send(err);
     } else {
-      res.send();
+      res.send('Ok');
     }
   });
 });
@@ -46,13 +52,13 @@ app.post('/notifications', (req, res) => {
       throw new Error;
       res.send(err);
     } else {
-      res.send();
+      res.send('Ok');
     }
   })
 
 });
 
-app.put('/notifications', (req, res) => {
+app.delete('/notifications', (req, res) => {
   let userId = 1;
   db.client.query(`
     DELETE FROM notifications
@@ -62,10 +68,12 @@ app.put('/notifications', (req, res) => {
       throw new Error(err);
       res.send(err);
     } else {
-      res.send(data);
+      res.send('Ok');
     }
   });
 });
+
+/* END NOTIFICATIONS ROUTES */
 
 app.listen(port, function() {
   console.log(`listening on port ${port}`);

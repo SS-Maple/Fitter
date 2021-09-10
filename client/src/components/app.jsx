@@ -44,6 +44,7 @@ class App extends React.Component {
     // If weight.goal is empty && last updated 3 days ago
     //   axios.post 'Remember to enter a weight goal to stay on track!', userId, new, etc
 
+    // ARE THESE NECESSARY????
     // If water.current < water.goal
     //   axios.post 'You need to drink more water to stay on track!', userId, new, etc
     // If calories.current > calories.goal
@@ -54,12 +55,19 @@ class App extends React.Component {
 
   // This needs to be called upon successful login
   getNotifications() {
-    axios.get(`/notifications?userId=${this.props.userId}`)
+    axios.get(`/notifications?userId=${this.state.userId}`)
       .then(data => {
         console.log('data from query', data);
-        this.setState = {
+        this.setState({
           notifications: data
-        };
+        });
+        axios.put(`/notifications?userId=${this.state.userId}`)
+        .then(data => {
+          console.log(data);
+        })
+        .catch(err => {
+          throw new Error(err);
+        });
       })
       .catch(err => {
         throw new Error(err);
