@@ -15,11 +15,15 @@ class TopBar extends React.Component {
   }
 
   render () {
+    const { logoOnClick, notificationOnClick, newNotifications } = this.props;
     return (
       <div id="topbar">
         <div id="emptyDiv"/>
-        <Logo id="logo"/>
-        <NotificationIcon id="notificaitonIcon" />
+        <Logo id="logo" onClick={logoOnClick} />
+        <NotificationIcon id="notificaitonIcon"
+          onClick={notificationOnClick}
+          newNotifications={newNotifications}
+        />
       </div>
 
     )

@@ -8,11 +8,19 @@ class Notifications extends React.Component {
     super(props);
 
     this.state = {
-
+      userId: this.props.userId,
+      notifications: []
     };
   }
 
-  render () {
+  getNotifications() {
+    axios.get(`/notifications?userId=${this.props.userId}`)
+      .then(data => {
+        console.log('data from query', data);
+      }
+  }
+
+  render() {
     return (
 
 
