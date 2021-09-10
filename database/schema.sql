@@ -1,4 +1,4 @@
--- TO RUN FILE: log into postgres and run \i schema.sql
+-- TO RUN FILE: log into postgres and run \i database/schema.sql
 
 
 -- CREATE DATABASE AND TABLES
@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS friends;
 DROP TABLE IF EXISTS goals;
 DROP TABLE IF EXISTS dailyData;
-DROP TABLE IF EXISTS friendsMessages;
+DROP TABLE IF EXISTS friendMessages;
 DROP TABLE IF EXISTS publicMessages;
 
 CREATE TABLE users (
@@ -18,6 +18,7 @@ CREATE TABLE users (
   firstName           VARCHAR   NOT NULL,
   lastName            VARCHAR   NOT NULL,
   email               VARCHAR   NOT NULL,
+  username            VARCHAR   NOT NULL,
   descriptionMessage  VARCHAR   NOT NULL,
   userPassword        VARCHAR   NOT NULL,
   shareBirthday       BOOLEAN   NOT NULL,
@@ -61,11 +62,12 @@ CREATE TABLE friendMessages (
 );
 
 -- DATA LOAD
-\COPY users(id,firstName,lastName,email,descriptionMessage,userPassword,shareBirthday,birthday,picture,securityQuestion,securityAnswer) FROM 'data/fitterUsers.csv' DELIMITER ',' CSV HEADER;
+\COPY users(id,firstName,lastName,email,username,descriptionMessage,userPassword,shareBirthday,birthday,picture,securityQuestion,securityAnswer) FROM 'data/fitterUsers.csv' DELIMITER ',' CSV HEADER;
 \COPY friends(id,userID,friendID) FROM 'data/fitterFriends.csv' DELIMITER ',' CSV HEADER;
 \COPY goals(id,userId,waterGoal,calorieGoal,weightGoal,shareBoolean) FROM 'data/goals.csv' DELIMITER ',' CSV HEADER;
 \COPY dailyData(id,userId,timestamp,water,calories,weight,shareBoolean) FROM 'data/dailyData.csv' DELIMITER ',' CSV HEADER;
 \COPY friendMessages(id,userID,friendID,message,timestamp) FROM 'data/friendMessages.csv' DELIMITER ',' CSV HEADER;
+
 
 
 -- STRETCH GOALS: public forum

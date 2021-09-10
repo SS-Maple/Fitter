@@ -2,6 +2,8 @@ import React from 'react';
 import FriendProfile from './friendProfile/friendProfile.jsx';
 import TopBar from './SharedComponents/TopBar.jsx';
 import BottomNav from './SharedComponents/BottomNav/bottomNav.jsx';
+import FriendsList from './FriendsList/FriendsList.jsx';
+import HomeFeed from './HomeFeed/HomeFeed.jsx';
 import Login from './LoginForms/Login.jsx';
 
 
@@ -22,6 +24,9 @@ class App extends React.Component {
     return (
       <div>
         <TopBar />
+        {/* temporarily hidding FriendsList, HomeFeed */}
+        {/* <FriendsList />  */}
+        {/* <HomeFeed /> */}
         <Login />
         <BottomNav handleClick={this.handleClick} />
       </div>

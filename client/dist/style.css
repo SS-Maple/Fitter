@@ -1,9 +1,13 @@
-
 /* APP STYLES*/
 #app {
-  margin: none;
-  padding: none;
-  border: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  margin: 0;
+  background-color: #6ec0c3;
 }
 
 /* TOP BAR STYLES */
@@ -55,31 +59,97 @@
   margin: none;
 }
 
-body {
-  margin: 0;
-  background-color: #6ec0c3;
+/* <----- Home Page  */
+
+#home-page {
+  font-family: sans-serif;
 }
-/* Bottom Nav */
-.bottom-nav {
-  background-color: #e25786;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  padding-top: .5rem;
-  justify-content: space-around;
+
+.home-page-header {
+  margin-top: 3%;
+  background: white;
+  padding: 3%
+}
+
+.home-page-header input {
+  width: 80%;
+  margin: auto;
+  display: block;
+  padding-left: 10px;
+}
+
+.home-placeholder {
+  margin-top: 3%;
+  background: white;
+  padding: 15%;
+  text-align: center
+}
+
+#home-page h4 {
+  color: white;
+  margin-left: 5%
+}
+
+.pic-tile-ranking {
+  margin-left: 5%;
+  padding-top: 5%
+}
+
+
+/* Home Page -----> */
+
+
+/* <---- Friend's List */
+
+.pic-tile-friend-header {
+  margin-top: 3%;
   display: flex;
-  flex-direction: row;
+  font-family: sans-serif;
+  background-color: white;
+  vertical-align: center;
 }
 
-.icon {
-  width: 2rem;
-  height: 2rem;
+.pic-tile-friend-header img {
+  margin-left: 8%;
+  margin-top: 3%;
 }
 
-/* Bottom Nav */
+.pic-tile-friend-header h3 {
+  margin-left: 15%;
+  text-align: center;
+}
+
+.pic-tile-friend-tile {
+  font-family: sans-serif;
+  display: flex;
+  background: white;
+  border-radius: 15px;
+  margin: 5%;
+}
+
+.pic-tile-friend-left-pic {
+  background: white;
+  border-radius: 15px;
+  width: 30%;
+  padding: 3%
+}
+
+.pic-tile-friend-left-pic img {
+  border-radius: 50%;
+  max-height: 75px
+}
+
+.pic-tile-friend-right-info {
+  background: white;
+  border-radius: 15px;
+  width: 70%;
+  padding: 3%
+}
+
+/* Friend's List ----> */
 
 /*User Profile*/
+
 .user-profile {
   display: flex;
   background-color: white;
@@ -102,6 +172,25 @@ body {
 
 /*User Profile*/
 
+/* Bottom Nav */
+.bottom-nav {
+  background-color: #e25786;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding-top: .5rem;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Bottom Nav */
 
 /*FORM STYLING*/
 input {
