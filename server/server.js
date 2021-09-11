@@ -8,11 +8,13 @@ const db = require('../database/connect.js');
 app.use(express.urlencoded());
 app.use(express.static(__dirname + '/../client/dist'));
 
-app.get('/user', (req, res) => {
+
+// get all user information
+app.get('/users', (req, res) => {
   let userId = 1;
   db.client.query(`
     SELECT * FROM users
-    WHERE id = ${userId}
+    ORDER BY firstname
   `, (err, data) => {
     if (err) {
       // console.log('error from server -', err)
@@ -24,6 +26,24 @@ app.get('/user', (req, res) => {
   })
 });
 
+// get current user information
+app.get('/user', (req, res) => {
+  let userId = 1;
+  db.client.query(`
+    SELECT * FROM users
+    WHERE id = ${userId}
+  `, (err, data) => {
+    if (err) {
+      // console.log('error from server -', err)
+      res.send(err);
+    } else {
+      // console.log('rows from server /user - ', data.rows)
+      res.send(data.rows);
+    }
+  })
+});
+
+// get current user's friends
 app.get('/friends', (req, res) => {
   let friendId = 1;
   db.client.query(`
@@ -43,6 +63,7 @@ app.get('/friends', (req, res) => {
   })
 });
 
+// get home feed rankings data
 app.get('/rankings', (req, res) => {
   let friendId = 1;
   db.client.query(`

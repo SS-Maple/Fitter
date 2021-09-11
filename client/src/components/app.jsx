@@ -4,7 +4,7 @@ import BottomNav from './SharedComponents/BottomNav/bottomNav.jsx';
 import FriendsList from './FriendsList/FriendsList.jsx';
 import HomeFeed from './HomeFeed/HomeFeed.jsx';
 import Login from './LoginForms/Login.jsx';
-
+import Main from './Main.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class App extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick(e){
+  handleClick(e) {
     console.log(e.target.alt)
   }
 
@@ -23,10 +23,7 @@ class App extends React.Component {
     return (
       <div>
         <TopBar />
-        {/* temporarily hidding FriendsList, HomeFeed */}
-        {/* <FriendsList />  */}
-        {/* <HomeFeed /> */}
-        <Login />
+        <Main />
         <BottomNav handleClick={this.handleClick} />
       </div>
     )
