@@ -32,12 +32,6 @@ function HomeFeed() {
     <div id='home-page'>
       {/* Home Feed Search */}
 
-      *** TEMPS REMOVE
-      <p><Link to={{ pathname: '/login' }} >Login</Link></p>
-      <p><Link to={{ pathname: '/signup' }} >Signup</Link></p>
-      <p><Link to={{ pathname: '/forgot' }} >Forgot Password</Link></p>
-      TEMPS REMOVE ***
-
       <SearchUsernames />
 
       {/* Placeholder for Personal Stats [Simon] */}
@@ -53,35 +47,34 @@ function HomeFeed() {
           .filter(friend => friend.sorting < 0)
           .sort((a, b) => b.sorting - a.sorting))
         .map((friend, index) => (
-          <Link key={index} to={{ pathname: '/user' }} style={{ 'textDecoration': 'none', 'color': 'black' }}>
-            <div
-              className='pic-tile-friend-tile'
-              key={index}
-              onClick={() => console.log(friend.friendfirst)}
-            >
-              <div className='pic-tile-ranking'>
-                #{index + 1}<p style={{ 'fontSize': '10px' }}>{friend.sorting}</p>
-              </div>
-              {/* Profile Picture */}
-              <div className='pic-tile-friend-left-pic' style={{ 'width': '15%', }}>
-                <img style={{ 'maxHeight': '50px' }} src={friend.profilephoto}></img>
-              </div>
-              {/* Friend Information */}
-              <div
-                className='pic-tile-friend-right-info'
-                style={{ 'fontSize': '14px', 'width': '85%' }}
-              >
-                <b>{friend.friendusername}:</b>
-                <li>
-                  {Math.round(friend.goals[0].wateraverage * 100)}% of my water goal.
-                </li>
-                <li>
-                  {Math.round(friend.goals[0].caloriesaverage * 100)}% of my calories goal.
-                </li>
-              </div>
+          <div
+            className='pic-tile-friend-tile'
+            key={index}
+            onClick={() => console.log('On click needs to route to', friend.friendfirst)}
+          >
+            <div className='pic-tile-ranking'>
+              #{index + 1}
             </div>
-          </Link>
+            {/* Profile Picture */}
+            <div className='pic-tile-friend-left-pic' style={{ 'width': '15%', }}>
+              <img style={{ 'maxHeight': '50px' }} src={friend.profilephoto}></img>
+            </div>
+            {/* Friend Information */}
+            <div
+              className='pic-tile-friend-right-info'
+              style={{ 'fontSize': '14px', 'width': '85%' }}
+            >
+              <b>{friend.friendusername}:</b>
+              <li>
+                {Math.round(friend.goals[0].wateraverage * 100)}% of my water goal.
+              </li>
+              <li>
+                {Math.round(friend.goals[0].caloriesaverage * 100)}% of my calories goal.
+              </li>
+            </div>
+          </div>
         ))}
+      <div className='feed-bottom'></div>
     </div>
 
   );

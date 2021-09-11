@@ -5,7 +5,6 @@ import App from './App.jsx';
 import Signup from './LoginForms/Signup.jsx';
 import Login from './LoginForms/Login.jsx';
 import HomeFeed from './HomeFeed/HomeFeed.jsx';
-import Test from './HomeFeed/Test.jsx';
 import ForgotPW from './LoginForms/ForgotPW.jsx';
 
 
@@ -13,13 +12,8 @@ function Main() {
   return (
     <main>
       <Switch>
-        <Route path='/login' component={Login}/>
-        <Route path='/signup' component={Signup}/>
-        <Route path='/forgot' component={ForgotPW}/>
-        <Route exact path='/' component={HomeFeed}/>
-        <Route path='/friends' component={FriendsList}/>
-        {/* Update below to route to a userprofile when clicked */}
-        <Route path='/user' component={Test}/> 
+        <Route exact path='/' component={HomeFeed} />
+        <Route path='/friends' component={FriendsList} />
       </Switch>
     </main>
   );

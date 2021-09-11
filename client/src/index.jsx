@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM  from 'react-dom';
+import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 
@@ -8,4 +8,3 @@ ReactDOM.render((
     <App />
   </BrowserRouter>
 ), document.getElementById('app'));
-  

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
-const BottomNav = ({handleClick}) => {
+const BottomNav = ({ handleClick }) => {
 
-  return(
+  return (
     <div className='bottom-nav'>
       <div className='nav-icon home' onClick={(e) => handleClick(e)}>
         <Link to={{ pathname: '/' }}>
