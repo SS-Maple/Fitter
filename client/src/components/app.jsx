@@ -2,6 +2,8 @@ import React from 'react';
 import TopBar from './SharedComponents/TopBar.jsx';
 import BottomNav from './SharedComponents/BottomNav/bottomNav.jsx';
 import Login from './LoginForms/Login.jsx';
+import DirectChatPage from './Chat/DirectChatPage.jsx';
+// import ChatHome from './Chat/ChatHome.jsx';
 
 
 class App extends React.Component {
@@ -20,9 +22,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <TopBar />
-        <Login />
-        <BottomNav handleClick={this.handleClick} />
+        {/* <TopBar />
+        <Login /> */}
+        <DirectChatPage name='Maple' secret='meatball'/>
+        {/* <ChatHome /> */}
+        {/* <BottomNav handleClick={this.handleClick} /> */}
       </div>
     )
   }
