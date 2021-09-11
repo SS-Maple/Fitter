@@ -1,4 +1,5 @@
 import React from 'react';
+import AddCalorieModal from './addCalorieModal.jsx';
 
 class TodaysGoals extends React.Component{
   constructor(props){
@@ -6,7 +7,16 @@ class TodaysGoals extends React.Component{
     this.state = {
       calorie: 0,
       water: 0,
-      weight: 0
+      weight: 0,
+      calorieShow: false
+    }
+  }
+
+  handleClick(){
+    if(!this.state.calorieShow) {
+      this.setState({
+        calorieShow: true
+      })
     }
   }
 
@@ -16,7 +26,7 @@ class TodaysGoals extends React.Component{
 
     return(
       <div className='my-goals'>
-        <div className='goal-container'>
+        <div className='goal-container' onClick={() => this.handleClick()}>
           <div className='indiv-goal-curr'>
             <div className='goal-progress'>{calorie}</div>
           </div>
@@ -35,6 +45,7 @@ class TodaysGoals extends React.Component{
           </div>
           <div className='goal-label'>Weight</div>
         </div>
+        <AddCalorieModal show={this.state.calorieShow} />
 
       </div>
     )
