@@ -59,6 +59,72 @@ body {
   margin: none;
 }
 
+/* <----- Home Page  */
+
+#home-page {
+  font-family: sans-serif;
+}
+
+.home-page-header {
+  margin-top: 3%;
+  background: white;
+  padding: 3%
+}
+
+.home-page-header input {
+  width: 86%;
+  margin: auto;
+  display: block;
+  padding-left: 10px;
+}
+
+.home-placeholder {
+  margin-top: 3%;
+  background: white;
+  padding: 15%;
+  text-align: center
+}
+
+#home-page h4 {
+  color: white;
+  margin-left: 5%
+}
+
+.pic-tile-ranking {
+  margin-left: 5%;
+  padding-top: 5%
+}
+
+.username-results {
+  max-height: 130px;
+  overflow: scroll;
+  max-width: 90%;
+  margin-left: 5%;
+}
+
+.search-user-result {
+  height: 40px;
+  padding-left: 3%;
+  font-size: 14px;
+  padding: 1%;
+  border: 1px solid rgb(193, 188, 188);
+  margin: 1% 0%;
+  display: flex;
+  align-items: center;
+}
+
+.search-user-result img {
+  max-height: 40px;
+  margin-right: 3%;
+  border-radius: 50%;
+}
+
+.feed-bottom {
+  height: 50px;
+}
+
+/* Home Page -----> */
+
 
 /* <---- Friend's List */
 
@@ -84,7 +150,7 @@ body {
   font-family: sans-serif;
   display: flex;
   background: white;
-  border-radius: 50px;
+  border-radius: 15px;
   margin: 5%;
 }
 
