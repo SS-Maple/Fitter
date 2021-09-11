@@ -11,7 +11,6 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 // get all user information
 app.get('/users', (req, res) => {
-  let userId = 1;
   db.client.query(`
     SELECT * FROM users
     ORDER BY firstname
@@ -28,7 +27,7 @@ app.get('/users', (req, res) => {
 
 // get current user information
 app.get('/user', (req, res) => {
-  let userId = 1;
+  let userId = req.query.userId;
   db.client.query(`
     SELECT * FROM users
     WHERE id = ${userId}
@@ -45,7 +44,7 @@ app.get('/user', (req, res) => {
 
 // get current user's friends
 app.get('/friends', (req, res) => {
-  let friendId = 1;
+  let friendId = req.query.userId;
   db.client.query(`
     SELECT * FROM friends 
     JOIN users
