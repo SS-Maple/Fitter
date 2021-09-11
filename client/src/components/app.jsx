@@ -2,6 +2,9 @@ import React from 'react';
 import TopBar from './SharedComponents/TopBar.jsx';
 import BottomNav from './SharedComponents/BottomNav/bottomNav.jsx';
 import MyProfile from './myProfile/myProfile.jsx';
+import FriendsList from './FriendsList/FriendsList.jsx';
+import Login from './LoginForms/Login.jsx';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -20,6 +23,9 @@ class App extends React.Component {
     return (
       <div>
         <TopBar />
+        {/* temporarily hidding FriendsList */}
+        {/* <FriendsList />  */}
+        {/* <Login /> */}
         <MyProfile />
         <BottomNav handleClick={this.handleClick} />
       </div>

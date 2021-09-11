@@ -1,15 +1,21 @@
 import React from 'react';
 
-const PreviousStats = (props) => {
-  //sample build - finalize build will be dependent on the data structure passed down from top level
-  return (
-    <div className='previous-stat-container'>
-      <p className='data'>On October 3, 2021:</p>
-      <p>- You reached X% of your calories intake goal.</p>
-      <p>- You reached X% of your water intake goal.</p>
-      <p>- You're X% of the way to your weight goal!</p>
-    </div>
-  )
+const PreviousStats = ({stats, goals}) => {
+
+   return stats.map((stat, i) =>{
+      let waterGoal = ((stat.water/ goals.watergoal) * 100).toFixed(0);
+      let calorieGoal = ((stat.calories/ goals.caloriegoal) * 100).toFixed(0);
+      let weightGoal = ((stat.weight/goals.weightgoal) * 100).toFixed(0);
+    return(
+      <div className='previous-stat-container' key={i} >
+        <p>{stat.date}</p>
+        <p>You've reached {calorieGoal}% of your calorie intake!</p>
+        <p>You've reached {waterGoal}% of your water intake!</p>
+        <p>You're {weightGoal}% of your weight goal!</p>
+      </div>
+       )
+      }
+    )
 }
 
 export default PreviousStats;
