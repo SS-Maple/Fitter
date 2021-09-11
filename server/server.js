@@ -27,7 +27,7 @@ app.get('/user', (req, res) => {
 app.get('/friends', (req, res) => {
   let friendId = 1;
   db.client.query(`
-    SELECT * FROM friends 
+    SELECT * FROM friends
     JOIN users
     ON friends.friendid = users.id
     WHERE userid = ${friendId}
@@ -50,7 +50,7 @@ app.get('/rankings', (req, res) => {
       (
         select array_to_json(array_agg(row_to_json(d)))
         from (
-          select *, 
+          select *,
           (
             select username
             from users
@@ -111,6 +111,22 @@ app.get('/rankings', (req, res) => {
   })
 });
 
+app.post('/addfriend', (req, res) => {
+  let friendId = 1;
+  // let friendId = req.body.friendID
+  // let userId = req.body.userID
+  db.client.query(`
+    INSERT INTO friends (userID, friendID)
+    VALUES (${userId}, ${friendId})
+  `, (err, data) => {
+    if (err) {
+      // console.log('error from server -', err)
+      res.send(err);
+    } else {
+      res.sendStatus(204);
+    }
+  })
+});
 
 app.listen(port, function () {
   console.log(`listening on port ${port}`);
