@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import SearchUsernames from './SearchUsernames.jsx';
+import { Link } from 'react-router-dom'
 
 
 function HomeFeed() {
@@ -29,9 +31,8 @@ function HomeFeed() {
   return (
     <div id='home-page'>
       {/* Home Feed Search */}
-      <div className='home-page-header'>
-        <input placeholder='Search Username...'></input>
-      </div>
+
+      <SearchUsernames />
 
       {/* Placeholder for Personal Stats [Simon] */}
       <div className='home-placeholder'>
@@ -43,36 +44,37 @@ function HomeFeed() {
       {friends.filter(friend => friend.sorting >= 0)
         .sort((a, b) => a.sorting - b.sorting)
         .concat(friends
-        .filter(friend => friend.sorting < 0)
-        .sort((a, b) => b.sorting - a.sorting))
+          .filter(friend => friend.sorting < 0)
+          .sort((a, b) => b.sorting - a.sorting))
         .map((friend, index) => (
-        <div
-          className='pic-tile-friend-tile'
-          key={index}
-          onClick={() => console.log({ friend })}
-        >
-          <div className='pic-tile-ranking'>
-            #{index + 1}<p style={{'fontSize': '10px'}}>{friend.sorting}</p>
-          </div>
-          {/* Profile Picture */}
-          <div className='pic-tile-friend-left-pic' style={{ 'width': '15%', }}>
-            <img style={{ 'maxHeight': '50px' }} src={friend.profilephoto}></img>
-          </div>
-          {/* Friend Information */}
           <div
-            className='pic-tile-friend-right-info'
-            style={{ 'fontSize': '14px', 'width': '85%' }}
+            className='pic-tile-friend-tile'
+            key={index}
+            onClick={() => console.log('On click needs to route to', friend)}
           >
-            <b>{friend.friendusername}:</b>
-            <li>
-              {Math.round(friend.goals[0].wateraverage * 100)}% of my water goal.
-            </li>
-            <li>
-              {Math.round(friend.goals[0].caloriesaverage * 100)}% of my calories goal.
-            </li>
+            <div className='pic-tile-ranking'>
+              #{index + 1}
+            </div>
+            {/* Profile Picture */}
+            <div className='pic-tile-friend-left-pic' style={{ 'width': '15%', }}>
+              <img style={{ 'maxHeight': '50px' }} src={friend.profilephoto}></img>
+            </div>
+            {/* Friend Information */}
+            <div
+              className='pic-tile-friend-right-info'
+              style={{ 'fontSize': '14px', 'width': '85%' }}
+            >
+              <b>{friend.friendusername}:</b>
+              <li>
+                {Math.round(friend.goals[0].wateraverage * 100)}% of my water goal.
+              </li>
+              <li>
+                {Math.round(friend.goals[0].caloriesaverage * 100)}% of my calories goal.
+              </li>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      <div className='feed-bottom'></div>
     </div>
 
   );

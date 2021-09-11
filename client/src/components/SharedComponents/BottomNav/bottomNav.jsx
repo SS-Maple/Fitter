@@ -1,11 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
-const BottomNav = ({handleClick}) => {
+const BottomNav = ({ handleClick }) => {
 
-  return(
+  return (
     <div className='bottom-nav'>
       <div className='nav-icon home' onClick={(e) => handleClick(e)}>
-        <img alt='Home' className='icon' src='https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_home_48px-1024.png'></img>
+        <Link to={{ pathname: '/' }}>
+          <img alt='Home' className='icon' src='https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_home_48px-1024.png'></img>
+        </Link>
       </div>
       <div className='nav-icon chat' onClick={(e) => handleClick(e)}>
         <img alt='Chat' className='icon' src='https://cdn4.iconfinder.com/data/icons/top-search-6/128/_chat_communication_message_typing_launcher_conversation_talk_bubble-512.png'></img>
