@@ -75,6 +75,7 @@ app.get('/userdata', (req, res) => {
     email,
     descriptionmessage AS intro,
     picture,
+    (SELECT count(friendid) from friends where userid=${userId}) AS friendcount,
     (SELECT array_to_json(array_agg(row_to_json(b)))
     FROM (
       SELECT id,
@@ -95,6 +96,17 @@ app.get('/userdata', (req, res) => {
   .then(results => res.send(results.rows[0].array_agg))
   .catch(err => console.error(err))
 })
+
+app.put('/calorieupdate', (req, res) => {
+  let userid = 5;
+  return db.client.query(`
+  INSERT INTO dailydata (userid, timestamp, water, calories, weight)
+  VALUES (${userid}, to_char(now(), 'Month DD, YYYY') as timestamp, ${water}, ${calories}, ${weight})
+  ON CONFLICT (timestamp) DO UPDATE SET
+  water=water+${water}, calories=calories+${calories}, weight=weight+${weight}
+  `)
+})
+
 // get home feed rankings data
 app.get('/rankings', (req, res) => {
   let friendId = 1;

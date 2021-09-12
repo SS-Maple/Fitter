@@ -402,6 +402,19 @@ body {
 .modal-header {
   text-align: center;
 }
+
+.food-calorie-display {
+  text-align: center;
+}
+
+.d1 {
+  padding-top: 10px;
+  min-height: 35px;
+}
+
+.d2 {
+  font-size: 25px;
+}
 /*Add Calorie Modal*/
 
 

@@ -44,12 +44,12 @@ CREATE TABLE goals (
 );
 
 CREATE TABLE dailyData (
-  id              INT       NOT NULL   PRIMARY KEY,
+  id              SERIAL       NOT NULL   PRIMARY KEY,
   userID          INT       NOT NULL   REFERENCES users(id),
   timestamp       TIMESTAMP DEFAULT now(),
-  water           INT       NOT NULL,
-  calories        INT       NOT NULL,
-  weight          INT       NOT NULL,
+  water           INT       DEFAULT 0,
+  calories        INT       DEFAULT 0,
+  weight          INT       DEFAULT 0,
   shareBoolean    BOOLEAN
 );
 

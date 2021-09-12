@@ -1,5 +1,7 @@
 import React from 'react';
 import AddCalorieModal from './addCalorieModal.jsx';
+import AddWaterModal from './addWaterModal.jsx';
+import UpdateWeightModal from './updateWeightModal.jsx';
 
 class TodaysGoals extends React.Component{
   constructor(props){
@@ -8,19 +10,21 @@ class TodaysGoals extends React.Component{
       calorie: 0,
       water: 0,
       weight: 0,
-      calorieShow: false
+      calorieShow: false,
+      waterShow: false
     }
-    this.handleClick = this.handleClick.bind(this)
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(){
-    if(!this.state.calorieShow) {
+
+  handleClick(x){
+    if (!this.state.[x]) {
       this.setState({
-        calorieShow: true
+        [x]: true
       })
     } else {
       this.setState({
-        calorieShow: false
+        [x]: false
       })
     }
   }
@@ -31,19 +35,19 @@ class TodaysGoals extends React.Component{
 
     return(
       <div className='my-goals'>
-        <div className='goal-container' onClick={() => this.handleClick()} >
+        <div className='goal-container' onClick={() => this.handleClick('calorieShow')} >
           <div className='indiv-goal-curr'>
             <div className='goal-progress'>{calorie}</div>
           </div>
           <div className='goal-label'>Calories</div>
         </div>
-        <div className='goal-container'>
+        <div className='goal-container' onClick={() => this.handleClick('waterShow')}>
           <div className='indiv-goal-curr'>
             <div className='goal-progress'>{water}</div>
           </div>
           <div className='goal-label'>Water Intake</div>
         </div>
-        <div className='goal-container'>
+        <div className='goal-container' onClick={() => this.handleClick('weightShow')}>
           <div className='indiv-goal'>
             <div className='goal-total'>{weight}</div>
             <div className='goal-units'>lbs</div>
@@ -51,7 +55,8 @@ class TodaysGoals extends React.Component{
           <div className='goal-label'>Weight</div>
         </div>
         <AddCalorieModal show={this.state.calorieShow} close={this.handleClick} />
-
+        <AddWaterModal show={this.state.waterShow} close={this.handleClick} />
+        <UpdateWeightModal show={this.state.weightShow} close={this.handleClick} />
       </div>
     )
   }

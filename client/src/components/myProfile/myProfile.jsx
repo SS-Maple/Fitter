@@ -33,7 +33,7 @@ class MyProfile extends React.Component {
         stats: info.stats,
         goals: info.goals
       });
-      console.log('CLIENT', info)})
+    })
   }
 
 
