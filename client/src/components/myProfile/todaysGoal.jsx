@@ -10,12 +10,17 @@ class TodaysGoals extends React.Component{
       weight: 0,
       calorieShow: false
     }
+    this.handleClick = this.handleClick.bind(this)
   }
 
   handleClick(){
     if(!this.state.calorieShow) {
       this.setState({
         calorieShow: true
+      })
+    } else {
+      this.setState({
+        calorieShow: false
       })
     }
   }
@@ -26,7 +31,7 @@ class TodaysGoals extends React.Component{
 
     return(
       <div className='my-goals'>
-        <div className='goal-container' onClick={() => this.handleClick()}>
+        <div className='goal-container' onClick={() => this.handleClick()} >
           <div className='indiv-goal-curr'>
             <div className='goal-progress'>{calorie}</div>
           </div>
@@ -45,7 +50,7 @@ class TodaysGoals extends React.Component{
           </div>
           <div className='goal-label'>Weight</div>
         </div>
-        <AddCalorieModal show={this.state.calorieShow} />
+        <AddCalorieModal show={this.state.calorieShow} close={this.handleClick} />
 
       </div>
     )

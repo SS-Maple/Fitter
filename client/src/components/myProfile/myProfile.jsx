@@ -3,6 +3,8 @@ import MyGoals from './myGoals.jsx';
 import TodaysGoals from './todaysGoal.jsx';
 import PreviousStats from './previousStats.jsx';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
+
 
 class MyProfile extends React.Component {
   constructor(props){
