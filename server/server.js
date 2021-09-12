@@ -63,6 +63,38 @@ app.get('/friends', (req, res) => {
   })
 });
 
+app.get('/userdata', (req, res) => {
+  //test id
+  let userId = 5;
+  return db.client.query(`
+  SELECT array_agg(row_to_json(a))
+  FROM (
+    SELECT id,
+    firstName,
+    lastName,
+    email,
+    descriptionmessage AS intro,
+    picture,
+    (SELECT array_to_json(array_agg(row_to_json(b)))
+    FROM (
+      SELECT id,
+      to_char(timestamp, 'Month DD, YYYY') AS date,
+      water,
+      calories,
+      weight
+      FROM dailyData WHERE userId=users.id)b) AS stats,
+    (SELECT row_to_json(c)
+    FROM (
+      SELECT id,
+      watergoal,
+      weightgoal,
+      caloriegoal
+      FROM goals WHERE userId=users.id)c) AS goals
+    FROM users WHERE id=${userId})a;
+  `)
+  .then(results => res.send(results.rows[0].array_agg))
+  .catch(err => console.error(err))
+})
 // get home feed rankings data
 app.get('/rankings', (req, res) => {
   let friendId = 1;
@@ -132,21 +164,46 @@ app.get('/rankings', (req, res) => {
   })
 });
 // get friend profile information
+// SELECT * FROM dailyData
+// WHERE userID = ${friendId} AND shareBoolean=true
+// ORDER BY timestamp
 app.get('/friendProfile', (req, res) => {
   let friendId = 7;
   db.client.query(`
-    SELECT * FROM dailyData
-    WHERE userID = ${friendId} AND shareBoolean=true
-    ORDER BY timestamp
-  `, (err, data) => {
-    if (err) {
-      // console.log('error from server -', err)
-      res.send(err);
-    } else {
-      console.log('rows from server /user - ', data.rows)
-      res.send(data.rows);
-    }
-  })
+      SELECT username, firstName, lastName, descriptionMessage, picture,
+        (
+          select array_to_json(array_agg(row_to_json(d)))
+          from (
+            SELECT userID,
+            to_char(timestamp, 'Month DD, YYYY') AS date,
+            water, calories, weight
+            from dailydata
+            WHERE userID=${friendId} AND shareBoolean=true
+            ORDER BY timestamp
+          ) d
+        ) as dlydata,
+        (
+          select row_to_json(e)
+          from (
+            SELECT userID,
+            waterGoal,
+            calorieGoal,
+            weightGoal
+            from goals
+            WHERE userID=${friendId}
+          ) e
+        ) as goals
+      from users
+      WHERE users.id=${friendId}`,
+      (err, data) => {
+        if (err) {
+          // console.log('error from server', err)
+          res.send(err);
+        } else {
+          // console.log('rows from server /friendprofile - ', data.rows[0])
+          res.send(data.rows[0]);
+        }
+    })
 });
 app.post('/addfriend', (req, res) => {
   let friendId = 7;
@@ -158,7 +215,25 @@ app.post('/addfriend', (req, res) => {
     VALUES (${userId}, ${friendId})
   `, (err, data) => {
     if (err) {
-      // console.log('error from server -', err)
+      // console.log('error from server', err)
+      res.send(err);
+    } else {
+      res.sendStatus(204);
+    }
+  })
+});
+app.delete('/removefriend', (req, res) => {
+  let friendId = 7;
+  let userId = 1;
+
+  // let friendId = req.body.friendID
+  // let userId = req.body.userID
+  db.client.query(`
+    DELETE from friends
+    WHERE userID=${userId} AND friendID=${friendId}
+  `, (err, data) => {
+    if (err) {
+      // console.log('error from server', err)
       res.send(err);
     } else {
       res.sendStatus(204);

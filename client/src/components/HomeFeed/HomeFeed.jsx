@@ -50,7 +50,7 @@ function HomeFeed() {
           <div
             className='pic-tile-friend-tile'
             key={index}
-            onClick={() => console.log('On click needs to route to', friend)}
+            onClick={() => console.log('On click needs to route to', friend.friendfirst)}
           >
             <div className='pic-tile-ranking'>
               #{index + 1}

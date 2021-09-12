@@ -3,6 +3,7 @@ import AddFriend from './addFriend.jsx';
 import MessageButton from './messageButton.jsx';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import SharedStats from './sharedStats.jsx'
 // {id: 4,
 // userid: 1,
 // friendid: 7,
@@ -11,31 +12,66 @@ import axios from 'axios';
 // sorting: "5.25",
 // userid: 1}
 
-const FriendProfile = (props) => {
+class FriendProfile extends React.Component {
+  constructor(props){
+    super(props);
+    this.state ={
+      username: '',
+      userid: 1,
+      friendid: 7,
+      profilephoto: 'https://cdn0.iconfinder.com/data/icons/users-34/24/user_symbol_person-1024.png',
+      firstName: '',
+      lastName: '',
+      description: '',
+      stats: [],
+      goals: {}
+    }
+  }
+  componentDidMount(){
+    this.getFriendData()
+  }
 
-  // const [friend, setFriend] = useState(props.friend)
-
-  useEffect(() => {
-    console.log('hi')
+  getFriendData() {
     axios.get('/friendProfile')
     .then(result => {
-      console.log('in friendProfile', result)
-
+      var userData = result.data
+      this.setState({
+        username: userData.username,
+        firstName: userData.firstname,
+        lastName: userData.lastname,
+        profilephoto: userData.picture,
+        description: userData.descriptionmessage,
+        stats: userData.dlydata,
+        goals: userData.goals
+      })
+      console.log(this.state)
     })
-  })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+  // const [friend, setFriend] = useState(props.friend)
 
+  // useEffect(() => {
+  //   console.log('hi')
+  //   axios.get('/friendProfile')
+  //   .then(result => {
+  //     console.log('in friendProfile', result)
 
+  //   })
+  // })
+
+  render() {
     return(
       <div>
         <div className='my-profile'>
           <div className='profile-info'>
             <div className='profile-pic'>
-              <img className='profile-img' src='https://cdn0.iconfinder.com/data/icons/users-34/24/user_symbol_person-1024.png'></img>
+              <img className='profile-img' src={this.state.profilephoto}></img>
             </div>
             <div className='profile-desc'>
-              <p className='user-details'>Name:</p>
+              <p className='user-details'>{this.state.username}</p>
               {/* {friend.firstName} {friend.lastName} */}
-              <p className='user-details'>Age: 1000</p>
             </div>
             <div className='user-profile-friends'>
               <div className='friend-count'>5</div>
@@ -43,22 +79,20 @@ const FriendProfile = (props) => {
             </div>
           </div>
           <div className='profile-intro'>
-            {/* <p>{intro}</p> */}
+            <h4>{this.state.firstName} {this.state.lastName}</h4>
+            <p>{this.state.description}</p>
           </div>
-          <div>
+          <div className='profile-btn-container'>
             <AddFriend />
-          </div>
-          <div>
             <MessageButton />
           </div>
         </div>
         <div>
-          {/* <PreviousStats stats={stats} goals={goals} /> */}
-          Placeholder for stat tiles
+          <SharedStats picture={this.state.profilephoto} username={this.state.username} stats={this.state.stats} goals={this.state.goals} />
         </div>
       </div>
     )
-
+  }
 }
 
 export default FriendProfile;

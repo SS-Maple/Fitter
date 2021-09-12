@@ -14,7 +14,7 @@ function Main() {
       <Switch>
         <Route exact path='/' component={HomeFeed} />
         <Route path='/friends' component={FriendsList} />
-        {/* <Route path='/friendProfile' component={FriendProfile} /> */}
+        <Route path='/friendProfile' component={FriendProfile} />
       </Switch>
     </main>
   );

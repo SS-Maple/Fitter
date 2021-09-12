@@ -7,7 +7,7 @@ const MessageButton = (props) => {
   const clickMessage = () => {
     setMessage(true)
   };
-  return <button className="xxbtn" onClick={clickMessage}> Message </button>
+  return <button className='profile-btn' onClick={clickMessage}> Message </button>
 
 }
 
