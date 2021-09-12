@@ -24,7 +24,9 @@ class FriendProfile extends React.Component {
       lastName: '',
       description: '',
       stats: [],
-      goals: {}
+      goals: {},
+      friends: [],
+      isFriend: ''
     }
   }
   componentDidMount(){
@@ -35,6 +37,7 @@ class FriendProfile extends React.Component {
     axios.get('/friendProfile')
     .then(result => {
       var userData = result.data
+      console.log('isfriend', userData.isfriend)
       this.setState({
         username: userData.username,
         firstName: userData.firstname,
@@ -42,9 +45,11 @@ class FriendProfile extends React.Component {
         profilephoto: userData.picture,
         description: userData.descriptionmessage,
         stats: userData.dlydata,
-        goals: userData.goals
+        goals: userData.goals,
+        friends: userData.fiends.length,
+        isFriend: (userData.isFriend !== null) ? true : false
       })
-      console.log(this.state)
+      console.log('state', this.state)
     })
     .catch(err => {
       console.log(err)
@@ -73,8 +78,9 @@ class FriendProfile extends React.Component {
               <p className='user-details'>{this.state.username}</p>
               {/* {friend.firstName} {friend.lastName} */}
             </div>
-            <div className='user-profile-friends'>
-              <div className='friend-count'>5</div>
+            <div className='user-profile-friends'
+            onClick={() => console.log('On click needs to route to friendList', this.state.friendid)}>
+              <div className='friend-count'>{this.state.friends}</div>
                 <p className='friend-label'>Friends</p>
             </div>
           </div>
@@ -83,7 +89,7 @@ class FriendProfile extends React.Component {
             <p>{this.state.description}</p>
           </div>
           <div className='profile-btn-container'>
-            <AddFriend />
+            <AddFriend isFriend={this.state.isFriend}/>
             <MessageButton />
           </div>
         </div>

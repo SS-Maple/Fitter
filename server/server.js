@@ -169,6 +169,7 @@ app.get('/rankings', (req, res) => {
 // ORDER BY timestamp
 app.get('/friendProfile', (req, res) => {
   let friendId = 7;
+  let userId = 1;
   db.client.query(`
       SELECT username, firstName, lastName, descriptionMessage, picture,
         (
@@ -192,15 +193,33 @@ app.get('/friendProfile', (req, res) => {
             from goals
             WHERE userID=${friendId}
           ) e
-        ) as goals
+        ) as goals,
+        (
+          select row_to_json(f)
+          from (
+            SELECT userID,
+            friendID
+            from friends
+            WHERE userID=${userId} AND friendID=${friendId}
+          ) f
+        ) as isFriend,
+        (
+          select array_to_json(array_agg(row_to_json(g)))
+          from (
+            SELECT userID,
+            friendID
+            from friends
+            WHERE userID=${friendId}
+          ) g
+        ) as fiends
       from users
       WHERE users.id=${friendId}`,
       (err, data) => {
         if (err) {
-          // console.log('error from server', err)
+          console.log('error from server', err)
           res.send(err);
         } else {
-          // console.log('rows from server /friendprofile - ', data.rows[0])
+          console.log('rows from server /friendprofile - ', data.rows[0])
           res.send(data.rows[0]);
         }
     })
@@ -215,9 +234,10 @@ app.post('/addfriend', (req, res) => {
     VALUES (${userId}, ${friendId})
   `, (err, data) => {
     if (err) {
-      // console.log('error from server', err)
+      console.log('error from server', err)
       res.send(err);
     } else {
+      console.log('success in add friend')
       res.sendStatus(204);
     }
   })
