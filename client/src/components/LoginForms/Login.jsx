@@ -22,11 +22,10 @@ const Login = ({ setToken }) => {
       email,
       password
     }
-    console.log(body)
-    axios.post('/login', body)
-    .then((data) => setToken(data))
-    .catch((err) => console.log('Error loggin in', err))
 
+    axios.post('/login', body)
+    .then((response) => setToken(response.data))
+    .catch((err) => console.log('Error logging in', err))
   }
 
   if (view === 'login') {

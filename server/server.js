@@ -185,10 +185,18 @@ app.post('/signin', (req, res) => {
 
 // post user login and receive token
 app.post('/login', (req, res) => {
-  console.log('login body', req.body)
-  res.send({
-    token: 'test123'
-  });
+  let email = req.body.email;
+  let password = req.body.password;
+
+  // check if the email is in the db
+  db.client.query(`SELECT email FROM users WHERE users.email = '${email}'`)
+  .then(data => {
+    if (!data.rowCount) {
+      throw new Error('email does not exist');
+    }
+    res.send({ token: 'test123' })
+  })
+  .catch(err => console.log('Error logging in', err))
 })
 
 
