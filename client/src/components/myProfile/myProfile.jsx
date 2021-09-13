@@ -10,8 +10,10 @@ class MyProfile extends React.Component {
   constructor(props){
     super(props);
     this.state ={
+      userid: null,
       firstName: null,
       lastName: null,
+      picture: null,
       intro: null,
       stats: [],
       goals: {},
@@ -28,14 +30,36 @@ class MyProfile extends React.Component {
     .then(data => {
       let info = data.data[0]
       this.setState({
+        userid: info.id,
         firstName: info.firstname,
         lastName: info.lastname,
+        picture: info.picture,
         intro: info.intro,
         stats: info.stats,
         goals: info.goals,
         friendCount: info.friendcount
       });
     })
+  }
+
+  addPhoto(e){
+    let file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file)
+    formData.append("upload_preset", "bji3bjas")
+
+    axios({
+      method: "post",
+      url: "https://api.cloudinary.com/v1_1/hrrpp28fec/image/upload",
+      data: formData
+    })
+    .then(data => {
+      this.setState({
+        picture: data.data.url
+      })
+      return axios.put('/updatephoto', `photo=${data.data.url}&userid=${this.state.userid}`)
+    })
+    .catch(err => console.error(err))
   }
 
   render(){
@@ -45,7 +69,7 @@ class MyProfile extends React.Component {
         <div className='my-profile'>
           <div className='profile-info'>
             <div className='profile-pic'>
-              <img className='profile-img' src='https://cdn0.iconfinder.com/data/icons/users-34/24/user_symbol_person-1024.png'></img>
+              <img className='profile-img' src={this.state.picture}></img>
             </div>
             <div className='profile-desc'>
               <p className='user-details'>Name: {firstName} {lastName}</p>
@@ -60,7 +84,8 @@ class MyProfile extends React.Component {
             <p>{intro}</p>
           </div>
           <div className='profile-btn-container'>
-            <button className='profile-btn'>Upload profile picture</button>
+            <input id='upload-pic' type='file' onChange={(e) => this.addPhoto(e)} hidden/>
+            <button className='profile-btn' onClick={() => document.getElementById('upload-pic').click()}>Upload profile picture</button>
             <button className='profile-btn'>Edit Profile</button>
           </div>
         </div>

@@ -107,10 +107,20 @@ app.get('/userdata', (req, res) => {
   .catch(err => console.error(err))
 })
 
+app.put('/updatephoto', (req,res) => {
+  const {photo, userid} = req.body;
+  console.log(req.body)
+  return db.client.query(`
+    UPDATE users SET picture='${photo}' WHERE id=${userid}
+  `)
+  .then(() => res.sendStatus(200))
+  .catch(err => console.error('hello', err))
+})
+
 //updates today's goal status
 app.put('/updateToday', (req, res) => {
   const {userid, category, value} = req.body;
-db.client.query(`
+return db.client.query(`
   INSERT INTO dailydata (userID, timestamp, ${category}) VALUES (${userid}, now(), ${Number(value)})
   ON CONFLICT (timestamp)
   DO
