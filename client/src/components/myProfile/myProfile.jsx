@@ -2,6 +2,7 @@ import React from 'react';
 import MyGoals from './myGoals.jsx';
 import TodaysGoals from './todaysGoal.jsx';
 import PreviousStats from './previousStats.jsx';
+import EditGoals from './editGoals.jsx';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 
@@ -20,6 +21,8 @@ class MyProfile extends React.Component {
       goals: {},
       friendCount: 0
     }
+    this.handleClick = this.handleClick.bind(this);
+    this.handleGoalSubmit = this.handleGoalSubmit.bind(this);
   }
 
   componentDidMount(){
@@ -39,9 +42,20 @@ class MyProfile extends React.Component {
         intro: info.intro,
         stats: info.stats,
         goals: info.goals,
-        friendCount: info.friendcount
+        friendCount: info.friendcount,
+        editGoals: false
       });
     })
+  }
+
+  handleGoalSubmit(water, calorie, weight){
+
+    axios({
+      method: 'put',
+      url: '/updategoals',
+      data: `userid=${this.state.userid}&watergoal=${water}&caloriegoal=${calorie}&weightgoal=${weight}`
+    })
+    .then(() => this.getUserData())
   }
 
   addPhoto(e){
@@ -62,6 +76,18 @@ class MyProfile extends React.Component {
       return axios.put('/updatephoto', `photo=${data.data.url}&userid=${this.state.userid}`)
     })
     .catch(err => console.error(err))
+  }
+
+  handleClick(){
+    if (this.state.editGoals){
+      this.setState({
+        editGoals: false
+      })
+    } else {
+      this.setState({
+        editGoals: true
+      })
+    }
   }
 
   render(){
@@ -88,7 +114,7 @@ class MyProfile extends React.Component {
           <div className='profile-btn-container'>
             <input id='upload-pic' type='file' onChange={(e) => this.addPhoto(e)} hidden/>
             <button className='profile-btn' onClick={() => document.getElementById('upload-pic').click()}>Upload profile picture</button>
-            <button className='profile-btn'>Edit Profile</button>
+            <button className='profile-btn' onClick={() => this.handleClick()} >Edit Goals</button>
           </div>
         </div>
         <div className='goal-header'>Your Goals:</div>
@@ -97,6 +123,7 @@ class MyProfile extends React.Component {
         <TodaysGoals userid={this.state.userid} goals={this.state.goals} />
         <div className='goal-header'>Your Previous Status:</div>
         <PreviousStats stats={stats} goals={goals}/>
+        <EditGoals show={this.state.editGoals} close={this.handleClick} userid={this.state.userid} handleGoalSubmit={this.handleGoalSubmit} />
       </div>
     )
   }

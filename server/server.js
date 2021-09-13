@@ -118,6 +118,18 @@ app.put('/updatephoto', (req,res) => {
   .catch(err => console.error('hello', err))
 })
 
+app.put('/updategoals', (req, res) => {
+  const {userid, watergoal, caloriegoal, weightgoal} = req.body;
+  return db.client.query(`
+  INSERT INTO goals (userId, waterGoal, calorieGoal, weightGoal) VALUES (${userid}, ${watergoal}, ${caloriegoal}, ${weightgoal})
+  ON CONFLICT (userId)
+  DO
+    UPDATE SET waterGoal=excluded.waterGoal, calorieGoal=excluded.calorieGoal, weightGoal=excluded.weightGoal;
+  `)
+  .then(() => res.sendStatus(200))
+  .catch(err => console.error(err))
+})
+
 //updates today's goal status
 app.put('/updateToday', (req, res) => {
   const {userid, category, value} = req.body;

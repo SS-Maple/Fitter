@@ -397,7 +397,8 @@ margin-bottom: 50px;
 
 .modal-content {
   border-radius: .7rem;
-  width: 300px;
+  min-width: 300px;
+  max-width: 400px;
   min-height: 300px;
   max-height: 500px;
   background-color: white;
@@ -432,6 +433,10 @@ margin-bottom: 50px;
   margin-top: 1px;
   margin-bottom: 1px;
   min-width: 200px;
+}
+
+.goal-modal {
+  padding:5px;
 }
 /*Add Calorie Modal*/
 
