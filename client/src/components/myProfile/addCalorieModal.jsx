@@ -47,7 +47,11 @@ class AddCalorieModal extends React.Component{
             <h3>Enter Your Calories:</h3>
           </div>
           <div className='modal-body'>
-            <form onSubmit={(e) => this.props.handleSubmit(e, 'calories', this.state.calorie)}>
+            <form onSubmit={(e) => {
+              this.props.handleSubmit(e, 'calories', this.state.calorie)
+              this.handleReset();
+              this.props.close('calorieShow')}
+              }>
               <input className='food-input' type='text' placeholder='Enter Meal' value={this.state.value} onChange={(e) => this.handleChange(e)}></input>
               <input type='submit' value='Submit'></input>
             </form>

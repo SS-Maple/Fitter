@@ -34,7 +34,11 @@ class UpdateWeightModal extends React.Component{
             <h3>Enter Your Water Intake:</h3>
           </div>
           <div className='modal-body'>
-            <form onSubmit={(e) => this.props.handleSubmit(e, 'weight', this.state.value)}>
+            <form onSubmit={(e) => {
+              this.props.handleSubmit(e, 'weight', this.state.value)
+              this.handleReset();
+              this.props.close('weightShow')}
+            }>
               <input className='food-input' type='number' placeholder='Your Current Weight' value={this.state.value} onChange={(e) => this.handleChange(e)}></input>
               <input type='submit' value='Submit'></input>
             </form>
