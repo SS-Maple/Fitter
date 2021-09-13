@@ -62,7 +62,7 @@ CREATE TABLE friendMessages (
 );
 
 CREATE TABLE notifications (
-  id                     INT       NOT NULL    PRIMARY KEY,
+  id                     SERIAL    NOT NULL    PRIMARY KEY,
   userId                 INT       NOT NULL    REFERENCES users(id),
   notificationText       VARCHAR   NOT NULL,
   notificationTimestamp  TIMESTAMP DEFAULT now(),

@@ -12,6 +12,7 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/notifications', (req, res) => {
   let { userId } = req.query;
+  console.log('userID: ', userId);
   db.client.query(`
     SELECT * FROM notifications
     WHERE userId = ${userId}

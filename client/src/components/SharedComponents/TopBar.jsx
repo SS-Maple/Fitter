@@ -13,7 +13,7 @@ const TopBar = (props) => {
       <Logo id="logo" onClick={logoOnClick} />
       {
         loggedIn ? (
-          <NotificationIcon id="notificaitonIcon"
+          <NotificationIcon id="notificationIcon"
           onClick={notificationOnClick}
           newNotifications={newNotifications}
         />
