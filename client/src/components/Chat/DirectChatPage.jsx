@@ -2,24 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ChatEngine, getOrCreateChat } from 'react-chat-engine';
 import axios from 'axios';
+// const dotenv = require('dotenv').config({path: __dirname + '/../../../../..' + '/.env'});
 
 const DirectChatPage = (props) => {
 	const [friend, setFriend] = useState('')
 
-	// create a new user or retrieve the existing one if they don't exist
-	// useEffect(() => {
-	// 	let config = {
-	// 		headers: {
-	// 			PRIVATE_KEY: '{{59eed471-fa85-444f-bfda-021ac8ca2005}}'
-	// 		}
-	// 	};
-	// 	let data = {
-	// 		username: props.userName,
-	// 		secret: props.userSecret
-	// 	};
-	// 	axios.put('https://api.chatengine.io/users/', data, config)
-	// 		.then((response) => console.log('response: ', response));
-  // }, [props])
+	useEffect(() => {
+		let config = {
+			headers: {
+				'private-key': '59eed471-fa85-444f-bfda-021ac8ca2005'
+			}
+		};
+		let data = {
+			username: props.userName,
+			secret: props.userSecret
+		};
+		axios.put('https://api.chatengine.io/users/', data, config)
+			.then((response) => console.log('response: ', response))
+			.catch((error) => console.log('error: ', error))
+  }, [props])
 
 	const createDirectChat = (creds) => {
 		getOrCreateChat(
@@ -32,6 +33,7 @@ const DirectChatPage = (props) => {
 	const renderChatForm = (creds) => {
 		return (
 			<div>
+				<div>Welcome, {props.userName}!</div>
 				<input
 					placeholder='Search Friends'
 					value={friend}

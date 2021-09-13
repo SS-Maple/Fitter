@@ -69,7 +69,7 @@ const ChatMain = (props) => {
       .catch((error) => console.log('error', error))
   }, [props]);
 
-  if (user !== '' || user === undefined) {
+  if (user !== '') {
     return (
       <div>
         <DirectChatPage
