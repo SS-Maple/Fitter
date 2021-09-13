@@ -63,6 +63,16 @@ app.get('/friends', (req, res) => {
   })
 });
 
+app.get('/todaysgoals', (req, res) => {
+  //test id
+  let userId = 5;
+  return db.client.query(`
+  SELECT water, calories, weight FROM dailydata where userid=${userId} AND timestamp = date(now());
+  `)
+  .then(results => res.send(results.rows[0]))
+  .catch(err => console.error(err))
+})
+
 app.get('/userdata', (req, res) => {
   //test id
   let userId = 5;
@@ -97,6 +107,7 @@ app.get('/userdata', (req, res) => {
   .catch(err => console.error(err))
 })
 
+//updates today's goal status
 app.put('/updateToday', (req, res) => {
   const {userid, category, value} = req.body;
 db.client.query(`

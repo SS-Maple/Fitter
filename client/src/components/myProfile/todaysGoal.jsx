@@ -8,7 +8,7 @@ class TodaysGoals extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      calorie: 0,
+      calories: 0,
       water: 0,
       weight: 0,
       calorieShow: false,
@@ -17,6 +17,22 @@ class TodaysGoals extends React.Component{
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
+  }
+
+  componentDidMount() {
+    this.getData()
+  }
+
+  getData(){
+    return axios.get('/todaysgoals')
+    .then(results =>
+      {
+        this.setState({
+          calories: results.data.calories,
+          water: results.data.water,
+          weight: results.data.weight
+        })
+      })
   }
 
 
@@ -42,16 +58,17 @@ class TodaysGoals extends React.Component{
       url: '/updateToday',
       data: `userid=${userid}&value=${value}&category=${category}`
     })
+    .then(() => this.getData())
   }
 
   render(){
-    const {calorie, water, weight} = this.state
+    const {calories, water, weight} = this.state
 
     return(
       <div className='my-goals'>
         <div className='goal-container' onClick={() => this.handleClick('calorieShow')} >
           <div className='indiv-goal-curr'>
-            <div className='goal-progress'>{calorie}</div>
+            <div className='goal-progress'>{calories}</div>
           </div>
           <div className='goal-label'>Calories</div>
         </div>
