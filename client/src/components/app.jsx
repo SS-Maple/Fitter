@@ -5,7 +5,6 @@ import FriendsList from './FriendsList/FriendsList.jsx';
 import HomeFeed from './HomeFeed/HomeFeed.jsx';
 import Login from './LoginForms/Login.jsx';
 import Main from './Main.jsx';
-import ChatMain from './Chat/ChatMain.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -23,10 +22,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {/* <TopBar />
-        <Main /> */}
-        <ChatMain userId='1'/>
-        {/* <BottomNav handleClick={this.handleClick} /> */}
+        <TopBar />
+        <Main />
+        <BottomNav handleClick={this.handleClick} />
       </div>
     )
   }
