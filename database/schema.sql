@@ -77,3 +77,5 @@ CREATE TABLE friendMessages (
 --   message     VARCHAR   NOT NULL,
 --   timestamp   TIMESTAMP DEFAULT now()
 -- );
+
+

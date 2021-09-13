@@ -176,17 +176,76 @@ body {
 /* Friend's List ----> */
 
 /*User Profile*/
-
-.user-profile {
+.my-profile {
   display: flex;
+  flex-direction: column;
   background-color: white;
   border: black;
-  margin-top: 60px;
+  padding-bottom: 5px;
+  margin-top: 5px;
   margin-left: 5px;
   margin-right: 5px;
   height: auto;
   width: auto;
-  border-radius: 1rem;
+  border-radius: .75rem;
+
+}
+
+.user-details {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.profile-desc {
+  margin-top: 35px;
+  min-width: 50vw;
+  max-width: 50vw;
+}
+
+.profile-info {
+  display: flex;
+  justify-content: flex-start ;
+}
+
+.profile-intro {
+  padding-left: 1rem;
+  min-height: 5vh;
+  max-height: 20vh;
+}
+
+.profile-intro p {
+  margin-top:0;
+}
+
+.user-profile-friends {
+  position: relative;
+  border: solid;
+  border-color: grey;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  height: 6vh;
+  min-width: 8vh;
+}
+
+.friend-label{
+  font-family: sans-serif;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin-bottom: 0;
+  color: white;
+  background-color: black;
+  padding-top: 3px;
+}
+
+.friend-count {
+  position: relative;
+  padding: 5%;
+  text-align: center;
 }
 
 .profile-pic {
@@ -197,7 +256,107 @@ body {
   max-height: 750px;
 }
 
+.profile-btn-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.profile-btn {
+  font-size: 12px;
+  background-color: black;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  padding: .5rem;
+}
 /*User Profile*/
+
+/*Your Goals*/
+.goal-header {
+  font-family: sans-serif;
+  color: white;
+  font-size: medium;
+  margin-top: 1rem;
+  margin-bottom: .5rem;
+  margin-left: 5px;
+
+}
+
+.my-goals {
+  font-family: sans-serif;
+  display: grid;
+  margin-left: 5px;
+  margin-right: 5px;
+  grid-template-columns: auto auto auto;
+}
+
+.goal-container {
+  border: solid 1px;
+  border-color: grey;
+  display: flex;
+  flex-direction: column;
+}
+
+.indiv-goal {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  min-height: 3vh;
+}
+
+.goal-total {
+  background-color: white;
+  text-align: center;
+  padding: 2px;
+}
+
+.goal-units {
+  background-color: rgb(194, 194, 194);
+  text-align: center;
+  padding: 2px;
+}
+
+.goal-label {
+  position: relative;
+  text-align: center;
+  background-color: black;
+  color: white;
+  font-size: 12px;
+}
+/*Your Goals*/
+
+/*Todays Goals*/
+.goal-progress {
+  background-color: white;
+  text-align: center;
+  padding: 2px;
+}
+
+.indiv-goal-curr {
+  display: grid;
+  min-height: 3vh;
+}
+/*Todays Goals*/
+
+/*Previous Stats*/
+.previous-stat-container {
+  background-color: white;
+  font-family: sans-serif;
+  font-size: 14px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: .75rem;
+  padding: 5px;
+  margin-bottom: 7px;
+}
+
+.previous-stat-container p{
+  padding-left: 5px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/*Previous Stats*/
 
 /* Bottom Nav */
 .bottom-nav {
@@ -218,6 +377,33 @@ body {
 }
 
 /* Bottom Nav */
+
+/*Add Calorie Modal*/
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right:0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  border-radius: .7rem;
+  width: 300px;
+  min-height: 300px;
+  max-height: 500px;
+  background-color: white;
+}
+
+.modal-header {
+  text-align: center;
+}
+/*Add Calorie Modal*/
+
 
 /*FORM STYLING*/
 input {
