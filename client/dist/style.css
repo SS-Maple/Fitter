@@ -412,12 +412,26 @@ margin-bottom: 50px;
 }
 
 .d1 {
+  font-size: x-large;
   padding-top: 10px;
   min-height: 35px;
 }
 
 .d2 {
   font-size: 25px;
+}
+
+.food-options {
+  max-height: 150px;
+  overflow: scroll;
+}
+
+.food-select {
+  text-align: center;
+  outline:  1px solid grey;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  min-width: 200px;
 }
 /*Add Calorie Modal*/
 
