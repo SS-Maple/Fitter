@@ -2,6 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import TopBar from './SharedComponents/TopBar.jsx';
 import Notifications from './notifications/Notifications.jsx';
+import BottomNav from './SharedComponents/BottomNav/bottomNav.jsx';
+import FriendsList from './FriendsList/FriendsList.jsx';
+import Login from './LoginForms/Login.jsx';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +19,11 @@ class App extends React.Component {
       notifications: ['This is a notification', 'This is another notification'],
       successfulLogin: true
     }
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(e){
+    console.log(e.target.alt)
   }
 
   notificationEventHandler() {
@@ -108,6 +117,11 @@ class App extends React.Component {
           //   <HomePage />
           // ) : null
         }
+        <TopBar />
+        {/* temporarily hidding FriendsList */}
+        {/* <FriendsList />  */}
+        <Login />
+        <BottomNav handleClick={this.handleClick} />
       </div>
     )
   }

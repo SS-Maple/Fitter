@@ -1,4 +1,4 @@
--- TO RUN FILE: log into postgres and run \i schema.sql
+-- TO RUN FILE: log into postgres and run \i database/schema.sql
 
 
 -- CREATE DATABASE AND TABLES
