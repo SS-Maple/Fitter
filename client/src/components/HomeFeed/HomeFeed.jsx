@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import SearchUsernames from './SearchUsernames.jsx';
 import { Link } from 'react-router-dom'
+import MyGoals from '../myProfile/myGoals.jsx';
 
 
 function HomeFeed() {
@@ -20,10 +21,10 @@ function HomeFeed() {
   function sortFriends() {
     friends.forEach(friend => {
       // returns negative if they missed the goal
-      let water = ((friend['goals'][0]['wateraverage'] * 100).toFixed(3));
+      let water = Math.abs(100 - (friend['goals'][0]['wateraverage'] * 100))
       // returns negative if goal is exceeded
-      let calories = ((friend['goals'][0]['caloriesaverage'] * 100).toFixed(3));
-      let calculate = water - calories;
+      let calories = Math.abs(100 - (friend['goals'][0]['caloriesaverage'] * 100))
+      let calculate = water + calories;
       friend['sorting'] = calculate.toFixed(2);
     })
   }
@@ -36,7 +37,7 @@ function HomeFeed() {
 
       {/* Placeholder for Personal Stats [Simon] */}
       <div className='home-placeholder'>
-        Placeholder for Daily/Weekly Status
+        {/* <MyGoals /> */}
       </div>
 
       <h4>Your Friend's Rankings: </h4>

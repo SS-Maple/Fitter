@@ -3,3 +3,7 @@ bundle.js
 coverage/
 coverage/lcov-report
 .env
+
+# bundle
+client/dist/bundle.js
+client/dist/bundle.js.LICENSE.txt
