@@ -163,7 +163,103 @@ app.get('/rankings', (req, res) => {
     }
   })
 });
+// get friend profile information
+// SELECT * FROM dailyData
+// WHERE userID = ${friendId} AND shareBoolean=true
+// ORDER BY timestamp
+app.get('/friendProfile', (req, res) => {
+  let friendId = 7;
+  let userId = 1;
+  db.client.query(`
+      SELECT username, firstName, lastName, descriptionMessage, picture,
+        (
+          select array_to_json(array_agg(row_to_json(d)))
+          from (
+            SELECT userID,
+            to_char(timestamp, 'Month DD, YYYY') AS date,
+            water, calories, weight
+            from dailydata
+            WHERE userID=${friendId} AND shareBoolean=true
+            ORDER BY timestamp
+          ) d
+        ) as dlydata,
+        (
+          select row_to_json(e)
+          from (
+            SELECT userID,
+            waterGoal,
+            calorieGoal,
+            weightGoal
+            from goals
+            WHERE userID=${friendId}
+          ) e
+        ) as goals,
+        (
+          select row_to_json(f)
+          from (
+            SELECT userID,
+            friendID
+            from friends
+            WHERE userID=${userId} AND friendID=${friendId}
+          ) f
+        ) as isFriend,
+        (
+          select array_to_json(array_agg(row_to_json(g)))
+          from (
+            SELECT userID,
+            friendID
+            from friends
+            WHERE userID=${friendId}
+          ) g
+        ) as fiends
+      from users
+      WHERE users.id=${friendId}`,
+      (err, data) => {
+        if (err) {
+          console.log('error from server', err)
+          res.send(err);
+        } else {
+          console.log('rows from server /friendprofile - ', data.rows[0])
+          res.send(data.rows[0]);
+        }
+    })
+});
+app.post('/addfriend', (req, res) => {
+  let friendId = 7;
+  let userId = 1;
+  // let friendId = req.body.friendID
+  // let userId = req.body.userID
+  db.client.query(`
+    INSERT INTO friends (userID, friendID)
+    VALUES (${userId}, ${friendId})
+  `, (err, data) => {
+    if (err) {
+      console.log('error from server', err)
+      res.send(err);
+    } else {
+      console.log('success in add friend')
+      res.sendStatus(204);
+    }
+  })
+});
+app.delete('/removefriend', (req, res) => {
+  let friendId = 7;
+  let userId = 1;
 
+  // let friendId = req.body.friendID
+  // let userId = req.body.userID
+  db.client.query(`
+    DELETE from friends
+    WHERE userID=${userId} AND friendID=${friendId}
+  `, (err, data) => {
+    if (err) {
+      // console.log('error from server', err)
+      res.send(err);
+    } else {
+      res.sendStatus(204);
+    }
+  })
+});
 
 app.listen(port, function () {
   console.log(`listening on port ${port}`);

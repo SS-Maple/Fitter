@@ -29,7 +29,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE friends (
-  id             INT       NOT NULL   PRIMARY KEY,
+  id             SERIAL       NOT NULL   PRIMARY KEY,
   userID         INT       NOT NULL   REFERENCES users(id),
   friendID       INT       NOT NULL   REFERENCES users(id)
 );
