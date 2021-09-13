@@ -57,6 +57,7 @@ import axios from 'axios';
 
 const ChatMain = (props) => {
   const [user, setUser] = useState('');
+  const [friends, setFriends] = useState('');
 
   useEffect(() => {
     axios.get('/user')
@@ -67,6 +68,18 @@ const ChatMain = (props) => {
         });
       })
       .catch((error) => console.log('error', error))
+    axios.get('/friends')
+      .then((response) => {
+        let modifiedFriends = response.data.map(friend => {
+          return {
+            userName: friend.firstname + ' ' + friend.lastname,
+            userSecret: friend.id
+          };
+        });
+        console.log('friends:',modifiedFriends);
+        setFriends(modifiedFriends);
+      })
+      .catch((error) => console.log('error', error))
   }, [props]);
 
   if (user !== '') {
@@ -75,6 +88,7 @@ const ChatMain = (props) => {
         <DirectChatPage
           userName={user.userName}
           userSecret={user.userSecret}
+          friends={friends}
         />
       </div>
     );
