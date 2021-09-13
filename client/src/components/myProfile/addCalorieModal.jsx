@@ -16,7 +16,7 @@ class AddCalorieModal extends React.Component{
     this.setState({
       value: '',
       calorie: 0,
-      selectedFoods: ''
+      selectedFood: ''
     })
   }
 
