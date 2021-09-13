@@ -82,12 +82,11 @@ const ChatMain = (props) => {
       .catch((error) => console.log('error', error))
   }, [props]);
 
-  if (user !== '') {
+  if (user !== '' && friends !== '') {
     return (
       <div>
         <DirectChatPage
-          userName={user.userName}
-          userSecret={user.userSecret}
+          user={user}
           friends={friends}
         />
       </div>
