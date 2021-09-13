@@ -63,18 +63,30 @@ app.get('/friends', (req, res) => {
   })
 });
 
+app.get('/todaysgoals', (req, res) => {
+  //test id
+  let userId = 1;
+  return db.client.query(`
+  SELECT water, calories, weight FROM dailydata where userid=${userId} AND timestamp = date(now());
+  `)
+  .then(results => res.send(results.rows[0]))
+  .catch(err => console.error(err))
+})
+
 app.get('/userdata', (req, res) => {
   //test id
-  let userId = 5;
+  let userId = 1;
   return db.client.query(`
   SELECT array_agg(row_to_json(a))
   FROM (
     SELECT id,
     firstName,
     lastName,
+    birthday,
     email,
     descriptionmessage AS intro,
     picture,
+    (SELECT count(friendid) from friends where userid=${userId}) AS friendcount,
     (SELECT array_to_json(array_agg(row_to_json(b)))
     FROM (
       SELECT id,
@@ -95,6 +107,42 @@ app.get('/userdata', (req, res) => {
   .then(results => res.send(results.rows[0].array_agg))
   .catch(err => console.error(err))
 })
+
+app.put('/updatephoto', (req,res) => {
+  const {photo, userid} = req.body;
+  console.log(req.body)
+  return db.client.query(`
+    UPDATE users SET picture='${photo}' WHERE id=${userid}
+  `)
+  .then(() => res.sendStatus(200))
+  .catch(err => console.error('hello', err))
+})
+
+app.put('/updategoals', (req, res) => {
+  const {userid, watergoal, caloriegoal, weightgoal} = req.body;
+  return db.client.query(`
+  INSERT INTO goals (userId, waterGoal, calorieGoal, weightGoal) VALUES (${userid}, ${watergoal}, ${caloriegoal}, ${weightgoal})
+  ON CONFLICT (userId)
+  DO
+    UPDATE SET waterGoal=excluded.waterGoal, calorieGoal=excluded.calorieGoal, weightGoal=excluded.weightGoal;
+  `)
+  .then(() => res.sendStatus(200))
+  .catch(err => console.error(err))
+})
+
+//updates today's goal status
+app.put('/updateToday', (req, res) => {
+  const {userid, category, value} = req.body;
+return db.client.query(`
+  INSERT INTO dailydata (userID, timestamp, ${category}) VALUES (${userid}, now(), ${Number(value)})
+  ON CONFLICT (timestamp)
+  DO
+    UPDATE SET ${category}=dailydata.${category} + excluded.${category};
+  `)
+  .then(() => res.sendStatus(200))
+  .catch(err => console.error(err))
+})
+
 // get home feed rankings data
 app.get('/rankings', (req, res) => {
   let friendId = 1;
