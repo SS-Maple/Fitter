@@ -11,23 +11,37 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      test: []
+      test: [],
+      token: null
     }
     this.handleClick = this.handleClick.bind(this)
+    this.setToken = this.setToken.bind(this);
   }
 
   handleClick(e) {
     console.log(e.target.alt)
   }
 
+  setToken(value) {
+    this.setState({ token: value})
+  }
+
   render() {
+    if (!this.state.token) {
+      return (
+        <div>
+          <TopBar />
+          <Login setToken={this.setToken}/>
+        </div>
+      )
+    }
     return (
       <div>
         <TopBar />
         {/* temporarily hidding FriendsList */}
         {/* <FriendsList />  */}
-        <Login />
-        {/* <MyProfile /> */}
+        {/* <Login /> */}
+        <MyProfile />
         {/* <Main /> */}
         <BottomNav handleClick={this.handleClick} />
       </div>

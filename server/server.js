@@ -183,6 +183,15 @@ app.post('/signin', (req, res) => {
   })
 })
 
+// post user login and receive token
+app.post('/login', (req, res) => {
+  console.log('login body', req.body)
+  res.send({
+    token: 'test123'
+  });
+})
+
+
 app.listen(port, function () {
   console.log(`listening on port ${port}`);
 });
