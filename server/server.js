@@ -47,7 +47,7 @@ app.get('/user', (req, res) => {
 app.get('/friends', (req, res) => {
   let friendId = 1;
   db.client.query(`
-    SELECT * FROM friends 
+    SELECT * FROM friends
     JOIN users
     ON friends.friendid = users.id
     WHERE userid = ${friendId}
@@ -71,7 +71,7 @@ app.get('/rankings', (req, res) => {
       (
         select array_to_json(array_agg(row_to_json(d)))
         from (
-          select *, 
+          select *,
           (
             select username
             from users
