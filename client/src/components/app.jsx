@@ -1,4 +1,5 @@
 import React from 'react';
+import FriendProfile from './friendProfile/friendProfile.jsx';
 import TopBar from './SharedComponents/TopBar.jsx';
 import BottomNav from './SharedComponents/BottomNav/bottomNav.jsx';
 import MyProfile from './myProfile/myProfile.jsx';
@@ -24,8 +25,9 @@ class App extends React.Component {
     return (
       <div>
         <TopBar />
+        {/* <FriendProfile /> */}
         {/* temporarily hidding FriendsList */}
-        {/* <FriendsList />  */}
+        {/* <FriendsList /> */}
         {/* <Login /> */}
         {/* <MyProfile /> */}
         <Main />
