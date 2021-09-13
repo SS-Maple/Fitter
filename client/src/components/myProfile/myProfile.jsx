@@ -14,7 +14,8 @@ class MyProfile extends React.Component {
       lastName: null,
       intro: null,
       stats: [],
-      goals: {}
+      goals: {},
+      friendCount: 0
     }
   }
 
@@ -31,15 +32,14 @@ class MyProfile extends React.Component {
         lastName: info.lastname,
         intro: info.intro,
         stats: info.stats,
-        goals: info.goals
+        goals: info.goals,
+        friendCount: info.friendcount
       });
     })
   }
 
-
-
   render(){
-    const {firstName, lastName, intro, stats, goals} = this.state;
+    const {firstName, lastName, intro, stats, goals, friendCount} = this.state;
     return(
       <div>
         <div className='my-profile'>
@@ -52,7 +52,7 @@ class MyProfile extends React.Component {
               <p className='user-details'>Age: 1000</p>
             </div>
             <div className='user-profile-friends'>
-              <div className='friend-count'>5</div>
+              <div className='friend-count'>{friendCount}</div>
                 <p className='friend-label'>Friends</p>
             </div>
           </div>

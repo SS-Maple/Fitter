@@ -34,7 +34,7 @@ class AddWaterModal extends React.Component{
             <h3>Enter Your Water Intake:</h3>
           </div>
           <div className='modal-body'>
-            <form onSubmit={(e) => this.handleFoodSubmit(e)}>
+            <form onSubmit={(e) => this.props.handleSubmit(e, 'water', this.state.value)}>
               <input className='food-input' type='number' placeholder='Ounces' value={this.state.value} onChange={(e) => this.handleChange(e)}></input>
               <input type='submit' value='Submit'></input>
             </form>

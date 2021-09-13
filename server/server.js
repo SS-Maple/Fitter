@@ -97,14 +97,16 @@ app.get('/userdata', (req, res) => {
   .catch(err => console.error(err))
 })
 
-app.put('/calorieupdate', (req, res) => {
-  let userid = 5;
-  return db.client.query(`
-  INSERT INTO dailydata (userid, timestamp, water, calories, weight)
-  VALUES (${userid}, to_char(now(), 'Month DD, YYYY') as timestamp, ${water}, ${calories}, ${weight})
-  ON CONFLICT (timestamp) DO UPDATE SET
-  water=water+${water}, calories=calories+${calories}, weight=weight+${weight}
+app.put('/updateToday', (req, res) => {
+  const {userid, category, value} = req.body;
+db.client.query(`
+  INSERT INTO dailydata (userID, timestamp, ${category}) VALUES (${userid}, now(), ${Number(value)})
+  ON CONFLICT (timestamp)
+  DO
+    UPDATE SET ${category}=dailydata.${category} + excluded.${category};
   `)
+  .then(() => res.sendStatus(200))
+  .catch(err => console.error(err))
 })
 
 // get home feed rankings data

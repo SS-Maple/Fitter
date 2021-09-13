@@ -46,7 +46,7 @@ CREATE TABLE goals (
 CREATE TABLE dailyData (
   id              SERIAL       NOT NULL   PRIMARY KEY,
   userID          INT       NOT NULL   REFERENCES users(id),
-  timestamp       TIMESTAMP DEFAULT now(),
+  timestamp       DATE DEFAULT now() UNIQUE,
   water           INT       DEFAULT 0,
   calories        INT       DEFAULT 0,
   weight          INT       DEFAULT 0,

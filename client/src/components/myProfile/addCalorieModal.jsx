@@ -17,11 +17,6 @@ class AddCalorieModal extends React.Component{
     })
   }
 
-  handleFoodSubmit(e){
-    e.preventDefault();
-    axios()
-  }
-
   handleChange(e){
     this.setState({
       value: e.target.value
@@ -52,7 +47,7 @@ class AddCalorieModal extends React.Component{
             <h3>Enter Your Calories:</h3>
           </div>
           <div className='modal-body'>
-            <form onSubmit={(e) => this.handleFoodSubmit(e)}>
+            <form onSubmit={(e) => this.props.handleSubmit(e, 'calories', this.state.calorie)}>
               <input className='food-input' type='text' placeholder='Enter Meal' value={this.state.value} onChange={(e) => this.handleChange(e)}></input>
               <input type='submit' value='Submit'></input>
             </form>

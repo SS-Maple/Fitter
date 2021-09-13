@@ -2,6 +2,7 @@ import React from 'react';
 import AddCalorieModal from './addCalorieModal.jsx';
 import AddWaterModal from './addWaterModal.jsx';
 import UpdateWeightModal from './updateWeightModal.jsx';
+import axios from 'axios';
 
 class TodaysGoals extends React.Component{
   constructor(props){
@@ -14,6 +15,8 @@ class TodaysGoals extends React.Component{
       waterShow: false
     }
     this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
   }
 
 
@@ -29,6 +32,17 @@ class TodaysGoals extends React.Component{
     }
   }
 
+  handleSubmit(e, category, value){
+    e.preventDefault();
+    //temp userid
+    let userid = 5;
+
+    axios({
+      method: 'put',
+      url: '/updateToday',
+      data: `userid=${userid}&value=${value}&category=${category}`
+    })
+  }
 
   render(){
     const {calorie, water, weight} = this.state
@@ -54,9 +68,9 @@ class TodaysGoals extends React.Component{
           </div>
           <div className='goal-label'>Weight</div>
         </div>
-        <AddCalorieModal show={this.state.calorieShow} close={this.handleClick} />
-        <AddWaterModal show={this.state.waterShow} close={this.handleClick} />
-        <UpdateWeightModal show={this.state.weightShow} close={this.handleClick} />
+        <AddCalorieModal show={this.state.calorieShow} close={this.handleClick} handleSubmit={this.handleSubmit}/>
+        <AddWaterModal show={this.state.waterShow} close={this.handleClick} handleSubmit={this.handleSubmit} />
+        <UpdateWeightModal show={this.state.weightShow} close={this.handleClick} handleSubmit={this.handleSubmit}/>
       </div>
     )
   }
