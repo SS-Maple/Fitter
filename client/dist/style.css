@@ -176,6 +176,10 @@ body {
 /* Friend's List ----> */
 
 /*User Profile*/
+.my-profile-container {
+margin-bottom: 50px;
+}
+
 .my-profile {
   display: flex;
   flex-direction: column;
@@ -188,7 +192,6 @@ body {
   height: auto;
   width: auto;
   border-radius: .75rem;
-
 }
 
 .user-details {

@@ -13,6 +13,7 @@ class MyProfile extends React.Component {
       userid: null,
       firstName: null,
       lastName: null,
+      birthday: null,
       picture: null,
       intro: null,
       stats: [],
@@ -33,6 +34,7 @@ class MyProfile extends React.Component {
         userid: info.id,
         firstName: info.firstname,
         lastName: info.lastname,
+        birthday: info.birthday,
         picture: info.picture,
         intro: info.intro,
         stats: info.stats,
@@ -63,9 +65,9 @@ class MyProfile extends React.Component {
   }
 
   render(){
-    const {firstName, lastName, intro, stats, goals, friendCount} = this.state;
+    const {firstName, lastName, intro, stats, goals, friendCount, birthday} = this.state;
     return(
-      <div>
+      <div className='my-profile-container'>
         <div className='my-profile'>
           <div className='profile-info'>
             <div className='profile-pic'>
@@ -73,7 +75,7 @@ class MyProfile extends React.Component {
             </div>
             <div className='profile-desc'>
               <p className='user-details'>Name: {firstName} {lastName}</p>
-              <p className='user-details'>Age: 1000</p>
+              <p className='user-details'>Birthday: {birthday}</p>
             </div>
             <div className='user-profile-friends'>
               <div className='friend-count'>{friendCount}</div>
@@ -92,7 +94,7 @@ class MyProfile extends React.Component {
         <div className='goal-header'>Your Goals:</div>
         <MyGoals goals={goals} />
         <div className='goal-header' >Today's Status:</div>
-        <TodaysGoals />
+        <TodaysGoals userid={this.state.userid} />
         <div className='goal-header'>Your Previous Status:</div>
         <PreviousStats stats={stats} goals={goals}/>
       </div>

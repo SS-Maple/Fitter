@@ -51,12 +51,12 @@ class TodaysGoals extends React.Component{
   handleSubmit(e, category, value){
     e.preventDefault();
     //temp userid
-    let userid = 5;
+    let userid = 1;
 
     axios({
       method: 'put',
       url: '/updateToday',
-      data: `userid=${userid}&value=${value}&category=${category}`
+      data: `userid=${this.props.userid}&value=${value}&category=${category}`
     })
     .then(() => this.getData())
   }
@@ -64,23 +64,31 @@ class TodaysGoals extends React.Component{
   render(){
     const {calories, water, weight} = this.state
 
+    let check = (v) => {
+      if(!v) {
+        return '-'
+      } else {
+        return v;
+      }
+    }
+
     return(
       <div className='my-goals'>
         <div className='goal-container' onClick={() => this.handleClick('calorieShow')} >
           <div className='indiv-goal-curr'>
-            <div className='goal-progress'>{calories}</div>
+            <div className='goal-progress'>{check(calories)}</div>
           </div>
           <div className='goal-label'>Calories</div>
         </div>
         <div className='goal-container' onClick={() => this.handleClick('waterShow')}>
           <div className='indiv-goal-curr'>
-            <div className='goal-progress'>{water}</div>
+            <div className='goal-progress'>{check(water)}</div>
           </div>
           <div className='goal-label'>Water Intake</div>
         </div>
         <div className='goal-container' onClick={() => this.handleClick('weightShow')}>
           <div className='indiv-goal'>
-            <div className='goal-total'>{weight}</div>
+            <div className='goal-total'>{check(weight)}</div>
             <div className='goal-units'>lbs</div>
           </div>
           <div className='goal-label'>Weight</div>

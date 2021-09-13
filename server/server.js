@@ -65,7 +65,7 @@ app.get('/friends', (req, res) => {
 
 app.get('/todaysgoals', (req, res) => {
   //test id
-  let userId = 5;
+  let userId = 1;
   return db.client.query(`
   SELECT water, calories, weight FROM dailydata where userid=${userId} AND timestamp = date(now());
   `)
@@ -75,13 +75,14 @@ app.get('/todaysgoals', (req, res) => {
 
 app.get('/userdata', (req, res) => {
   //test id
-  let userId = 5;
+  let userId = 1;
   return db.client.query(`
   SELECT array_agg(row_to_json(a))
   FROM (
     SELECT id,
     firstName,
     lastName,
+    birthday,
     email,
     descriptionmessage AS intro,
     picture,
