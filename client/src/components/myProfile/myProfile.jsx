@@ -94,7 +94,7 @@ class MyProfile extends React.Component {
         <div className='goal-header'>Your Goals:</div>
         <MyGoals goals={goals} />
         <div className='goal-header' >Today's Status:</div>
-        <TodaysGoals userid={this.state.userid} />
+        <TodaysGoals userid={this.state.userid} goals={this.state.goals} />
         <div className='goal-header'>Your Previous Status:</div>
         <PreviousStats stats={stats} goals={goals}/>
       </div>

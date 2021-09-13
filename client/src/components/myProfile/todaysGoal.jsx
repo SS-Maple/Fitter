@@ -64,11 +64,12 @@ class TodaysGoals extends React.Component{
   render(){
     const {calories, water, weight} = this.state
 
-    let check = (v) => {
+    let pct = (v,category) => {
       if(!v) {
-        return '-'
+        return '0%'
       } else {
-        return v;
+        let pctvalue = ((v/this.props.goals.[category]) * 100).toFixed(0)
+        return `${pctvalue}%`;
       }
     }
 
@@ -76,19 +77,19 @@ class TodaysGoals extends React.Component{
       <div className='my-goals'>
         <div className='goal-container' onClick={() => this.handleClick('calorieShow')} >
           <div className='indiv-goal-curr'>
-            <div className='goal-progress'>{check(calories)}</div>
+            <div className='goal-progress'>{pct(calories, 'caloriegoal')}</div>
           </div>
           <div className='goal-label'>Calories</div>
         </div>
         <div className='goal-container' onClick={() => this.handleClick('waterShow')}>
           <div className='indiv-goal-curr'>
-            <div className='goal-progress'>{check(water)}</div>
+            <div className='goal-progress'>{pct(water, 'watergoal')}</div>
           </div>
           <div className='goal-label'>Water Intake</div>
         </div>
         <div className='goal-container' onClick={() => this.handleClick('weightShow')}>
           <div className='indiv-goal'>
-            <div className='goal-total'>{check(weight)}</div>
+            <div className='goal-total'>{weight}</div>
             <div className='goal-units'>lbs</div>
           </div>
           <div className='goal-label'>Weight</div>
