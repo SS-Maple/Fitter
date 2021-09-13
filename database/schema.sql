@@ -14,18 +14,19 @@ DROP TABLE IF EXISTS friendMessages;
 DROP TABLE IF EXISTS publicMessages;
 
 CREATE TABLE users (
-  id                  INT       NOT NULL   PRIMARY KEY,
-  firstName           VARCHAR   NOT NULL,
-  lastName            VARCHAR   NOT NULL,
-  email               VARCHAR   NOT NULL,
-  username            VARCHAR   NOT NULL,
-  descriptionMessage  VARCHAR   NOT NULL,
-  userPassword        VARCHAR   NOT NULL,
-  shareBirthday       BOOLEAN   NOT NULL,
+  id                  SERIAL   NOT NULL   PRIMARY KEY,
+  firstName           VARCHAR,
+  lastName            VARCHAR,
+  email               VARCHAR,
+  username            VARCHAR,
+  descriptionMessage  VARCHAR,
+  userPassword        VARCHAR,
+  shareBirthday       BOOLEAN,
   birthday            VARCHAR,
   picture             VARCHAR,
-  securityQuestion    VARCHAR   NOT NULL,
-  securityAnswer      VARCHAR   NOT NULL
+  securityQuestion    VARCHAR,
+  securityAnswer      VARCHAR,
+  UNIQUE(email)
 );
 
 CREATE TABLE friends (

@@ -5,7 +5,8 @@ let port = 3000;
 
 const db = require('../database/connect.js');
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true}));
+app.use(express.json())
 app.use(express.static(__dirname + '/../client/dist'));
 
 
@@ -164,7 +165,26 @@ app.get('/rankings', (req, res) => {
   })
 });
 
+// post user sign in information
+app.post('/signin', (req, res) => {
+  let users = req.body;
+  console.log(users);
+  db.client.query(`
+    INSERT INTO users(firstname, lastname, email, username, userpassword, securityquestion, securityanswer)
+    VALUES (${users.firstname}, ${users.lastname}, ${users.email}, ${users.username}, ${users.userpassword}, '${users.securityquestion}', ${users.securityanswer})
+  `, (err, data) => {
+    if (err) {
+      console.log('ERROR-', err);
+      res.send(err);
+    } else {
+      console.log('Heres the data', data);
+      res.send(data);
+    }
+  })
+})
 
 app.listen(port, function () {
   console.log(`listening on port ${port}`);
 });
+
+
