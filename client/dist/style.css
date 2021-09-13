@@ -257,6 +257,7 @@ margin-bottom: 50px;
 .profile-img {
   max-width: 75px;
   max-height: 750px;
+  border-radius: 50%;
 }
 
 .profile-btn-container {
