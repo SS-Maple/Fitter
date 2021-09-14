@@ -94,6 +94,7 @@ app.get('/userdata', (req, res) => {
   .then(results => res.send(results.rows[0].array_agg))
   .catch(err => console.error(err))
 })
+
 // get home feed rankings data
 app.get('/rankings', (req, res) => {
   let friendId = 1;

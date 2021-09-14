@@ -8,12 +8,19 @@ import MyGoals from '../myProfile/myGoals.jsx';
 function HomeFeed() {
 
   const [friends, setFriends] = useState([]);
+  const [goals, setGoals] = useState({});
 
   useEffect(() => {
     axios.get('/rankings')
       .then(response => response.data)
       .then(result => setFriends(result[0].friends))
       .catch(error => error)
+    axios.get('/userdata')
+      .then(data => data.data[0])
+      .then(info => setGoals({
+        
+      }))
+      .catch(error => console.log(error))
   }, []);
 
   sortFriends();
@@ -35,9 +42,9 @@ function HomeFeed() {
 
       <SearchUsernames />
 
-      {/* Placeholder for Personal Stats [Simon] */}
       <div className='home-placeholder'>
-        {/* <MyGoals /> */}
+      Placeholder for Personal Stats
+        {/* <MyGoals goals={goals} /> */}
       </div>
 
       <h4>Your Friend's Rankings: </h4>
