@@ -5,7 +5,7 @@ import FriendProfile from "../client/src/components/friendProfile/friendProfile.
 import { configure, shallow, mount } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import 'regenerator-runtime';
-// @jest-environment jsdom
+
 
 configure({ adapter: new Adapter() });
 afterEach(cleanup);

@@ -14,7 +14,8 @@ DROP TABLE IF EXISTS friendMessages;
 DROP TABLE IF EXISTS publicMessages;
 
 CREATE TABLE users (
-  id                  INT       NOT NULL   PRIMARY KEY,
+  id                  SERIAL  UNIQUE   PRIMARY KEY,
+  userid              INT       NOT NULL,
   firstName           VARCHAR   NOT NULL,
   lastName            VARCHAR   NOT NULL,
   email               VARCHAR   NOT NULL,
@@ -62,7 +63,7 @@ CREATE TABLE friendMessages (
 );
 
 -- DATA LOAD
-\COPY users(id,firstName,lastName,email,username,descriptionMessage,userPassword,shareBirthday,birthday,picture,securityQuestion,securityAnswer) FROM 'data/fitterUsers.csv' DELIMITER ',' CSV HEADER;
+\COPY users(userid,firstName,lastName,email,username,descriptionMessage,userPassword,shareBirthday,birthday,picture,securityQuestion,securityAnswer) FROM 'data/fitterUsers.csv' DELIMITER ',' CSV HEADER;
 \COPY friends(id,userID,friendID) FROM 'data/fitterFriends.csv' DELIMITER ',' CSV HEADER;
 \COPY goals(id,userId,waterGoal,calorieGoal,weightGoal,shareBoolean) FROM 'data/goals.csv' DELIMITER ',' CSV HEADER;
 \COPY dailyData(id,userId,timestamp,water,calories,weight,shareBoolean) FROM 'data/dailyData.csv' DELIMITER ',' CSV HEADER;
@@ -79,3 +80,4 @@ CREATE TABLE friendMessages (
 -- );
 
 
+-- SELECT setval(pg_get_serial_sequence(users, users.id), max(users.id)) FROM users;
