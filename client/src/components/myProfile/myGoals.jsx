@@ -20,7 +20,7 @@ class MyGoals extends React.Component{
         <div className='goal-container'>
           <div className='indiv-goal'>
             <div className='goal-total'>{watergoal}</div>
-            <div className='goal-units'>cups</div>
+            <div className='goal-units'>Ounces</div>
           </div>
           <div className='goal-label'>Water Intake</div>
         </div>
