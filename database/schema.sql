@@ -14,10 +14,10 @@ DROP TABLE IF EXISTS friendMessages;
 DROP TABLE IF EXISTS publicMessages;
 
 CREATE TABLE users (
-  id                  SERIAL   NOT NULL   PRIMARY KEY,
+  id                  SERIAL       NOT NULL   PRIMARY KEY,
   firstName           VARCHAR,
   lastName            VARCHAR,
-  email               VARCHAR,
+  email               VARCHAR   UNIQUE,
   username            VARCHAR,
   descriptionMessage  VARCHAR,
   userPassword        VARCHAR,
@@ -25,32 +25,31 @@ CREATE TABLE users (
   birthday            VARCHAR,
   picture             VARCHAR,
   securityQuestion    VARCHAR,
-  securityAnswer      VARCHAR,
-  UNIQUE(email)
+  securityAnswer      VARCHAR
 );
 
 CREATE TABLE friends (
-  id             INT       NOT NULL   PRIMARY KEY,
+  id             SERIAL       NOT NULL   PRIMARY KEY,
   userID         INT       NOT NULL   REFERENCES users(id),
   friendID       INT       NOT NULL   REFERENCES users(id)
 );
 
 CREATE TABLE goals (
-  id                    INT       NOT NULL   PRIMARY KEY,
-  userId                INT       NOT NULL   REFERENCES users(id),
-  waterGoal             INT       NOT NULL,
-  calorieGoal           INT       NOT NULL,
-  weightGoal            INT       NOT NULL,
+  id                    SERIAL    NOT NULL   PRIMARY KEY,
+  userId                INT       NOT NULL   UNIQUE REFERENCES users(id),
+  waterGoal             INT       DEFAULT 0,
+  calorieGoal           INT       DEFAULT 0,
+  weightGoal            INT       DEFAULT 0,
   shareBoolean          BOOLEAN
 );
 
 CREATE TABLE dailyData (
-  id              INT       NOT NULL   PRIMARY KEY,
+  id              SERIAL       NOT NULL   PRIMARY KEY,
   userID          INT       NOT NULL   REFERENCES users(id),
-  timestamp       TIMESTAMP DEFAULT now(),
-  water           INT       NOT NULL,
-  calories        INT       NOT NULL,
-  weight          INT       NOT NULL,
+  timestamp       DATE DEFAULT now() UNIQUE,
+  water           INT       DEFAULT 0,
+  calories        INT       DEFAULT 0,
+  weight          INT       DEFAULT 0,
   shareBoolean    BOOLEAN
 );
 
