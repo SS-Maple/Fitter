@@ -11,11 +11,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      test: [],
-      token: null
+      test: []
     }
     this.handleClick = this.handleClick.bind(this)
-    this.setToken = this.setToken.bind(this);
+    this.setToken = this.setToken.bind(this)
+    this.setUserId = this.setUserId.bind(this)
   }
 
   handleClick(e) {
@@ -26,12 +26,17 @@ class App extends React.Component {
     this.setState({ token: value})
   }
 
+  setUserId(value) {
+    this.setState({ user: value })
+  }
+
+
   render() {
     if (!this.state.token) {
       return (
         <div>
           <TopBar />
-          <Login setToken={this.setToken}/>
+          <Login setToken={this.setToken} setUserId={this.setUserId}/>
         </div>
       )
     }
@@ -39,9 +44,9 @@ class App extends React.Component {
       <div>
         <TopBar />
         {/* temporarily hidding FriendsList */}
-        {/* <FriendsList />  */}
+        <FriendsList />
         {/* <Login /> */}
-        <MyProfile />
+        {/* <MyProfile /> */}
         {/* <Main /> */}
         <BottomNav handleClick={this.handleClick} />
       </div>

@@ -8,7 +8,7 @@ const formReducer = (state, event) => {
   }
  }
 
-const Signup = ({setView}) => {
+const Signup = ({ setView, setToken, setUserId }) => {
   const [formData, setFormData] = useReducer(formReducer, {});
 
 
@@ -22,8 +22,12 @@ const Signup = ({setView}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post('/userdata', formData)
-    .then((data) => console.log(`User successfully stored`))
+    axios.post('/signin', formData)
+    .then((response) => {
+      let data = response.data
+      setToken(data.token)
+      // setUserId(data.userid)
+    })
     .catch((err) => console.log('Error saving user'))
   }
 

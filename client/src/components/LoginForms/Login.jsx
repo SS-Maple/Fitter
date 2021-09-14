@@ -3,13 +3,13 @@ import axios from 'axios';
 import Signup from './Signup.jsx';
 import ForgotPW from './ForgotPW.jsx';
 
-const Login = ({ setToken }) => {
+const Login = ({ setToken, setUserId }) => {
   const [view, setView] = useState('login');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
   if (view === 'signup') {
-    return <Signup setView={setView}/>
+    return <Signup setView={setView} setToken={setToken} setUserId={setUserId}/>
   }
 
   if (view === 'forgot') {

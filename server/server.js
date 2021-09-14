@@ -165,25 +165,26 @@ app.get('/rankings', (req, res) => {
   })
 });
 
-// post user sign in information
+// post user sign in information and send auth token + user id
 app.post('/signin', (req, res) => {
   let users = req.body;
-  console.log(users);
-  db.client.query(`
-    INSERT INTO users(firstname, lastname, email, username, userpassword, securityquestion, securityanswer)
-    VALUES (${users.firstname}, ${users.lastname}, ${users.email}, ${users.username}, ${users.userpassword}, '${users.securityquestion}', ${users.securityanswer})
-  `, (err, data) => {
-    if (err) {
-      console.log('ERROR-', err);
-      res.send(err);
-    } else {
-      console.log('Heres the data', data);
-      res.send(data);
+  let text = 'INSERT INTO users(firstname, lastname, email, username, userpassword, securityquestion, securityanswer) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id';
+  let values = [users.firstname, users.lastname, users.email, users.username, users.userpassword, users.securityquestion, users.securityanswer]
+
+  db.client.query(text, values)
+  .then(data => {
+
+    if (data.rowCount === 1) {
+      res.send({
+        token: 'test123',
+        userId: data.rows[0].id
+      })
     }
   })
+  .catch(err => res.send(err))
 })
 
-// post user login and receive token
+// post user login and send auth token
 app.post('/login', (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
@@ -194,7 +195,9 @@ app.post('/login', (req, res) => {
     if (!data.rowCount) {
       throw new Error('email does not exist');
     }
-    res.send({ token: 'test123' })
+    res.send({
+      token: 'test123'
+    })
   })
   .catch(err => console.log('Error logging in', err))
 })
