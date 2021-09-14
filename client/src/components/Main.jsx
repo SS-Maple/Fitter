@@ -6,12 +6,8 @@ import Signup from './LoginForms/Signup.jsx';
 import Login from './LoginForms/Login.jsx';
 import HomeFeed from './HomeFeed/HomeFeed.jsx';
 import ForgotPW from './LoginForms/ForgotPW.jsx';
-<<<<<<< HEAD
 import MyProfile from './myProfile/myProfile.jsx';
-
-=======
 import FriendProfile from './friendProfile/friendProfile.jsx';
->>>>>>> main
 
 function Main() {
   return (
@@ -19,11 +15,8 @@ function Main() {
       <Switch>
         <Route exact path='/' component={HomeFeed} />
         <Route path='/friends' component={FriendsList} />
-<<<<<<< HEAD
         <Route path='/userprofile' component={MyProfile} />
-=======
         <Route path='/friendProfile' component={FriendProfile} />
->>>>>>> main
       </Switch>
     </main>
   );
