@@ -44,10 +44,10 @@ class App extends React.Component {
       <div>
         <TopBar />
         {/* temporarily hidding FriendsList */}
-        <FriendsList />
+        {/* <FriendsList /> */}
         {/* <Login /> */}
         {/* <MyProfile /> */}
-        {/* <Main /> */}
+        <Main />
         <BottomNav handleClick={this.handleClick} />
       </div>
     )
