@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import SearchUsernames from './SearchUsernames.jsx';
 import { Link } from 'react-router-dom'
-import MyGoals from '../myProfile/myGoals.jsx';
+import TodaysGoals from '../myProfile/todaysGoal.jsx';
 
 
 function HomeFeed() {
@@ -15,13 +15,17 @@ function HomeFeed() {
       .then(response => response.data)
       .then(result => setFriends(result[0].friends))
       .catch(error => error)
-    axios.get('/userdata')
-      .then(data => data.data[0])
-      .then(info => setGoals({
-        
-      }))
-      .catch(error => console.log(error))
+    axios.get('/todaysgoals')
+      .then(results => {
+          setGoals({
+            calories: results.data.calories,
+            water: results.data.water,
+            weight: results.data.weight
+          })
+        })
   }, []);
+
+  console.log('goals', goals)
 
   sortFriends();
 
@@ -43,8 +47,7 @@ function HomeFeed() {
       <SearchUsernames />
 
       <div className='home-placeholder'>
-      Placeholder for Personal Stats
-        {/* <MyGoals goals={goals} /> */}
+        <TodaysGoals goals={goals} />
       </div>
 
       <h4>Your Friend's Rankings: </h4>
