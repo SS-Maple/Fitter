@@ -6,6 +6,7 @@ import Signup from './LoginForms/Signup.jsx';
 import Login from './LoginForms/Login.jsx';
 import HomeFeed from './HomeFeed/HomeFeed.jsx';
 import ForgotPW from './LoginForms/ForgotPW.jsx';
+import MyProfile from './myProfile/myProfile.jsx';
 import FriendProfile from './friendProfile/friendProfile.jsx';
 
 function Main() {
@@ -14,10 +15,16 @@ function Main() {
       <Switch>
         <Route exact path='/' component={HomeFeed} />
         <Route path='/friends' component={FriendsList} />
-        <Route path='/friendProfile' component={FriendProfile} />
+        <Route path='/userprofile' component={MyProfile} />
+        <userContext.Consumer>
+          {({userId}) => {
+            <Route path='/friendProfile' component={FriendProfile} userId={userId}/>
+          }}
+        </userContext.Consumer>
       </Switch>
     </main>
   );
 }
 
 export default Main;
+

@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   border: 0;
+  font-family: sans-serif;
 }
 
 body {
@@ -176,6 +177,10 @@ body {
 /* Friend's List ----> */
 
 /*User Profile*/
+.my-profile-container {
+margin-bottom: 50px;
+}
+
 .my-profile {
   display: flex;
   flex-direction: column;
@@ -188,7 +193,6 @@ body {
   height: auto;
   width: auto;
   border-radius: .75rem;
-
 }
 
 .user-details {
@@ -254,6 +258,7 @@ body {
 .profile-img {
   max-width: 75px;
   max-height: 750px;
+  border-radius: 50%;
 }
 
 .profile-btn-container {
@@ -393,7 +398,8 @@ body {
 
 .modal-content {
   border-radius: .7rem;
-  width: 300px;
+  min-width: 300px;
+  max-width: 400px;
   min-height: 300px;
   max-height: 500px;
   background-color: white;
@@ -401,6 +407,37 @@ body {
 
 .modal-header {
   text-align: center;
+}
+
+.food-calorie-display {
+  text-align: center;
+}
+
+.d1 {
+  font-size: x-large;
+  padding-top: 10px;
+  min-height: 35px;
+}
+
+.d2 {
+  font-size: 25px;
+}
+
+.food-options {
+  max-height: 150px;
+  overflow: scroll;
+}
+
+.food-select {
+  text-align: center;
+  outline:  1px solid grey;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  min-width: 200px;
+}
+
+.goal-modal {
+  padding:5px;
 }
 /*Add Calorie Modal*/
 

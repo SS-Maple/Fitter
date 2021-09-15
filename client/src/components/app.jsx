@@ -7,11 +7,13 @@ import FriendsList from './FriendsList/FriendsList.jsx';
 import HomeFeed from './HomeFeed/HomeFeed.jsx';
 import Login from './LoginForms/Login.jsx';
 import Main from './Main.jsx';
+import {userContext} from './userContext';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userId: 3,
       test: []
     }
     this.handleClick = this.handleClick.bind(this)
@@ -30,7 +32,9 @@ class App extends React.Component {
         {/* <FriendsList /> */}
         {/* <Login /> */}
         {/* <MyProfile /> */}
-        <Main />
+        <userContext.Provider userId={this.state.userId}>
+          <Main/>
+        </userContext.Provider>
         <BottomNav handleClick={this.handleClick} />
       </div>
     )
