@@ -45,6 +45,7 @@ class MyProfile extends React.Component {
         friendCount: info.friendcount,
         editGoals: false
       });
+      console.log(info.goals)
     })
   }
 
@@ -91,7 +92,7 @@ class MyProfile extends React.Component {
   }
 
   render(){
-    const {firstName, lastName, intro, stats, goals, friendCount, birthday} = this.state;
+    const {userid, firstName, lastName, intro, stats, goals, friendCount, birthday} = this.state;
     return(
       <div className='my-profile-container'>
         <div className='my-profile'>
@@ -103,10 +104,12 @@ class MyProfile extends React.Component {
               <p className='user-details'>Name: {firstName} {lastName}</p>
               <p className='user-details'>Birthday: {birthday}</p>
             </div>
+            <Link to={{ pathname:`/friends`}}>
             <div className='user-profile-friends'>
               <div className='friend-count'>{friendCount}</div>
                 <p className='friend-label'>Friends</p>
             </div>
+            </Link>
           </div>
           <div className='profile-intro'>
             <p>{intro}</p>
@@ -121,6 +124,7 @@ class MyProfile extends React.Component {
         <MyGoals goals={goals} />
         <div className='goal-header' >Today's Status:</div>
         <TodaysGoals userid={this.state.userid} goals={this.state.goals} />
+        <div className='more-details'>Tap for more details</div>
         <div className='goal-header'>Your Previous Status:</div>
         <PreviousStats stats={stats} goals={goals}/>
         <EditGoals show={this.state.editGoals} close={this.handleClick} userid={this.state.userid} handleGoalSubmit={this.handleGoalSubmit} />

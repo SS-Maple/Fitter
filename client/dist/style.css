@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   border: 0;
+  font-family: sans-serif;
 }
 
 body {
@@ -273,6 +274,17 @@ margin-bottom: 50px;
   color: white;
   text-align: center;
   padding: .5rem;
+}
+
+.more-details {
+  text-align: center;
+  color: white;
+  margin-top: 10px;
+  background-color: black;
+  font-size: 14px;
+  border-radius: 1rem;
+  padding-top: 2px;
+  padding-bottom:2px;
 }
 /*User Profile*/
 

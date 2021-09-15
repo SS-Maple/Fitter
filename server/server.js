@@ -94,7 +94,8 @@ app.get('/userdata', (req, res) => {
       water,
       calories,
       weight
-      FROM dailyData WHERE userId=users.id)b) AS stats,
+      FROM dailyData WHERE userId=users.id
+      ORDER BY timestamp DESC)b) AS stats,
     (SELECT row_to_json(c)
     FROM (
       SELECT id,
