@@ -44,13 +44,45 @@ app.get('/user', (req, res) => {
 
 // get current user's friends
 app.get('/friends', (req, res) => {
-  let friendId = req.query.userId;
+  console.log('-', req.query.friendId)
+  let friendId = req.query.friendId;
   db.client.query(`
-    SELECT * FROM friends
-    JOIN users
-    ON friends.friendid = users.id
-    WHERE userid = ${friendId}
-    ORDER BY users.firstname
+      select id, firstname, lastname, picture, descriptionmessage,
+      (
+        select array_to_json(array_agg(row_to_json(d)))
+        from (
+          select *,
+          (
+            select username
+            from users
+            where users.id = friends.friendId
+          ) as friendusername ,
+          (
+            select picture
+            from users
+            where users.id = friends.friendId
+          ) as profilephoto ,
+          (
+            select descriptionMessage
+            from users
+            where users.id = friends.friendId
+          ) as description ,
+          (
+            select firstname
+            from users
+            where users.id = friends.friendId
+          ) as friendfirst ,
+          (
+            select lastname
+            from users
+            where users.id = friends.friendId
+          ) as friendlast
+          from friends
+          where friends.userID = users.id
+        ) d
+      ) as friends
+    from users
+    where users.id = ${friendId}
   `, (err, data) => {
     if (err) {
       // console.log('error from server -', err)
@@ -109,7 +141,7 @@ app.get('/userdata', (req, res) => {
 
 app.put('/updatephoto', (req, res) => {
   const { photo, userid } = req.body;
-  console.log(req.body)
+  // console.log(req.body)
   return db.client.query(`
     UPDATE users SET picture='${photo}' WHERE id=${userid}
   `)
@@ -263,10 +295,10 @@ app.get('/friendProfile', (req, res) => {
       WHERE users.id=${friendId}`,
     (err, data) => {
       if (err) {
-        console.log('error from server', err)
+        // console.log('error from server', err)
         res.send(err);
       } else {
-        console.log('rows from server /friendprofile - ', data.rows[0])
+        // console.log('rows from server /friendprofile - ', data.rows[0])
         res.send(data.rows[0]);
       }
     })
@@ -281,10 +313,10 @@ app.post('/addfriend', (req, res) => {
     VALUES (${userId}, ${friendId})
   `, (err, data) => {
     if (err) {
-      console.log('error from server', err)
+      // console.log('error from server', err)
       res.send(err);
     } else {
-      console.log('success in add friend')
+      // console.log('success in add friend')
       res.sendStatus(204);
     }
   })
