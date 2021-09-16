@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import FriendsList from './FriendsList/FriendsList.jsx';
 import App from './App.jsx';
 import Signup from './LoginForms/Signup.jsx';
@@ -12,12 +12,14 @@ import FriendProfile from './friendProfile/friendProfile.jsx';
 function Main() {
   return (
     <main>
-      <Switch>
-        <Route exact path='/' component={HomeFeed} />
-        <Route path='/friends' component={FriendsList} />
-        <Route path='/userprofile' component={MyProfile} />
-        <Route path='/friendProfile' component={FriendProfile} />
-      </Switch>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path='/' component={HomeFeed} />
+          <Route path='/friends' component={FriendsList} />
+          <Route path='/userprofile' component={MyProfile} />
+          <Route path='/friendProfile' component={FriendProfile} />
+        </Switch>
+      </BrowserRouter>
     </main>
   );
 }

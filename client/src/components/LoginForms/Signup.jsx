@@ -25,7 +25,8 @@ const Signup = ({ setView, setToken, setUserId }) => {
     axios.post('/signin', formData)
     .then((response) => {
       let data = response.data
-      setToken(data.token)
+      console.log('signin data', data)
+      setToken(data)
       // setUserId(data.userid)
     })
     .catch((err) => console.log('Error saving user'))
