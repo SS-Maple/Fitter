@@ -12,14 +12,12 @@ import FriendProfile from './friendProfile/friendProfile.jsx';
 function Main() {
   return (
     <main>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path='/' component={HomeFeed} />
-          <Route path='/friends' component={FriendsList} />
-          <Route path='/userprofile' component={MyProfile} />
-          <Route path='/friendProfile' component={FriendProfile} />
-        </Switch>
-      </BrowserRouter>
+      <Switch>
+        <Route exact path='/' component={HomeFeed} />
+        <Route path='/friends' component={FriendsList} />
+        <Route path='/userprofile' component={MyProfile} />
+        <Route path='/friendProfile' component={FriendProfile} />
+      </Switch>
     </main>
   );
 }
