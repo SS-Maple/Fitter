@@ -1,24 +1,26 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
-
+import { Link, useLocation, useHistory, useParams } from 'react-router-dom';
 
 function FriendsList() {
+  const location = useLocation();
+  
+  const [userId, setUserId] = useState(location.search.split('=')[1]);
 
   const [friends, setFriends] = useState([]);
   const [user, setUser] = useState('');
 
   useEffect(() => {
-    axios.get('/user')
+    axios.get(`/user?userId=${userId}`)
       .then((response) => response.data)
       .then((result) => {
         result.forEach(item => setUser(item.firstname))
       })
       .catch((error) => console.log('error', error))
-    axios.get('/friends')
+    axios.get(`/friends?userId=${userId}`)
       .then((response) => response.data)
       .then((result) => setFriends(result))
-      .catch((error) => console.log('error', error))
+      .catch((error) => console.log('error', error));
   }, [])
 
   return (
