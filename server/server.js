@@ -5,7 +5,8 @@ let port = 3000;
 
 const db = require('../database/connect.js');
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true}));
+app.use(express.json())
 app.use(express.static(__dirname + '/../client/dist'));
 
 
@@ -367,6 +368,44 @@ app.delete('/removefriend', (req, res) => {
   })
 });
 
+// post user sign in information and send auth token + user id
+app.post('/signin', (req, res) => {
+  let users = req.body;
+  let text = 'INSERT INTO users(firstname, lastname, email, username, userpassword, securityquestion, securityanswer) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id';
+  let values = [users.firstname, users.lastname, users.email, users.username, users.userpassword, users.securityquestion, users.securityanswer]
+
+  db.client.query(text, values)
+  .then(data => {
+
+    if (data.rowCount === 1) {
+      res.send({
+        token: 'test123',
+        userId: data.rows[0].id
+      })
+    }
+  })
+  .catch(err => res.send(err))
+})
+
+// post user login and send auth token
+app.post('/login', (req, res) => {
+  let email = req.body.email;
+  let password = req.body.password;
+
+  // check if the email is in the db
+  db.client.query(`SELECT email FROM users WHERE users.email = '${email}'`)
+  .then(data => {
+    if (!data.rowCount) {
+      throw new Error('email does not exist');
+    }
+    res.send({
+      token: 'test123'
+    })
+  })
+  .catch(err => console.log('Error logging in', err))
+})
 app.listen(port, function () {
   console.log(`listening on port ${port}`);
 });
+
+

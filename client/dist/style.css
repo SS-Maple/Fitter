@@ -486,3 +486,14 @@ form,
   color: white;
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.19);
 }
+
+.security-select {
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #afafaf;
+  width: 206px;
+  height: 29px;
+  margin: 10px;
+  background-color: #f1f1f1;
+}
