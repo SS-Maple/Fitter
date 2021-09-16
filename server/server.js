@@ -176,94 +176,110 @@ app.put('/updateToday', (req, res) => {
 
 // get home feed rankings data
 app.get(`/rankings`, (req, res) => {
-  let friendId = req.query.friendId;
+  // let friendId = req.query.friendId;
+  let friendId = 1;
+  // select id, firstname, lastname, picture, descriptionmessage,
+  // (
+  //   select array_to_json(array_agg(row_to_json(d)))
+  //   from (
+  //     select watergoal, caloriegoal, weightgoal,
+  //     (
+  //       select avg(water)/watergoal
+  //       from dailyData
+  //       where dailyData.userId = 1
+  //     ) as wateraverage ,
+  //     (
+  //       select avg(calories)/caloriegoal
+  //       from dailyData
+  //       where dailyData.userId = 1
+  //     ) as caloriesaverage ,
+  //     (
+  //       select avg(weight)/weightgoal
+  //       from dailyData
+  //       where dailyData.userId = 1
+  //     ) as weightaverage
+  //     from goals
+  //     where goals.userId = 1 
+  //   ) d
+  // ) as userdata,
+
+  //   (
+  //     select array_to_json(array_agg(row_to_json(d)))
+  //     from (
+  //       select *,
+  //       (
+  //         select username
+  //         from users
+  //         where users.id = friends.friendId
+  //       ) as friendusername ,
+  //       (
+  //         select picture
+  //         from users
+  //         where users.id = friends.friendId
+  //       ) as profilephoto ,
+  //       (
+  //         select firstname
+  //         from users
+  //         where users.id = friends.friendId
+  //       ) as friendfirst ,
+  //       (
+  //         select lastname
+  //         from users
+  //         where users.id = friends.friendId
+  //       ) as friendlast ,
+  //       (
+  //         select array_to_json(array_agg(row_to_json(d)))
+  //         from (
+  //           select watergoal, caloriegoal, weightgoal,
+  //           (
+  //             select avg(water)/watergoal
+  //             from dailyData
+  //             where dailyData.userId = friendId
+  //           ) as wateraverage ,
+  //           (
+  //             select avg(calories)/caloriegoal
+  //             from dailyData
+  //             where dailyData.userId = friendId
+  //           ) as caloriesaverage ,
+  //           (
+  //             select avg(weight)/weightgoal
+  //             from dailyData
+  //             where dailyData.userId = friendId
+  //           ) as weightaverage
+  //           from goals
+  //           where goals.userId = friendId 
+  //         ) d
+  //       ) as goals
+  //       from friends
+  //       where friends.userID = users.id 
+  //     ) d
+  //   ) as friends
+  // from users
+  // where users.id = ${friendId}
   db.client.query(`
-    select id, firstname, lastname, picture, descriptionmessage,
 
-    (
-      select array_to_json(array_agg(row_to_json(d)))
-      from (
-        select watergoal, caloriegoal, weightgoal,
-        (
-          select avg(water)/watergoal
-          from dailyData
-          where dailyData.userId = 1
-        ) as wateraverage ,
-        (
-          select avg(calories)/caloriegoal
-          from dailyData
-          where dailyData.userId = 1
-        ) as caloriesaverage ,
-        (
-          select avg(weight)/weightgoal
-          from dailyData
-          where dailyData.userId = 1
-        ) as weightaverage
-        from goals
-        where goals.userId = 1 
-      ) d
-    ) as userdata,
+  SELECT friendId FROM friends 
+  WHERE userid = ${friendId}
 
-      (
-        select array_to_json(array_agg(row_to_json(d)))
-        from (
-          select *,
-          (
-            select username
-            from users
-            where users.id = friends.friendId
-          ) as friendusername ,
-          (
-            select picture
-            from users
-            where users.id = friends.friendId
-          ) as profilephoto ,
-          (
-            select firstname
-            from users
-            where users.id = friends.friendId
-          ) as friendfirst ,
-          (
-            select lastname
-            from users
-            where users.id = friends.friendId
-          ) as friendlast ,
-          (
-            select array_to_json(array_agg(row_to_json(d)))
-            from (
-              select watergoal, caloriegoal, weightgoal,
-              (
-                select avg(water)/watergoal
-                from dailyData
-                where dailyData.userId = friendId
-              ) as wateraverage ,
-              (
-                select avg(calories)/caloriegoal
-                from dailyData
-                where dailyData.userId = friendId
-              ) as caloriesaverage ,
-              (
-                select avg(weight)/weightgoal
-                from dailyData
-                where dailyData.userId = friendId
-              ) as weightaverage
-              from goals
-              where goals.userId = friendId 
-            ) d
-          ) as goals
-          from friends
-          where friends.userID = users.id 
-        ) d
-      ) as friends
-    from users
-    where users.id = ${friendId}
+
   `, (err, data) => {
     if (err) {
       console.log('error from server -', err)
       res.send(err);
     } else {
       console.log('rows from server /rankings - ', data.rows)
-      res.send(data.rows);
+      let info = data.rows;
+      let temp = [];
+      info.forEach(friend => temp.push(friend.friendid))
+      temp.push(friendId)
+      db.client.query(`select * from users`, (err, data) => {
+        if (err) {
+          console.log('error')
+        } else {
+          console.log('else', temp)
+        }
+      })
+      res.send(temp);
     }
   })
 });
