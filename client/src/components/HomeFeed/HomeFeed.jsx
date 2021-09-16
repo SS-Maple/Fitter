@@ -4,7 +4,6 @@ import SearchUsernames from './SearchUsernames.jsx';
 import { Link } from 'react-router-dom'
 import TodaysGoals from '../myProfile/todaysGoal.jsx';
 import Rankings from './Rankings.jsx';
-import PersonalRank from './PersonalRank.jsx';
 
 
 function HomeFeed() {
@@ -30,7 +29,6 @@ function HomeFeed() {
       <h4>Your Daily Status:</h4>
       <div className='home-daily-stats'>
         <TodaysGoals goals={goals} />
-        <PersonalRank />
       </div>
       <Rankings id={id}/>
       <div className='feed-bottom'></div>
