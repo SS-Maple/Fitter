@@ -14,7 +14,6 @@ function App() {
   const { token, setToken } = useToken();
 
   if (!token) {
-
     return (
       <div>
         <TopBar />
@@ -26,11 +25,6 @@ function App() {
   return (
     <div>
       <TopBar />
-      {/* <FriendProfile /> */}
-      {/* temporarily hidding FriendsList */}
-      {/* <FriendsList /> */}
-      {/* <Login /> */}
-      {/* <MyProfile /> */}
       <Main />
       <BottomNav />
     </div>

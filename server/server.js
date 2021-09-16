@@ -45,13 +45,44 @@ app.get('/user', (req, res) => {
 
 // get current user's friends
 app.get('/friends', (req, res) => {
-  let friendId = req.query.userId;
+  let friendId = req.query.friendId;
   db.client.query(`
-    SELECT * FROM friends
-    JOIN users
-    ON friends.friendid = users.id
-    WHERE userid = ${friendId}
-    ORDER BY users.firstname
+      select id, firstname, lastname, picture, descriptionmessage,
+      (
+        select array_to_json(array_agg(row_to_json(d)))
+        from (
+          select *,
+          (
+            select username
+            from users
+            where users.id = friends.friendId
+          ) as friendusername ,
+          (
+            select picture
+            from users
+            where users.id = friends.friendId
+          ) as profilephoto ,
+          (
+            select descriptionMessage
+            from users
+            where users.id = friends.friendId
+          ) as description ,
+          (
+            select firstname
+            from users
+            where users.id = friends.friendId
+          ) as friendfirst ,
+          (
+            select lastname
+            from users
+            where users.id = friends.friendId
+          ) as friendlast
+          from friends
+          where friends.userID = users.id
+        ) d
+      ) as friends
+    from users
+    where users.id = ${friendId}
   `, (err, data) => {
     if (err) {
       // console.log('error from server -', err)
@@ -110,7 +141,7 @@ app.get('/userdata', (req, res) => {
 
 app.put('/updatephoto', (req, res) => {
   const { photo, userid } = req.body;
-  console.log(req.body)
+  // console.log(req.body)
   return db.client.query(`
     UPDATE users SET picture='${photo}' WHERE id=${userid}
   `)
@@ -144,10 +175,35 @@ app.put('/updateToday', (req, res) => {
 })
 
 // get home feed rankings data
-app.get('/rankings', (req, res) => {
-  let friendId = 1;
+app.get(`/rankings`, (req, res) => {
+  let friendId = req.query.friendId;
   db.client.query(`
     select id, firstname, lastname, picture, descriptionmessage,
+
+    (
+      select array_to_json(array_agg(row_to_json(d)))
+      from (
+        select watergoal, caloriegoal, weightgoal,
+        (
+          select avg(water)/watergoal
+          from dailyData
+          where dailyData.userId = 1
+        ) as wateraverage ,
+        (
+          select avg(calories)/caloriegoal
+          from dailyData
+          where dailyData.userId = 1
+        ) as caloriesaverage ,
+        (
+          select avg(weight)/weightgoal
+          from dailyData
+          where dailyData.userId = 1
+        ) as weightaverage
+        from goals
+        where goals.userId = 1 
+      ) d
+    ) as userdata,
+
       (
         select array_to_json(array_agg(row_to_json(d)))
         from (
@@ -192,25 +248,26 @@ app.get('/rankings', (req, res) => {
                 where dailyData.userId = friendId
               ) as weightaverage
               from goals
-              where goals.userId = friendId
+              where goals.userId = friendId 
             ) d
           ) as goals
           from friends
-          where friends.userID = users.id
+          where friends.userID = users.id 
         ) d
       ) as friends
     from users
     where users.id = ${friendId}
   `, (err, data) => {
     if (err) {
-      // console.log('error from server -', err)
+      console.log('error from server -', err)
       res.send(err);
     } else {
-      // console.log('rows from server /rankings - ', data.rows)
+      console.log('rows from server /rankings - ', data.rows)
       res.send(data.rows);
     }
   })
 });
+
 // get friend profile information
 // SELECT * FROM dailyData
 // WHERE userID = ${friendId} AND shareBoolean=true
@@ -264,14 +321,15 @@ app.get('/friendProfile', (req, res) => {
       WHERE users.id=${friendId}`,
     (err, data) => {
       if (err) {
-        console.log('error from server', err)
+        // console.log('error from server', err)
         res.send(err);
       } else {
-        console.log('rows from server /friendprofile - ', data.rows[0])
+        // console.log('rows from server /friendprofile - ', data.rows[0])
         res.send(data.rows[0]);
       }
     })
 });
+
 app.post('/addfriend', (req, res) => {
   let friendId = 7;
   let userId = 1;
@@ -282,10 +340,10 @@ app.post('/addfriend', (req, res) => {
     VALUES (${userId}, ${friendId})
   `, (err, data) => {
     if (err) {
-      console.log('error from server', err)
+      // console.log('error from server', err)
       res.send(err);
     } else {
-      console.log('success in add friend')
+      // console.log('success in add friend')
       res.sendStatus(204);
     }
   })

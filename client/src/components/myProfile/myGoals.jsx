@@ -6,8 +6,8 @@ class MyGoals extends React.Component{
   }
 
   render(){
-    const {caloriegoal, watergoal, weightgoal} = this.props.goals
-    console.log(this.props.goals)
+    const {caloriegoal, watergoal, weightgoal} = this.props.goals;
+
     return(
       <div className='my-goals'>
         <div className='goal-container'>
