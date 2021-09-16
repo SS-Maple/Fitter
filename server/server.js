@@ -329,19 +329,20 @@ app.post('/signin', (req, res) => {
   .catch(err => res.send(err))
 })
 
-// post user login and send auth token
+// post user login and send auth token + user id
 app.post('/login', (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
 
-  // check if the email is in the db
-  db.client.query(`SELECT email FROM users WHERE users.email = '${email}'`)
+  db.client.query(`SELECT id FROM users WHERE users.email = '${email}'`)
   .then(data => {
     if (!data.rowCount) {
       throw new Error('email does not exist');
     }
+
     res.send({
-      token: 'test123'
+      token: 'test123',
+      userId: data.rows[0].id
     })
   })
   .catch(err => console.log('Error logging in', err))
