@@ -2,6 +2,8 @@ const { Client } = require('pg');
 const dotenv = require('dotenv').config({path: __dirname + '/..' + '/.env'});
 const connectionString = process.env.connectionString;
 
+console.log(__dirname + '/..' + '/.env')
+
 const client = new Client({
   connectionString: connectionString
 });
