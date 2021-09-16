@@ -66,7 +66,7 @@ CREATE TABLE notifications (
   userId                 INT       NOT NULL    REFERENCES users(id),
   notificationText       VARCHAR   NOT NULL,
   notificationTimestamp  TIMESTAMP DEFAULT now(),
-  new                    BOOLEAN DEFAULT true
+  new                    BOOLEAN   DEFAULT true
 );
 
 -- DATA LOAD
