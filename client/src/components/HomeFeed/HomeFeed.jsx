@@ -9,9 +9,8 @@ import { useAuth } from '../user-auth.js';
 
 function HomeFeed() {
   const auth = useAuth();
-  console.log('this is auth in homefeed', auth);
   const [goals, setGoals] = useState({});
-  const [id, setId] = useState(1);
+  const [id, setId] = useState(auth.userId);
 
   useEffect(() => {
     axios.get('/todaysgoals')

@@ -52,7 +52,8 @@ function useProvideAuth() {
       .signOut()
       .then(() => {
         setUser(false);
-      });
+      })
+      .then(() => setUserId(null));
   };
   const sendPasswordResetEmail = (email) => {
     return firebase

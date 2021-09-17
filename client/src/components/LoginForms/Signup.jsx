@@ -8,7 +8,7 @@ const formReducer = (state, event) => {
   }
  }
 
-const Signup = ({ setView, setToken, setUserId }) => {
+const Signup = ({ setView }) => {
   const [formData, setFormData] = useReducer(formReducer, {});
 
 
@@ -25,8 +25,7 @@ const Signup = ({ setView, setToken, setUserId }) => {
     axios.post('/signin', formData)
     .then((response) => {
       let data = response.data
-      setToken(data.token)
-      // setUserId(data.userid)
+      console.log('sign in data', data);
     })
     .catch((err) => console.log('Error saving user'))
   }

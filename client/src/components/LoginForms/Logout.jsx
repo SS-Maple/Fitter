@@ -3,12 +3,12 @@ import { useAuth } from '../user-auth.js';
 import { useHistory } from 'react-router-dom';
 
 function Logout() {
-  let history = useHistory();
-  let auth = useAuth();
-  console.log('auth in logout', auth)
+  const history = useHistory();
+  const auth = useAuth();
+
   return auth.user ? (
     <p>
-      Welcome!{''}
+      Welcome! {`User ${auth.userId}`}
       <button
         onClick={() => {
           auth.signout(() => history.push("/"));

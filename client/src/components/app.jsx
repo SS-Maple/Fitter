@@ -8,49 +8,32 @@ import HomeFeed from './HomeFeed/HomeFeed.jsx';
 import Login from './LoginForms/Login.jsx';
 import Main from './Main.jsx';
 import Logout from './LoginForms/Logout.jsx';
+import { useAuth } from './user-auth.js';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      test: []
-    }
-    this.handleClick = this.handleClick.bind(this)
-    this.setToken = this.setToken.bind(this)
-    this.setUserId = this.setUserId.bind(this)
-  }
+function App() {
+  const auth = useAuth();
 
-  handleClick(e) {
+  const handleClick = (e) => {
     console.log(e.target.alt)
   }
 
-  setToken(value) {
-    this.setState({ token: value})
-  }
-
-  setUserId(value) {
-    this.setState({ user: value })
-  }
-
-
-  render() {
-    // if (!this.state.token) {
-    //   return (
-    //     <div>
-    //       <TopBar />
-    //       <Login setToken={this.setToken} setUserId={this.setUserId}/>
-    //     </div>
-    //   )
-    // }
+  if (!auth.userId) {
     return (
       <div>
         <TopBar />
-        <Logout />
-        <Main />
-        <BottomNav handleClick={this.handleClick} />
+        <Login />
       </div>
     )
   }
+  return (
+    <div>
+      <TopBar />
+      <Logout />
+      <Main />
+      <BottomNav handleClick={handleClick} />
+    </div>
+  )
+
 }
 
 export default App;
