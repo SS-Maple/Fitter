@@ -200,7 +200,7 @@ app.get(`/rankings`, (req, res) => {
           where dailyData.userId = 1
         ) as weightaverage
         from goals
-        where goals.userId = 1 
+        where goals.userId = 1
       ) d
     ) as userdata,
 
@@ -248,11 +248,11 @@ app.get(`/rankings`, (req, res) => {
                 where dailyData.userId = friendId
               ) as weightaverage
               from goals
-              where goals.userId = friendId 
+              where goals.userId = friendId
             ) d
           ) as goals
           from friends
-          where friends.userID = users.id 
+          where friends.userID = users.id
         ) d
       ) as friends
     from users
@@ -393,13 +393,14 @@ app.post('/login', (req, res) => {
   let password = req.body.password;
 
   // check if the email is in the db
-  db.client.query(`SELECT email FROM users WHERE users.email = '${email}'`)
+  db.client.query(`SELECT id FROM users WHERE users.email = '${email}'`)
   .then(data => {
     if (!data.rowCount) {
       throw new Error('email does not exist');
     }
+    console.log('logindata', data)
     res.send({
-      token: 'test123'
+      userId: data.rows[0].id
     })
   })
   .catch(err => console.log('Error logging in', err))

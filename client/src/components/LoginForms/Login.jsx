@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Signup from './Signup.jsx';
 import ForgotPW from './ForgotPW.jsx';
+import { useAuth } from '../user-auth.js';
 
 const Login = ({ setToken, setUserId }) => {
   const [view, setView] = useState('login');
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const auth = useAuth();
 
   if (view === 'signup') {
     return <Signup setView={setView} setToken={setToken} setUserId={setUserId}/>
@@ -24,7 +26,12 @@ const Login = ({ setToken, setUserId }) => {
     }
 
     axios.post('/login', body)
-    .then((response) => setToken(response.data))
+    .then((response) => {
+      let id = response.data.userId;
+      console.log('loginserverresponse', response.data.userId)
+      auth.signin(email, password, id)
+      console.log('auth after sign in', auth.userId)
+    })
     .catch((err) => console.log('Error logging in', err))
   }
 
