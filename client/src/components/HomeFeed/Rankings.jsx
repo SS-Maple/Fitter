@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import TodaysGoals from '../myProfile/todaysGoal.jsx';
 
 
-function Rankings({id}) {
+function Rankings({ id }) {
 
   const [friends, setFriends] = useState([]);
   const [userId, setUserId] = useState(id);
@@ -18,9 +18,9 @@ function Rankings({id}) {
       .catch(error => error)
   }, []);
 
-  
+
   sortFriends();
-  
+
   function sortFriends() {
     friends.forEach((friend, index) => {
       // returns negative if they missed the goal
@@ -32,11 +32,22 @@ function Rankings({id}) {
       friend['wateraverage'] = friend['userdata'][index]['wateraverage'];
       friend['caloriesaverage'] = friend['userdata'][index]['caloriesaverage'];
     })
+    final();
+  }
+
+  function ranking() {
+    return friends.sort((a, b) => a.sorting - b.sorting)
+    .forEach((user, index) => user['ranks'] = (index + 1))
+  }
+  
+  function final() {
+    ranking();
+    return friends.filter(user => user.id === userId).map(user => user.ranks).toString()
   }
 
   return (
     <div id='home-page'>
-        {/* Friend Information */}
+      {/* Friend Information */}
       <div
         className='pic-tile-friend-tile'
         onClick={() => console.log('On click needs to route to', friend.friendfirst)}
@@ -45,7 +56,7 @@ function Rankings({id}) {
           className='pic-tile-friend-right-info'
           style={{ 'fontSize': '14px', 'width': '85%' }}
         >
-          You are currently ranked _ amongst your friends.
+         You are currently ranked  <b>#{final()}</b> amongst your friends.
         </div>
       </div>
       <h4>Your Friend's Rankings: </h4>
@@ -58,12 +69,12 @@ function Rankings({id}) {
             onClick={() => console.log('On click needs to route to', friend.firstname)}
           >
             <div className='pic-tile-ranking'>
-              #{index + 1}, {friend.sorting}
+              #{index + 1}
             </div>
             {/* Profile Picture */}
             <div className='pic-tile-friend-left-pic' style={{ 'width': '15%', }}>
               <img style={{ 'maxHeight': '50px' }} src={friend.picture}></img>
-            </div> 
+            </div>
             {/* Friend Information */}
             <div
               className='pic-tile-friend-right-info'
@@ -81,7 +92,6 @@ function Rankings({id}) {
         ))}
       <div className='feed-bottom'></div>
     </div>
-
   );
 }
 
