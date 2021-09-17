@@ -66,13 +66,15 @@ const DirectChatPage = (props) => {
 	}
 
 	return (
-		<ChatEngine
-			userName={props.user.userName}
-			userSecret={props.user.userSecret}
-			projectID='4f65a747-dbb0-414d-abc1-9436ab6724cc'
-			height='100vh'
-			renderNewChatForm={(creds) => renderChatForm(creds)}
-		/>
+		<div id="direct-chat-page" style={{ fontFamily: 'sans-serif' }}>
+			<ChatEngine
+				userName={props.user.userName}
+				userSecret={props.user.userSecret}
+				projectID='4f65a747-dbb0-414d-abc1-9436ab6724cc'
+				height='100vh'
+				renderNewChatForm={(creds) => renderChatForm(creds)}
+			/>
+		</div>
 	)
 }
 
