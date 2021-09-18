@@ -13,12 +13,17 @@ body {
 
 /* TOP BAR STYLES */
 #topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   background-color: #e25786;
   width: 100vw;
   height: 10vh;
   display: flex;
   padding: none;
   margin: none;
+  z-index: 10;
 }
 
 #emptyDiv {
@@ -178,6 +183,7 @@ body {
 
 /*User Profile*/
 .my-profile-container {
+margin-top: 10.5vh;
 margin-bottom: 50px;
 }
 
