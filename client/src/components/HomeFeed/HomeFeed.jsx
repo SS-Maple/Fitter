@@ -18,7 +18,7 @@ function HomeFeed() {
     axios.get('/userdata')
       .then(data => data.data[0])
       .then(info => setGoals({
-        
+
       }))
       .catch(error => console.log(error))
   }, []);
@@ -55,10 +55,11 @@ function HomeFeed() {
           .filter(friend => friend.sorting < 0)
           .sort((a, b) => b.sorting - a.sorting))
         .map((friend, index) => (
+          <Link to={`/friendProfile?userid=${friend.friendid}`} key={index} >
           <div
             className='pic-tile-friend-tile'
             key={index}
-            onClick={() => console.log('On click needs to route to', friend.friendfirst)}
+            onClick={() => console.log('On click needs to route to', friend.friendid)}
           >
             <div className='pic-tile-ranking'>
               #{index + 1}
@@ -81,6 +82,7 @@ function HomeFeed() {
               </li>
             </div>
           </div>
+          </Link>
         ))}
       <div className='feed-bottom'></div>
     </div>

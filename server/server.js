@@ -6,6 +6,7 @@ let port = 3000;
 const db = require('../database/connect.js');
 
 app.use(express.urlencoded());
+app.use(express.json());
 app.use(express.static(__dirname + '/../client/dist'));
 
 
@@ -215,7 +216,13 @@ app.get('/rankings', (req, res) => {
 // WHERE userID = ${friendId} AND shareBoolean=true
 // ORDER BY timestamp
 app.get('/friendProfile', (req, res) => {
-  let friendId = 7;
+  console.log('madeit')
+
+  var params = req.headers.referer.split('?')[1].split('=')[1]
+
+  console.log('rq', params)
+  // let friendId = parseInt(req.query);
+  let friendId = parseInt(params);
   let userId = 1;
   db.client.query(`
       SELECT username, firstName, lastName, descriptionMessage, picture,
@@ -307,7 +314,9 @@ app.delete('/removefriend', (req, res) => {
     }
   })
 });
-
+app.post('/comment', (req, res) => {
+  console.log('looking for this', req.body)
+})
 app.listen(port, function () {
   console.log(`listening on port ${port}`);
 });

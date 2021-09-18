@@ -4,7 +4,7 @@ import { Link, useLocation, useHistory, useParams } from 'react-router-dom';
 
 function FriendsList() {
   const location = useLocation();
-  
+
   const [userId, setUserId] = useState(location.search.split('=')[1]);
 
   const [friends, setFriends] = useState([]);
@@ -36,6 +36,7 @@ function FriendsList() {
       </div>
       {/* Friend's List Tile */}
       {friends.map((friend, index) => (
+        <Link to={`/friendProfile?userid=${friend.friendid}`} key={index} >
         <div
           className='pic-tile-friend-tile'
           key={index}
@@ -51,6 +52,7 @@ function FriendsList() {
             {friend.descriptionmessage}
           </div>
         </div>
+        </Link>
       ))}
       <div className='feed-bottom'></div>
     </div>

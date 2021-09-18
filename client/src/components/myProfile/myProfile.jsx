@@ -93,6 +93,7 @@ class MyProfile extends React.Component {
   render(){
     const {firstName, lastName, intro, stats, goals, friendCount, birthday} = this.state;
     return(
+      // <Link to={`/userprofile?userid=${this.state.userid}`} >
       <div className='my-profile-container'>
         <div className='my-profile'>
           <div className='profile-info'>
@@ -103,10 +104,12 @@ class MyProfile extends React.Component {
               <p className='user-details'>Name: {firstName} {lastName}</p>
               <p className='user-details'>Birthday: {birthday}</p>
             </div>
+            <Link to={`/friends?userid=${this.state.userid}`} >
             <div className='user-profile-friends'>
               <div className='friend-count'>{friendCount}</div>
                 <p className='friend-label'>Friends</p>
             </div>
+            </Link>
           </div>
           <div className='profile-intro'>
             <p>{intro}</p>
@@ -125,6 +128,7 @@ class MyProfile extends React.Component {
         <PreviousStats stats={stats} goals={goals}/>
         <EditGoals show={this.state.editGoals} close={this.handleClick} userid={this.state.userid} handleGoalSubmit={this.handleGoalSubmit} />
       </div>
+      // </Link>
     )
   }
 

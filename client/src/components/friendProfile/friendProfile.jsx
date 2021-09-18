@@ -14,6 +14,7 @@ import SharedStats from './sharedStats.jsx'
 
 class FriendProfile extends React.Component {
   constructor(props){
+    console.log('0')
     super(props);
     this.state ={
       username: '',
@@ -26,16 +27,19 @@ class FriendProfile extends React.Component {
       stats: [],
       goals: {},
       friends: [],
-      isFriend: ''
+      isFriend: null
     }
   }
   componentDidMount(){
+    console.log('1')
     this.getFriendData()
   }
 
   getFriendData() {
+    console.log('2')
     axios.get('/friendProfile')
     .then(result => {
+      console.log('3')
       var userData = result.data
       console.log('isfriend', userData.isfriend)
       this.setState({
@@ -52,6 +56,7 @@ class FriendProfile extends React.Component {
       console.log('state', this.state)
     })
     .catch(err => {
+      console.log('3')
       console.log(err)
     })
   }
@@ -68,35 +73,39 @@ class FriendProfile extends React.Component {
 
   render() {
     return(
-      <div>
-        <div className='my-profile'>
-          <div className='profile-info'>
-            <div className='profile-pic'>
-              <img className='profile-img' src={this.state.profilephoto}></img>
-            </div>
-            <div className='profile-desc'>
-              <p className='user-details'>{this.state.username}</p>
-              {/* {friend.firstName} {friend.lastName} */}
-            </div>
-            <div className='user-profile-friends'
-            onClick={() => console.log('On click needs to route to friendList', this.state.friendid)}>
-              <div className='friend-count'>{this.state.friends}</div>
-                <p className='friend-label'>Friends</p>
-            </div>
-          </div>
-          <div className='profile-intro'>
-            <h4>{this.state.firstName} {this.state.lastName}</h4>
-            <p>{this.state.description}</p>
-          </div>
-          <div className='profile-btn-container'>
-            <AddFriend isFriend={this.state.isFriend}/>
-            <MessageButton />
-          </div>
-        </div>
+
         <div>
-          <SharedStats picture={this.state.profilephoto} username={this.state.username} stats={this.state.stats} goals={this.state.goals} />
+          <div className='my-profile'>
+            <div className='profile-info'>
+              <div className='profile-pic'>
+                <img className='profile-img' src={this.state.profilephoto}></img>
+              </div>
+              <div className='profile-desc'>
+                <p className='user-details'>{this.state.username}</p>
+                {/* {friend.firstName} {friend.lastName} */}
+              </div>
+              <Link to={`/friends?userid=${this.state.friendid}`} >
+              <div className='user-profile-friends'
+              onClick={() => console.log('On click needs to route to friendList', this.state.friendid)}>
+                <div className='friend-count'>{this.state.friends}</div>
+                  <p className='friend-label'>Friends</p>
+              </div>
+              </Link>
+            </div>
+            <div className='profile-intro'>
+              <h4>{this.state.firstName} {this.state.lastName}</h4>
+              <p>{this.state.description}</p>
+            </div>
+            <div className='profile-btn-container'>
+              <AddFriend isFriend={this.state.isFriend}/>
+              <MessageButton />
+            </div>
+          </div>
+          <div>
+            <SharedStats picture={this.state.profilephoto} username={this.state.username} stats={this.state.stats} goals={this.state.goals} userid={this.state.userid} friendid={this.state.friendid}/>
+          </div>
         </div>
-      </div>
+
     )
   }
 }

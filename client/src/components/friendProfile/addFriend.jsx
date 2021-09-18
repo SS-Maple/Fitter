@@ -13,6 +13,7 @@ const AddFriend = (props) => {
   // const [friended, setFriend] = useState(false);
   console.log('222', props.isFriend)
   const [friended, setFriend] = useState(props.isFriend);
+  console.log('hereeeee', friended)
   const addFriend = () => {
     axios.post('/addfriend', {friendID: props.friendid, userID: props.userid})
     .then(result => {
@@ -34,12 +35,13 @@ const AddFriend = (props) => {
   };
 
   console.log('fdd', friended)
-  if (friended) {
-    console.log('fdd', friended)
-    return <button className='profile-btn' onClick={removeFriend}> Remove Friend- </button>
-  } else {
+  if (!friended) {
     console.log('fdd', friended)
     return <button className='profile-btn' onClick={addFriend}> Add Friend+ </button>
+  } else {
+    console.log('fdd', friended)
+    return <button className='profile-btn' onClick={removeFriend}> Remove Friend- </button>
+
   }
 };
 

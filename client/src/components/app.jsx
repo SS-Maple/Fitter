@@ -32,7 +32,7 @@ class App extends React.Component {
         {/* <FriendsList /> */}
         {/* <Login /> */}
         {/* <MyProfile /> */}
-        <userContext.Provider userId={this.state.userId}>
+        <userContext.Provider value={this.state.userId}>
           <Main/>
         </userContext.Provider>
         <BottomNav handleClick={this.handleClick} />

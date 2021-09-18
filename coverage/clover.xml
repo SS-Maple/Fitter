@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<coverage generated="1631575155963" clover="3.2.0">
-  <project timestamp="1631575155964" name="All files">
-    <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1" elements="3" coveredelements="3" complexity="0" loc="2" ncloc="2" packages="1" files="1" classes="1"/>
-    <file name="sum.js" path="/Users/pscheutzow/Documents/Griselda/Hack Reactor/Fitter/sum.js">
-=======
-<coverage generated="1631478908565" clover="3.2.0">
-  <project timestamp="1631478908565" name="All files">
-    <metrics statements="43" coveredstatements="22" conditionals="4" coveredconditionals="1" methods="19" coveredmethods="8" elements="66" coveredelements="31" complexity="0" loc="43" ncloc="43" packages="2" files="5" classes="5"/>
+<coverage generated="1631761570874" clover="3.2.0">
+  <project timestamp="1631761570874" name="All files">
+    <metrics statements="48" coveredstatements="21" conditionals="4" coveredconditionals="1" methods="19" coveredmethods="6" elements="71" coveredelements="28" complexity="0" loc="48" ncloc="48" packages="2" files="5" classes="5"/>
     <package name="Fitter">
->>>>>>> b38f78a4f48eb12f7d0ca152d934d41f11fd8d5f
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="sum.js" path="/Users/hackreactor/work/blueOcean/Fitter/sum.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -18,7 +11,7 @@
       </file>
     </package>
     <package name="Fitter.client.src.components.friendProfile">
-      <metrics statements="41" coveredstatements="20" conditionals="4" coveredconditionals="1" methods="18" coveredmethods="7"/>
+      <metrics statements="46" coveredstatements="19" conditionals="4" coveredconditionals="1" methods="18" coveredmethods="5"/>
       <file name="addFriend.jsx" path="/Users/hackreactor/work/blueOcean/Fitter/client/src/components/friendProfile/addFriend.jsx">
         <metrics statements="17" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="7" coveredmethods="1"/>
         <line num="12" count="1" type="stmt"/>
@@ -40,18 +33,23 @@
         <line num="42" count="1" type="stmt"/>
       </file>
       <file name="friendProfile.jsx" path="/Users/hackreactor/work/blueOcean/Fitter/client/src/components/friendProfile/friendProfile.jsx">
-        <metrics statements="11" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="7" coveredmethods="4"/>
+        <metrics statements="16" coveredstatements="4" conditionals="2" coveredconditionals="0" methods="7" coveredmethods="2"/>
         <line num="17" count="1" type="stmt"/>
         <line num="18" count="1" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="37" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="70" count="1" type="stmt"/>
-        <line num="82" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
       </file>
       <file name="messageButton.jsx" path="/Users/hackreactor/work/blueOcean/Fitter/client/src/components/friendProfile/messageButton.jsx">
         <metrics statements="5" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>

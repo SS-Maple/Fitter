@@ -8,19 +8,25 @@ import HomeFeed from './HomeFeed/HomeFeed.jsx';
 import ForgotPW from './LoginForms/ForgotPW.jsx';
 import MyProfile from './myProfile/myProfile.jsx';
 import FriendProfile from './friendProfile/friendProfile.jsx';
-
+import {userContext} from './userContext';
 function Main() {
   return (
     <main>
       <Switch>
         <Route exact path='/' component={HomeFeed} />
+        {/* <userContext.Consumer>
+          {({value}) => {
+            <Route exact path='/' component={HomeFeed} userId={value}/>
+          }} */}
+        {/* </userContext.Consumer> */}
         <Route path='/friends' component={FriendsList} />
         <Route path='/userprofile' component={MyProfile} />
-        <userContext.Consumer>
+        <Route path='/friendProfile' component={FriendProfile}/>
+        {/* <userContext.Consumer>
           {({userId}) => {
-            <Route path='/friendProfile' component={FriendProfile} userId={userId}/>
+            <Route path={`/friendProfile?userId=${friend.friendid}`} component={FriendProfile} userId={userId}/>
           }}
-        </userContext.Consumer>
+        </userContext.Consumer> */}
       </Switch>
     </main>
   );
