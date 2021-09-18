@@ -16,7 +16,9 @@ const BottomNav = ({ handleClick }) => {
         </Link>
       </div>
       <div className='nav-icon profile' onClick={(e) => handleClick(e)}>
-        <img alt='User Profile' className='icon' src='https://cdn3.iconfinder.com/data/icons/user-2/100/9-1024.png'></img>
+        <Link to={{ pathname: '/userprofile'}}>
+         <img alt='User Profile' className='icon' src='https://cdn3.iconfinder.com/data/icons/user-2/100/9-1024.png'></img>
+        </Link>
       </div>
     </div>
   )
