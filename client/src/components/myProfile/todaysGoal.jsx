@@ -1,106 +1,88 @@
-import React from 'react';
+import React,  { useState, useEffect } from 'react';
 import AddCalorieModal from './addCalorieModal.jsx';
 import AddWaterModal from './addWaterModal.jsx';
 import UpdateWeightModal from './updateWeightModal.jsx';
 import axios from 'axios';
 
-class TodaysGoals extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      calories: 0,
-      water: 0,
-      weight: 0,
-      calorieShow: false,
-      waterShow: false
-    }
-    this.handleClick = this.handleClick.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+const TodaysGoals = ({ userid, goals }) => {
+  const {caloriegoal, watergoal, weightgoal} = goals
 
-  }
+  const [calories, setCalories] = useState(0);
+  const [water, setWater] = useState(0);
+  const [weight, setWeight] = useState(0);
+  const [calorieShow, setCalorieShow] = useState(false);
+  const [waterShow, setWaterShow] =  useState(false);
+  const [weightShow, setWeightShow] =  useState(false);
 
-  componentDidMount() {
-    this.getData()
-  }
 
-  getData(){
+  useEffect(() => {
+    getData()
+  }, []);
+
+  function getData(){
     return axios.get('/todaysgoals')
     .then(results =>
       {
-        this.setState({
-          calories: results.data.calories,
-          water: results.data.water,
-          weight: results.data.weight
-        })
+        setCalories(results.data.calories)
+        setWater(results.data.water)
+        setWeight(results.data.weight)
       })
-  }
+  };
 
-
-  handleClick(x){
-    if (!this.state.[x]) {
-      this.setState({
-        [x]: true
-      })
+  function pct(v,category){
+    if(!v) {
+      return '0%'
     } else {
-      this.setState({
-        [x]: false
-      })
+      if (category === 'caloriegoal') {
+        let pctvalue = ((v/caloriegoal) * 100).toFixed(0)
+        return `${pctvalue}%`
+      }
+      if (category === 'watergoal') {
+        let pctvalue = ((v/watergoal) * 100).toFixed(0)
+        return `${pctvalue}%`
+      }
+      if (category === 'weightgoal') {
+        let pctvalue = ((v/weightgoal) * 100).toFixed(0)
+        return `${pctvalue}%`
+      }
     }
-  }
+  };
 
-  handleSubmit(e, category, value){
-    e.preventDefault();
-    //temp userid
-    let userid = 1;
-
+  function handleSubmit(id, category, value){
     axios({
       method: 'put',
       url: '/updateToday',
-      data: `userid=${this.props.userid}&value=${value}&category=${category}`
+      data: `userid=${id}&value=${value}&category=${category}`
     })
-    .then(() => this.getData())
+    .then(() => getData())
   }
 
-  render(){
-    const {calories, water, weight} = this.state
-
-    let pct = (v,category) => {
-      if(!v) {
-        return '0%'
-      } else {
-        let pctvalue = ((v/this.props.goals.[category]) * 100).toFixed(0)
-        return `${pctvalue}%`;
-      }
-    }
-
-    return(
-      <div className='my-goals'>
-        <div className='goal-container' onClick={() => this.handleClick('calorieShow')} >
-          <div className='indiv-goal-curr'>
-            <div className='goal-progress'>{pct(calories, 'caloriegoal')}</div>
-          </div>
-          <div className='goal-label'>Calories</div>
+  return(
+    <div className='my-goals'>
+      <div className='goal-container' onClick={() => setCalorieShow(prev => !prev)} >
+        <div className='indiv-goal-curr'>
+          <div className='goal-progress'>{pct(calories, 'caloriegoal')}</div>
         </div>
-        <div className='goal-container' onClick={() => this.handleClick('waterShow')}>
-          <div className='indiv-goal-curr'>
-            <div className='goal-progress'>{pct(water, 'watergoal')}</div>
-          </div>
-          <div className='goal-label'>Water Intake</div>
-        </div>
-        <div className='goal-container' onClick={() => this.handleClick('weightShow')}>
-          <div className='indiv-goal'>
-            <div className='goal-total'>{weight}</div>
-            <div className='goal-units'>lbs</div>
-          </div>
-          <div className='goal-label'>Weight</div>
-        </div>
-        <AddCalorieModal show={this.state.calorieShow} close={this.handleClick} handleSubmit={this.handleSubmit}/>
-        <AddWaterModal show={this.state.waterShow} close={this.handleClick} handleSubmit={this.handleSubmit} />
-        <UpdateWeightModal show={this.state.weightShow} close={this.handleClick} handleSubmit={this.handleSubmit}/>
+        <div className='goal-label'>Calories</div>
       </div>
-    )
-  }
-
+      <div className='goal-container' onClick={() => setWaterShow(prev => !prev)}>
+        <div className='indiv-goal-curr'>
+          <div className='goal-progress'>{pct(water, 'watergoal')}</div>
+        </div>
+        <div className='goal-label'>Water Intake</div>
+      </div>
+      <div className='goal-container' onClick={() => setWeightShow(prev => !prev)}>
+        <div className='indiv-goal'>
+          <div className='goal-total'>{weight}</div>
+          <div className='goal-units'>lbs</div>
+        </div>
+        <div className='goal-label'>Weight</div>
+      </div>
+      <AddCalorieModal show={calorieShow} userid={userid} close={()=> setCalorieShow(prev => !prev)} handleSubmit={handleSubmit} />
+      <AddWaterModal show={waterShow} userid={userid} close={()=> setWaterShow(prev => !prev)} handleSubmit={handleSubmit}/>
+      <UpdateWeightModal show={weightShow} userid={userid} close={()=> setWeightShow(prev => !prev)} handleSubmit={handleSubmit}/>
+    </div>
+  )
 }
 
 export default TodaysGoals;
