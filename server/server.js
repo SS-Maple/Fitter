@@ -226,8 +226,8 @@ app.get(`/rankings`, (req, res) => {
         `, (err, data) => {
           if (err) {
             // console.log('error from server -', err)
+            // console.log(queryString)
             res.send(err);
-            console.log(queryString)
           } else {
             // console.log('rows from server /users - ', data.rows)
             res.send(data.rows);

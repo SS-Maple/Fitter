@@ -52,11 +52,8 @@ function Rankings({ id }) {
         className='pic-tile-friend-tile'
         onClick={() => console.log('On click needs to route to', friend.friendfirst)}
       >
-        <div
-          className='pic-tile-friend-right-info'
-          style={{ 'fontSize': '14px', 'width': '85%' }}
-        >
-         You are currently ranked  <b>#{final()}</b> amongst your friends.
+        <div className='pic-tile-friend-right-info'>
+         You're currently ranked <b>#{final()}</b> amongst friends.
         </div>
       </div>
       <h4>Your Friend's Rankings: </h4>
@@ -72,20 +69,17 @@ function Rankings({ id }) {
               #{index + 1}
             </div>
             {/* Profile Picture */}
-            <div className='pic-tile-friend-left-pic' style={{ 'width': '15%', }}>
-              <img style={{ 'maxHeight': '50px' }} src={friend.picture}></img>
+            <div className='pic-tile-friend-left-pic'>
+              <img src={friend.picture}></img>
             </div>
             {/* Friend Information */}
-            <div
-              className='pic-tile-friend-right-info'
-              style={{ 'fontSize': '14px', 'width': '85%' }}
-            >
+            <div className='pic-tile-friend-right-info'>
               <b>{friend.username}:</b>
               <li>
-                {Math.round(friend.wateraverage * 100)}% of my water goal.
+                Reached {Math.round(friend.wateraverage * 100)}% of my water goal.
               </li>
               <li>
-                {Math.round(friend.caloriesaverage * 100)}% of my calories goal.
+                Reached {Math.round(friend.caloriesaverage * 100)}% of my calories goal.
               </li>
             </div>
           </div>
