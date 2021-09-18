@@ -15,6 +15,7 @@ function Main() {
     <main>
       <Switch>
         <Route exact path='/' component={HomeFeed} />
+        <Route path='/login' component={Login} />
         <Route path='/friends' component={FriendsList} />
         <Route path='/userprofile' component={MyProfile} />
         <Route path='/friendProfile' component={FriendProfile} />
