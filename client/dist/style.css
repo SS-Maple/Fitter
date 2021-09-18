@@ -13,12 +13,17 @@ body {
 
 /* TOP BAR STYLES */
 #topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   background-color: #e25786;
   width: 100vw;
   height: 10vh;
   display: flex;
   padding: none;
   margin: none;
+  z-index: 10;
 }
 
 #emptyDiv {
@@ -177,6 +182,7 @@ body {
 
 /*User Profile*/
 .my-profile-container {
+margin-top: 10.5vh;
 margin-bottom: 50px;
 }
 
@@ -274,6 +280,17 @@ margin-bottom: 50px;
   text-align: center;
   padding: .5rem;
 }
+
+.more-details {
+  text-align: center;
+  color: white;
+  margin-top: 10px;
+  background-color: black;
+  font-size: 14px;
+  border-radius: 1rem;
+  padding-top: 2px;
+  padding-bottom:2px;
+}
 /*User Profile*/
 
 /*Your Goals*/
@@ -354,12 +371,21 @@ margin-bottom: 50px;
   margin-bottom: 7px;
 }
 
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+
+}
+
 .previous-stat-container p{
   padding-left: 5px;
   margin-top: 0;
   margin-bottom: 0;
 }
 
+.share {
+  color:blue
+}
 /*Previous Stats*/
 
 /* Bottom Nav */
