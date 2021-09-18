@@ -5,95 +5,87 @@ import { Link } from 'react-router-dom'
 import TodaysGoals from '../myProfile/todaysGoal.jsx';
 
 
-function Rankings({id}) {
+function Rankings({ id }) {
 
   const [friends, setFriends] = useState([]);
   const [userId, setUserId] = useState(id);
   const [userData, setUserData] = useState([]);
+  const [rank, setRank] = useState(0);
 
   useEffect(() => {
     axios.get(`/rankings?friendId=${userId}`)
-      .then(response => {
-        return response.data
-      })
-      .then(result => {
-        setUserData(result[0].userdata)
-        setFriends(result[0].friends)
-      })
+      .then(response => setFriends(response.data))
       .catch(error => error)
   }, []);
+
 
   sortFriends();
 
   function sortFriends() {
-    userData.forEach(user => {
-      let water = Math.abs(100 - (user.wateraverage) * 100);
-      let calories = Math.abs(100 - (user.caloriesaverage) * 100);
-      let calculate = water + calories;
-      user['sorting'] = calculate.toFixed(2);
-    })
-    friends.forEach(friend => {
+    friends.forEach((friend, index) => {
       // returns negative if they missed the goal
-      let water = Math.abs(100 - (friend['goals'][0]['wateraverage'] * 100))
+      let water = Math.abs(100 - (friend['userdata'][index]['wateraverage'] * 100))
       // returns negative if goal is exceeded
-      let calories = Math.abs(100 - (friend['goals'][0]['caloriesaverage'] * 100))
+      let calories = Math.abs(100 - (friend['userdata'][index]['caloriesaverage'] * 100))
       let calculate = water + calories;
       friend['sorting'] = calculate.toFixed(2);
+      friend['wateraverage'] = friend['userdata'][index]['wateraverage'];
+      friend['caloriesaverage'] = friend['userdata'][index]['caloriesaverage'];
     })
+    final();
+  }
+
+  function ranking() {
+    return friends.sort((a, b) => a.sorting - b.sorting)
+    .forEach((user, index) => user['ranks'] = (index + 1))
+  }
+  
+  function final() {
+    ranking();
+    return friends.filter(user => user.id === userId).map(user => user.ranks).toString()
   }
 
   return (
     <div id='home-page'>
-        {/* Friend Information */}
+      {/* Friend Information */}
       <div
         className='pic-tile-friend-tile'
         onClick={() => console.log('On click needs to route to', friend.friendfirst)}
       >
-        <div
-          className='pic-tile-friend-right-info'
-          style={{ 'fontSize': '14px', 'width': '85%' }}
-        >
-          Personal Rank Placeholder :
+        <div className='pic-tile-friend-right-info'>
+         You're currently ranked <b>#{final()}</b> amongst friends.
         </div>
       </div>
       <h4>Your Friend's Rankings: </h4>
       {/* Friend's List Tile */}
-      {friends.filter(friend => friend.sorting >= 0)
-        .sort((a, b) => a.sorting - b.sorting)
-        .concat(friends
-          .filter(friend => friend.sorting < 0)
-          .sort((a, b) => b.sorting - a.sorting))
+      {friends.sort((a, b) => a.sorting - b.sorting)
         .map((friend, index) => (
           <div
             className='pic-tile-friend-tile'
             key={index}
-            onClick={() => console.log('On click needs to route to', friend.friendfirst)}
+            onClick={() => console.log('On click needs to route to', friend.firstname)}
           >
             <div className='pic-tile-ranking'>
               #{index + 1}
             </div>
             {/* Profile Picture */}
-            <div className='pic-tile-friend-left-pic' style={{ 'width': '15%', }}>
-              <img style={{ 'maxHeight': '50px' }} src={friend.profilephoto}></img>
+            <div className='pic-tile-friend-left-pic'>
+              <img src={friend.picture}></img>
             </div>
             {/* Friend Information */}
-            <div
-              className='pic-tile-friend-right-info'
-              style={{ 'fontSize': '14px', 'width': '85%' }}
-            >
-              <b>{friend.friendusername}:</b>
+            <div className='pic-tile-friend-right-info'>
+              <b>{friend.username}:</b>
               <li>
-                {Math.round(friend.goals[0].wateraverage * 100)}% of my water goal.
+                Reached {Math.round(friend.wateraverage * 100)}% of my water goal.
               </li>
               <li>
-                {Math.round(friend.goals[0].caloriesaverage * 100)}% of my calories goal.
+                Reached {Math.round(friend.caloriesaverage * 100)}% of my calories goal.
               </li>
             </div>
           </div>
         ))}
       <div className='feed-bottom'></div>
     </div>
-
   );
 }
 
