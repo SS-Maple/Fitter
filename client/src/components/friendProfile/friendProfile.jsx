@@ -17,8 +17,8 @@ class FriendProfile extends React.Component {
     super(props);
     this.state ={
       username: '',
-      userid: 1,
-      friendid: 7,
+      userid: 1, 
+      friendid: 7, 
       profilephoto: 'https://cdn0.iconfinder.com/data/icons/users-34/24/user_symbol_person-1024.png',
       firstName: '',
       lastName: '',
@@ -79,9 +79,11 @@ class FriendProfile extends React.Component {
               {/* {friend.firstName} {friend.lastName} */}
             </div>
             <div className='user-profile-friends'
-            onClick={() => console.log('On click needs to route to friendList', this.state.friendid)}>
-              <div className='friend-count'>{this.state.friends}</div>
+                onClick={() => console.log('On click needs to route to friendList', this.state.friendid)}>
+              <Link to={`/friends?friendId=${this.state.friendid}`}>
+                <div className='friend-count'>{this.state.friends}</div>
                 <p className='friend-label'>Friends</p>
+              </ Link>
             </div>
           </div>
           <div className='profile-intro'>

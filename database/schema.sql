@@ -14,29 +14,29 @@ DROP TABLE IF EXISTS friendMessages;
 DROP TABLE IF EXISTS publicMessages;
 
 CREATE TABLE users (
-  id                  SERIAL       NOT NULL   PRIMARY KEY,
-  firstName           VARCHAR,
-  lastName            VARCHAR,
-  email               VARCHAR   UNIQUE,
-  username            VARCHAR,
-  descriptionMessage  VARCHAR,
-  userPassword        VARCHAR,
-  shareBirthday       BOOLEAN,
+  id                  SERIAL    UNIQUE   PRIMARY KEY,
+  firstName           VARCHAR   NOT NULL,
+  lastName            VARCHAR   NOT NULL,
+  email               VARCHAR   UNIQUE  NOT NULL,
+  username            VARCHAR   UNIQUE  NOT NULL,
+  descriptionMessage  VARCHAR   NULL,
+  userPassword        VARCHAR   NOT NULL,
+  shareBirthday       BOOLEAN   DEFAULT FALSE,
   birthday            VARCHAR,
   picture             VARCHAR,
-  securityQuestion    VARCHAR,
-  securityAnswer      VARCHAR
+  securityQuestion    VARCHAR   NOT NULL,
+  securityAnswer      VARCHAR   NOT NULL
 );
 
 CREATE TABLE friends (
-  id             SERIAL       NOT NULL   PRIMARY KEY,
-  userID         INT       NOT NULL   REFERENCES users(id),
-  friendID       INT       NOT NULL   REFERENCES users(id)
+  id                  SERIAL    UNIQUE   PRIMARY KEY,
+  userID         INT       NOT NULL      REFERENCES users(id),
+  friendID       INT       NOT NULL      REFERENCES users(id)
 );
 
 CREATE TABLE goals (
-  id                    SERIAL    NOT NULL   PRIMARY KEY,
-  userId                INT       NOT NULL   UNIQUE REFERENCES users(id),
+  id                  SERIAL      UNIQUE     PRIMARY KEY,
+  userId                INT       NOT NULL   REFERENCES users(id),
   waterGoal             INT       DEFAULT 0,
   calorieGoal           INT       DEFAULT 0,
   weightGoal            INT       DEFAULT 0,
@@ -44,9 +44,9 @@ CREATE TABLE goals (
 );
 
 CREATE TABLE dailyData (
-  id              SERIAL       NOT NULL   PRIMARY KEY,
+  id              SERIAL    UNIQUE     PRIMARY KEY,
   userID          INT       NOT NULL   REFERENCES users(id),
-  timestamp       DATE DEFAULT now() UNIQUE,
+  timestamp       TIMESTAMP DEFAULT now() UNIQUE,
   water           INT       DEFAULT 0,
   calories        INT       DEFAULT 0,
   weight          INT       DEFAULT 0,
@@ -54,7 +54,7 @@ CREATE TABLE dailyData (
 );
 
 CREATE TABLE friendMessages (
-  id              INT       NOT NULL   PRIMARY KEY,
+  id              SERIAL    UNIQUE     PRIMARY KEY,
   userID          INT       NOT NULL   REFERENCES users(id),
   friendID        INT       NOT NULL   REFERENCES users(id),
   message         VARCHAR   NOT NULL,
@@ -62,11 +62,11 @@ CREATE TABLE friendMessages (
 );
 
 -- DATA LOAD
-\COPY users(id,firstName,lastName,email,username,descriptionMessage,userPassword,shareBirthday,birthday,picture,securityQuestion,securityAnswer) FROM 'data/fitterUsers.csv' DELIMITER ',' CSV HEADER;
-\COPY friends(id,userID,friendID) FROM 'data/fitterFriends.csv' DELIMITER ',' CSV HEADER;
-\COPY dailyData(id,userId,timestamp,water,calories,weight,shareBoolean) FROM 'data/dailyData.csv' DELIMITER ',' CSV HEADER;
-\COPY goals(id,userId,waterGoal,calorieGoal,weightGoal,shareBoolean) FROM 'data/goals.csv' DELIMITER ',' CSV HEADER;
-\COPY friendMessages(id,userID,friendID,message,timestamp) FROM 'data/friendMessages.csv' DELIMITER ',' CSV HEADER;
+\COPY users(firstName,lastName,email,username,descriptionMessage,userPassword,shareBirthday,birthday,picture,securityQuestion,securityAnswer) FROM 'data/fitterUsers.csv' DELIMITER ',' CSV HEADER;
+\COPY friends(userID,friendID) FROM 'data/fitterFriends.csv' DELIMITER ',' CSV HEADER;
+\COPY goals(userId,waterGoal,calorieGoal,weightGoal,shareBoolean) FROM 'data/goals.csv' DELIMITER ',' CSV HEADER;
+\COPY dailyData(userId,timestamp,water,calories,weight,shareBoolean) FROM 'data/dailyData.csv' DELIMITER ',' CSV HEADER;
+\COPY friendMessages(userID,friendID,message,timestamp) FROM 'data/friendMessages.csv' DELIMITER ',' CSV HEADER;
 
 
 
