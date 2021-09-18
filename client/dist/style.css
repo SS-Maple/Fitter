@@ -280,32 +280,65 @@ form,
   background-color: #6ec0c3 !important;
 }
 
+.ce-chat-list svg {
+  /* display: none; */
+  color: white !important;
+}
+
 .ce-chats-container {
   font-family: sans-serif;
   background-color: #6ec0c3 !important;
+  /* margin: 2% 5% !important; */
+  width: 100% !important;
+  overflow-x: hidden !important;
+  /* margin-top: 5%; */
+  /* margin-bottom: 15%; */
+}
+
+.ce-chats-container:last-child {
+  /* display: none !important; */
+  /* opacity: 0; */
 }
 
 .ce-chat-card {
+  color: #e25786 !important;
   background-color: white !important;
-  margin: 1% !important;
+  margin: 5% 5% 0% 5% !important;
+  padding: 5% !important;
+  border-radius: 25px !important;
 }
 
 .ce-chat-form-container {
   /* display: none; */
+  background-color:  #e25786 !important;
+  color: white !important;
+  margin-bottom: 5% !important;
 }
 
-#ce-chat-search {
+.ce-chat-form-container > * {
+  background-color:  #e25786 !important;
+}
+
+#new-chat-plus-button {
+  display: none !important;
+}
+
+/* #ce-chat-search {
   display: inline-block;
 }
 
 #ce-chat-span-search {
   display: inline-block
-}
+} */
 
 /*-- chat feed --*/
 .ce-chat-feed {
   font-family: sans-serif;
   background-color: #6ec0c3;
+}
+
+.ce-chat-title {
+  background-color: white !important;
 }
 
 .ce-chat-title-container {
@@ -319,8 +352,67 @@ form,
 .ce-message-bubble.ce-my-message-bubble {
   background-color: white !important;
   color: #494949 !important;
+  padding: 2% !important;
+  margin: 2% 10% !important;
 }
 
 #ce-feed-container {
   background-color: #6ec0c3 !important;
+}
+
+/*-- settings --*/
+
+/* .ce-chat-settings-mobile-option {
+  background-color: #e25786 !important;
+} */
+
+.ce-chat-settings-mobile-option * {
+  color: #e25786 !important;
+  /* background-color: #e25786 !important; */
+}
+
+.ce-settings {
+  font-family: sans-serif;
+  background-color: #6ec0c3 !important;
+  color: #343434 !important;
+}
+
+.ce-settings > * {
+  font-family: sans-serif;
+  color: #343434 !important;
+}
+
+.ce-chat-settings-container * {
+  color: white !important;
+}
+
+#ce-options-drop-down {
+  display: none;
+}
+
+/*-- others --*/
+svg {
+  color: #e25786 !important;
+}
+
+form svg {
+  color: #494949;
+}
+
+#ce-send-message-button {
+  background-color: #6ec0c3 !important;
+  color: white !important;
+}
+
+#ce-send-message-button * {
+  color: white !important;
+}
+
+#upload-document-button * {
+  color: #494949;
+}
+
+.ce-chat-list svg {
+  /* display: none; */
+  color: white !important;
 }
