@@ -280,24 +280,11 @@ form,
   background-color: #6ec0c3 !important;
 }
 
-.ce-chat-list svg {
-  /* display: none; */
-  color: white !important;
-}
-
 .ce-chats-container {
   font-family: sans-serif;
   background-color: #6ec0c3 !important;
-  /* margin: 2% 5% !important; */
   width: 100% !important;
   overflow-x: hidden !important;
-  /* margin-top: 5%; */
-  /* margin-bottom: 15%; */
-}
-
-.ce-chats-container:last-child {
-  /* display: none !important; */
-  /* opacity: 0; */
 }
 
 .ce-chat-card {
@@ -309,7 +296,6 @@ form,
 }
 
 .ce-chat-form-container {
-  /* display: none; */
   background-color:  #e25786 !important;
   color: white !important;
   margin-bottom: 5% !important;
@@ -322,14 +308,6 @@ form,
 #new-chat-plus-button {
   display: none !important;
 }
-
-/* #ce-chat-search {
-  display: inline-block;
-}
-
-#ce-chat-span-search {
-  display: inline-block
-} */
 
 /*-- chat feed --*/
 .ce-chat-feed {
@@ -362,13 +340,8 @@ form,
 
 /*-- settings --*/
 
-/* .ce-chat-settings-mobile-option {
-  background-color: #e25786 !important;
-} */
-
 .ce-chat-settings-mobile-option * {
   color: #e25786 !important;
-  /* background-color: #e25786 !important; */
 }
 
 .ce-settings {
@@ -395,13 +368,8 @@ svg {
   color: #e25786 !important;
 }
 
-form svg {
-  color: #494949;
-}
-
 #ce-send-message-button {
   background-color: #6ec0c3 !important;
-  color: white !important;
 }
 
 #ce-send-message-button * {
@@ -413,11 +381,10 @@ form svg {
 }
 
 .ce-chat-list svg {
-  /* display: none; */
   color: white !important;
 }
 
 ::-webkit-scrollbar {
-  width: 0; /* Remove scrollbar space */
-  background: transparent; /* Optional: just make scrollbar invisible */
+  width: 0;
+  background: transparent;
 }
