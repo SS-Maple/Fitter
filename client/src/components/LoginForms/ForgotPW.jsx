@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
+import { useAuth } from '../user-auth.js';
 
 const ForgotPW = () => {
   const [userExists, setUserExists] = useState(false);
   const [verified, setVerified] = useState(false);
+  const [email, setEmail] = useState();
+  const auth = useAuth();
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    auth.resetPassword(email);
+  }
 
   if (!userExists) {
     return (
@@ -12,7 +20,7 @@ const ForgotPW = () => {
           <form>
             <label>Please enter the email address for your account</label>
             <input type='email' placeholder='Email'></input>
-            <input className='form-submit' type='submit' value='Submit' onClick={e => setUserExists(true)}></input>
+            <input className='form-submit' type='submit' value='Reset Password' onClick={handleSubmit}></input>
           </form>
         </div>
       </div>
