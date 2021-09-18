@@ -4,6 +4,7 @@ import { Link, useLocation, useHistory, useParams } from 'react-router-dom';
 
 function FriendsList() {
   const location = useLocation();
+  const history = useHistory();
 
   const [name, setName] = useState('');
   const [friendId, setFriendId] = useState(location.search.split('')[10]);
@@ -29,7 +30,7 @@ function FriendsList() {
         <img
           className='icon'
           src="https://img.icons8.com/ios-filled/50/000000/left.png"
-          onClick={() => console.log('back button was clicked')}
+          onClick={() => history.goBack()}
         />
         <h3>{name}'s Friends</h3>
       </div>
