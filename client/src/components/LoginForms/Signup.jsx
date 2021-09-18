@@ -1,5 +1,6 @@
 import React, { useReducer, useState } from 'react';
 import axios from 'axios';
+import { useAuth } from '../user-auth.js';
 
 const formReducer = (state, event) => {
   return {
@@ -10,6 +11,7 @@ const formReducer = (state, event) => {
 
 const Signup = ({ setView }) => {
   const [formData, setFormData] = useReducer(formReducer, {});
+  const auth = useAuth();
 
 
   const handleChange = (e) => {
@@ -24,8 +26,8 @@ const Signup = ({ setView }) => {
 
     axios.post('/signin', formData)
     .then((response) => {
-      let data = response.data
-      console.log('sign in data', data);
+      let { email, password, userId } = response.data
+      auth.signup(email, password, userId);
     })
     .catch((err) => console.log('Error saving user'))
   }

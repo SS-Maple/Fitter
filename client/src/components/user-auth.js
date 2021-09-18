@@ -37,14 +37,15 @@ function useProvideAuth() {
       })
       .then(() => setUserId(id));
   };
-  const signup = (email, password) => {
+  const signup = (email, password, id) => {
     return firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((response) => {
         setUser(response.user);
         return response.user;
-      });
+      })
+      .then(() => setUserId(id));
   };
   const signout = () => {
     return firebase

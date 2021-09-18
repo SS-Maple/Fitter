@@ -12,7 +12,7 @@ import { useAuth } from './user-auth.js';
 
 function App() {
   const auth = useAuth();
-
+  console.log('this is the auth', auth)
   const handleClick = (e) => {
     console.log(e.target.alt)
   }
