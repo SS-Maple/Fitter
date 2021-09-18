@@ -4,12 +4,13 @@ import SearchUsernames from './SearchUsernames.jsx';
 import { Link } from 'react-router-dom'
 import TodaysGoals from '../myProfile/todaysGoal.jsx';
 import Rankings from './Rankings.jsx';
+import { useAuth } from '../user-auth.js';
 
 
 function HomeFeed() {
-
+  const auth = useAuth();
   const [goals, setGoals] = useState({});
-  const [id, setId] = useState(1);
+  const [id, setId] = useState(auth.userId);
 
   useEffect(() => {
     axios.get('/todaysgoals')

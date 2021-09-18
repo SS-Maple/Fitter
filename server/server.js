@@ -368,16 +368,17 @@ app.delete('/removefriend', (req, res) => {
 // post user sign in information and send auth token + user id
 app.post('/signin', (req, res) => {
   let users = req.body;
-  let text = 'INSERT INTO users(firstname, lastname, email, username, userpassword, securityquestion, securityanswer) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id';
+  let text = 'INSERT INTO users(firstname, lastname, email, username, userpassword, securityquestion, securityanswer) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id, email, userpassword';
   let values = [users.firstname, users.lastname, users.email, users.username, users.userpassword, users.securityquestion, users.securityanswer]
 
   db.client.query(text, values)
   .then(data => {
-
     if (data.rowCount === 1) {
+      let result = data.rows[0];
       res.send({
-        token: 'test123',
-        userId: data.rows[0].id
+        userId: result.id,
+        email: result.email,
+        password: result.userpassword
       })
     }
   })
@@ -390,13 +391,14 @@ app.post('/login', (req, res) => {
   let password = req.body.password;
 
   // check if the email is in the db
-  db.client.query(`SELECT email FROM users WHERE users.email = '${email}'`)
+  db.client.query(`SELECT id FROM users WHERE users.email = '${email}'`)
   .then(data => {
     if (!data.rowCount) {
       throw new Error('email does not exist');
     }
+
     res.send({
-      token: 'test123'
+      userId: data.rows[0].id
     })
   })
   .catch(err => console.log('Error logging in', err))
