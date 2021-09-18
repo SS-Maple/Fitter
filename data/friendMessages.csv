@@ -1,11 +1,11 @@
-﻿id,userID,friendID,message,timestamp
-1,2,3,Hello!,2021-08-15 21:05:15.72336+07
-2,3,2,"Hi, how are you?",2017-08-15 21:06:30.72336+07
-3,2,3,"Great, you hit all your goals this week. That's amazing!",2021-08-15 21:10:04.72336+07
-4,3,2,"Thanks, you can do it too! This app really helps motivate me.",2021-08-15 21:20:17.72336+07
-5,7,1,"Wow, you're number 1 on my friend list this week. Great job!",2021-08-20 13:05:15.72336+07
-6,1,7,Thank you! The reminders are really helpful.,2017-08-20 13:06:30.72336+07
-7,7,1,The reminders…?,2017-08-20 13:15:30.72336+07
-8,1,7,"Ah, yes! You should get notifications from Fitter.",2017-08-20 13:20:30.72336+07
-9,7,1,"Gotcha, I must have turned it off by accident. I will change my setting! Thanks for the tip :)",2017-08-20 13:30:30.72336+07
-10,1,7,You're welcome! Let's stay fit together!,2017-08-20 13:33:30.72336+07
+﻿userID,friendID,message,timestamp
+2,3,Hello!,2021-08-15 21:05:15.72336+07
+3,2,"Hi, how are you?",2017-08-15 21:06:30.72336+07
+2,3,"Great, you hit all your goals this week. That's amazing!",2021-08-15 21:10:04.72336+07
+3,2,"Thanks, you can do it too! This app really helps motivate me.",2021-08-15 21:20:17.72336+07
+7,1,"Wow, you're number 1 on my friend list this week. Great job!",2021-08-20 13:05:15.72336+07
+1,7,Thank you! The reminders are really helpful.,2017-08-20 13:06:30.72336+07
+7,1,The reminders…?,2017-08-20 13:15:30.72336+07
+1,7,"Ah, yes! You should get notifications from Fitter.",2017-08-20 13:20:30.72336+07
+7,1,"Gotcha, I must have turned it off by accident. I will change my setting! Thanks for the tip :)",2017-08-20 13:30:30.72336+07
+1,7,You're welcome! Let's stay fit together!,2017-08-20 13:33:30.72336+07

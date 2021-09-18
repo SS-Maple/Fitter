@@ -2,4 +2,14 @@ node_modules/
 bundle.js
 coverage/
 coverage/lcov-report
+coverage/clover.xml
+coverage/coverage-final.json
+coverage/lcov-report/index.html
+coverage/lcov-report/sum.js.html
+
 .env
+firebase.config.js
+
+# bundle
+client/dist/bundle.js
+client/dist/bundle.js.LICENSE.txt
