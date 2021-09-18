@@ -372,12 +372,21 @@ margin-bottom: 50px;
   margin-bottom: 7px;
 }
 
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+
+}
+
 .previous-stat-container p{
   padding-left: 5px;
   margin-top: 0;
   margin-bottom: 0;
 }
 
+.share {
+  color:blue
+}
 /*Previous Stats*/
 
 /* Bottom Nav */

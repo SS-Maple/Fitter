@@ -4,11 +4,16 @@ const EditGoals = ({ show, close, userid, handleGoalSubmit }) => {
   const [watergoal, setWaterGoal] = useState('');
   const [caloriegoal, setCalorieGoal] = useState('');
   const [weightgoal, setWeightGoal] = useState('');
+  const [sharing, setSharing] = useState(true);
 
   function handleReset(){
     setWaterGoal('');
     setCalorieGoal('');
     setWeightGoal('');
+  }
+
+  function handleCheck(){
+    setSharing(prevState => !prevState)
   }
 
   if (!show){
@@ -25,7 +30,7 @@ const EditGoals = ({ show, close, userid, handleGoalSubmit }) => {
         <div className='modal-body'>
           <form onSubmit={(e) => {
             e.preventDefault();
-            handleGoalSubmit(watergoal, caloriegoal, weightgoal)
+            handleGoalSubmit(watergoal, caloriegoal, weightgoal, sharing)
             handleReset();
             close()}
             }>
@@ -37,6 +42,9 @@ const EditGoals = ({ show, close, userid, handleGoalSubmit }) => {
             </label>
             <label> Weight Goal
               <input className='food-input' type='number' placeholder='lbs' name='weightgoal' value={weightgoal} onChange={(e) => setWeightGoal(e.target.value)}></input>
+            </label>
+            <label> Share?
+              <input type='checkbox' name='goal-share' checked={sharing} onChange={handleCheck}></input>
             </label>
             <input type='submit' value='Submit'></input>
           </form>

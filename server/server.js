@@ -93,7 +93,8 @@ app.get('/userdata', (req, res) => {
       to_char(timestamp, 'Month DD, YYYY') AS date,
       water,
       calories,
-      weight
+      weight,
+      shareBoolean
       FROM dailyData WHERE userId=users.id
       ORDER BY timestamp DESC)b) AS stats,
     (SELECT row_to_json(c)
@@ -108,24 +109,48 @@ app.get('/userdata', (req, res) => {
   .then(results => res.send(results.rows[0].array_agg))
   .catch(err => console.error(err))
 })
+app.get('/getStats', (req, res) => {
+  return db.client.query(`
+  SELECT array_to_json(array_agg(row_to_json(a)))
+  FROM ( SELECT
+    id,
+    to_char(timestamp, 'Month DD, YYYY') AS date,
+    water,
+    calories,
+    weight,
+    shareBoolean FROM dailydata WHERE userid=${req.query.userid}
+    ORDER BY timestamp DESC)a;
+  `)
+  .then(results => res.send(results.rows[0].array_to_json))
+  .catch(err => console.error(err))
+})
 
 app.put('/updatephoto', (req,res) => {
   const {photo, userid} = req.body;
-  console.log(req.body)
   return db.client.query(`
     UPDATE users SET picture='${photo}' WHERE id=${userid}
   `)
   .then(() => res.sendStatus(200))
-  .catch(err => console.error('hello', err))
+  .catch(err => console.error(err))
 })
 
 app.put('/updategoals', (req, res) => {
-  const {userid, watergoal, caloriegoal, weightgoal} = req.body;
+  const {userid, watergoal, caloriegoal, weightgoal, share} = req.body;
+
   return db.client.query(`
-  INSERT INTO goals (userId, waterGoal, calorieGoal, weightGoal) VALUES (${userid}, ${watergoal}, ${caloriegoal}, ${weightgoal})
+  INSERT INTO goals (userId, waterGoal, calorieGoal, weightGoal, shareBoolean) VALUES (${userid}, ${watergoal}, ${caloriegoal}, ${weightgoal}, ${share})
   ON CONFLICT (userId)
   DO
-    UPDATE SET waterGoal=excluded.waterGoal, calorieGoal=excluded.calorieGoal, weightGoal=excluded.weightGoal;
+    UPDATE SET waterGoal=excluded.waterGoal, calorieGoal=excluded.calorieGoal, weightGoal=excluded.weightGoal, shareBoolean = excluded.shareBoolean;
+  `)
+  .then(() => res.sendStatus(200))
+  .catch(err => console.error(err))
+})
+
+app.put('/updateStatShare', (req, res) => {
+  const {id, share} = req.body;
+  return db.client.query(`
+  UPDATE dailyData SET shareboolean=${share} where id=${id}
   `)
   .then(() => res.sendStatus(200))
   .catch(err => console.error(err))

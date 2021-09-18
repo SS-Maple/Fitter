@@ -60,13 +60,35 @@ const MyProfile = () => {
     setEditGoals(prevState => !prevState)
   }
 
-  function handleGoalSubmit(water, calorie, weight){
+  function handleGoalSubmit(water, calorie, weight, share){
+    console.log(share)
     axios({
       method: 'put',
       url: '/updategoals',
-      data: `userid=${userid}&watergoal=${water}&caloriegoal=${calorie}&weightgoal=${weight}`
+      data: `userid=${userid}&watergoal=${water}&caloriegoal=${calorie}&weightgoal=${weight}&share=${share}`
     })
     .then(() => getUserData())
+  }
+
+  function handleShare(e){
+    let id = e.target.attributes.[1].nodeValue
+    let share = e.target.attributes.[2].nodeValue === 'true' ? false : true
+    console.log(id, e.target.attributes.[2].nodeValue, share)
+
+    return axios({
+      method: 'put',
+      url: '/updateStatShare',
+      data:`id=${id}&share=${share}`
+    })
+    .then(() => {
+        axios({
+        method: 'get',
+        url: '/getStats',
+        params: {userid: userid}
+      })
+      .then((results) => setStats(results.data))
+    })
+
   }
 
   return(
@@ -104,7 +126,7 @@ const MyProfile = () => {
               <div className='more-details'>Tap for more details</div>
             </Link>
             <div className='goal-header'>Your Previous Status:</div>
-            <PreviousStats stats={stats} goals={goals}/>
+            <PreviousStats stats={stats} goals={goals} handleShare={handleShare} />
             <EditGoals show={editGoals} close={handleClick} userid={userid} handleGoalSubmit={handleGoalSubmit} />
           </div>
         )
