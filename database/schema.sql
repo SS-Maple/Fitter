@@ -62,10 +62,10 @@ CREATE TABLE friendMessages (
 );
 
 CREATE TABLE comments (
-  id                  SERIAL    UNIQUE   PRIMARY KEY,
+  id             SERIAL    UNIQUE   PRIMARY KEY,
   userID         INT       NOT NULL      REFERENCES users(id),
   friendID       INT       NOT NULL      REFERENCES users(id),
-  comment        VARCHAR    NOT NULL,
+  comment        VARCHAR    ,
   tileId         INT      NOT NULL
 );
 

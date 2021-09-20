@@ -336,7 +336,23 @@ app.get('/friendProfile', (req, res) => {
       }
     })
 });
+app.get('/isfriend', (req, res) => {
+  let friendId = 7;
+  let userId = 1;
+  // let friendId = req.body.friendID
+  // let userId = req.body.userID
+  db.client.query(`
+    SELECT * from friends WHERE userID=${userId} AND friendID=${friendId}`, (err, data) => {
+    if (err) {
+      // console.log('error from server', err)
+      res.send(err);
+    } else {
 
+      console.log('success in isfriend', data)
+      res.send(data);
+    }
+  })
+});
 app.post('/addfriend', (req, res) => {
   let friendId = 7;
   let userId = 1;
@@ -375,14 +391,15 @@ app.delete('/removefriend', (req, res) => {
   })
 });
 app.post('/comment', (req, res) => {
-  console.log('looking for this', req.body['userid'])
-  var userId = req.body['userid']
-  var friendId = req.body['friendid']
+  console.log('looking for this', typeof(req.body['comment']))
+
+  var userId = parseInt(req.body['userid'])
+  var friendId = parseInt(req.body['friendid'])
   var comment = req.body['comment']
-  var tileId = req.body['commentid']
+  var tileId = parseInt(req.body['commentid'])
   console.log(userId, friendId, comment, tileId)
   db.client.query(`
-    INSERT INTO comments (userID, friendID, comment, tileId) VALUES (${userId}, ${friendId}, ${comment}, ${tileId})`, (err, data) => {
+    INSERT INTO comments (userID, friendID, comment, tileId) VALUES (${userId}, ${friendId},'', ${tileId});`, (err, data) => {
       if (err) {
         console.log('error from server', err)
         res.send(err);
