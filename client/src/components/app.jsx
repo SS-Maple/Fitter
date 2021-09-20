@@ -7,38 +7,34 @@ import FriendsList from './FriendsList/FriendsList.jsx';
 import HomeFeed from './HomeFeed/HomeFeed.jsx';
 import Login from './LoginForms/Login.jsx';
 import Main from './Main.jsx';
-import {userContext} from './userContext';
+import Logout from './LoginForms/Logout.jsx';
+import { useAuth } from './user-auth.js';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userId: 3,
-      test: []
-    }
-    this.handleClick = this.handleClick.bind(this)
-  }
-
-  handleClick(e) {
+function App() {
+  const auth = useAuth();
+  console.log('this is the auth', auth)
+  const handleClick = (e) => {
     console.log(e.target.alt)
   }
 
-  render() {
+  if (!auth.userId) {
     return (
       <div>
         <TopBar />
-        {/* <FriendProfile /> */}
-        {/* temporarily hidding FriendsList */}
-        {/* <FriendsList /> */}
-        {/* <Login /> */}
-        {/* <MyProfile /> */}
-        <userContext.Provider value={this.state.userId}>
-          <Main/>
-        </userContext.Provider>
-        <BottomNav handleClick={this.handleClick} />
+        <Login />
       </div>
     )
   }
+  return (
+    <div>
+      <TopBar />
+      <Logout />
+      {/* <FriendProfile /> */}
+      <Main />
+      <BottomNav handleClick={handleClick} />
+    </div>
+  )
+
 }
 
 export default App;

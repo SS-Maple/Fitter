@@ -40,7 +40,7 @@ CREATE TABLE goals (
   waterGoal             INT       DEFAULT 0,
   calorieGoal           INT       DEFAULT 0,
   weightGoal            INT       DEFAULT 0,
-  shareBoolean          BOOLEAN
+  shareBoolean          BOOLEAN   DEFAULT FALSE
 );
 
 CREATE TABLE dailyData (
@@ -50,7 +50,7 @@ CREATE TABLE dailyData (
   water           INT       DEFAULT 0,
   calories        INT       DEFAULT 0,
   weight          INT       DEFAULT 0,
-  shareBoolean    BOOLEAN
+  shareBoolean    BOOLEAN   DEFAULT FALSE
 );
 
 CREATE TABLE friendMessages (
@@ -59,6 +59,14 @@ CREATE TABLE friendMessages (
   friendID        INT       NOT NULL   REFERENCES users(id),
   message         VARCHAR   NOT NULL,
   timestamp       TIMESTAMP DEFAULT now()
+);
+
+CREATE TABLE comments (
+  id                  SERIAL    UNIQUE   PRIMARY KEY,
+  userID         INT       NOT NULL      REFERENCES users(id),
+  friendID       INT       NOT NULL      REFERENCES users(id),
+  comment        VARCHAR    NOT NULL,
+  tileId         INT      NOT NULL
 );
 
 -- DATA LOAD

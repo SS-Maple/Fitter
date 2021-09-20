@@ -10,10 +10,10 @@ import 'regenerator-runtime';
 configure({ adapter: new Adapter() });
 afterEach(cleanup);
 
-// describe('Friend Profile Component', () => {
-//   test('it renders', () => {
-//     render(<FriendProfile />);
-//     expect(screen.getByText('Message')).toBeInTheDocument();
-//   });
+xdescribe('Friend Profile Component', () => {
+  test('it renders', () => {
+    render(<FriendProfile />);
+    expect(screen.getByText('Message')).toBeInTheDocument();
+  });
 
 // });
