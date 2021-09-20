@@ -20,6 +20,8 @@ function Main() {
         <Route path='/userprofile' component={MyProfile} />
         <Route path='/friendProfile' component={FriendProfile} />
         <Route path='/chart' component={Line} />
+        <Route path='/signup' component={Signup} />
+        <Route path='/forgotpw' component={ForgotPW} />
       </Switch>
     </main>
   );
