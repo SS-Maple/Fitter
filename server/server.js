@@ -47,7 +47,27 @@ app.get('/user', (req, res) => {
 app.get('/friends', (req, res) => {
   let friendId = req.query.friendId;
   db.client.query(`
-      select id, firstname, lastname, picture, descriptionmessage,
+    SELECT * FROM friends
+    JOIN users
+    ON friends.friendid = users.id
+    WHERE userid = ${friendId}
+    ORDER BY users.firstname
+  `, (err, data) => {
+    if (err) {
+      // console.log('error from server -', err)
+      res.send(err);
+    } else {
+      // console.log('rows from server /friends - ', data.rows)
+      res.send(data.rows);
+    }
+  })
+});
+
+// get home feed rankings data
+app.get('/rankings', (req, res) => {
+  let friendId = 1;
+  db.client.query(`
+    select id, firstname, lastname, picture, descriptionmessage,
       (
         select array_to_json(array_agg(row_to_json(d)))
         from (

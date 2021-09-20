@@ -516,6 +516,128 @@ form,
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.19);
 }
 
+/*-- CHAT --*/
+
+/* -- overall container --*/
+#direct-chat-page {
+  margin-bottom: 45px !important;
+  max-height: 80% !important;
+}
+
+/* -- chat list --*/
+.ce-chat-list {
+  background-color: #6ec0c3 !important;
+}
+
+.ce-chats-container {
+  font-family: sans-serif;
+  background-color: #6ec0c3 !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.ce-chat-card {
+  color: #e25786 !important;
+  background-color: white !important;
+  margin: 5% 5% 0% 5% !important;
+  padding: 5% !important;
+  border-radius: 25px !important;
+}
+
+.ce-chat-form-container {
+  background-color:  #e25786 !important;
+  color: white !important;
+  margin-bottom: 5% !important;
+}
+
+.ce-chat-form-container > * {
+  background-color:  #e25786 !important;
+}
+
+#new-chat-plus-button {
+  display: none !important;
+}
+
+/*-- chat feed --*/
+.ce-chat-feed {
+  font-family: sans-serif;
+  background-color: #6ec0c3;
+}
+
+.ce-chat-title {
+  background-color: white !important;
+}
+
+.ce-chat-title-container {
+  color: #e25786 !important;
+}
+
+#ce-ice-breaker-text {
+  color: white !important;
+}
+
+.ce-message-bubble.ce-my-message-bubble {
+  background-color: white !important;
+  color: #494949 !important;
+  padding: 2% !important;
+  margin: 2% 10% !important;
+}
+
+#ce-feed-container {
+  background-color: #6ec0c3 !important;
+}
+
+/*-- settings --*/
+
+.ce-chat-settings-mobile-option * {
+  color: #e25786 !important;
+}
+
+.ce-settings {
+  font-family: sans-serif;
+  background-color: #6ec0c3 !important;
+  color: #343434 !important;
+}
+
+.ce-settings > * {
+  font-family: sans-serif;
+  color: #343434 !important;
+}
+
+.ce-chat-settings-container * {
+  color: white !important;
+}
+
+#ce-options-drop-down {
+  display: none;
+}
+
+/*-- others --*/
+svg {
+  color: #e25786 !important;
+}
+
+#ce-send-message-button {
+  background-color: #6ec0c3 !important;
+}
+
+#ce-send-message-button * {
+  color: white !important;
+}
+
+#upload-document-button * {
+  color: #494949;
+}
+
+.ce-chat-list svg {
+  color: white !important;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
 .security-select {
   border-radius: 5px;
   border-style: solid;
