@@ -29,7 +29,7 @@ function HomeFeed() {
   }, []);
 
   return (
-    <div id='home-page'>
+    <div id='home-page' data-testid='home-page'>
       <div className='feed-bottom'></div>
         <h4 style={{textAlign: 'center', fontSize: '20px'}}>Welcome {userName}!</h4>
       {/* Home Feed Search */}
