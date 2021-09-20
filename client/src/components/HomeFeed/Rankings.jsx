@@ -41,11 +41,11 @@ function Rankings({ id }) {
     ranking();
     return friends.filter(user => user.id === userId).map(user => user.ranks).toString()
   }
-    
+
   if (friends) {
     if (friends.length > 1) {
       sortFriends();
-      return <div id='home-page'>
+      return <div data-testid='home-page' id='home-page'>
           {/* Friend Information */}
           <div
             className='pic-tile-friend-tile'
@@ -87,7 +87,7 @@ function Rankings({ id }) {
       </div>
      } else {
        return <div>
-        <div id='home-page'>
+        <div data-testid='home-page' id='home-page'>
         <h4>Your Friend's Rankings: </h4>
           <div className='pic-tile-friend-tile'>
             <div className='pic-tile-friend-right-info'>
@@ -102,4 +102,5 @@ function Rankings({ id }) {
 }
 
 export default Rankings;
+module.export = Rankings.sortFriends;
 

@@ -5,12 +5,11 @@ import { Link,useLocation,useHistory, useParams } from 'react-router-dom';
 
 function SearchUsernames() {
 
-  const [userId, setUserId] = useState(1);
   const [term, setTerm] = useState(' ');
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get(`/users?userID=${userId}`)
+    axios.get(`/users`)
       .then(response => response.data)
       .then(result => setUsers(result))
       .catch(error => error);

@@ -5,15 +5,21 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import 'regenerator-runtime';
 import axios from "axios";
 import HomeFeed from "../../client/src/components/HomeFeed/HomeFeed.jsx";
+import myProfile from "../../client/src/components/myProfile/myProfile.jsx";
+import Enzyme from 'enzyme';
+import { shallow } from 'enzyme';
+import Rankings from "../../client/src/components/HomeFeed/Rankings.jsx";
+
 // @jest-environment jsdom
 
 afterEach(cleanup);
+Enzyme.configure({ adapter: new Adapter() })
 
 xdescribe(`Home Feed`, () => {
   let email = 
   axios.get('/login')
     .then()
-  test(`it renders home page`, () => {
+  xtest(`it renders home page`, () => {
     let auth = {
       userId: 2
     }

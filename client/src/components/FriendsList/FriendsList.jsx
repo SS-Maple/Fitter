@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useHistory, useParams } from 'react-router-dom';
-import FriendTile from './FriendTile.jsx';
+import FriendTile from '../FriendsList/FriendTile.jsx';
 
 function FriendsList() {
   // const location = useLocation();
@@ -10,7 +10,7 @@ function FriendsList() {
   const [name, setName] = useState('');
   const [friendId, setFriendId] = useState(location.search.split('')[10]);
   const [friends, setFriends] = useState([]);
-  const [user, setUser] = useState('');
+  // const [user, setUser] = useState('');
   
   useEffect(() => {
     axios.get(`/friends?friendId=${friendId}`)
@@ -36,9 +36,8 @@ function FriendsList() {
       </div>
       {/* Friend's List Tile */}
       <FriendTile friends={friends}/>
-      <div className='feed-bottom'></div>
+      <div data-testid='feed-bottom'className='feed-bottom'></div>
     </div>
-
   );
 }
 

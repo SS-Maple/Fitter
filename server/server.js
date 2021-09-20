@@ -203,7 +203,6 @@ app.put('/updateToday', (req, res) => {
 // get home feed rankings data
 app.get(`/rankings`, (req, res) => {
   let friendId = req.query.friendId;
-  // let friendId = 1;
   db.client.query(`
   SELECT friendId FROM friends
   WHERE userid = ${friendId}
@@ -255,7 +254,8 @@ app.get(`/rankings`, (req, res) => {
             // console.log(queryString)
             res.send(err);
           } else {
-            // console.log('rows from server /users - ', data.rows)
+            console.log('rows from server /users - ', data.rows)
+            console.log(Array.isArray(data.rows))
             res.send(data.rows);
           }
         })
