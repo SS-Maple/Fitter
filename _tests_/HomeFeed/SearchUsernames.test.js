@@ -67,29 +67,32 @@ let users =
 
 let term = 'hikingalice';
 
-test('Renders Search Bar', () => {
-  const searchBar = shallow(<SearchUsernames />)
-  expect(searchBar.exists()).toBe(true);
+xdescribe('Search Usernames', () => {
+  test('Renders Search Bar', () => {
+    const searchBar = shallow(<SearchUsernames />)
+    expect(searchBar.exists()).toBe(true);
+  });
+  
+  test(`expects search username component to load`, () => {
+    render(<SearchUsernames users={users} />);
+    expect(Array.isArray(users)).toBe(true);
+    expect(users.length).toBeGreaterThan(0);
+    expect(screen.getByTestId('home-page-header')).toBeInTheDocument();
+  });
+  
+  test(`expect only results with Alice`, () => {
+    render(<SearchUsernames users={users} term={term}/>)
+    let temp = [];
+    users.filter(user => user.username === term).forEach(user => temp.push(user.username))
+    expect(temp[0]).toBe('hikingalice')
+    expect(temp.length).toBe(1);
+  });
+  
+  //////////////////////////////////////////////////////////////////////////////////////////
+  
+  test(`expects search username options to load`, () => {
+    render(<Rankings users={users} />);
+    expect(Array.isArray(users)).toBe(true);
+  });
 });
 
-test(`expects search username component to load`, () => {
-  render(<SearchUsernames users={users} />);
-  expect(Array.isArray(users)).toBe(true);
-  expect(users.length).toBeGreaterThan(0);
-  expect(screen.getByTestId('home-page-header')).toBeInTheDocument();
-});
-
-test(`expect only results with Alice`, () => {
-  render(<SearchUsernames users={users} term={term}/>)
-  let temp = [];
-  users.filter(user => user.username === term).forEach(user => temp.push(user.username))
-  expect(temp[0]).toBe('hikingalice')
-  expect(temp.length).toBe(1);
-});
-
-//////////////////////////////////////////////////////////////////////////////////////////
-
-test(`expects search username options to load`, () => {
-  render(<Rankings users={users} />);
-  expect(Array.isArray(users)).toBe(true);
-});
