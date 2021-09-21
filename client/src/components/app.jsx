@@ -8,6 +8,7 @@ import HomeFeed from './HomeFeed/HomeFeed.jsx';
 import Login from './LoginForms/Login.jsx';
 import Main from './Main.jsx';
 import Logout from './LoginForms/Logout.jsx';
+import Notifications from './notifications/Notifications.jsx';
 import { useAuth } from './user-auth.js';
 
 function App() {
@@ -20,14 +21,14 @@ function App() {
   if (!auth.userId) {
     return (
       <div>
-        <TopBar />
+        <TopBar loggedIn={false}/>
         <Login />
       </div>
     )
   }
   return (
     <div>
-      <TopBar />
+      <TopBar loggedIn={true}/>
       <Logout />
       <Main />
       <BottomNav handleClick={handleClick} />

@@ -12,23 +12,23 @@ body {
 }
 
 /* TOP BAR STYLES */
-#topbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+.topbar {
   background-color: #e25786;
   width: 100vw;
   height: 10vh;
   display: flex;
   padding: none;
   margin: none;
-  z-index: 10;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
 }
 
 #emptyDiv {
   width: 15vw;
   display: flex;
+  background-color: #e25786;
 }
 
 #logoButton {
@@ -64,6 +64,59 @@ body {
   padding: none;
   margin: none;
 }
+
+/* END OF TOP BAR STYLES */
+
+/* NOTIFICATIONS STYLES */
+
+#notificationsPage {
+  background-color: #6ec0c3;
+  width: 99vw;
+  height: 90vh;
+  position: fixed;
+  top: 10vh;
+  left: 0;
+}
+
+.notificationBoxes {
+  background-color: #494949;
+  border-radius: 5px;
+  justify-content: center;
+  padding: 2px;
+  margin: 5px;
+}
+
+#notificationsHeader {
+  font-size: 3vh;
+  text-align: center;
+  justify-content: center;
+  color: white;
+}
+
+#notificationsTile {
+  background-color: white;
+  color: #494949;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  margin: 1vh;
+}
+
+#deleteNotifications {
+  background-color: #e25786;
+  color: white;
+  border: none;
+  padding: none;
+  border-radius: 5px;
+  height: 5vh;
+  text-align: center;
+  justify-content: center;
+  margin: auto;
+  display:flex;
+  align-items: center;
+}
+
+/* END OF NOTIFICATIONS STYLES */
 
 /* <----- Home Page  */
 

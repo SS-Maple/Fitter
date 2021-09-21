@@ -1,26 +1,12 @@
 import React from 'react';
-import '../../../../dist/style.css';
+import { Link } from 'react-router-dom';
 
-class Logo extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-
-    };
-  }
-
-  onClick() {
-    console.log('Logo click');
-  }
-
-  render() {
-    return (
-      <button id="logoButton" onClick={this.onClick.bind(this)}>
-          FITTER
-      </button>
-    )
-}
+const Logo = (props) => {
+  return (
+    // <button id="logoButton" onClick={props.onClick}>
+    <Link id="logoButton" to="/">FITTER</Link>
+    // </button>
+  );
 };
 
 export default Logo;
