@@ -365,11 +365,11 @@ app.delete('/removefriend', (req, res) => {
   })
 });
 
-// post user sign in information and send auth token + user id
+// post user sign in information
 app.post('/signin', (req, res) => {
   let users = req.body;
-  let text = 'INSERT INTO users(firstname, lastname, email, username, userpassword, securityquestion, securityanswer) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id, email, userpassword';
-  let values = [users.firstname, users.lastname, users.email, users.username, users.userpassword, users.securityquestion, users.securityanswer]
+  let text = 'INSERT INTO users(firstname, lastname, email, username, userpassword) VALUES($1, $2, $3, $4, $5) RETURNING id, email, userpassword';
+  let values = [users.firstname, users.lastname, users.email, users.username, users.userpassword]
 
   db.client.query(text, values)
   .then(data => {
@@ -382,10 +382,10 @@ app.post('/signin', (req, res) => {
       })
     }
   })
-  .catch(err => res.send(err))
+  .catch(err => res.send(err.detail))
 })
 
-// post user login and send auth token
+// post user login information
 app.post('/login', (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
