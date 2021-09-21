@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-// import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { render, screen, fireEvent, waitFor, act } from './test-utils.jsx';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import '@testing-library/jest-dom'
 import Login from '../client/src/components/LoginForms/Login.jsx';
 import Signup from '../client/src/components/LoginForms/Signup.jsx';
 import ForgotPw from '../client/src/components/LoginForms/ForgotPw.jsx';
@@ -11,6 +11,10 @@ import { ProvideAuth } from '../client/src/components/user-auth.js';
 
 
 configure({adapter: new Adapter()});
+
+const mockContext = React.createContext();
+const auth = { user: 'email@test.com', userId: 8 };
+// components call useAuth() inside so maybe create mock auth value
 
 
 describe('Unit tests: Component rendering', () => {
@@ -32,15 +36,15 @@ describe('Unit tests: Component rendering', () => {
     expect(forgot.exists()).toBe(true);
   })
 
-  test('Renders Logout component', () => {
-    const logout = shallow(<Logout />);
+  test('Renders Logout component', async () => {
 
-    act(() => {
-      auth.user = true;
-      render(<Logout />)
-    });
+    render(
+      <ProvideAuth >
+        <Logout />
+      </ProvideAuth>
+    )
 
-    expect(logout.exists()).toBe(true);
+    expect(await screen.findByText("Sign out")).toBeInTheDocument();
   })
 
   test('Renders Auth Context', () => {
