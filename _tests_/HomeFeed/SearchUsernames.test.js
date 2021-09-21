@@ -10,9 +10,9 @@ import SearchUsernames from "../../client/src/components/HomeFeed/SearchUsername
 import Rankings from "../../client/src/components/HomeFeed/Rankings.jsx";
 
 beforeEach(() => {
-  axios.get('/users')
-    .then(result => result.data)
-    .catch(err => err)
+  // axios.get('/users')
+  //   .then(result => result.data)
+  //   .catch(err => err)
 })
 
 afterEach(cleanup);

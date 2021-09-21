@@ -15,8 +15,8 @@ beforeEach(() => {
 afterEach(cleanup);
 
 let friends = axios.get('/friends?friendId=2')
-.then(result => result.data)
-.catch(err => err)
+  .then(result => result.data)
+  .catch(err => err)
 
 test(`it renders friends's list for user #2`, () => {
   render(<FriendsList location={2} />);
@@ -25,7 +25,7 @@ test(`it renders friends's list for user #2`, () => {
   expect(screen.getByTestId('feed-bottom')).toBeInTheDocument();
 });
 
-test(`expects friends array to be true`, () => {
+xtest(`expects friends array to be true`, () => {
   render(<FriendsList location={2} friends={friends}/>);
   expect(friends).toBeTruthy();
 });

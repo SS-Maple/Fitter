@@ -9,9 +9,9 @@ import Rankings from "../../client/src/components/HomeFeed/Rankings.jsx";
 import sorting from '../../client/src/components/HomeFeed/scripts/sorting.js'
 
 beforeEach(() => {
-  axios.get('/rankings?friendId=2')
-    .then(result => result.data)
-    .catch(err => err)
+  // axios.get('/rankings?friendId=2')
+  //   .then(result => result.data)
+  //   .catch(err => err)
 })
 
 afterEach(cleanup);
