@@ -2,8 +2,8 @@ import React from 'react';
 import Logo from './TopBarComponents/Logo.jsx';
 import NotificationIcon from './TopBarComponents/NotificationIcon.jsx';
 import { Link } from 'react-router-dom';
-const generateNewNotifications = require('../notifications/notificationHelpers/generateNewNotifications.js');
 import { useAuth } from '../user-auth.js';
+const generateNewNotifications = require('../notifications/notificationHelpers/generateNewNotifications.js');
 
 const TopBar = (props) => {
   const auth = useAuth();

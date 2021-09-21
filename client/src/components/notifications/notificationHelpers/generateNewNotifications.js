@@ -1,6 +1,3 @@
-import React from 'react';
-
-
 const generateNewNotifications = (userId) => {
   let newNotifications = false;
   // axios.get user's target goals and current values
@@ -46,6 +43,6 @@ const generateNewNotifications = (userId) => {
     });
 
     return newNotifications;
-  }
+  };
 
-moudle.exports.generateNewNotifications = generateNewNotifications;
+  module.exports = generateNewNotifications;

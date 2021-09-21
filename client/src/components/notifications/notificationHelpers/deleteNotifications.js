@@ -1,4 +1,4 @@
-import { useAuth } from '../../user-auth.js';
+const { useAuth } = require('../../user-auth.js');
 
 const deleteNotifications = () => {
   const auth = useAuth();
