@@ -1,21 +1,21 @@
 import React, { useReducer } from "react";
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import 'regenerator-runtime';
 import axios from "axios";
-import { configure, shallow, mount } from 'enzyme';
+import { configure, shallow, mount, shallowWithIntl } from 'enzyme';
 import Rankings from "../../client/src/components/HomeFeed/Rankings.jsx";
-import sortFriends from "../../client/src/components/HomeFeed/Rankings.jsx";
+import sorting from '../../client/src/components/HomeFeed/scripts/sorting.js'
 
-// @jest-environment jsdom
 beforeEach(() => {
-  
+  axios.get('/rankings?friendId=2')
+    .then(result => result.data)
+    .catch(err => err)
 })
 
 afterEach(cleanup);
 configure({ adapter: new Adapter() })
-
 
 let friends = [
   {
@@ -295,26 +295,7 @@ let friends = [
   }
 ]
 
-friends.forEach((friend, index) => {
-  // returns negative if they missed the goal
-  let water = Math.abs(100 - (friend['userdata'][index]['wateraverage'] * 100))
-  // returns negative if goal is exceeded
-  let calories = Math.abs(100 - (friend['userdata'][index]['caloriesaverage'] * 100))
-  let calculate = water + calories;
-  friend['sorting'] = calculate.toFixed(2);
-  friend['wateraverage'] = friend['userdata'][index]['wateraverage'];
-  friend['caloriesaverage'] = friend['userdata'][index]['caloriesaverage'];
-})
-friends.sort((a, b) => a.sorting - b.sorting)
-.forEach((user, index) => user['ranks'] = (index + 1))
-friends.filter(user => user.id === 1).map(user => user.ranks).toString()
-
-
 jest.mock('../../client/src/components/HomeFeed/Rankings.jsx');
-const myRankings = shallow(<Rankings />)
-const onSubmitSpy = jest.fn();
-const onSubmit = onSubmitSpy;
-
 
 test('Renders Home Feed', () => {
   const myRankings = shallow(<Rankings />)
@@ -322,14 +303,19 @@ test('Renders Home Feed', () => {
 })
 
 test(`expects friends to be an array`, () => {
-  // render(<Rankings friends={friends}/>);
   expect(Array.isArray(friends)).toBe(true);
   expect(friends.length).toBeGreaterThan(0);
 });
 
-test(`expects top friend to be Carol`, () => {
-  expect(friends[0].firstname).toBe('Carol')
-  expect(friends[1].firstname).toBe('Mike')
+test(`expects rankings to render properly after sorting`, () => {
+  // render(<Rankings friends={friends}/>); // won't work because helper functions are not being called
 });
 
-
+test(`expects friends to render in order`, () => {
+  sorting(friends);
+  expect(friends[0].firstname).toBe('Carol')
+  expect(friends[1].firstname).toBe('Mike')
+  expect(friends[2].firstname).toBe('Greg')
+  expect(friends[3].firstname).toBe('Alice')
+  expect(friends[4].firstname).toBe('Peter')
+});

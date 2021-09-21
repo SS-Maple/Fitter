@@ -19,6 +19,7 @@ function Rankings({ id }) {
   }, []);
 
   function sortFriends() {  
+    console.log('calling sort')
     friends.forEach((friend, index) => {
       // returns negative if they missed the goal
       let water = Math.abs(100 - (friend['userdata'][index]['wateraverage'] * 100))
@@ -102,5 +103,4 @@ function Rankings({ id }) {
 }
 
 export default Rankings;
-module.export = Rankings.sortFriends;
 

@@ -16,7 +16,7 @@ function SearchUsernames() {
   }, [])
 
   return (
-    <div className='home-page-header'>
+    <div data-testid='home-page-header' className='home-page-header'>
       <input placeholder='Search Username...' onChange={() => setTerm(event.target.value)}></input>
       <div className='username-results'>{users.filter(name => name.username.includes(term)).map(((user, index) => (        
         <div className='search-user-result' key={index} onClick={() => console.log('On click needs to route to', user.firstname)}>

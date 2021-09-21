@@ -3,13 +3,12 @@ import { render, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import 'regenerator-runtime';
-import axios from "axios";
 import Enzyme from 'enzyme';
 import { shallow } from 'enzyme';
 import FriendTile from "../../client/src/components/FriendsList/FriendTile.jsx";
-// @jest-environment jsdom
 
 Enzyme.configure({ adapter: new Adapter() })
+
 afterEach(cleanup);
 
 let friends = 
@@ -65,10 +64,13 @@ let friends =
     }
   ]
 
-describe(`Friend's Tile`, () => {
-  test(`expects friends to load`, () => {
-    render(<FriendTile friends={friends}/>);
-    expect(Array.isArray(friends)).toBe(true);
-    expect(friends[0].friends.length).toBe(4);
-  });
+test(`expects friends to load`, () => {
+  render(<FriendTile friends={friends}/>);
+  expect(Array.isArray(friends)).toBe(true);
+  expect(friends[0].friends.length).toBe(4);
 });
+
+test('render shallow', () => {
+  const friendsList = shallow(<FriendTile friends={friends}/>)
+  expect(friendsList.exists()).toBe(true);
+})

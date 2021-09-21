@@ -1,4 +1,4 @@
-const sortFriends = function (friends, userId) {
+const sorting = function (friends, userId) {
   friends.forEach((friend, index) => {
     // returns negative if they missed the goal
     let water = Math.abs(100 - (friend['userdata'][index]['wateraverage'] * 100))
@@ -13,5 +13,4 @@ const sortFriends = function (friends, userId) {
     .forEach((user, index) => user['ranks'] = (index + 1))
 }
 
-
-export default sortFriends;
+export default sorting;

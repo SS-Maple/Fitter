@@ -254,8 +254,8 @@ app.get(`/rankings`, (req, res) => {
             // console.log(queryString)
             res.send(err);
           } else {
-            console.log('rows from server /users - ', data.rows)
-            console.log(Array.isArray(data.rows))
+            // console.log('rows from server /users - ', data.rows)
+            // console.log(Array.isArray(data.rows))
             res.send(data.rows);
           }
         })
