@@ -5,6 +5,8 @@ import PreviousStats from './previousStats.jsx';
 import EditGoals from './editGoals.jsx';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../user-auth.js';
+
 
 const MyProfile = () => {
   const [userid, setUserId] = useState('');
@@ -18,12 +20,14 @@ const MyProfile = () => {
   const [friendCount, setFriendCount] = useState('');
   const [editGoals, setEditGoals] = useState(false);
 
+  const auth = useAuth();
+
   useEffect(() => {
-    getUserData();
+    getUserData(auth.userId);
   }, [])
 
-  function getUserData(){
-    axios.get('/userdata')
+  function getUserData(userid){
+    axios.get('/userdata', { params: {userId: userid}})
     .then(data => {
       let info = data.data[0]
         setUserId(info.id)
@@ -73,7 +77,6 @@ const MyProfile = () => {
   function handleShare(e){
     let id = e.target.attributes.[1].nodeValue
     let share = e.target.attributes.[2].nodeValue === 'true' ? false : true
-    console.log(id, e.target.attributes.[2].nodeValue, share)
 
     return axios({
       method: 'put',
@@ -90,7 +93,6 @@ const MyProfile = () => {
     })
 
   }
-
   return(
           <div className='my-profile-container'>
             <div className='my-profile'>
@@ -114,8 +116,8 @@ const MyProfile = () => {
               </div>
               <div className='profile-btn-container'>
                 <input id='upload-pic' type='file' onChange={(e) => addPhoto(e)} hidden/>
-                <button className='profile-btn' onClick={() => document.getElementById('upload-pic').click()}>Upload profile picture</button>
-                <button className='profile-btn' onClick={() => handleClick()} >Edit Goals</button>
+                <button className='profile-btn upload-pic-btn' onClick={() => document.getElementById('upload-pic').click()}>Upload profile picture</button>
+                <button className='profile-btn edit-goal-btn' onClick={() => handleClick()} >Edit Goals</button>
               </div>
             </div>
             <div className='goal-header'>Your Goals:</div>
