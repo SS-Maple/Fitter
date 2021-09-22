@@ -290,8 +290,15 @@ app.get(`/rankings`, (req, res) => {
 // WHERE userID = ${friendId} AND shareBoolean=true
 // ORDER BY timestamp
 app.get('/friendProfile', (req, res) => {
-  let friendId = 7;
-  let userId = 1;
+  console.log('madeit')
+
+  var params = req.headers.referer.split('?')[1].split('=')[1].split('')[0]
+  var useridparams = req.headers.referer.split('&')[1].split('=')[1]
+
+  console.log('rq', params, useridparams)
+  // let friendId = parseInt(req.query);
+  let friendId = parseInt(params);
+  let userId = parseInt(useridparams);
   db.client.query(`
       SELECT username, firstName, lastName, descriptionMessage, picture,
         (
@@ -338,15 +345,34 @@ app.get('/friendProfile', (req, res) => {
       WHERE users.id=${friendId}`,
     (err, data) => {
       if (err) {
-        // console.log('error from server', err)
+        console.log('error from server', err)
         res.send(err);
       } else {
+        var returnRes = data.rows[0]
+        returnRes['userid'] = userId
+        returnRes['friendid'] = friendId
         // console.log('rows from server /friendprofile - ', data.rows[0])
-        res.send(data.rows[0]);
+        res.send(returnRes);
       }
     })
 });
+app.get('/isfriend', (req, res) => {
+  let friendId = 7;
+  let userId = 1;
+  // let friendId = req.body.friendID
+  // let userId = req.body.userID
+  db.client.query(`
+    SELECT * from friends WHERE userID=${userId} AND friendID=${friendId}`, (err, data) => {
+    if (err) {
+      // console.log('error from server', err)
+      res.send(err);
+    } else {
 
+      console.log('success in isfriend', data)
+      res.send(data);
+    }
+  })
+});
 app.post('/addfriend', (req, res) => {
   let friendId = 7;
   let userId = 1;
@@ -384,7 +410,24 @@ app.delete('/removefriend', (req, res) => {
     }
   })
 });
+app.post('/comment', (req, res) => {
+  console.log('looking for this', typeof(req.body['comment']))
 
+  var userId = parseInt(req.body['userid'])
+  var friendId = parseInt(req.body['friendid'])
+  var comment = req.body['comment']
+  var tileId = parseInt(req.body['commentid'])
+  console.log(userId, friendId, comment, tileId)
+  db.client.query(`
+    INSERT INTO comments (userID, friendID, comment, tileId) VALUES (${userId}, ${friendId},'', ${tileId});`, (err, data) => {
+      if (err) {
+        console.log('error from server', err)
+        res.send(err);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+})
 // post user sign in information and send auth token + user id
 app.post('/signin', (req, res) => {
   let users = req.body;

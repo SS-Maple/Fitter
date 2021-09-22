@@ -39,7 +39,7 @@ function Rankings({ id }) {
     return friends.sort((a, b) => a.sorting - b.sorting)
     .forEach((user, index) => user['ranks'] = (index + 1))
   }
-  
+
   function final() {
     ranking();
     return friends.filter(user => user.id === userId).map(user => user.ranks).toString()
@@ -60,10 +60,11 @@ function Rankings({ id }) {
       {/* Friend's List Tile */}
       {friends.sort((a, b) => a.sorting - b.sorting)
         .map((friend, index) => (
+          <Link to={`/friendProfile?friendid=${friend.id}&userid=${userId}`} key={index} >
           <div
             className='pic-tile-friend-tile'
             key={index}
-            onClick={() => console.log('On click needs to route to', friend.firstname)}
+            onClick={() => console.log('On click needs to route to', friend.id)}
           >
             <div className='pic-tile-ranking'>
               #{index + 1}
@@ -83,6 +84,7 @@ function Rankings({ id }) {
               </li>
             </div>
           </div>
+          </Link>
         ))}
       <div className='feed-bottom'></div>
     </div>
