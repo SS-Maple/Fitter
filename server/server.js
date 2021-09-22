@@ -469,13 +469,13 @@ app.put('/notifications', (req, res) => {
 });
 
 app.post('/notifications', (req, res) => {
-  let { userId, notificationsText  } = req.query;
+  let { userId, notificationsText } = req.query;
   db.client.query(`
-    INSERT INTO notifications(userId,notificationText,new)
-    VALUES(${userId},${notificationsText},true)
+    INSERT INTO notifications (userid, notificationtext, new)
+    VALUES (${userId}, ${notificationsText}, true)
   `, (err, data) => {
     if (err) {
-      throw new Error;
+      console.log(err);
       res.send(err);
     } else {
       res.send('Ok');
