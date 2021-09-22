@@ -17,8 +17,8 @@ CREATE TABLE users (
   id                  SERIAL    UNIQUE   PRIMARY KEY,
   firstName           VARCHAR   NOT NULL,
   lastName            VARCHAR   NOT NULL,
-  email               VARCHAR   UNIQUE  NOT NULL,
-  username            VARCHAR   UNIQUE  NOT NULL,
+  email               VARCHAR   NOT NULL,
+  username            VARCHAR   NOT NULL,
   descriptionMessage  VARCHAR   NULL,
   userPassword        VARCHAR   NOT NULL,
   shareBirthday       BOOLEAN   DEFAULT FALSE,
@@ -61,6 +61,14 @@ CREATE TABLE friendMessages (
   timestamp       TIMESTAMP DEFAULT now()
 );
 
+CREATE TABLE comments (
+  id             SERIAL    UNIQUE   PRIMARY KEY,
+  userID         INT       NOT NULL      REFERENCES users(id),
+  friendID       INT       NOT NULL      REFERENCES users(id),
+  comment        VARCHAR    ,
+  tileId         INT      NOT NULL
+);
+
 -- DATA LOAD
 \COPY users(firstName,lastName,email,username,descriptionMessage,userPassword,shareBirthday,birthday,picture,securityQuestion,securityAnswer) FROM 'data/fitterUsers.csv' DELIMITER ',' CSV HEADER;
 \COPY friends(userID,friendID) FROM 'data/fitterFriends.csv' DELIMITER ',' CSV HEADER;
@@ -79,3 +87,4 @@ CREATE TABLE friendMessages (
 -- );
 
 
+-- SELECT setval(pg_get_serial_sequence(users, users.id), max(users.id)) FROM users;

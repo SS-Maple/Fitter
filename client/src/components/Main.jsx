@@ -9,7 +9,7 @@ import ForgotPW from './LoginForms/ForgotPW.jsx';
 import MyProfile from './myProfile/myProfile.jsx';
 import Line from './myProfile/charts.jsx';
 import FriendProfile from './friendProfile/friendProfile.jsx';
-
+import {userContext} from './userContext';
 function Main() {
   return (
     <main>
@@ -26,3 +26,4 @@ function Main() {
 }
 
 export default Main;
+
