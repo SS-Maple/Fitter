@@ -3,16 +3,18 @@ import Logo from './TopBarComponents/Logo.jsx';
 import NotificationIcon from './TopBarComponents/NotificationIcon.jsx';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../user-auth.js';
-const generateNewNotifications = require('../notifications/notificationHelpers/generateNewNotifications.js');
+import generateNewNotifications from '../notifications/notificationHelpers/generateNewNotifications.js';
 
 const TopBar = (props) => {
   const auth = useAuth();
-  const userId = auth.userId; // Is this grabbing the userId correctly?
+  const userId = auth.userId;
+  let newNotification = false;
 
   const { loggedIn } = props;
 
   if (loggedIn) {
-    let newNotifications = generateNewNotifications(userId);
+    newNotification = generateNewNotifications(userId);
+    console.log('logged in', newNotification);
   }
 
   return (
@@ -22,7 +24,7 @@ const TopBar = (props) => {
         {
           loggedIn ? (
             <Link to={{pathname: '/notifications'}}>
-              <NotificationIcon id="notificationIcon" newNotifications={newNotifications} />
+              <NotificationIcon id="notificationIcon" newNotifications={newNotification} />
             </ Link>
           ) : (
             <div id="emptyDiv" />
@@ -33,5 +35,3 @@ const TopBar = (props) => {
 };
 
 export default TopBar;
-
-
