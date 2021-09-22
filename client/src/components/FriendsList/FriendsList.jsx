@@ -1,16 +1,19 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useHistory, useParams } from 'react-router-dom';
+import { useAuth } from '../user-auth.js';
 
 function FriendsList() {
   const location = useLocation();
   const history = useHistory();
+  const auth = useAuth();
+  const [userId, setId] = useState(auth.userId);
 
   const [name, setName] = useState('');
   const [friendId, setFriendId] = useState(location.search.split('')[10]);
   const [friends, setFriends] = useState([]);
   const [user, setUser] = useState('');
-  
+
   useEffect(() => {
     axios.get(`/friends?friendId=${friendId}`)
       .then((response) => setName(response.data[0].firstname))
@@ -21,7 +24,7 @@ function FriendsList() {
       .then((list) => setFriends(list))
       .catch((error) => console.log('error', error));
   }, [])
-  
+
 
   return (
     <div>
@@ -36,6 +39,8 @@ function FriendsList() {
       </div>
       {/* Friend's List Tile */}
       {friends.map((friend, index) => (
+        <Link to={`/friendProfile?userid=${friend.friendid}&userid=${userId}`} key={index} >
+          {console.log('friend in fl', friend)}
         <div
           className='pic-tile-friend-tile'
           key={index}
@@ -51,6 +56,7 @@ function FriendsList() {
             {friend.description}
           </div>
         </div>
+        </Link>
       ))}
       <div className='feed-bottom'></div>
     </div>
