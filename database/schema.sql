@@ -10,8 +10,8 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS friends;
 DROP TABLE IF EXISTS goals;
 DROP TABLE IF EXISTS dailyData;
--- DROP TABLE IF EXISTS friendMessages;
--- DROP TABLE IF EXISTS publicMessages;
+DROP TABLE IF EXISTS friendMessages;
+DROP TABLE IF EXISTS publicMessages;
 
 CREATE TABLE users (
   id                  SERIAL    UNIQUE   PRIMARY KEY,

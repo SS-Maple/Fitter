@@ -1,102 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<coverage generated="1631761570874" clover="3.2.0">
-  <project timestamp="1631761570874" name="All files">
-    <metrics statements="48" coveredstatements="21" conditionals="4" coveredconditionals="1" methods="19" coveredmethods="6" elements="71" coveredelements="28" complexity="0" loc="48" ncloc="48" packages="2" files="5" classes="5"/>
-=======
-<coverage generated="1631761542675" clover="3.2.0">
-  <project timestamp="1631761542675" name="All files">
-    <metrics statements="43" coveredstatements="5" conditionals="4" coveredconditionals="0" methods="19" coveredmethods="1" elements="66" coveredelements="6" complexity="0" loc="43" ncloc="43" packages="2" files="5" classes="5"/>
->>>>>>> d02d8a73269b388695006731d01bd015209a5e11
+<coverage generated="1632280549380" clover="3.2.0">
+  <project timestamp="1632280549380" name="All files">
+    <metrics statements="65" coveredstatements="35" conditionals="10" coveredconditionals="4" methods="27" coveredmethods="11" elements="102" coveredelements="50" complexity="0" loc="65" ncloc="65" packages="2" files="6" classes="6"/>
     <package name="Fitter">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="sum.js" path="/Users/pscheutzow/Documents/Griselda/Hack Reactor/Fitter/sum.js">
+      <file name="sum.js" path="/Users/hackreactor/work/blueOcean/Fitter/sum.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="2" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
       </file>
     </package>
     <package name="Fitter.client.src.components.friendProfile">
-<<<<<<< HEAD
-      <metrics statements="46" coveredstatements="19" conditionals="4" coveredconditionals="1" methods="18" coveredmethods="5"/>
+      <metrics statements="63" coveredstatements="33" conditionals="10" coveredconditionals="4" methods="26" coveredmethods="10"/>
       <file name="addFriend.jsx" path="/Users/hackreactor/work/blueOcean/Fitter/client/src/components/friendProfile/addFriend.jsx">
-        <metrics statements="17" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="7" coveredmethods="1"/>
-=======
-      <metrics statements="41" coveredstatements="3" conditionals="4" coveredconditionals="0" methods="18" coveredmethods="0"/>
-      <file name="addFriend.jsx" path="/Users/pscheutzow/Documents/Griselda/Hack Reactor/Fitter/client/src/components/friendProfile/addFriend.jsx">
-        <metrics statements="17" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="7" coveredmethods="0"/>
->>>>>>> d02d8a73269b388695006731d01bd015209a5e11
-        <line num="12" count="1" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
+        <metrics statements="13" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="7" coveredmethods="1"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="37" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
+        <line num="30" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
       </file>
-<<<<<<< HEAD
-      <file name="friendProfile.jsx" path="/Users/hackreactor/work/blueOcean/Fitter/client/src/components/friendProfile/friendProfile.jsx">
-        <metrics statements="16" coveredstatements="4" conditionals="2" coveredconditionals="0" methods="7" coveredmethods="2"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
+      <file name="comment.jsx" path="/Users/hackreactor/work/blueOcean/Fitter/client/src/components/friendProfile/comment.jsx">
+        <metrics statements="17" coveredstatements="6" conditionals="2" coveredconditionals="1" methods="6" coveredmethods="2"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="36" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="37" count="2" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
         <line num="42" count="0" type="stmt"/>
+      </file>
+      <file name="friendProfile.jsx" path="/Users/hackreactor/work/blueOcean/Fitter/client/src/components/friendProfile/friendProfile.jsx">
+        <metrics statements="17" coveredstatements="8" conditionals="4" coveredconditionals="0" methods="7" coveredmethods="4"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
         <line num="44" count="0" type="stmt"/>
         <line num="45" count="0" type="stmt"/>
-        <line num="56" count="0" type="stmt"/>
-        <line num="59" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
         <line num="60" count="0" type="stmt"/>
-        <line num="75" count="1" type="stmt"/>
-        <line num="89" count="0" type="stmt"/>
-=======
-      <file name="friendProfile.jsx" path="/Users/pscheutzow/Documents/Griselda/Hack Reactor/Fitter/client/src/components/friendProfile/friendProfile.jsx">
-        <metrics statements="11" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="7" coveredmethods="0"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="82" count="0" type="stmt"/>
->>>>>>> d02d8a73269b388695006731d01bd015209a5e11
+        <line num="63" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
       </file>
-      <file name="messageButton.jsx" path="/Users/pscheutzow/Documents/Griselda/Hack Reactor/Fitter/client/src/components/friendProfile/messageButton.jsx">
-        <metrics statements="5" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="messageButton.jsx" path="/Users/hackreactor/work/blueOcean/Fitter/client/src/components/friendProfile/messageButton.jsx">
+        <metrics statements="5" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
       </file>
-      <file name="sharedStats.jsx" path="/Users/pscheutzow/Documents/Griselda/Hack Reactor/Fitter/client/src/components/friendProfile/sharedStats.jsx">
-        <metrics statements="8" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
+      <file name="sharedStats.jsx" path="/Users/hackreactor/work/blueOcean/Fitter/client/src/components/friendProfile/sharedStats.jsx">
+        <metrics statements="11" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="2"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
       </file>
     </package>
   </project>

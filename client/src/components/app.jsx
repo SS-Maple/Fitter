@@ -29,7 +29,6 @@ function App() {
     <div>
       <TopBar />
       <Logout />
-      {/* <FriendProfile /> */}
       <Main />
       <BottomNav handleClick={handleClick} />
     </div>
