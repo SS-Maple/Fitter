@@ -76,7 +76,7 @@ const LineChart = () => {
   return (
     <>
     <div className='header'>
-      <h1 className='title'>Test Chart</h1>
+      <h1 className='title'>{text} Chart</h1>
       <form>
         <label htmlFor='chart-selection'> Select Chart </label>
       <select name='charts' id='chart-selection' onChange={(e) => handleChange(e)}>
