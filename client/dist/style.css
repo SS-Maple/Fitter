@@ -515,6 +515,45 @@ form {
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.19);
 }
 
+.c-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.c-modal-content {
+  position: relative;
+  max-width: 800px;
+  max-height: 80vh;
+  border-radius: 5px;
+  background: #fff;
+  overflow: auto;
+  cursor: default;
+}
+
+.c-modal-header,
+.c-modal-footer {
+  padding: 10px;
+  background: var(--lightgray);
+}
+
+.c-modal-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.c-modal-body {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
 .security-select {
   border-radius: 5px;
   border-style: solid;
