@@ -16,17 +16,22 @@ const Notifications = () => {
     none: 'You have no notifications to display'
   };
 
-  if (notifications.new || notifications.old) {
+  let newNotifications = notifications.new;
+  let oldNotifications = notifications.old;
+  console.log('notifications.new: ', newNotifications);
+  console.log('notifications.old: ', oldNotifications);
+
+  if (newNotifications || oldNotifications) {
     return (
       <div id="notificationsPage">
         {
-          notifications.new ? (
+          newNotifications ? (
             <div className="notificationBoxes">
               <div id="notificationsHeader">
                 {labels.new}
               </div>
               {
-                notifications.new.map((notification) => {
+                newNotifications.map((notification) => {
                   return (
                     <div id="notificationsTile">
                       {notification.notificationtext}
@@ -35,17 +40,16 @@ const Notifications = () => {
                 })
               }
             </div>
-          ) : null
+           ) : null
         }
         {
-          notifications.old ? (
+          oldNotifications ? (
             <div className="notificationBoxes">
               <div id="notificationsHeader">
                 {labels.old}
               </div>
               {
-                notifications.old.map((notification) => {
-                  console.log(notification.notificationtext)
+                oldNotifications.map((notification) => {
                   return (
                     <div id="notificationsTile">
                       {notification.notificationtext}
@@ -56,7 +60,7 @@ const Notifications = () => {
             </div>
           ) : null
         }
-        <button id="deleteNotifications" onClick={deleteNotifications()}>
+        <button id="deleteNotifications" onClick={deleteNotifications}>
           {labels.delete}
         </button>
       </div>
