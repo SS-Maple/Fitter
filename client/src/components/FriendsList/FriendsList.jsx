@@ -1,25 +1,30 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
-
+import { Link, useLocation, useHistory, useParams } from 'react-router-dom';
+import { useAuth } from '../user-auth.js';
 
 function FriendsList() {
+  const location = useLocation();
+  const history = useHistory();
+  const auth = useAuth();
+  const [userId, setId] = useState(auth.userId);
 
+  const [name, setName] = useState('');
+  const [friendId, setFriendId] = useState(location.search.split('')[10]);
   const [friends, setFriends] = useState([]);
   const [user, setUser] = useState('');
 
   useEffect(() => {
-    axios.get('/user')
+    axios.get(`/friends?friendId=${friendId}`)
+      .then((response) => setName(response.data[0].firstname))
+      .catch((error) => console.log('error', error));
+    axios.get(`/friends?friendId=${friendId}`)
       .then((response) => response.data)
-      .then((result) => {
-        result.forEach(item => setUser(item.firstname))
-      })
-      .catch((error) => console.log('error', error))
-    axios.get('/friends')
-      .then((response) => response.data)
-      .then((result) => setFriends(result))
-      .catch((error) => console.log('error', error))
+      .then((result) => result[0].friends)
+      .then((list) => setFriends(list))
+      .catch((error) => console.log('error', error));
   }, [])
+
 
   return (
     <div>
@@ -28,27 +33,30 @@ function FriendsList() {
         <img
           className='icon'
           src="https://img.icons8.com/ios-filled/50/000000/left.png"
-          onClick={() => console.log('back button was clicked')}
+          onClick={() => history.goBack()}
         />
-        <h3>{user}'s Friends</h3>
+        <h3>{name}'s Friends</h3>
       </div>
       {/* Friend's List Tile */}
       {friends.map((friend, index) => (
+        <Link to={`/friendProfile?userid=${friend.friendid}&userid=${userId}`} key={index} >
+          {console.log('friend in fl', friend)}
         <div
           className='pic-tile-friend-tile'
           key={index}
-          onClick={() => console.log('you clicked on ', friend.firstname, `'s tile`)}
+          onClick={() => console.log('you clicked on ', friend.friendfirst, `'s tile`)}
         >
           {/* Profile Picture */}
           <div className='pic-tile-friend-left-pic'>
-            <img src={friend.picture}></img>
+            <img src={friend.profilephoto}></img>
           </div>
           {/* Friend Information */}
           <div className='pic-tile-friend-right-info'>
-            <b>{friend.firstname} {friend.lastname}</b><p></p>
-            {friend.descriptionmessage}
+            <b>{friend.friendfirst} {friend.friendlast}</b><p></p>
+            {friend.description}
           </div>
         </div>
+        </Link>
       ))}
       <div className='feed-bottom'></div>
     </div>
