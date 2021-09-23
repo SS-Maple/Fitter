@@ -18,7 +18,7 @@ function Rankings({ id }) {
       .catch(error => error)
   }, []);
 
-  function sortFriends() {  
+  function sortFriends() {
     console.log('calling sort')
     friends.forEach((friend, index) => {
       // returns negative if they missed the goal
@@ -35,9 +35,9 @@ function Rankings({ id }) {
 
   function ranking() {
     return friends.sort((a, b) => a.sorting - b.sorting)
-    .forEach((user, index) => user['ranks'] = (index + 1))
+      .forEach((user, index) => user['ranks'] = (index + 1))
   }
-  
+
   function final() {
     ranking();
     return friends.filter(user => user.id === userId).map(user => user.ranks).toString()
@@ -47,19 +47,20 @@ function Rankings({ id }) {
     if (friends.length > 1) {
       sortFriends();
       return <div data-testid='home-page' id='home-page'>
-          {/* Friend Information */}
-          <div
-            className='pic-tile-friend-tile'
-            onClick={() => console.log('On click needs to route to', friend.friendfirst)}
-          >
-            <div className='pic-tile-friend-right-info'>
-              You're currently ranked <b>#{final()}</b> amongst friends.
-            </div>
+        {/* Friend Information */}
+        <div
+          className='pic-tile-friend-tile'
+          onClick={() => console.log('On click needs to route to', friend.friendfirst)}
+        >
+          <div className='pic-tile-friend-right-info'>
+            You're currently ranked <b>#{final()}</b> amongst friends.
           </div>
-          <h4>Your Friend's Rankings: </h4>
-          {/* Friend's List Tile */}
-          {friends.sort((a, b) => a.sorting - b.sorting)
-            .map((friend, index) => (
+        </div>
+        <h4>Your Friend's Rankings: </h4>
+        {/* Friend's List Tile */}
+        {friends.sort((a, b) => a.sorting - b.sorting)
+          .map((friend, index) => (
+            <Link to={`/friendProfile?friendid=${friend.id}&userid=${userId}`} key={index} >
               <div
                 className='pic-tile-friend-tile'
                 key={index}
@@ -82,22 +83,23 @@ function Rankings({ id }) {
                     Reached {Math.round(friend.caloriesaverage * 100)}% of my calories goal.
                   </li>
                 </div>
-              </div>
+            </div>
+                </Link>
             ))}
           <div className='feed-bottom'></div>
       </div>
-     } else {
-       return <div>
+    } else {
+      return <div>
         <div data-testid='home-page' id='home-page'>
-        <h4>Your Friend's Rankings: </h4>
+          <h4>Your Friend's Rankings: </h4>
           <div className='pic-tile-friend-tile'>
             <div className='pic-tile-friend-right-info'>
-            You don't have friends yet, go ahead and add friends using the searchbar so we can populate the rankings! 
+              You don't have friends yet, go ahead and add friends using the searchbar so we can populate the rankings!
             </div>
           </div>
-          <div className='feed-bottom'></div>
-        </div>
+        <div className='feed-bottom'></div>
       </div>
+      </div >
      }
   }
 }
