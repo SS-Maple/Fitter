@@ -11,7 +11,7 @@ const formReducer = (state, event) => {
 
 const Signup = ({ setView }) => {
   const [formData, setFormData] = useReducer(formReducer, {});
-  const [warning, setWarning] = useState();
+  const [warning, setWarning] = useState(null);
   const auth = useAuth();
 
 
@@ -33,7 +33,7 @@ const Signup = ({ setView }) => {
       if (typeof response.data === 'string' && response.data.includes('username')) {
         setWarning('This username is already in use!')
       }
-
+      console.log('sign up response', response.data)
       let { email, password, userId } = response.data
       auth.signup(email, password, userId);
     })
@@ -42,9 +42,9 @@ const Signup = ({ setView }) => {
 
   return (
     <div className='form-page'>
-      <div className='form-content' style={{marginTop: '10%'}}>
+      <div className='form-content'>
         <form onSubmit={handleSubmit}>
-          <p style={{color: 'red'}}>{warning}</p>
+          <p style={{color: 'red', margin: '0px'}}>{warning}</p>
           <input type='text' placeholder='First Name' name='firstname' onChange={handleChange}></input>
           <input type='text' placeholder='Last Name' name='lastname' onChange={handleChange}></input>
           <input type='email' placeholder='Email' name='email' onChange={handleChange}></input>

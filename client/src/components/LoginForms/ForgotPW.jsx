@@ -14,9 +14,9 @@ const ForgotPW = ({ setView }) => {
 
   return (
     <div className='form-page'>
-      <div className='form-content' style={{marginTop: '20%'}}>
+      <div className='forgot-content' style={{marginTop: '20%'}}>
         <form>
-          <label>Please enter the email address for your account</label>
+          <label className='forgot-label'>Please enter the email address for your account</label>
           <input type='email' placeholder='Email' onChange={e => setEmail(e.target.value)}></input>
           <input className='form-submit' type='submit' value='Reset Password' onClick={handleSubmit}></input>
         </form>
