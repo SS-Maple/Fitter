@@ -587,3 +587,7 @@ form {
   margin: 1vh;
   font-size: smaller;
 }
+
+.forgot-label {
+  margin: 2px;
+}

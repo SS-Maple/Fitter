@@ -14,7 +14,6 @@ configure({adapter: new Adapter()});
 
 const mockContext = React.createContext();
 const auth = { user: 'email@test.com', userId: 8 };
-// components call useAuth() inside so maybe create mock auth value
 
 
 describe('Unit tests: Component rendering', () => {
