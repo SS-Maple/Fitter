@@ -96,17 +96,17 @@ app.get('/friends', (req, res) => {
 
 app.get('/todaysgoals', (req, res) => {
   //test id
-  let userId = 1;
+  // let userId = 1;
+  const { userid } = req.query;
   return db.client.query(`
-  SELECT water, calories, weight FROM dailydata where userid=${userId} AND timestamp = date(now());
+  SELECT water, calories, weight FROM dailydata where userid=${userid} AND timestamp = date(now());
   `)
     .then(results => res.send(results.rows[0]))
-    .catch(err => console.error(err))
+    .catch(err => res.send(err))
 })
 
 app.get('/userdata', (req, res) => {
-  //test id
-  let userId = 1;
+  const { userId } = req.query;
   return db.client.query(`
   SELECT array_agg(row_to_json(a))
   FROM (
@@ -138,7 +138,7 @@ app.get('/userdata', (req, res) => {
     FROM users WHERE id=${userId})a;
   `)
     .then(results => res.send(results.rows[0].array_agg))
-    .catch(err => console.error(err))
+    .catch(err => console.error('userData', err))
 })
 app.get('/getStats', (req, res) => {
   return db.client.query(`
@@ -153,7 +153,7 @@ app.get('/getStats', (req, res) => {
     ORDER BY timestamp DESC)a;
   `)
   .then(results => res.send(results.rows[0].array_to_json))
-  .catch(err => console.error(err))
+  .catch(err => console.error('getstats', err))
 })
 
 app.put('/updatephoto', (req,res) => {
@@ -162,7 +162,7 @@ app.put('/updatephoto', (req,res) => {
     UPDATE users SET picture='${photo}' WHERE id=${userid}
   `)
   .then(() => res.sendStatus(200))
-  .catch(err => console.error(err))
+  .catch(err => console.error('updatephoto', err))
 })
 
 app.put('/updategoals', (req, res) => {
@@ -175,7 +175,7 @@ app.put('/updategoals', (req, res) => {
     UPDATE SET waterGoal=excluded.waterGoal, calorieGoal=excluded.calorieGoal, weightGoal=excluded.weightGoal, shareBoolean = excluded.shareBoolean;
   `)
   .then(() => res.sendStatus(200))
-  .catch(err => console.error(err))
+  .catch(err => console.error('updategoals', err))
 })
 
 app.put('/updateStatShare', (req, res) => {
@@ -184,26 +184,25 @@ app.put('/updateStatShare', (req, res) => {
   UPDATE dailyData SET shareboolean=${share} where id=${id}
   `)
     .then(() => res.sendStatus(200))
-    .catch(err => console.error(err))
+    .catch(err => console.error('updateStatShare', err))
 })
 
 //updates today's goal status
 app.put('/updateToday', (req, res) => {
   const { userid, category, value } = req.body;
   return db.client.query(`
-  INSERT INTO dailydata (userID, timestamp, ${category}) VALUES (${userid}, now(), ${Number(value)})
+  INSERT INTO dailydata (userID, timestamp, ${category}) VALUES (${userid}, current_date, ${Number(value)})
   ON CONFLICT (timestamp)
   DO
-    UPDATE SET ${category}=dailydata.${category} + excluded.${category};
+    UPDATE SET ${category}=dailydata.${category} + excluded.${category} RETURNING userID;
   `)
-    .then(() => res.sendStatus(200))
-    .catch(err => console.error(err))
+    .then((result) => res.send(result.rows[0]))
+    .catch(err => console.error('updateToday', err))
 })
 
 // get home feed rankings data
 app.get(`/rankings`, (req, res) => {
   let friendId = req.query.friendId;
-  // let friendId = 1;
   db.client.query(`
   SELECT friendId FROM friends
   WHERE userid = ${friendId}
@@ -256,6 +255,7 @@ app.get(`/rankings`, (req, res) => {
             res.send(err);
           } else {
             // console.log('rows from server /users - ', data.rows)
+            // console.log(Array.isArray(data.rows))
             res.send(data.rows);
           }
         })
