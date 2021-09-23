@@ -14,7 +14,7 @@ const TopBar = (props) => {
 
   if (loggedIn) {
     newNotification = generateNewNotifications(userId);
-    console.log('logged in', newNotification);
+    console.log('newNotifications?', newNotification);
   }
 
   return (

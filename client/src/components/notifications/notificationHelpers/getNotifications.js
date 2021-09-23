@@ -1,7 +1,6 @@
 const axios = require('axios');
 
 const getNotifications = (userId) => {
-
   let notifications = {
     new: [],
     old: []
@@ -9,7 +8,6 @@ const getNotifications = (userId) => {
 
   axios.get(`/notifications?userId=${userId}`)
     .then(data => {
-      console.log('data from getNoti', data);
       if (data.data.length > 0) {
         for (var i = 0; i < data.data.length; i++) {
           if (data.data[i].new === true) {

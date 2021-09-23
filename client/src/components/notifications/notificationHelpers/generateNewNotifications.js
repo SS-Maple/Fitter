@@ -35,7 +35,6 @@ const generateNewNotifications = (userId) => {
       timestampDate = parseInt(timestampDate[1]);
       if (dateNum - timestampDate < -2 || dateNum - timestampDate > 2) {
         let queryString = `userId=${userId}&notificationsText='Please update your daily goals!'`;
-        console.log(queryString);
         axios.post(`/notifications?${queryString}`);
         newNotifications = true;
       }

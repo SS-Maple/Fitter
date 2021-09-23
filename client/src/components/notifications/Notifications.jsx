@@ -16,42 +16,47 @@ const Notifications = () => {
     none: 'You have no notifications to display'
   };
 
-  if (notifications.new.length > 0 || notifications.old.length > 0) {
+  if (notifications.new || notifications.old) {
     return (
       <div id="notificationsPage">
         {
-          notifications.new.length > 0 ? (
+          notifications.new ? (
             <div className="notificationBoxes">
               <div id="notificationsHeader">
                 {labels.new}
               </div>
               {
-                notifications.new.map((notification, index) => (
-                  <div id="notificationsTile">
-                    {notification.notificationtext}
-                  </div>
-                ))
+                notifications.new.map((notification) => {
+                  return (
+                    <div id="notificationsTile">
+                      {notification.notificationtext}
+                    </div>
+                  )
+                })
               }
             </div>
           ) : null
         }
         {
-          notifications.old.length > 0 ? (
+          notifications.old ? (
             <div className="notificationBoxes">
               <div id="notificationsHeader">
                 {labels.old}
               </div>
               {
-                oldNotifications.map((notification, index) => (
-                  <div id="notificationsTile">
-                    {notification.notificationtext}
-                  </div>
-                ))
+                notifications.old.map((notification) => {
+                  console.log(notification.notificationtext)
+                  return (
+                    <div id="notificationsTile">
+                      {notification.notificationtext}
+                    </div>
+                  )
+                })
               }
             </div>
           ) : null
         }
-        <button id="deleteNotifications" onClick={deleteNotifications}>
+        <button id="deleteNotifications" onClick={deleteNotifications()}>
           {labels.delete}
         </button>
       </div>

@@ -18,8 +18,8 @@ CREATE TABLE users (
   id                  SERIAL    UNIQUE   PRIMARY KEY,
   firstName           VARCHAR   NOT NULL,
   lastName            VARCHAR   NOT NULL,
-  email               VARCHAR   UNIQUE  NOT NULL,
-  username            VARCHAR   UNIQUE  NOT NULL,
+  email               VARCHAR   NOT NULL,
+  username            VARCHAR   NOT NULL,
   descriptionMessage  VARCHAR   NULL,
   userPassword        VARCHAR   NOT NULL,
   shareBirthday       BOOLEAN   DEFAULT FALSE,
@@ -62,6 +62,14 @@ CREATE TABLE friendMessages (
   timestamp       TIMESTAMP DEFAULT now()
 );
 
+CREATE TABLE comments (
+  id             SERIAL    UNIQUE   PRIMARY KEY,
+  userID         INT       NOT NULL      REFERENCES users(id),
+  friendID       INT       NOT NULL      REFERENCES users(id),
+  comment        VARCHAR    ,
+  tileId         INT      NOT NULL
+);
+
 CREATE TABLE notifications (
   id                     SERIAL    NOT NULL    PRIMARY KEY,
   userId                 INT       NOT NULL    REFERENCES users(id),
@@ -78,7 +86,6 @@ CREATE TABLE notifications (
 \COPY notifications(id,userId,notificationText,new) FROM 'data/notifications.csv' DELIMITER ',' CSV HEADER;
 
 
-
 -- STRETCH GOALS: public forum
 -- CREATE TABLE publicMessages (
 --   id          INT       NOT NULL   PRIMARY KEY,
@@ -88,3 +95,4 @@ CREATE TABLE notifications (
 -- );
 
 
+-- SELECT setval(pg_get_serial_sequence(users, users.id), max(users.id)) FROM users;

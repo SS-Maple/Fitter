@@ -5,13 +5,7 @@ const deleteNotifications = () => {
   const auth = useAuth();
   const userId = auth.userId;
 
-  axios.delete(`/notifications?userId=${userId}`)
-    .then((data) => {
-      console.log('Deleted');
-    })
-    .catch((err) => {
-      throw new Error(err);
-    });
+  axios.put(`/notifications/delete?userId=${userId}`)
 };
 
 module.exports = deleteNotifications;

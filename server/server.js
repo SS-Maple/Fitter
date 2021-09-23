@@ -409,10 +409,9 @@ app.post('/login', (req, res) => {
 app.get('/notifications', (req, res) => {
   db.client.query(`
     SELECT * FROM notifications
-    WHERE userId = ${req.query.userId}
+    WHERE userid = ${req.query.userId}
   `, (err, data) => {
     if (err) {
-      throw new Error(err);
       res.send(err);
     } else {
       res.send(data.rows);
@@ -460,7 +459,6 @@ app.put('/notifications', (req, res) => {
     WHERE userId = ${req.query.userId}
   `, (err, data) => {
     if (err) {
-      throw new Error(err);
       res.send(err);
     } else {
       res.send('Ok');
@@ -475,7 +473,6 @@ app.post('/notifications', (req, res) => {
     VALUES (${userId}, ${notificationsText}, true)
   `, (err, data) => {
     if (err) {
-      console.log(err);
       res.send(err);
     } else {
       res.send('Ok');
@@ -484,13 +481,12 @@ app.post('/notifications', (req, res) => {
 
 });
 
-app.delete('/notifications', (req, res) => {
+app.put('/notifications/delete', (req, res) => {
   db.client.query(`
-    DELETE * FROM notifications
+    DELETE FROM notifications
     WHERE userId = ${req.query.userId};
   `, (err, data) => {
     if (err) {
-      throw new Error(err);
       res.send(err);
     } else {
       res.send('Ok');
