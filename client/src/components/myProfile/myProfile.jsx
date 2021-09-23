@@ -104,7 +104,7 @@ const MyProfile = () => {
                   <p className='user-details'>Name: {firstName} {lastName}</p>
                   <p className='user-details'>Birthday: {birthday}</p>
                 </div>
-                <Link to={{ pathname:`/friends`}}>
+                <Link to={`/friends?friendId=${userid}`}>
                 <div className='user-profile-friends'>
                   <div className='friend-count'>{friendCount}</div>
                     <p className='friend-label'>Friends</p>
