@@ -297,7 +297,7 @@ let friends = [
 
 jest.mock('../../client/src/components/HomeFeed/Rankings.jsx');
 
-xdescribe('Rankings', () => {
+describe('Rankings', () => {
   test('Renders Home Feed', () => {
     const myRankings = shallow(<Rankings />)
     expect(myRankings.exists()).toBe(true);

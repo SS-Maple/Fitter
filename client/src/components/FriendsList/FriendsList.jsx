@@ -29,6 +29,7 @@ function FriendsList() {
   return (
     <div data-testid='friends'>
       {/* Friend's List Header */}
+      <div className='feed-bottom'></div>
       <div data-testid='pic-tile-friend-header' className='pic-tile-friend-header'>
         <img
           className='icon'

@@ -31,3 +31,10 @@ xdescribe('Friend List', () => {
     expect(friends).toBeTruthy();
   });
 });
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+test('placeholder', () => {
+  expect(true).toBe(true);
+})

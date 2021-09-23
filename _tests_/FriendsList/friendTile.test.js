@@ -64,7 +64,7 @@ let friends =
     }
   ]
 
-xdescribe('Friend Tile', () => {
+describe('Friend Tile', () => {
   test(`expects friends to load`, () => {
     render(<FriendTile friends={friends}/>);
     expect(Array.isArray(friends)).toBe(true);

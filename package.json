@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "testCoverage": "jest --env=jsdom --coverage",
-    "test": "jest --env=jsdom --watch",
+    "test": "jest --env=jsdom --coverage",
     "client": "webpack --watch",
     "start": "nodemon server/server.js"
   },

@@ -67,7 +67,7 @@ let users =
 
 let term = 'hikingalice';
 
-xdescribe('Search Usernames', () => {
+describe('Search Usernames', () => {
   test('Renders Search Bar', () => {
     const searchBar = shallow(<SearchUsernames />)
     expect(searchBar.exists()).toBe(true);
