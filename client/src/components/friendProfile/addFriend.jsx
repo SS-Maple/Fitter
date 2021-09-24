@@ -15,9 +15,7 @@ const AddFriend = () => {
   useEffect(() => {
     axios.get(`/isfriend?friendID=${friendId}&userID=${userId}`)
     .then(results => {
-      console.log('res', results.data)
       setFriend(results.data)
-      console.log('friended', friended)
     })
     .catch(err => {
       console.log('ERROR', err)
@@ -27,7 +25,6 @@ const AddFriend = () => {
   const addFriend = () => {
     axios.post(`/addfriend?friendID=${friendId}&userID=${userId}`)
     .then(result => {
-      console.log(result)
       setFriend(true)
     })
     .catch(err => {
@@ -43,7 +40,7 @@ const AddFriend = () => {
       console.log('ERROR in axios post to /addFriend catch block: ', err)
     })
   };
-  console.log('before', friended)
+
   if (!friended) {
     return <button className='profile-btn' onClick={addFriend}> Add Friend+ </button>
   } else {

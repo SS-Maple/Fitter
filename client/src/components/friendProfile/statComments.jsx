@@ -10,7 +10,6 @@ const StatComments = (props) => {
 
 
     const [userId, setId] = useState(auth.userId);
-    // console.log('PROPS', stats)
     const [name, setName] = useState('');
     const [stat, setStat] = useState('');
     const [friendId, setFriendId] = useState(location.search.split('')[10]);
@@ -25,13 +24,11 @@ const StatComments = (props) => {
         .then((response) => setComments(response.data))
         .catch((error) => console.log('error', error));
     }, [])
-    console.log('PROPS', props)
-    console.log('hi')
+
 
     return (
       <div>
         <div className='pic-tile-friend-header'>
-          {console.log('hi')}
           <img
             className='icon'
             src="https://img.icons8.com/ios-filled/50/000000/left.png"

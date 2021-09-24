@@ -15,7 +15,6 @@ import SharedStats from './sharedStats.jsx'
 
 class FriendProfile extends React.Component {
   constructor(props){
-    console.log('0')
     super(props);
     this.state ={
       username: '',
@@ -32,21 +31,17 @@ class FriendProfile extends React.Component {
     }
   }
   componentDidMount(){
-    console.log('1', )
+
     this.getFriendData()
   }
 
   getFriendData() {
-    console.log('2')
     axios.get('/friendProfile')
     .then(result => {
-      console.log('3')
       var userData = result.data
       if(userData.fiends===null){
         userData[fiends]= []
       }
-      console.log('userdata', userData)
-      console.log('isfiends', userData.fiends)
       this.setState({
         friendid: userData.friendid,
         userid: userData.userid,
@@ -60,23 +55,11 @@ class FriendProfile extends React.Component {
         friends: userData.friends.length,
         // isFriend: (userData.isfriend !== null) ? true : false
       })
-      console.log('state', this.state)
     })
     .catch(err => {
-      console.log('3')
       console.log(err)
     })
   }
-  // const [friend, setFriend] = useState(props.friend)
-
-  // useEffect(() => {
-  //   console.log('hi')
-  //   axios.get('/friendProfile')
-  //   .then(result => {
-  //     console.log('in friendProfile', result)
-
-  //   })
-  // })
 
   render() {
     return(

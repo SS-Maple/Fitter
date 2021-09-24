@@ -14,7 +14,6 @@ const SharedStats = ({picture, username, stats, goals, userid, friendid}) => {
   const [show, setShow] = useState(false);
 
    return stats.map((stat, i) =>{
-     console.log(stat, i)
       let waterGoal = ((stat.water/ goals.watergoal) * 100).toFixed(0);
       let calorieGoal = ((stat.calories/ goals.caloriegoal) * 100).toFixed(0);
       let weightGoal = ((stat.weight/goals.weightgoal) * 100).toFixed(0);

@@ -3,6 +3,8 @@ import AddCalorieModal from './addCalorieModal.jsx';
 import AddWaterModal from './addWaterModal.jsx';
 import UpdateWeightModal from './updateWeightModal.jsx';
 import axios from 'axios';
+import { useAuth } from '../user-auth.js';
+
 
 const TodaysGoals = ({ userid, goals }) => {
   const {caloriegoal, watergoal, weightgoal} = goals
@@ -14,19 +16,21 @@ const TodaysGoals = ({ userid, goals }) => {
   const [waterShow, setWaterShow] =  useState(false);
   const [weightShow, setWeightShow] =  useState(false);
 
+  const auth = useAuth();
 
   useEffect(() => {
-    getData()
+    getData(auth.userId)
   }, []);
 
-  function getData(){
-    return axios.get('/todaysgoals')
+  function getData(userid){
+    return axios.get('/todaysgoals', {params: {userid}})
     .then(results =>
       {
         setCalories(results.data.calories)
         setWater(results.data.water)
         setWeight(results.data.weight)
       })
+    .catch(err => console.log('No Records for today'))
   };
 
   function pct(v,category){
@@ -54,7 +58,8 @@ const TodaysGoals = ({ userid, goals }) => {
       url: '/updateToday',
       data: `userid=${id}&value=${value}&category=${category}`
     })
-    .then(() => getData())
+    .then((result) => {
+      getData(result.data.userid)})
   }
 
   return(
