@@ -34,18 +34,13 @@ function FriendsList() {
           onClick={() => history.goBack()}
         />
         <h3>{name}'s Friends</h3>
-      </div>
-      {console.log('userId', userId)}
-      {console.log('friendId', friendId)}
-      {console.log('list', friends)}
-      
+      </div>  
       {/* Friend's List Tile */}
       {friends.filter(user => user.friendid.toString() !== friendId.toString()).map((friend, index) => (
         <Link to={`/friendProfile?userid=${friend.friendid}&userid=${userId}`} 
           key={index} 
           style={{textDecoration:"none", color:'black'}}
         >
-          {console.log('->', friend)}
         <div className='pic-tile-friend-tile' key={index}>
           {/* Profile Picture */}
           <div className='pic-tile-friend-left-pic'>

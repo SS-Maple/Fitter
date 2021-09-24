@@ -23,7 +23,7 @@ const PreviousStats = ({ stats, goals, handleShare }) => {
   } else {
     return <div className='previous-stat-container' >
     <div className='stat-header'>
-      <div className='share'  onClick={(e) => handleShare(e)}></div>
+      <div className='share' ></div>
     </div>
     <p>You don't have any saved stats yet!</p>
   </div>

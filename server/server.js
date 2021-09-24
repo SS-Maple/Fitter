@@ -263,10 +263,7 @@ app.get(`/rankings`, (req, res) => {
              } else {
                // console.log('rows from server /users - ', data.rows)
                let rankingInfo = data.rows;
-              //  console.log('----->  before', rankingInfo)
-   
-               let arrayInfo = [];
-               rankingInfo.forEach((friend, index) => {
+                 rankingInfo.forEach((friend, index) => {
                  // returns negative if they missed the goal
                  let water = Math.abs(100 - (friend['userdata'][index]['wateraverage'] * 100))
                  // returns negative if goal is exceeded
@@ -280,9 +277,6 @@ app.get(`/rankings`, (req, res) => {
                  delete friend['userdata'];
                })
                rankingInfo.sort((a, b) => a.sorting - b.sorting).forEach((user, index) => user['ranks'] = (index + 1))
-   
-               // rankingInfo.filter(user => user.id === userId).map(user => user.ranks).toString()
-               
                res.send(rankingInfo);
              }
            })
@@ -303,7 +297,7 @@ app.get('/friendProfile', (req, res) => {
   var params = req.headers.referer.split('?')[1].split('=')[1].split('')[0]
   var useridparams = req.headers.referer.split('&')[1].split('=')[1]
 
-  // console.log('rq', params, useridparams)
+  console.log('rq', params, useridparams)
   // let friendId = parseInt(req.query);
   let friendId = parseInt(params);
   let userId = parseInt(useridparams);

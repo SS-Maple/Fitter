@@ -19,7 +19,6 @@ function HomeFeed() {
       .catch(error => error)
     axios.get('/userdata', { params: {userId: id}})
       .then(data => {
-        console.log(data.data[0])
         let info = data.data[0]
           setGoals(info.goals)
       })
