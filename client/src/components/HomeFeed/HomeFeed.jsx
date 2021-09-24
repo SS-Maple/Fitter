@@ -9,7 +9,7 @@ import { useAuth } from '../user-auth.js';
 
 function HomeFeed() {
   const auth = useAuth();
-  const [goals, setGoals] = useState({});
+  const [goals, setGoals] = useState([{}]);
   const [id, setId] = useState(auth.userId);
   const [userName, setUserName] = useState('')
 
@@ -17,8 +17,9 @@ function HomeFeed() {
     axios.get(`/user?userId=${id}`)
       .then(result => setUserName(result.data[0].firstname))
       .catch(error => error)
-      axios.get('/userdata', { params: {userId: id}})
+    axios.get('/userdata', { params: {userId: id}})
       .then(data => {
+        console.log(data.data[0])
         let info = data.data[0]
           setGoals(info.goals)
       })
