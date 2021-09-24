@@ -29,6 +29,7 @@ function Rankings({ id }) {
       friend['sorting'] = calculate.toFixed(2);
       friend['wateraverage'] = friend['userdata'][index]['wateraverage'];
       friend['caloriesaverage'] = friend['userdata'][index]['caloriesaverage'];
+      friend['weightaverage'] = friend['userdata'][index]['weightaverage'];
     })
     final();
   }
@@ -60,7 +61,10 @@ function Rankings({ id }) {
         {/* Friend's List Tile */}
         {friends.sort((a, b) => a.sorting - b.sorting)
           .map((friend, index) => (
-            <Link to={`/friendProfile?friendid=${friend.id}&userid=${userId}`} key={index} >
+            <Link to={`/friendProfile?friendid=${friend.id}&userid=${userId}`} 
+              key={index} 
+              style={{textDecoration:"none", color:'black'}}
+            >
               <div
                 className='pic-tile-friend-tile'
                 key={index}
@@ -75,12 +79,16 @@ function Rankings({ id }) {
                 </div>
                 {/* Friend Information */}
                 <div className='pic-tile-friend-right-info'>
+                  {console.log(friend)}
                   <b>{friend.username}:</b>
                   <li>
                     Reached {Math.round(friend.wateraverage * 100)}% of my water goal.
                   </li>
                   <li>
                     Reached {Math.round(friend.caloriesaverage * 100)}% of my calories goal.
+                  </li>
+                  <li>
+                    {Math.round(friend.weightaverage * 100)}% of the way to my weight goal.
                   </li>
                 </div>
             </div>

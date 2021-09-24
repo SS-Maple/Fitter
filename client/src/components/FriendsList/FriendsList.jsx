@@ -1,11 +1,9 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useHistory, useParams } from 'react-router-dom';
-import FriendTile from '../FriendsList/FriendTile.jsx';
 import { useAuth } from '../user-auth.js';
 
 function FriendsList() {
-  // const location = useLocation();
   const history = useHistory();
   const auth = useAuth();
   const [userId, setId] = useState(auth.userId);
@@ -13,7 +11,6 @@ function FriendsList() {
   const [name, setName] = useState('');
   const [friendId, setFriendId] = useState(location.search.split('')[10]);
   const [friends, setFriends] = useState([]);
-  // const [user, setUser] = useState('');
 
   useEffect(() => {
     axios.get(`/friends?friendId=${friendId}`)
@@ -38,19 +35,18 @@ function FriendsList() {
         />
         <h3>{name}'s Friends</h3>
       </div>
-      {/* Friend's List Tile */}
+      {console.log('userId', userId)}
+      {console.log('friendId', friendId)}
+      {console.log('list', friends)}
       
-      {/* <FriendTile friends={friends}/>
-      <div data-testid='feed-bottom'className='feed-bottom'></div> */}
-
-      {friends.map((friend, index) => (
-        <Link to={`/friendProfile?userid=${friend.friendid}&userid=${userId}`} key={index} >
-          {console.log('friend in fl', friend)}
-        <div
-          className='pic-tile-friend-tile'
-          key={index}
-          onClick={() => console.log('you clicked on ', friend.friendfirst, `'s tile`)}
+      {/* Friend's List Tile */}
+      {friends.filter(user => user.friendid.toString() !== friendId.toString()).map((friend, index) => (
+        <Link to={`/friendProfile?userid=${friend.friendid}&userid=${userId}`} 
+        key={index} 
+        style={{textDecoration:"none", color:'black'}}
         >
+          {console.log('->', friend)}
+        <div className='pic-tile-friend-tile' key={index}>
           {/* Profile Picture */}
           <div className='pic-tile-friend-left-pic'>
             <img src={friend.profilephoto}></img>
