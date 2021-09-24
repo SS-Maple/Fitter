@@ -7,11 +7,6 @@ import Logo from '../../client/src/components/SharedComponents/TopBarComponents/
 import NotificationIcon from '../../client/src/components/SharedComponents/TopBarComponents/NotificationIcon.jsx';
 import 'regenerator-runtime';
 import { BrowserRouter } from 'react-router-dom';
-import * as hooks from './hooks.js';
-
-
-
-
 
 describe('Renders emptyDiv', () => {
   test('renders emptyDiv', () => {
