@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import DirectChatPage from './DirectChatPage.jsx';
 import axios from 'axios';
+import { useAuth } from '../user-auth.js';
 
 const ChatMain = (props) => {
+  const auth = useAuth();
+
   const [user, setUser] = useState('');
   const [friends, setFriends] = useState('');
 
   useEffect(() => {
-    axios.get('/chat/user')
+    let params = {
+      params: {
+        userId: auth.userId
+      }
+    };
+    axios.get('/chat/user', params)
       .then((response) => {
         setUser({
         userName: response.data[0].firstname + ' ' + response.data[0].lastname,
@@ -15,7 +23,7 @@ const ChatMain = (props) => {
         });
       })
       .catch((error) => console.log('error', error))
-    axios.get('/chat/friends')
+    axios.get('/chat/friends', params)
       .then((response) => {
         let modifiedFriends = response.data.map(friend => {
           return {
