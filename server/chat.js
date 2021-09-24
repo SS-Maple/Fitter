@@ -10,7 +10,7 @@ module.exports = {
       .catch(error => error);
   },
   getChatUserFriends: (userId) => {
-    let queryString = 'SELECT * FROM friends JOIN users ON friends.friendid = users.id WHERE userid = $1 ORDER BY users.frirstname';
+    let queryString = 'SELECT * FROM friends f JOIN users u ON f.friendid = u.id WHERE userid = $1 ORDER BY u.firstname';
     let values = [userId];
     return db.client
       .query(queryString, values)

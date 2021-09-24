@@ -70,11 +70,11 @@ CREATE TABLE comments (
 );
 
 -- DATA LOAD
-\COPY users(firstName,lastName,email,username,descriptionMessage,userPassword,shareBirthday,birthday,picture,securityQuestion,securityAnswer) FROM 'data/fitterUsers.csv' DELIMITER ',' CSV HEADER;
-\COPY friends(userID,friendID) FROM 'data/fitterFriends.csv' DELIMITER ',' CSV HEADER;
-\COPY goals(userId,waterGoal,calorieGoal,weightGoal,shareBoolean) FROM 'data/goals.csv' DELIMITER ',' CSV HEADER;
-\COPY dailyData(userId,timestamp,water,calories,weight,shareBoolean) FROM 'data/dailyData.csv' DELIMITER ',' CSV HEADER;
-\COPY friendMessages(userID,friendID,message,timestamp) FROM 'data/friendMessages.csv' DELIMITER ',' CSV HEADER;
+\COPY users(firstName,lastName,email,username,descriptionMessage,userPassword,shareBirthday,birthday,picture,securityQuestion,securityAnswer) FROM '/Users/tchitrakorn/Documents/HackReactor/boc/Fitter/Fitter/data/fitterUsers.csv' DELIMITER ',' CSV HEADER;
+\COPY friends(userID,friendID) FROM '/Users/tchitrakorn/Documents/HackReactor/boc/Fitter/Fitter/data/fitterFriends.csv' DELIMITER ',' CSV HEADER;
+\COPY goals(userId,waterGoal,calorieGoal,weightGoal,shareBoolean) FROM '/Users/tchitrakorn/Documents/HackReactor/boc/Fitter/Fitter/data/goals.csv' DELIMITER ',' CSV HEADER;
+\COPY dailyData(userId,timestamp,water,calories,weight,shareBoolean) FROM '/Users/tchitrakorn/Documents/HackReactor/boc/Fitter/Fitter/data/dailyData.csv' DELIMITER ',' CSV HEADER;
+\COPY friendMessages(userID,friendID,message,timestamp) FROM '/Users/tchitrakorn/Documents/HackReactor/boc/Fitter/Fitter/data/friendMessages.csv' DELIMITER ',' CSV HEADER;
 
 
 

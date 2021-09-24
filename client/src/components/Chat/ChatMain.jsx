@@ -7,7 +7,7 @@ const ChatMain = (props) => {
   const [friends, setFriends] = useState('');
 
   useEffect(() => {
-    axios.get('/user')
+    axios.get('/chat/user')
       .then((response) => {
         setUser({
         userName: response.data[0].firstname + ' ' + response.data[0].lastname,
@@ -15,7 +15,7 @@ const ChatMain = (props) => {
         });
       })
       .catch((error) => console.log('error', error))
-    axios.get('/friends')
+    axios.get('/chat/friends')
       .then((response) => {
         let modifiedFriends = response.data.map(friend => {
           return {

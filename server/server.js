@@ -471,7 +471,7 @@ app.post('/login', (req, res) => {
 // GET chat user's info
 app.get('/chat/user', (req, res) => {
   console.log('here!');
-  let userId = req.query.userId;
+  let userId = req.query.userId || 1;
   console.log('userId: ', userId);
   chatdb.getChatUser(userId)
     .then(results => res.status(200).send(results))
@@ -480,7 +480,7 @@ app.get('/chat/user', (req, res) => {
 
 // GET chat user's friends
 app.get('/chat/friends', (req, res) => {
-  let userId = req.query.userId;
+  let userId = req.query.userId || 1;
   chatdb.getChatUserFriends(userId)
     .then(results => res.status(200).send(results))
     .catch(error => res.status(500).send(error));
