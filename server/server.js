@@ -1,4 +1,5 @@
 const express = require('express');
+const { useReducer } = require('react');
 
 let app = express();
 let port = 3000;
@@ -79,6 +80,7 @@ app.get('/friends', (req, res) => {
           ) as friendlast
           from friends
           where friends.userID = users.id
+          order by friendfirst
         ) d
       ) as friends
     from users
@@ -208,60 +210,80 @@ app.get(`/rankings`, (req, res) => {
   WHERE userid = ${friendId}
   `, (err, data) => {
     if (err) {
-      console.log('error from server -', err)
+      // console.log('error from server -', err)
       res.send(err);
     } else {
       let info = data.rows;
-      let temp = [];
-      info.forEach(friend => temp.push(friend.friendid))
-      temp.push(friendId)
-      let inner = () => {
-        let condition = '';
-        temp.forEach(user => condition += `id = ${user} OR `)
-        let tempDataCondition = '';
-        temp.forEach(user => tempDataCondition += ` goals.userId = ${user} OR `)
-        let dataCondition = tempDataCondition.substring(0, tempDataCondition.length - 3)
-        let tempString =
-        ` select id, firstname, lastname, picture, descriptionmessage, username,
-          (
-            select array_to_json(array_agg(row_to_json(d)))
-            from (
-              select userid, watergoal, caloriegoal, weightgoal,
-              (
-                select avg(water)/watergoal
-                from dailyData
-              ) as wateraverage ,
-              (
-                select avg(calories)/caloriegoal
-                from dailyData
-              ) as caloriesaverage ,
-              (
-                select avg(weight)/weightgoal
-                from dailyData
-              ) as weightaverage
-              from goals
-              where ${dataCondition}
-            ) d
-          ) as userdata
-        from users
-        WHERE ${condition}`
-        let queryString = tempString.substring(0, tempString.length - 3)
-        return db.client.query(`
-          ${queryString}
-        `, (err, data) => {
-          if (err) {
-            // console.log('error from server -', err)
-            // console.log(queryString)
-            res.send(err);
-          } else {
-            // console.log('rows from server /users - ', data.rows)
-            // console.log(Array.isArray(data.rows))
-            res.send(data.rows);
-          }
-        })
+      if (info.length === 0) {
+        // console.log('there are no friends')
+        res.send(info)
+      } else {
+        //  console.log('there are friends')
+         let temp = [];
+         info.forEach(friend => temp.push(friend.friendid))
+         temp.push(friendId)
+         let inner = () => {
+           let condition = '';
+           temp.forEach(user => condition += `id = ${user} OR `)
+           let tempDataCondition = '';
+           temp.forEach(user => tempDataCondition += ` goals.userId = ${user} OR `)
+           let dataCondition = tempDataCondition.substring(0, tempDataCondition.length - 3)
+           let tempString =
+           ` select id, firstname, lastname, picture, descriptionmessage, username,
+             (
+               select array_to_json(array_agg(row_to_json(d)))
+               from (
+                 select userid, watergoal, caloriegoal, weightgoal,
+                 (
+                   select avg(water)/watergoal
+                   from dailyData
+                 ) as wateraverage ,
+                 (
+                   select avg(calories)/caloriegoal
+                   from dailyData
+                 ) as caloriesaverage ,
+                 (
+                   select avg(weight)/weightgoal
+                   from dailyData
+                 ) as weightaverage
+                 from goals
+                 where ${dataCondition}
+               ) d
+             ) as userdata
+           from users
+           WHERE ${condition}`
+           let queryString = tempString.substring(0, tempString.length - 3)
+           return db.client.query(`
+             ${queryString}
+           `, (err, data) => {
+             if (err) {
+               console.log('error from server -', err)
+               // console.log(queryString)
+               res.send(err);
+             } else {
+               // console.log('rows from server /users - ', data.rows)
+               let rankingInfo = data.rows;
+                 rankingInfo.forEach((friend, index) => {
+                 // returns negative if they missed the goal
+                 let water = Math.abs(100 - (friend['userdata'][index]['wateraverage'] * 100))
+                 // returns negative if goal is exceeded
+                 let calories = Math.abs(100 - (friend['userdata'][index]['caloriesaverage'] * 100))
+                 let calculate = water + calories;
+                 friend['newId'] = friend['userdata'][index]['userid'];
+                 friend['sorting'] = calculate.toFixed(2);
+                 friend['wateraverage'] = friend['userdata'][index]['wateraverage'];
+                 friend['caloriesaverage'] = friend['userdata'][index]['caloriesaverage'];
+                 friend['weightaverage'] = friend['userdata'][index]['weightaverage'];
+                 delete friend['userdata'];
+               })
+               rankingInfo.sort((a, b) => a.sorting - b.sorting).forEach((user, index) => user['ranks'] = (index + 1))
+               res.send(rankingInfo);
+             }
+           })
+         }
+         inner();
+       }
       }
-      inner();
-    }
   })
 });
 

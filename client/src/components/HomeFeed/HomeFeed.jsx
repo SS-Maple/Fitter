@@ -9,21 +9,17 @@ import generateNewNotifications from '../notifications/notificationHelpers/gener
 
 function HomeFeed() {
   const auth = useAuth();
-  const [goals, setGoals] = useState({});
+  const [goals, setGoals] = useState([{}]);
   const [id, setId] = useState(auth.userId);
   const [userName, setUserName] = useState('')
 
   useEffect(() => {
     axios.get(`/user?userId=${id}`)
       .then(result => setUserName(result.data[0].firstname))
-      .catch(error => error)
-    axios.get('/todaysgoals')
-      .then(results => {
-        setGoals({
-          calories: results.data.calories,
-          water: results.data.water,
-          weight: results.data.weight
-        })
+      axios.get('/userdata', { params: {userId: id}})
+      .then(data => {
+        let info = data.data[0]
+        setGoals(info.goals)
       })
       .then(() => {
         generateNewNotifications(id);
@@ -34,12 +30,12 @@ function HomeFeed() {
   return (
     <div id='home-page' data-testid='home-page'>
       <div className='feed-bottom'></div>
-        <h4 style={{textAlign: 'center', fontSize: '20px'}}>Welcome {userName}!</h4>
+      <div style={{textAlign: 'center', fontSize: '20px', color:'white'}}><b>Welcome {userName}!</b></div>
       {/* Home Feed Search */}
       <SearchUsernames />
       <h4>Your Daily Status:</h4>
       <div className='home-daily-stats'>
-        <TodaysGoals goals={goals} />
+        <TodaysGoals goals={goals} userid={id} />
       </div>
       <Rankings id={id}/>
       <div className='feed-bottom'></div>

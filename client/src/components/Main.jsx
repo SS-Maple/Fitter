@@ -9,6 +9,7 @@ import ForgotPW from './LoginForms/ForgotPW.jsx';
 import MyProfile from './myProfile/myProfile.jsx';
 import FriendProfile from './friendProfile/friendProfile.jsx';
 import Notifications from './notifications/Notifications.jsx';
+import Line from './myProfile/charts.jsx';
 import {userContext} from './userContext';
 
 function Main() {
