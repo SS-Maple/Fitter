@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../user-auth.js';
 const getNotifications = require('./notificationHelpers/getNotifications.js');
 const deleteNotifications = require('./notificationHelpers/deleteNotifications.js');
 
 const Notifications = () => {
   const auth = useAuth();
-  const userId = auth.userId;
+
+  const [ userId, setUserId ] = useState(auth.userId);
+  const [ newNotifications, setNewNotifications ] = useState([]);
+  const [ oldNotifications, setOldNotifications ] = useState([]);
 
   let notifications = getNotifications(userId);
+
+  React.useEffect(() => {
+    setNewNotifications(notifications.new);
+    setOldNotifications(notifications.old);
+  }, []);
 
   let labels = {
     new: 'New Notifications',
@@ -16,10 +24,16 @@ const Notifications = () => {
     none: 'You have no notifications to display'
   };
 
-  let newNotifications = notifications.new;
-  let oldNotifications = notifications.old;
-  console.log('notifications.new: ', newNotifications);
-  console.log('notifications.old: ', oldNotifications);
+  const handleDeleteClick = () => {
+    deleteNotifications(userId);
+    React.useEffect(() => {
+      setNewNotifications([]);
+      setOldNotifications([]);
+    }, []);
+  }
+
+  console.log('newNotifications: ', newNotifications);
+  console.log('oldNotifications: ', oldNotifications);
 
   if (newNotifications || oldNotifications) {
     return (
@@ -30,15 +44,15 @@ const Notifications = () => {
               <div id="notificationsHeader">
                 {labels.new}
               </div>
+              <div>
               {
-                newNotifications.map((notification) => {
-                  return (
+                newNotifications.map((notification) => (
                     <div id="notificationsTile">
                       {notification.notificationtext}
                     </div>
-                  )
-                })
+                  ))
               }
+              </div>
             </div>
            ) : null
         }
@@ -48,19 +62,19 @@ const Notifications = () => {
               <div id="notificationsHeader">
                 {labels.old}
               </div>
+              <div>
               {
-                oldNotifications.map((notification) => {
-                  return (
+                oldNotifications.map((notification) => (
                     <div id="notificationsTile">
                       {notification.notificationtext}
                     </div>
-                  )
-                })
+                ))
               }
+              </div>
             </div>
           ) : null
         }
-        <button id="deleteNotifications" onClick={deleteNotifications}>
+        <button id="deleteNotifications" onClick={handleDeleteClick}>
           {labels.delete}
         </button>
       </div>

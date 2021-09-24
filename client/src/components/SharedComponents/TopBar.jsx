@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Logo from './TopBarComponents/Logo.jsx';
 import NotificationIcon from './TopBarComponents/NotificationIcon.jsx';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../user-auth.js';
-import generateNewNotifications from '../notifications/notificationHelpers/generateNewNotifications.js';
+import getNotifications from '../notifications/notificationHelpers/getNotifications.js';
 
 const TopBar = (props) => {
   const auth = useAuth();
   const userId = auth.userId;
-  let newNotification = false;
+  const [ newNotifications, setNewNotifications ] = useState(false);
+  let loggedIn = false;
 
-  const { loggedIn } = props;
-
-  if (loggedIn) {
-    newNotification = generateNewNotifications(userId);
-    console.log('newNotifications?', newNotification);
+  if (userId) {
+    loggedIn = true;
+    let isNew;
+    let notifications = getNotifications(userId);
+    if (notifications.new) {
+      let isNew = notifications.new;
+      if (isNew.length > 0) {
+        React.useEffect(() => {
+          setNewNotifications(true);
+        }, []);
+      }
+    }
   }
 
   return (
@@ -24,7 +32,7 @@ const TopBar = (props) => {
         {
           loggedIn ? (
             <Link to={{pathname: '/notifications'}}>
-              <NotificationIcon id="notificationIcon" newNotifications={newNotification} />
+              <NotificationIcon id="notificationIcon" newNotifications={newNotifications} />
             </ Link>
           ) : (
             <div id="emptyDiv" />
