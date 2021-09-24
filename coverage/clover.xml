@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1631761542675" clover="3.2.0">
-  <project timestamp="1631761542675" name="All files">
+<coverage generated="1632510909215" clover="3.2.0">
+  <project timestamp="1632510909216" name="All files">
     <metrics statements="43" coveredstatements="5" conditionals="4" coveredconditionals="0" methods="19" coveredmethods="1" elements="66" coveredelements="6" complexity="0" loc="43" ncloc="43" packages="2" files="5" classes="5"/>
     <package name="Fitter">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="sum.js" path="/Users/pscheutzow/Documents/Griselda/Hack Reactor/Fitter/sum.js">
+      <file name="sum.js" path="/Users/tim/Desktop/rpp28/Fitter/sum.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="2" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -12,7 +12,7 @@
     </package>
     <package name="Fitter.client.src.components.friendProfile">
       <metrics statements="41" coveredstatements="3" conditionals="4" coveredconditionals="0" methods="18" coveredmethods="0"/>
-      <file name="addFriend.jsx" path="/Users/pscheutzow/Documents/Griselda/Hack Reactor/Fitter/client/src/components/friendProfile/addFriend.jsx">
+      <file name="addFriend.jsx" path="/Users/tim/Desktop/rpp28/Fitter/client/src/components/friendProfile/addFriend.jsx">
         <metrics statements="17" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="7" coveredmethods="0"/>
         <line num="12" count="1" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
@@ -32,7 +32,7 @@
         <line num="41" count="0" type="stmt"/>
         <line num="42" count="0" type="stmt"/>
       </file>
-      <file name="friendProfile.jsx" path="/Users/pscheutzow/Documents/Griselda/Hack Reactor/Fitter/client/src/components/friendProfile/friendProfile.jsx">
+      <file name="friendProfile.jsx" path="/Users/tim/Desktop/rpp28/Fitter/client/src/components/friendProfile/friendProfile.jsx">
         <metrics statements="11" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="7" coveredmethods="0"/>
         <line num="17" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
@@ -46,7 +46,7 @@
         <line num="70" count="0" type="stmt"/>
         <line num="82" count="0" type="stmt"/>
       </file>
-      <file name="messageButton.jsx" path="/Users/pscheutzow/Documents/Griselda/Hack Reactor/Fitter/client/src/components/friendProfile/messageButton.jsx">
+      <file name="messageButton.jsx" path="/Users/tim/Desktop/rpp28/Fitter/client/src/components/friendProfile/messageButton.jsx">
         <metrics statements="5" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
@@ -54,7 +54,7 @@
         <line num="8" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
       </file>
-      <file name="sharedStats.jsx" path="/Users/pscheutzow/Documents/Griselda/Hack Reactor/Fitter/client/src/components/friendProfile/sharedStats.jsx">
+      <file name="sharedStats.jsx" path="/Users/tim/Desktop/rpp28/Fitter/client/src/components/friendProfile/sharedStats.jsx">
         <metrics statements="8" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="3" count="1" type="stmt"/>
         <line num="5" count="0" type="stmt"/>

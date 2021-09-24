@@ -11,7 +11,7 @@ const Notifications = () => {
   const [ newNotifications, setNewNotifications ] = useState(['Hello', 'Hey you']);
   const [ oldNotifications, setOldNotifications ] = useState(['Old stuff', 'More old Stuff']);
 
-  useEffect(() => {
+  React.useEffect(() => {
       let notifications = [[],[]];
 
       axios.get(`/notifications?userId=${userId}`)
@@ -48,7 +48,7 @@ const Notifications = () => {
 
   const handleDeleteClick = () => {
     deleteNotifications(userId);
-    useEffect(() => {
+    React.useEffect(() => {
       setNewNotifications([]);
       setOldNotifications([]);
     }, []);
