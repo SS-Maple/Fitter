@@ -19,8 +19,8 @@ class FriendProfile extends React.Component {
     super(props);
     this.state ={
       username: '',
-      userid: 1,
-      friendid: 1,
+      userid: null,
+      friendid: null,
       profilephoto: 'https://cdn0.iconfinder.com/data/icons/users-34/24/user_symbol_person-1024.png',
       firstName: '',
       lastName: '',
@@ -28,7 +28,7 @@ class FriendProfile extends React.Component {
       stats: [],
       goals: {},
       friends: [],
-      isFriend: null
+      // isFriend: null
     }
   }
   componentDidMount(){
@@ -42,8 +42,11 @@ class FriendProfile extends React.Component {
     .then(result => {
       console.log('3')
       var userData = result.data
+      if(userData.fiends===null){
+        userData[fiends]= []
+      }
       console.log('userdata', userData)
-      console.log('isfriend', userData.isfriend)
+      console.log('isfiends', userData.fiends)
       this.setState({
         friendid: userData.friendid,
         userid: userData.userid,
@@ -54,8 +57,8 @@ class FriendProfile extends React.Component {
         description: userData.descriptionmessage,
         stats: userData.dlydata,
         goals: userData.goals,
-        friends: userData.fiends.length || 0,
-        isFriend: (userData.isfriend !== null) ? true : false
+        friends: userData.friends.length,
+        // isFriend: (userData.isfriend !== null) ? true : false
       })
       console.log('state', this.state)
     })
@@ -101,13 +104,16 @@ class FriendProfile extends React.Component {
               <p>{this.state.description}</p>
             </div>
             <div className='profile-btn-container'>
-              <AddFriend isFriend={this.state.isFriend}/>
-              <MessageButton />
+              <AddFriend />
+              <Link to={`/statComment?friendId=${this.state.friendid}`}>
+              <button className='profile-btn' onClick={() => console.log('On click needs to route to', this.state.friendid)}> Comments </button>
+              </Link>
             </div>
           </div>
           <div>
             <SharedStats picture={this.state.profilephoto} username={this.state.username} stats={this.state.stats} goals={this.state.goals} userid={this.state.userid} friendid={this.state.friendid}/>
           </div>
+          <div className='feed-bottom'></div>
         </div>
 
     )

@@ -51,8 +51,8 @@ class CommentModal extends React.Component {
           <br></br>
         </div>
         <div className="c-modal-footer">
-          <button className="c-button" onClick={this.props.onClose}>Close</button>
-          <button className="c-button" onClick={this.handleSubmitComment}>Submit Comment </button>
+          <button className='profile-btn' onClick={this.props.onClose}>Close</button>
+          <button className="profile-btn" onClick={this.handleSubmitComment}>Submit Comment </button>
         </div>
       </div>
     </div>
@@ -60,3 +60,6 @@ class CommentModal extends React.Component {
 }
 
 export default CommentModal;
+
+
+

@@ -522,6 +522,8 @@ form,
   left: 0;
   right: 0;
   bottom: 0;
+  font-family: sans-serif;
+  font-size: 14px;
   background: rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
@@ -536,24 +538,32 @@ form,
   background: #fff;
   overflow: auto;
   cursor: default;
+  font-family: sans-serif;
+  font-size: 14px;
 }
 
 .c-modal-header,
 .c-modal-footer {
   padding: 10px;
   background: var(--lightgray);
+  font-family: sans-serif;
+  font-size: 14px;
 }
 
 .c-modal-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-family: sans-serif;
+  font-size: 14px;
 }
 
 .c-modal-body {
   padding: 10px;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
+  font-family: sans-serif;
+  font-size: 14px;
 }
 .security-select {
   border-radius: 5px;

@@ -9,6 +9,7 @@ import ForgotPW from './LoginForms/ForgotPW.jsx';
 import MyProfile from './myProfile/myProfile.jsx';
 import Line from './myProfile/charts.jsx';
 import FriendProfile from './friendProfile/friendProfile.jsx';
+import StatComments from './friendProfile/statComments.jsx';
 import {userContext} from './userContext';
 function Main() {
   return (
@@ -19,6 +20,7 @@ function Main() {
         <Route path='/friends' component={FriendsList} />
         <Route path='/userprofile' component={MyProfile} />
         <Route path='/friendProfile' component={FriendProfile} />
+        <Route path='/statComment' component={StatComments} />
         <Route path='/chart' component={Line} />
       </Switch>
     </main>

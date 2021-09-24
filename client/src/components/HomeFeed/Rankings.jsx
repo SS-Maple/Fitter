@@ -60,7 +60,8 @@ function Rankings({ id }) {
       {/* Friend's List Tile */}
       {friends.sort((a, b) => a.sorting - b.sorting)
         .map((friend, index) => (
-          <Link to={`/friendProfile?friendid=${friend.id}&userid=${userId}`} key={index} >
+          <Link to={`/friendProfile?friendid=${friend.id}&userid=${userId}`} key={index} style={{ textDecoration: 'none' }}>
+            {console.log('friend in rankings', friend)}
           <div
             className='pic-tile-friend-tile'
             key={index}
