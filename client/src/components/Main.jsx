@@ -9,6 +9,7 @@ import ForgotPW from './LoginForms/ForgotPW.jsx';
 import MyProfile from './myProfile/myProfile.jsx';
 import FriendProfile from './friendProfile/friendProfile.jsx';
 import Notifications from './notifications/Notifications.jsx';
+import {userContext} from './userContext';
 
 function Main() {
   return (
@@ -19,9 +20,13 @@ function Main() {
         <Route path='/userprofile' component={MyProfile} />
         <Route path='/friendProfile' component={FriendProfile} />
         <Route path='/notifications' component={Notifications} />
+        <Route path='/chart' component={Line} />
+        <Route path='/signup' component={Signup} />
+        <Route path='/forgotpw' component={ForgotPW} />
       </Switch>
     </main>
   );
 }
 
 export default Main;
+
