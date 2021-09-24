@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChatEngine, getOrCreateChat } from 'react-chat-engine';
 import axios from 'axios';
+import chatConfig from '../../../../chat.config.js';
 
 const DirectChatPage = (props) => {
 	useEffect(() => {
@@ -22,7 +23,7 @@ const DirectChatPage = (props) => {
 		console.log('user in getOrCreateUser: ', user);
 		let config = {
 			headers: {
-				'private-key': '59eed471-fa85-444f-bfda-021ac8ca2005'
+				'private-key': chatConfig.privateKey
 			}
 		};
 		let data = {
@@ -41,8 +42,8 @@ const DirectChatPage = (props) => {
 		}
 		let config = {
 			headers: {
-				'PRIVATE-KEY': '59eed471-fa85-444f-bfda-021ac8ca2005',
-				'Project-ID': '4f65a747-dbb0-414d-abc1-9436ab6724cc',
+				'PRIVATE-KEY': chatConfig.privateKey,
+				'Project-ID': chatConfig.projectID,
 				'User-Name': props.user.userName,
 				'User-Secret': props.user.userSecret
 			}
@@ -68,7 +69,7 @@ const DirectChatPage = (props) => {
 			<ChatEngine
 				userName={props.user.userName}
 				userSecret={props.user.userSecret}
-				projectID='4f65a747-dbb0-414d-abc1-9436ab6724cc'
+				projectID={chatConfig.projectID}
 				height='100vh'
 				renderNewChatForm={(creds) => renderChatForm(creds)}
 			/>
