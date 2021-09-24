@@ -19,7 +19,6 @@ function Rankings({ id }) {
   }, []);
 
   function sortFriends() {
-    console.log('calling sort')
     friends.forEach((friend, index) => {
       // returns negative if they missed the goal
       let water = Math.abs(100 - (friend['userdata'][index]['wateraverage'] * 100))
@@ -72,7 +71,6 @@ function Rankings({ id }) {
                 </div>
                 {/* Friend Information */}
                 <div className='pic-tile-friend-right-info'>
-                  {console.log(friend)}
                   <b>{friend.username}:</b>
                   <li>
                     Reached {Math.round(friend.wateraverage * 100)}% of my water goal.

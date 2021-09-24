@@ -79,7 +79,7 @@ app.get('/friends', (req, res) => {
           ) as friendlast
           from friends
           where friends.userID = users.id
-          order by friendfirst
+          
         ) d
       ) as friends
     from users
