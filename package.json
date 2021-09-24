@@ -41,13 +41,13 @@
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^12.1.0",
     "@testing-library/user-event": "^12.8.3",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
     "eslint-plugin-jest": "^24.4.0",
     "eslint-plugin-react": "^7.24.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.1.0",
     "jest-css-modules": "^2.1.0",
-    "jest-dom": "^4.0.0",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2"
+    "jest-dom": "^4.0.0"
   },
   "jest": {
     "moduleDirectories": [
