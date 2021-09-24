@@ -430,11 +430,13 @@ app.post('/comment', (req, res) => {
       }
     })
 })
-// post user sign in information and send auth token + user id
+
+
+// post user sign in information
 app.post('/signin', (req, res) => {
   let users = req.body;
-  let text = 'INSERT INTO users(firstname, lastname, email, username, userpassword, securityquestion, securityanswer) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id, email, userpassword';
-  let values = [users.firstname, users.lastname, users.email, users.username, users.userpassword, users.securityquestion, users.securityanswer]
+  let text = 'INSERT INTO users(firstname, lastname, email, username, userpassword) VALUES($1, $2, $3, $4, $5) RETURNING id, email, userpassword';
+  let values = [users.firstname, users.lastname, users.email, users.username, users.userpassword]
 
   db.client.query(text, values)
   .then(data => {
@@ -447,10 +449,10 @@ app.post('/signin', (req, res) => {
       })
     }
   })
-  .catch(err => res.send(err))
+  .catch(err => res.send(err.detail))
 })
 
-// post user login and send auth token
+// post user login information
 app.post('/login', (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
@@ -468,6 +470,99 @@ app.post('/login', (req, res) => {
   })
   .catch(err => console.log('Error logging in', err))
 })
+
+/* NOTIFICATIONS ROUTES */
+
+app.get('/notifications', (req, res) => {
+  db.client.query(`
+    SELECT * FROM notifications
+    WHERE userid = ${req.query.userId}
+  `, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(data.rows);
+    }
+  })
+});
+
+app.get('/notifications/users/goals', (req, res) => {
+  let goals = {};
+  db.client.query(`
+    SELECT watergoal, caloriegoal, weightgoal FROM goals
+    WHERE userid=${req.query.userId}
+  `, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      goals.water = data.rows[0].watergoal;
+      goals.calories = data.rows[0].caloriegoal;
+      goals.weight = data.rows[0].weightgoal;
+      res.send(goals);
+    }
+  })
+});
+
+//
+
+app.get('/notifications/users/timestamp', (req, res) => {
+    db.client.query(`
+      SELECT timestamp FROM dailydata
+      WHERE userid=${req.query.userId}
+      ORDER BY timestamp DESC LIMIT 1
+    `, (err, data) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(data.rows[0]);
+      }
+    });
+});
+
+app.put('/notifications', (req, res) => {
+  db.client.query(`
+    UPDATE notifications
+    SET new = false
+    WHERE userId = ${req.query.userId}
+  `, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send('Ok');
+    }
+  });
+});
+
+app.post('/notifications', (req, res) => {
+  let { userId, notificationsText } = req.query;
+  db.client.query(`
+    INSERT INTO notifications (userid, notificationtext, new)
+    VALUES (${userId}, ${notificationsText}, true)
+  `, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send('Ok');
+    }
+  })
+
+});
+
+app.put('/notifications/delete', (req, res) => {
+  db.client.query(`
+    DELETE FROM notifications
+    WHERE userId = ${req.query.userId};
+  `, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send('Ok');
+    }
+  });
+});
+
+/* END NOTIFICATIONS ROUTES */
+
 app.listen(port, function () {
   console.log(`listening on port ${port}`);
 });
