@@ -2,10 +2,8 @@ const axios = require('axios');
 
 const generateNewNotifications = (userId) => {
   let newNotifications = false;
-  // axios.get user's target goals and current values
   axios.get(`/notifications/users/goals?userId=${userId}`)
     .then((data) => {
-      // POSTS if goals are not entered
       if (data.data.water < 1) {
         let queryString = `userId=${userId}&notificationsText='Please update your water goal!'`;
         axios.post(`/notifications?${queryString}`);
@@ -26,7 +24,6 @@ const generateNewNotifications = (userId) => {
       throw new Error(err);
     });
 
-        // POSTS if daily goals are not entered > 2 days
   axios.get(`/notifications/users/timestamp?userId=${userId}`)
     .then((data) => {
       let todayDate = new Date;

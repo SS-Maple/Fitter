@@ -13,17 +13,13 @@ const TopBar = (props) => {
 
   if (userId) {
     loggedIn = true;
-    let isNew;
     let notifications = getNotifications(userId);
-    if (notifications.new) {
-      let isNew = notifications.new;
-      if (isNew.length > 0) {
-        React.useEffect(() => {
+    if (notifications[0].length > 0) {
+        useEffect(() => {
           setNewNotifications(true);
         }, []);
       }
     }
-  }
 
   return (
     <div className="topbar">
@@ -31,7 +27,7 @@ const TopBar = (props) => {
         <Logo id="logo" />
         {
           loggedIn ? (
-            <Link to={{pathname: '/notifications'}}>
+            <Link to={{pathname: '/notifications'}} style={{ textDecoration: 'none' }}>
               <NotificationIcon id="notificationIcon" newNotifications={newNotifications} />
             </ Link>
           ) : (

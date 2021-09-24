@@ -6,11 +6,11 @@ id,userId,notificationText,notificationTimestamp
 5,1,"You have exceeded your calorie goals!",false
 6,7,"You forgot to fill out your calorie goals!",true
 7,5,"You forgot to fill out your water goals!",true
-8,6,"You forgot to fill out your weight goals!",true
+8,9,"You forgot to fill out your weight goals!",true
 9,2,"You have met your water goals!",true
 10,2,"You have exceeded your calorie goals!",true
 11,3,"You forgot to fill out your calorie goals!",true
 12,4,"You forgot to fill out your water goals!",true
-13,6,"You forgot to fill out your weight goals!",true
+13,8,"You forgot to fill out your weight goals!",true
 14,8,"You have met your water goals!",true
 15,8,"You have exceeded your calorie goals!",true

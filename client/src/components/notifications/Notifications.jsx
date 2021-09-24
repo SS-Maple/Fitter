@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useAuth } from '../user-auth.js';
 const getNotifications = require('./notificationHelpers/getNotifications.js');
 const deleteNotifications = require('./notificationHelpers/deleteNotifications.js');
@@ -7,14 +8,35 @@ const Notifications = () => {
   const auth = useAuth();
 
   const [ userId, setUserId ] = useState(auth.userId);
-  const [ newNotifications, setNewNotifications ] = useState([]);
-  const [ oldNotifications, setOldNotifications ] = useState([]);
+  const [ newNotifications, setNewNotifications ] = useState(['Hello', 'Hey you']);
+  const [ oldNotifications, setOldNotifications ] = useState(['Old stuff', 'More old Stuff']);
 
-  let notifications = getNotifications(userId);
+  useEffect(() => {
+      let notifications = [[],[]];
 
-  React.useEffect(() => {
-    setNewNotifications(notifications.new);
-    setOldNotifications(notifications.old);
+      axios.get(`/notifications?userId=${userId}`)
+        .then(data => {
+          if (data.data.length > 0) {
+            for (var i = 0; i < data.data.length; i++) {
+              if (data.data[i].new === true) {
+                notifications[0].push(data.data[i]);
+              } else {
+                notifications[1].push(data.data[i])
+              }
+            }
+          }
+          return notifications;
+        })
+        .then((notifications) => {
+          setNewNotifications(notifications[0])
+          setOldNotifications(notifications[1])
+        })
+        .then(() => {
+          axios.put(`/notifications?userId=${userId}`)
+        })
+        .catch(err => {
+          throw new Error(err);
+        });
   }, []);
 
   let labels = {
@@ -26,31 +48,30 @@ const Notifications = () => {
 
   const handleDeleteClick = () => {
     deleteNotifications(userId);
-    React.useEffect(() => {
+    useEffect(() => {
       setNewNotifications([]);
       setOldNotifications([]);
     }, []);
   }
 
-  console.log('newNotifications: ', newNotifications);
-  console.log('oldNotifications: ', oldNotifications);
-
   if (newNotifications || oldNotifications) {
     return (
       <div id="notificationsPage">
         {
-          newNotifications ? (
+          newNotifications.length > 0 ? (
             <div className="notificationBoxes">
               <div id="notificationsHeader">
                 {labels.new}
               </div>
               <div>
               {
-                newNotifications.map((notification) => (
-                    <div id="notificationsTile">
+                newNotifications.map((notification, index) => {
+                  return (
+                    <div id="notificationsTile" key={index}>
                       {notification.notificationtext}
                     </div>
-                  ))
+                  );
+                })
               }
               </div>
             </div>
@@ -64,17 +85,23 @@ const Notifications = () => {
               </div>
               <div>
               {
-                oldNotifications.map((notification) => (
-                    <div id="notificationsTile">
+                oldNotifications.map((notification, index) => {
+                  return (
+                    <div id="notificationsTile" key={index}>
                       {notification.notificationtext}
                     </div>
-                ))
+                  );
+                })
               }
               </div>
             </div>
           ) : null
         }
-        <button id="deleteNotifications" onClick={handleDeleteClick}>
+        <button id="deleteNotifications" onClick={() => {
+          deleteNotifications(userId);
+          setNewNotifications([]);
+          setOldNotifications([]);
+        }}>
           {labels.delete}
         </button>
       </div>

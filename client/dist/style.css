@@ -35,7 +35,7 @@ body {
   color: white;
   display: flex;
   width: 70vw;
-  font-family: 'Courier Prime', monospace;
+  font-family: sans-serif, monospace;
   font-size: 6vh;
   font-weight: bold;
   margin: auto;
@@ -76,30 +76,35 @@ body {
   position: fixed;
   top: 10vh;
   left: 0;
+  overflow: scroll;
 }
 
 .notificationBoxes {
-  background-color: #494949;
+  background-color: white;
   border-radius: 5px;
   justify-content: center;
   padding: 2px;
-  margin: 5px;
+  margin: 15px;
+  font-family: sans-serif, monospace;
 }
 
 #notificationsHeader {
   font-size: 3vh;
   text-align: center;
   justify-content: center;
-  color: white;
+  color: #494949;
+  font-family: sans-serif, monospace;
 }
 
 #notificationsTile {
-  background-color: white;
-  color: #494949;
+  background-color: #494949;
+  color: white;
+  padding: 3px;
   border-radius: 5px;
   display: flex;
   align-items: center;
-  margin: 1vh;
+  margin: 5px;
+  font-family: sans-serif, monospace;
 }
 
 #deleteNotifications {
@@ -114,6 +119,7 @@ body {
   margin: auto;
   display:flex;
   align-items: center;
+  font-family: sans-serif, monospace;
 }
 
 /* END OF NOTIFICATIONS STYLES */

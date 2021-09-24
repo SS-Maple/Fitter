@@ -21,14 +21,14 @@ function App() {
   if (!auth.userId) {
     return (
       <div>
-        <TopBar loggedIn={false}/>
+        <TopBar />
         <Login />
       </div>
     )
   }
   return (
     <div>
-      <TopBar loggedIn={true}/>
+      <TopBar />
       <Logout />
       <Main />
       <BottomNav handleClick={handleClick} />
