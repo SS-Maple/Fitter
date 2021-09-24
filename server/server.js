@@ -1,4 +1,5 @@
 const express = require('express');
+const { useReducer } = require('react');
 
 let app = express();
 let port = 3000;
@@ -79,7 +80,7 @@ app.get('/friends', (req, res) => {
           ) as friendlast
           from friends
           where friends.userID = users.id
-          
+          order by friendfirst
         ) d
       ) as friends
     from users
@@ -209,7 +210,7 @@ app.get(`/rankings`, (req, res) => {
   WHERE userid = ${friendId}
   `, (err, data) => {
     if (err) {
-      console.log('error from server -', err)
+      // console.log('error from server -', err)
       res.send(err);
     } else {
       let info = data.rows;
@@ -256,8 +257,32 @@ app.get(`/rankings`, (req, res) => {
             res.send(err);
           } else {
             // console.log('rows from server /users - ', data.rows)
-            // console.log(Array.isArray(data.rows))
-            res.send(data.rows);
+            let rankingInfo = data.rows;
+            let arrayInfo = [];
+            // rankingInfo.forEach((user, index) => {
+            //  console.log(user.id)
+            //  console.log(user.userdata[0].userid)
+            //  if (user.id === user.userdata[0].userid) {
+
+            //  }
+              
+            // })
+            rankingInfo.forEach((friend, index) => {
+              // returns negative if they missed the goal
+              let water = Math.abs(100 - (friend['userdata'][index]['wateraverage'] * 100))
+              // returns negative if goal is exceeded
+              let calories = Math.abs(100 - (friend['userdata'][index]['caloriesaverage'] * 100))
+              let calculate = water + calories;
+              friend['newId'] = friend['userdata'][index]['userid'];
+              friend['sorting'] = calculate.toFixed(2);
+              friend['wateraverage'] = friend['userdata'][index]['wateraverage'];
+              friend['caloriesaverage'] = friend['userdata'][index]['caloriesaverage'];
+              friend['weightaverage'] = friend['userdata'][index]['weightaverage'];
+              delete friend['userdata'];
+            })
+            console.log('-----> ', rankingInfo)
+            
+            res.send(rankingInfo);
           }
         })
       }
