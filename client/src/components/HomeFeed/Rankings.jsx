@@ -49,10 +49,7 @@ function Rankings({ id }) {
       sortFriends();
       return <div data-testid='home-page' id='home-page'>
         {/* Friend Information */}
-        <div
-          className='pic-tile-friend-tile'
-          onClick={() => console.log('On click needs to route to', friend.friendfirst)}
-        >
+        <div className='pic-tile-friend-tile'>
           <div className='pic-tile-friend-right-info'>
             You're currently ranked <b>#{final()}</b> amongst friends.
           </div>
