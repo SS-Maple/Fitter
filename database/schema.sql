@@ -23,9 +23,7 @@ CREATE TABLE users (
   userPassword        VARCHAR   NOT NULL,
   shareBirthday       BOOLEAN   DEFAULT FALSE,
   birthday            VARCHAR,
-  picture             VARCHAR,
-  securityQuestion    VARCHAR   NOT NULL,
-  securityAnswer      VARCHAR   NOT NULL
+  picture             VARCHAR
 );
 
 CREATE TABLE friends (
@@ -70,7 +68,7 @@ CREATE TABLE comments (
 );
 
 -- DATA LOAD
-\COPY users(firstName,lastName,email,username,descriptionMessage,userPassword,shareBirthday,birthday,picture,securityQuestion,securityAnswer) FROM 'data/fitterUsers.csv' DELIMITER ',' CSV HEADER;
+\COPY users(firstName,lastName,email,username,descriptionMessage,userPassword,shareBirthday,birthday,picture) FROM 'data/fitterUsers.csv' DELIMITER ',' CSV HEADER;
 \COPY friends(userID,friendID) FROM 'data/fitterFriends.csv' DELIMITER ',' CSV HEADER;
 \COPY goals(userId,waterGoal,calorieGoal,weightGoal,shareBoolean) FROM 'data/goals.csv' DELIMITER ',' CSV HEADER;
 \COPY dailyData(userId,timestamp,water,calories,weight,shareBoolean) FROM 'data/dailyData.csv' DELIMITER ',' CSV HEADER;

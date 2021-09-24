@@ -1,36 +1,36 @@
 import React, { useState } from 'react';
+import { useAuth } from '../user-auth.js';
 
-const ForgotPW = () => {
-  const [userExists, setUserExists] = useState(false);
-  const [verified, setVerified] = useState(false);
+const ForgotPW = ({ setView }) => {
+  const [email, setEmail] = useState();
+  const [message, setMessage] = useState();
+  const [success, setSuccess] = useState();
+  const auth = useAuth();
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  if (!userExists) {
-    return (
-      <div className='form-page'>
-        <div className='form-content' style={{marginTop: '20%'}}>
-          <form>
-            <label>Please enter the email address for your account</label>
-            <input type='email' placeholder='Email'></input>
-            <input className='form-submit' type='submit' value='Submit' onClick={e => setUserExists(true)}></input>
-          </form>
-        </div>
-      </div>
-    )
+    auth.resetPassword(email)
+    .then(() => {
+      setSuccess(true)
+      setMessage('Check your email for further instructions!')
+    })
+    .catch(() => setMessage('Email not found - Please try again'))
   }
+
 
   return (
     <div className='form-page'>
-        <div className='form-content' style={{marginTop: '20%'}}>
-          <form>
-            <label style={{margin: '10px'}}>Complete your security question and create a new password</label>
-            <label>What was your first pet?</label>
-            <input type='text' placeholder='Answer'></input>
-            <input type='text' placeholder='New Password'></input>
-            <input className='form-submit' type='submit' value='Reset Password'></input>
-          </form>
-        </div>
+      <div className='forgot-content' style={{marginTop: '20%'}}>
+        <form>
+          <label className='forgot-label'>Please enter the email address for your account</label>
+          <label className='forgot-label' style={{ color: success ? 'green' : 'red'}}>{message}</label>
+          <input type='email' placeholder='Email' onChange={e => setEmail(e.target.value)}></input>
+          <input className='form-submit' type='submit' value='Reset Password' onClick={handleSubmit}></input>
+        </form>
       </div>
+      <u onClick={e => setView('login')}>Back to Login</u>
+    </div>
   )
 }
 

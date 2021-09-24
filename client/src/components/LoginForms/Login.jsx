@@ -3,6 +3,7 @@ import axios from 'axios';
 import Signup from './Signup.jsx';
 import ForgotPW from './ForgotPW.jsx';
 import { useAuth } from '../user-auth.js';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [view, setView] = useState('login');
@@ -11,11 +12,11 @@ const Login = () => {
   const auth = useAuth();
 
   if (view === 'signup') {
-    return <Signup setView={setView} />
+    return <Signup setView={setView}/>
   }
 
   if (view === 'forgot') {
-    return <ForgotPW />
+    return <ForgotPW setView={setView}/>
   }
 
   const handleSubmit = (e) => {
@@ -42,7 +43,7 @@ const Login = () => {
             <input type='password' placeholder='Password' onChange={e => setPassword(e.target.value)}></input>
             <input className='form-submit' type='submit' value='Login' ></input>
           </form>
-          <p style={{fontSize: 'small'}}>Need help logging in? <u onClick={e => setView('forgot')}>Click Here</u></p>
+          <p style={{fontSize: 'small'}}>Forgot your password? <u onClick={e => setView('forgot')}>Click Here</u></p>
         </div>
         <div className='form-content'>
           <p style={{fontSize: 'smaller'}}>Don't have an account? <u onClick={e => setView('signup')}>Sign Up Here</u></p>

@@ -479,14 +479,13 @@ input {
   background-color: #f1f1f1;
 }
 
-form,
-.form-page {
+form {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   align-content:center;
-  margin-top: 5vh;
+  margin-top: 2vh;
 }
 
 .login-header {
@@ -564,4 +563,31 @@ form,
   height: 29px;
   margin: 10px;
   background-color: #f1f1f1;
+}
+
+.form-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  align-content:center;
+  margin-top: 10vh;
+}
+
+.forgot-content {
+  display: flex;
+  background-color: white;
+  border-radius: 5px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  align-content:center;
+  width: 80vw;
+  height: 20vh;
+  margin: 1vh;
+  font-size: smaller;
+}
+
+.forgot-label {
+  margin: 2px;
 }
