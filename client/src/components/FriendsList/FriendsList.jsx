@@ -42,8 +42,8 @@ function FriendsList() {
       {/* Friend's List Tile */}
       {friends.filter(user => user.friendid.toString() !== friendId.toString()).map((friend, index) => (
         <Link to={`/friendProfile?userid=${friend.friendid}&userid=${userId}`} 
-        key={index} 
-        style={{textDecoration:"none", color:'black'}}
+          key={index} 
+          style={{textDecoration:"none", color:'black'}}
         >
           {console.log('->', friend)}
         <div className='pic-tile-friend-tile' key={index}>

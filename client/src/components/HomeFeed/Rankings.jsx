@@ -65,11 +65,7 @@ function Rankings({ id }) {
               key={index} 
               style={{textDecoration:"none", color:'black'}}
             >
-              <div
-                className='pic-tile-friend-tile'
-                key={index}
-                onClick={() => console.log('On click needs to route to', friend.firstname)}
-              >
+              <div className='pic-tile-friend-tile' key={index}>
                 <div className='pic-tile-ranking'>
                   #{index + 1}
                 </div>
