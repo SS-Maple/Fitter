@@ -5,14 +5,18 @@ import { Link } from 'react-router-dom'
 import TodaysGoals from '../myProfile/todaysGoal.jsx';
 import Rankings from './Rankings.jsx';
 import { useAuth } from '../user-auth.js';
-
+import generateNewNotifications from '../notifications/notificationHelpers/generateNewNotifications.js';
 
 function HomeFeed() {
   const auth = useAuth();
   const [goals, setGoals] = useState({});
   const [id, setId] = useState(auth.userId);
+  const [userName, setUserName] = useState('')
 
   useEffect(() => {
+    axios.get(`/user?userId=${id}`)
+      .then(result => setUserName(result.data[0].firstname))
+      .catch(error => error)
     axios.get('/todaysgoals')
       .then(results => {
         setGoals({
@@ -21,10 +25,16 @@ function HomeFeed() {
           weight: results.data.weight
         })
       })
+      .then(() => {
+        generateNewNotifications(id);
+      })
+      .catch(error => error)
   }, []);
 
   return (
-    <div id='home-page'>
+    <div id='home-page' data-testid='home-page'>
+      <div className='feed-bottom'></div>
+        <h4 style={{textAlign: 'center', fontSize: '20px'}}>Welcome {userName}!</h4>
       {/* Home Feed Search */}
       <SearchUsernames />
       <h4>Your Daily Status:</h4>
