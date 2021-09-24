@@ -16,6 +16,11 @@ function Rankings({ id }) {
     axios.get(`/rankings?friendId=${userId}`)
       .then(response => {
         setFriends(response.data)
+        response.data.forEach(user => {
+          if (user.id === userId) {
+            setRank(user.ranks)
+          }
+        })
       })
       .catch(error => error)
     }, []);
@@ -26,7 +31,7 @@ function Rankings({ id }) {
         {/* Friend Information */}
         <div className='pic-tile-friend-tile'>
           <div className='pic-tile-friend-right-info'>
-            You're currently ranked <b>#</b> amongst friends.
+            You're currently ranked <b>#{rank}</b> amongst friends.
           </div>
         </div>
         <h4>Your Friend's Rankings: </h4>
