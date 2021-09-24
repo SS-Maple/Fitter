@@ -12,30 +12,30 @@ body {
 }
 
 /* TOP BAR STYLES */
-#topbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+.topbar {
   background-color: #e25786;
   width: 100vw;
   height: 10vh;
   display: flex;
   padding: none;
   margin: none;
-  z-index: 10;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
 }
 
 #emptyDiv {
   width: 15vw;
   display: flex;
+  background-color: #e25786;
 }
 
 #logoButton {
   color: white;
   display: flex;
   width: 70vw;
-  font-family: 'Courier Prime', monospace;
+  font-family: sans-serif, monospace;
   font-size: 6vh;
   font-weight: bold;
   margin: auto;
@@ -64,6 +64,65 @@ body {
   padding: none;
   margin: none;
 }
+
+/* END OF TOP BAR STYLES */
+
+/* NOTIFICATIONS STYLES */
+
+#notificationsPage {
+  background-color: #6ec0c3;
+  width: 99vw;
+  height: 90vh;
+  position: fixed;
+  top: 10vh;
+  left: 0;
+  overflow: scroll;
+}
+
+.notificationBoxes {
+  background-color: white;
+  border-radius: 5px;
+  justify-content: center;
+  padding: 2px;
+  margin: 15px;
+  font-family: sans-serif, monospace;
+}
+
+#notificationsHeader {
+  font-size: 3vh;
+  text-align: center;
+  justify-content: center;
+  color: #494949;
+  font-family: sans-serif, monospace;
+}
+
+#notificationsTile {
+  background-color: #494949;
+  color: white;
+  padding: 3px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  font-family: sans-serif, monospace;
+}
+
+#deleteNotifications {
+  background-color: #e25786;
+  color: white;
+  border: none;
+  padding: none;
+  border-radius: 5px;
+  height: 5vh;
+  text-align: center;
+  justify-content: center;
+  margin: auto;
+  display:flex;
+  align-items: center;
+  font-family: sans-serif, monospace;
+}
+
+/* END OF NOTIFICATIONS STYLES */
 
 /* <----- Home Page  */
 
@@ -479,14 +538,13 @@ input {
   background-color: #f1f1f1;
 }
 
-form,
-.form-page {
+form {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   align-content:center;
-  margin-top: 5vh;
+  margin-top: 2vh;
 }
 
 .login-header {
@@ -686,4 +744,31 @@ svg {
   height: 29px;
   margin: 10px;
   background-color: #f1f1f1;
+}
+
+.form-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  align-content:center;
+  margin-top: 10vh;
+}
+
+.forgot-content {
+  display: flex;
+  background-color: white;
+  border-radius: 5px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  align-content:center;
+  width: 80vw;
+  height: 20vh;
+  margin: 1vh;
+  font-size: smaller;
+}
+
+.forgot-label {
+  margin: 2px;
 }
