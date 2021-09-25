@@ -24,7 +24,7 @@ function Rankings({ id }) {
       })
       .catch(error => error)
     }, []);
-    
+
   if (friends) {
     if (friends.length > 1) {
       return <div data-testid='home-page' id='home-page'>
@@ -38,8 +38,8 @@ function Rankings({ id }) {
         {/* Friend's List Tile */}
         {friends.sort((a, b) => a.sorting - b.sorting)
           .map((friend, index) => (
-            <Link to={`/friendProfile?friendid=${friend.id}&userid=${userId}`} 
-              key={index} 
+            <Link to={`/friendProfile?friendid=${friend.id}&userid=${userId}`}
+              key={index}
               style={{textDecoration:"none", color:'black'}}
             >
               <div className='pic-tile-friend-tile' key={index}>
