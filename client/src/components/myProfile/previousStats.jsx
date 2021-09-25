@@ -1,7 +1,7 @@
 import React from 'react';
 
 const PreviousStats = ({ stats, goals, handleShare }) => {
-  if (!stats) {
+  if (stats !== null) {
     return stats.map((stat, i) => {
       let waterGoal = ((stat.water / goals.watergoal) * 100).toFixed(0);
       let calorieGoal = ((stat.calories / goals.caloriegoal) * 100).toFixed(0);
