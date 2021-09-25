@@ -263,19 +263,20 @@ app.get(`/rankings`, (req, res) => {
                // console.log(queryString)
                res.send(err);
              } else {
-               // console.log('rows from server /users - ', data.rows)
+               console.log('rows from server /users - ', data.rows)
                let rankingInfo = data.rows;
                  rankingInfo.forEach((friend, index) => {
+                   console.log('friend', friend)
                  // returns negative if they missed the goal
-                 let water = Math.abs(100 - (friend['userdata'][index]['wateraverage'] * 100))
+                 let water = friend['userdata'][index] ? Math.abs(100 - (friend['userdata'][index]['wateraverage'] * 100)) : 0;
                  // returns negative if goal is exceeded
-                 let calories = Math.abs(100 - (friend['userdata'][index]['caloriesaverage'] * 100))
+                 let calories = friend['userdata'][index] ? Math.abs(100 - (friend['userdata'][index]['caloriesaverage'] * 100)) : 0;
                  let calculate = water + calories;
-                 friend['newId'] = friend['userdata'][index]['userid'];
+                //  friend['newId'] = friend['userdata'][index]['userid'];
                  friend['sorting'] = calculate.toFixed(2);
-                 friend['wateraverage'] = friend['userdata'][index]['wateraverage'];
-                 friend['caloriesaverage'] = friend['userdata'][index]['caloriesaverage'];
-                 friend['weightaverage'] = friend['userdata'][index]['weightaverage'];
+                 friend['wateraverage'] = friend['userdata'][index] ? friend['userdata'][index]['wateraverage'] : 0;
+                 friend['caloriesaverage'] = friend['userdata'][index] ? friend['userdata'][index]['caloriesaverage'] : 0;
+                 friend['weightaverage'] = friend['userdata'][index] ? friend['userdata'][index]['weightaverage'] : 0;
                  delete friend['userdata'];
                })
                rankingInfo.sort((a, b) => a.sorting - b.sorting).forEach((user, index) => user['ranks'] = (index + 1))
@@ -501,9 +502,9 @@ app.get('/notifications/users/goals', (req, res) => {
     if (err) {
       res.send(err);
     } else {
-      goals.water = data.rows[0].watergoal;
-      goals.calories = data.rows[0].caloriegoal;
-      goals.weight = data.rows[0].weightgoal;
+      goals.water = data.rows[0] ? data.rows[0].watergoal : 0;
+      goals.calories = data.rows[0] ? data.rows[0].caloriegal : 0;
+      goals.weight = data.rows[0] ? data.rows[0].weightgoal: 0;
       res.send(goals);
     }
   })
