@@ -19,9 +19,9 @@ function SearchUsernames() {
     <div data-testid='home-page-header' className='home-page-header'>
       <input placeholder='Search Username...' onChange={() => setTerm(event.target.value)}></input>
       <div className='username-results'>{users.filter(name => name.username.includes(term)).map(((user, index) => (
-        <Link to={`/friendProfile?friendid=${user.id}&userid=${user.id}`} 
-          key={index} 
-          style={{textDecoration:"none", color:'black'}}  
+        <Link to={`/friendProfile?friendid=${user.id}&userid=${user.id}`}
+          key={index}
+          style={{textDecoration:"none", color:'black'}}
         >
           <div className='search-user-result' >
             <img src={user.picture}></img>
