@@ -5,6 +5,7 @@ let app = express();
 let port = 3000;
 
 const db = require('../database/connect.js');
+const chatdb = require('./chat.js');
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
@@ -205,6 +206,7 @@ app.put('/updateToday', (req, res) => {
 // get home feed rankings data
 app.get(`/rankings`, (req, res) => {
   let friendId = req.query.friendId;
+  console.log('am i making it in here')
   db.client.query(`
   SELECT friendId FROM friends
   WHERE userid = ${friendId}
@@ -351,7 +353,7 @@ app.get('/isfriend', (req, res) => {
 
   var friendId = req.headers.referer.split('?')[1].split('=')[1].split('&')[0]
   var userId = req.headers.referer.split('&')[1].split('=')[1]
-
+  console.log(`friend ${friendId}, user ${userId}`)
   db.client.query(`
     SELECT * from friends WHERE userID=${userId} AND friendID=${friendId}`, (err, data) => {
     if (err) {
@@ -377,6 +379,7 @@ app.post('/addfriend', (req, res) => {
       console.log('error from server', err)
       res.send(err);
     } else {
+      console.log('success')
       res.sendStatus(204);
     }
   })
@@ -564,6 +567,24 @@ app.put('/notifications/delete', (req, res) => {
 });
 
 /* END NOTIFICATIONS ROUTES */
+
+// GET chat user's info
+app.get('/chat/user', (req, res) => {
+  console.log('here!');
+  let userId = req.query.userId || 1;
+  console.log('userId: ', userId);
+  chatdb.getChatUser(userId)
+    .then(results => res.status(200).send(results))
+    .catch(error => res.status(500).send(error));
+});
+
+// GET chat user's friends
+app.get('/chat/friends', (req, res) => {
+  let userId = req.query.userId || 1;
+  chatdb.getChatUserFriends(userId)
+    .then(results => res.status(200).send(results))
+    .catch(error => res.status(500).send(error));
+});
 
 app.listen(port, function () {
   console.log(`listening on port ${port}`);
