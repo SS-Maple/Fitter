@@ -1,14 +1,14 @@
 # Fitter
 
 App Overview:
-Track fitness goals: weight goal, water goal, calorie goal
-Add calories via Edamam API connection
-See rankings against your friends to see who is closest to their goals
-Ability to add friends
-Choose which stats are shared on your profile
-Comment on other people's goals
-Get notified of missing information and goal status
-One-on-one chat option
+<li>Track fitness goals: weight goal, water goal, calorie goal</li>
+<li>Add calories via Edamam API connection</li>
+<li>See rankings against your friends to see who is closest to their goals</li>
+<li>Ability to add friends</li>
+<li>Choose which stats are shared on your profile</li>
+<li>Comment on other people's goals</li>
+<li>Get notified of missing information and goal status</li>
+<li>One-on-one chat option</li>
 
 Project Set Up:
 1. Install packages - npm install
@@ -19,9 +19,9 @@ Project Set Up:
 6. Start webpack - npm run client
 
 Team Members: 
-Andre - https://github.com/aboussarath 
-Izzy - https://github.com/izzyfarley
-Griselda - https://github.com/griseldasanchez
-Simon - https://github.com/Sim0nSl1003
-Tatt - https://github.com/tchitrakorn 
-Tim - https://github.com/tmoes 
+<li>Andre - https://github.com/aboussarath </li>
+<li>Izzy - https://github.com/izzyfarley</li>
+<li>Griselda - https://github.com/griseldasanchez</li>
+<li>Simon - https://github.com/Sim0nSl1003</li>
+<li>Tatt - https://github.com/tchitrakorn </li>
+<li>Tim - https://github.com/tmoes </li>
