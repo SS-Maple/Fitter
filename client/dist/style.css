@@ -389,6 +389,7 @@ margin-bottom: 50px;
   border-color: grey;
   display: flex;
   flex-direction: column;
+  z-index: -1;
 }
 
 .indiv-goal {
@@ -794,4 +795,30 @@ svg {
 
 .forgot-label {
   margin: 2px;
+}
+
+.l-modal-content {
+  border-radius: .7rem;
+  width: 80vw;
+  height: 15vh;
+  background-color: white;
+}
+
+.l-modal-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content:center;
+  align-self: flex-end;
+  margin-top: 4vh;
+}
+
+#logout-icon {
+  color: #494949;
+  display: flex;
+  width: 7vw;
+  height: 3vh;
+  margin-top: 1vh;
+  margin-left: 2vw;
 }
