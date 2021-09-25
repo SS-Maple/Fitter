@@ -15,7 +15,20 @@ const SharedStats = ({picture, username, stats, goals, userid, friendid}) => {
         </div>
     </div>
     )
-  } else {
+  }
+  if(!goals){
+    return (
+      // <div style={{ 'fontSize': '15px', 'width': '75%', 'text-align': 'center', 'padding': '70px'}}>
+      //   {`${username} is not sharing any stats at this time`}
+      // </div>
+      <div className='pic-tile-friend-tile'>
+        <div className='pic-tile-friend-right-info'>
+          {`${username} is has not setup any goals yet.`}
+        </div>
+    </div>
+    )
+    }
+  else {
   const [show, setShow] = useState(false);
 
    return stats.map((stat, i) =>{

@@ -31,16 +31,19 @@ class FriendProfile extends React.Component {
     }
   }
   componentDidMount(){
-
     this.getFriendData()
   }
 
   getFriendData() {
     axios.get('/friendProfile')
     .then(result => {
+      console.log('what is this', result.data);
       var userData = result.data
       if(userData.fiends===null){
         userData[fiends]= []
+      }
+      if (result.data.goals === null) {
+        userData[goals] === {}
       }
       this.setState({
         friendid: userData.friendid,
@@ -60,11 +63,11 @@ class FriendProfile extends React.Component {
       console.log(err)
     })
   }
-
+  
   render() {
     return(
-
-        <div className='my-profile-container'> 
+      
+      <div className='my-profile-container'> 
           <div className='my-profile'>
             <div className='profile-info'>
               <div className='profile-pic'>

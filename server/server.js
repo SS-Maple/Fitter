@@ -48,6 +48,7 @@ app.get('/user', (req, res) => {
 // get current user's friends
 app.get('/friends', (req, res) => {
   let friendId = req.query.friendId;
+  console.log('infriends', friendId)
   db.client.query(`
       select id, firstname, lastname, picture, descriptionmessage,
       (
@@ -206,7 +207,6 @@ app.put('/updateToday', (req, res) => {
 // get home feed rankings data
 app.get(`/rankings`, (req, res) => {
   let friendId = req.query.friendId;
-  console.log('am i making it in here')
   db.client.query(`
   SELECT friendId FROM friends
   WHERE userid = ${friendId}
@@ -263,10 +263,9 @@ app.get(`/rankings`, (req, res) => {
                // console.log(queryString)
                res.send(err);
              } else {
-               console.log('rows from server /users - ', data.rows)
+              //  console.log('rows from server /users - ', data.rows)
                let rankingInfo = data.rows;
                  rankingInfo.forEach((friend, index) => {
-                   console.log('friend', friend)
                  // returns negative if they missed the goal
                  let water = friend['userdata'][index] ? Math.abs(100 - (friend['userdata'][index]['wateraverage'] * 100)) : 0;
                  // returns negative if goal is exceeded
@@ -300,6 +299,7 @@ app.get('/friendProfile', (req, res) => {
   // let friendId = parseInt(req.query);
   let friendId = parseInt(params);
   let userId = parseInt(useridparams);
+  console.log(friendId, userId)
   db.client.query(`
       SELECT username, firstName, lastName, descriptionMessage, picture,
         (

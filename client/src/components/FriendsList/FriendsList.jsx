@@ -9,19 +9,23 @@ function FriendsList() {
   const [userId, setId] = useState(auth.userId);
 
   const [name, setName] = useState('');
-  const [friendId, setFriendId] = useState(location.search.split('')[10]);
+  const [friendId, setFriendId] = useState((location.search.split('')).slice(10));
   const [friends, setFriends] = useState([]);
 
   useEffect(() => {
-    axios.get(`/friends?friendId=${friendId}`)
+    let temp = friendId.join('');
+    console.log('temp', temp)
+    axios.get(`/friends?friendId=${temp}`)
       .then((response) => setName(response.data[0].firstname))
       .catch((error) => error);
-    axios.get(`/friends?friendId=${friendId}`)
+    axios.get(`/friends?friendId=${temp}`)
       .then((response) => response.data)
       .then((result) => result[0].friends)
       .then((list) => setFriends(list))
       .catch((error) => error);
   }, [])
+
+  console.log('->', friendId, userId, friends)
 
   return (
     <div data-testid='friends'>
