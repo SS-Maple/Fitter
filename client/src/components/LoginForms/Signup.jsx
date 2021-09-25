@@ -41,7 +41,7 @@ const Signup = ({ setView }) => {
   }
 
   return (
-    <div className='form-page'>
+    <div className='form-page' style={{marginTop:'30%'}}>
       <div className='form-content'>
         <form onSubmit={handleSubmit}>
           <p style={{color: 'red', margin: '0px'}}>{warning}</p>
