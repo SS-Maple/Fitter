@@ -29,7 +29,7 @@ const MyProfile = () => {
     axios.get('/userdata', { params: {userId: userid}})
     .then(data => {
       let info = data.data[0]
-      console.log(info)
+      console.log('test', info)
         setUserId(info.id)
         setFirstName(info.firstname)
         setLastName(info.lastname)
@@ -84,7 +84,7 @@ const MyProfile = () => {
       url: '/updategoals',
       data: `userid=${userid}&watergoal=${water}&caloriegoal=${calorie}&weightgoal=${weight}&share=${share}`
     })
-    .then(() => getUserData())
+    .then(() => getUserData(userid))
   }
 
   function handleShare(e){
@@ -115,7 +115,7 @@ const MyProfile = () => {
                 </div>
                 <div className='profile-desc'>
                   <p className='user-details'>Name: {firstName} {lastName}</p>
-                  <p className='user-details'>Birthday: {birthday}</p>
+                  <p className='user-details'></p>
                 </div>
                 <Link to={`/friends?friendId=${userid}`}>
                 <div className='user-profile-friends'>

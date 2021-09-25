@@ -171,7 +171,7 @@ app.put('/updatephoto', (req,res) => {
 
 app.put('/updategoals', (req, res) => {
   const {userid, watergoal, caloriegoal, weightgoal, share} = req.body;
-
+  console.log(req.body)
   return db.client.query(`
   INSERT INTO goals (userId, waterGoal, calorieGoal, weightGoal, shareBoolean) VALUES (${userid}, ${watergoal}, ${caloriegoal}, ${weightgoal}, ${share})
   ON CONFLICT (userId)
