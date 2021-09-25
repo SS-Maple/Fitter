@@ -343,8 +343,6 @@ app.get('/friendProfile', (req, res) => {
         if(returnRes.friends === null){
           returnRes.friends = []
         }
-
-        // console.log('rows from server /friendprofile - ', data.rows[0])
         res.send(returnRes);
       }
     })
@@ -352,15 +350,11 @@ app.get('/friendProfile', (req, res) => {
 app.get('/isfriend', (req, res) => {
 
   var friendId = req.headers.referer.split('?')[1].split('=')[1].split('&')[0]
-
-
   var userId = req.headers.referer.split('&')[1].split('=')[1]
-  // let friendId = req.body.friendID
-  // let userId = req.body.userID
+
   db.client.query(`
     SELECT * from friends WHERE userID=${userId} AND friendID=${friendId}`, (err, data) => {
     if (err) {
-      // console.log('error from server', err)
       res.send(err);
     } else {
       if(data.rows.length === 0) {
@@ -369,8 +363,6 @@ app.get('/isfriend', (req, res) => {
 
         res.send(true);
       }
-      // console.log('success in isfriend', data)
-      // res.send(data);
     }
   })
 });
@@ -385,7 +377,6 @@ app.post('/addfriend', (req, res) => {
       console.log('error from server', err)
       res.send(err);
     } else {
-      console.log('success in add friend')
       res.sendStatus(204);
     }
   })
@@ -394,14 +385,11 @@ app.post('/addfriend', (req, res) => {
 app.delete('/removefriend', (req, res) => {
   var friendId = req.headers.referer.split('?')[1].split('=')[1].split('')[0]
   var userId = req.headers.referer.split('&')[1].split('=')[1]
-  // let friendId = req.body.friendID
-  // let userId = req.body.userID
   db.client.query(`
     DELETE from friends
     WHERE userID=${userId} AND friendID=${friendId}
   `, (err, data) => {
     if (err) {
-      // console.log('error from server', err)
       res.send(err);
     } else {
       res.sendStatus(204);
@@ -417,66 +405,32 @@ app.post('/comment', (req, res) => {
   let values = [userId, friendId, comment]
   db.client.query(text, values)
   .then(result => {
-    console.log('success')
     res.sendStatus(204);
   })
   .catch(err => console.log('error from server', err))
 })
 
 app.get('/statComment', (req, res) => {
-  console.log('looking for this', req.headers.referer)
-  console.log(req.headers)
   var friendId = req.headers.referer.split('?')[1].split('=')[1].split('&')[0]
 
-
-
-  console.log('fId:', friendId)
-
-  // `SELECT username, picture,
-  // (
-  //   select row_to_json(e)
-  //   from (
-  //     SELECT username, picture
-  //     from
-  //     SELECT * from comments
-  //     WHERE friendid=${friendId}
-  //     ) e
-  //   ) as comments
-  // from users
-  // WHERE users.id=${friendId}`
   db.client.query(`SELECT (comments.userid, comments.comment, comments.friendid, users.username, users.picture, to_char(comments.timestamp, 'Month DD, YYYY')) FROM comments INNER JOIN users ON comments.userid=users.id WHERE comments.friendid=${friendId}`)
   .then(result => {
-    console.log(result.rows)
     var data = []
     result.rows.map((roww, i) => {
       var temp = roww.row.split(',')
-      console.log('temp:', temp)
       var obj = {}
       obj['comment'] = temp[1].split('"')[1]
       obj['username'] = temp[3]
       obj['photo'] = temp[4]
       obj['date'] = temp[5].split('"')[1]
-      console.log('obj:', obj)
       data.push(obj)
     })
-    console.log('RES', data)
+
+
     res.send(data)
   })
   .catch(err => console.log(err))
-  // var userId = parseInt(req.body['userid'])
-  // var friendId = parseInt(req.body['friendid'])
-  // var comment = req.body['comment']
-  // var tileId = parseInt(req.body['commentid'])
-  // console.log(userId, friendId, comment, tileId)
-  // db.client.query(`
-  //   INSERT INTO comments (userID, friendID, comment, tileId) VALUES (${userId}, ${friendId},'', ${tileId});`, (err, data) => {
-  //     if (err) {
-  //       console.log('error from server', err)
-  //       res.send(err);
-  //     } else {
-  //       res.sendStatus(204);
-  //     }
-  //   })
+
 })
 
 
