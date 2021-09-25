@@ -1,20 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-// {id: 4,
-// userid: 1,
-// friendid: 7,
-// friendusername: 'gogreg',
-// profilephoto: 'https://randomuser.me/api/portraits/men/60.jpg',
-// sorting: "5.25",
-// userid: 1}
+import { Link, useLocation, useHistory, useParams } from 'react-router-dom';
+import { useAuth } from '../user-auth.js';
 
-const AddFriend = (props) => {
-  // const [friended, setFriend] = useState(false);
-  console.log('222', props.isFriend)
-  const [friended, setFriend] = useState(props.isFriend);
+const AddFriend = () => {
+  const location = useLocation();
+  const auth = useAuth();
+  const [userId, setId] = useState(auth.userId);
+  const [friendId, setFriendId] = useState(location.search.split('')[10]);
+
+  const [friended, setFriend] = useState();
+
+  useEffect(() => {
+    axios.get(`/isfriend?friendID=${friendId}&userID=${userId}`)
+    .then(results => {
+      setFriend(results.data)
+    })
+    .catch(err => {
+      console.log('ERROR', err)
+    })
+  }, []);
+
   const addFriend = () => {
-    axios.post('/addfriend', {friendID: props.friendid, userID: props.userid})
+    axios.post(`/addfriend?friendID=${friendId}&userID=${userId}`)
     .then(result => {
       setFriend(true)
     })
@@ -22,9 +31,8 @@ const AddFriend = (props) => {
       console.log('ERROR in axios post to /addFriend catch block: ', err)
     })
   };
-
   const removeFriend = () => {
-    axios.delete('/removefriend', {friendID: props.friendid, userID: props.userid})
+    axios.delete(`/removefriend?friendID=${friendId}&userID=${userId}`)
     .then(result => {
       setFriend(false)
     })
@@ -33,13 +41,11 @@ const AddFriend = (props) => {
     })
   };
 
-  console.log('fdd', friended)
-  if (friended) {
-    console.log('fdd', friended)
-    return <button className='profile-btn' onClick={removeFriend}> Remove Friend- </button>
-  } else {
-    console.log('fdd', friended)
+  if (!friended) {
     return <button className='profile-btn' onClick={addFriend}> Add Friend+ </button>
+  } else {
+    return <button className='profile-btn' onClick={removeFriend}> Remove Friend- </button>
+
   }
 };
 
