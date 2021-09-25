@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
+import { useAuth } from '../user-auth.js';
+
+
 
 const LineChart = () => {
   const [date, setDate] = useState([])
@@ -10,9 +13,10 @@ const LineChart = () => {
   const [display, setDisplay] = useState([])
   const [text, setText] = useState('Calorie')
 
+  const auth = useAuth();
 
-  function getStatData(){
-    return axios.get('/userdata')
+  function getStatData(userid){
+    return axios.get('/userdata', { params: {userId: userid}})
     .then(results => {
       results.data[0].stats.forEach(day => {
         setDate(prevState => prevState.concat(day.date))
@@ -24,7 +28,7 @@ const LineChart = () => {
   }
 
   useEffect(() => {
-    getStatData()
+    getStatData(auth.userId)
   }, [])
 
   useEffect(() => {
@@ -72,7 +76,7 @@ const LineChart = () => {
   return (
     <>
     <div className='header'>
-      <h1 className='title'>Test Chart</h1>
+      <h1 className='title'>{text} Chart</h1>
       <form>
         <label htmlFor='chart-selection'> Select Chart </label>
       <select name='charts' id='chart-selection' onChange={(e) => handleChange(e)}>
