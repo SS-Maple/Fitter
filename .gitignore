@@ -9,6 +9,7 @@ coverage/lcov-report/sum.js.html
 
 .env
 firebase.config.js
+chat.config.js
 
 # bundle
 client/dist/bundle.js

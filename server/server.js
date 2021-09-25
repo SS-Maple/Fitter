@@ -5,6 +5,7 @@ let app = express();
 let port = 3000;
 
 const db = require('../database/connect.js');
+const chatdb = require('./chat.js');
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
@@ -48,7 +49,27 @@ app.get('/user', (req, res) => {
 app.get('/friends', (req, res) => {
   let friendId = req.query.friendId;
   db.client.query(`
-      select id, firstname, lastname, picture, descriptionmessage,
+    SELECT * FROM friends
+    JOIN users
+    ON friends.friendid = users.id
+    WHERE userid = ${friendId}
+    ORDER BY users.firstname
+  `, (err, data) => {
+    if (err) {
+      // console.log('error from server -', err)
+      res.send(err);
+    } else {
+      // console.log('rows from server /friends - ', data.rows)
+      res.send(data.rows);
+    }
+  })
+});
+
+// get home feed rankings data
+app.get('/rankings', (req, res) => {
+  let friendId = 1;
+  db.client.query(`
+    select id, firstname, lastname, picture, descriptionmessage,
       (
         select array_to_json(array_agg(row_to_json(d)))
         from (
@@ -456,9 +477,9 @@ app.post('/signin', (req, res) => {
 app.post('/login', (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
-
+  console.log('/login email: ', email);
   // check if the email is in the db
-  db.client.query(`SELECT id FROM users WHERE users.email = '${email}'`)
+  db.client.query(`SELECT id FROM users WHERE email = 'privcan@live.com'`)
   .then(data => {
     if (!data.rowCount) {
       throw new Error('email does not exist');
@@ -468,8 +489,26 @@ app.post('/login', (req, res) => {
       userId: data.rows[0].id
     })
   })
-  .catch(err => console.log('Error logging in', err))
+  .catch(err => console.log('Error logging in in /login: ', err))
 })
+
+// GET chat user's info
+app.get('/chat/user', (req, res) => {
+  console.log('here!');
+  let userId = req.query.userId || 1;
+  console.log('userId: ', userId);
+  chatdb.getChatUser(userId)
+    .then(results => res.status(200).send(results))
+    .catch(error => res.status(500).send(error));
+});
+
+// GET chat user's friends
+app.get('/chat/friends', (req, res) => {
+  let userId = req.query.userId || 1;
+  chatdb.getChatUserFriends(userId)
+    .then(results => res.status(200).send(results))
+    .catch(error => res.status(500).send(error));
+});
 
 /* NOTIFICATIONS ROUTES */
 
