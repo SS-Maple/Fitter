@@ -15,6 +15,7 @@ const AddFriend = () => {
   useEffect(() => {
     axios.get(`/isfriend?friendID=${friendId}&userID=${userId}`)
     .then(results => {
+      console.log('res in isfriend', results.data)
       setFriend(results.data)
     })
     .catch(err => {
