@@ -94,8 +94,8 @@ const MyProfile = () => {
 
   }
   return(
-          <div className='my-profile-container'>
-            <div className='my-profile'>
+          <div className='my-profile-container' >
+            <div className='my-profile' style={{margin:'0% 2%', paddingRight:'2%'}}>
               <div className='profile-info'>
                 <div className='profile-pic'>
                   <img className='profile-img' src={picture}></img>
@@ -120,16 +120,18 @@ const MyProfile = () => {
                 <button className='profile-btn edit-goal-btn' onClick={() => handleClick()} >Edit Goals</button>
               </div>
             </div>
-            <div className='goal-header'>Your Goals:</div>
+            <div style={{margin:'0% 5%'}}>
+            <div className='goal-header'><b>Your Goals:</b></div>
             <MyGoals goals={goals} />
-            <div className='goal-header' >Today's Status:</div>
+            <div className='goal-header' ><b>Today's Status:</b></div>
             <TodaysGoals userid={userid} goals={goals} />
             <Link to={{ pathname:'/chart' }}>
               <div className='more-details'>Tap for more details</div>
             </Link>
-            <div className='goal-header'>Your Previous Status:</div>
+              <div className='goal-header'><b>Your Previous Status:</b></div>
             <PreviousStats stats={stats} goals={goals} handleShare={handleShare} />
             <EditGoals show={editGoals} close={handleClick} userid={userid} handleGoalSubmit={handleGoalSubmit} />
+          </div>
           </div>
         )
 
