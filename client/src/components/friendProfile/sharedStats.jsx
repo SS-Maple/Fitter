@@ -6,9 +6,14 @@ import { Link } from 'react-router-dom';
 const SharedStats = ({picture, username, stats, goals, userid, friendid}) => {
   if(!stats){
     return (
-      <div style={{ 'fontSize': '15px', 'width': '75%', 'text-align': 'center', 'padding': '70px'}}>
-        {`${username} is not sharing any stats at this time`}
-      </div>
+      // <div style={{ 'fontSize': '15px', 'width': '75%', 'text-align': 'center', 'padding': '70px'}}>
+      //   {`${username} is not sharing any stats at this time`}
+      // </div>
+      <div className='pic-tile-friend-tile'>
+        <div className='pic-tile-friend-right-info'>
+          {`${username} is not sharing any stats at this time.`}
+        </div>
+    </div>
     )
   } else {
   const [show, setShow] = useState(false);
