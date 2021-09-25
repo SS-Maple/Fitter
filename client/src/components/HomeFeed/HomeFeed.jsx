@@ -21,10 +21,9 @@ function HomeFeed() {
           weight: results.data.weight
         })
       })
-      .then(() => {
-        generateNewNotifications(id);
-      })
   }, []);
+
+  generateNewNotifications(id);
 
   return (
     <div id='home-page'>

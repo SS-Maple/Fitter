@@ -4,17 +4,17 @@ const generateNewNotifications = (userId) => {
   let newNotifications = false;
   axios.get(`/notifications/users/goals?userId=${userId}`)
     .then((data) => {
-      if (data.data.water < 1) {
+      if (data.data.water < 1 || data.data.water === null) {
         let queryString = `userId=${userId}&notificationsText='Please update your water goal!'`;
         axios.post(`/notifications?${queryString}`);
         newNotifications = true;
       }
-      if (data.data.calories < 1) {
+      if (data.data.calories < 1 || data.data.calories === null) {
         let queryString = `userId=${userId}&notificationsText='Please update your calorie goal!'`;
         axios.post(`/notifications?${queryString}`);
         newNotifications = true;
       }
-      if (data.data.weight < 1) {
+      if (data.data.weight < 1 || data.data.weight === null) {
         let queryString = `userId=${userId}&notificationsText='Please update your weight goal!'`;
         axios.post(`/notifications?${queryString}`);
         newNotifications = true;
