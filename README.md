@@ -10,6 +10,7 @@ App Overview:
 <li>Get notified of missing information and goal status</li>
 <li>One-on-one chat option</li>
 
+
 Project Set Up:
 1. Install packages - npm install
 2. Establish Postgres connection - create a .env file for your postgres connectionString to login
