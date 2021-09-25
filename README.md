@@ -9,7 +9,8 @@ App Overview:
 <li>Comment on other people's goals</li>
 <li>Get notified of missing information and goal status</li>
 <li>One-on-one chat option</li>
-<br/>
+
+
 Project Set Up:
 1. Install packages - npm install
 2. Establish Postgres connection - create a .env file for your postgres connectionString to login
@@ -17,7 +18,8 @@ Project Set Up:
 4. Firebase - create a firebase.config.js file with credentials
 5. Start server - npm run start
 6. Start webpack - npm run client
-<br/>
+
+
 Team Members: 
 <li>Andre - https://github.com/aboussarath </li>
 <li>Izzy - https://github.com/izzyfarley</li>
