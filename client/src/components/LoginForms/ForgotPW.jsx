@@ -23,13 +23,15 @@ const ForgotPW = ({ setView }) => {
     <div className='form-page'>
       <div className='forgot-content' style={{marginTop: '20%'}}>
         <form>
-          <label className='forgot-label'>Please enter the email address for your account</label>
+          <label className='forgot-label'>Please enter the email address for your account: </label>
           <label className='forgot-label' style={{ color: success ? 'green' : 'red'}}>{message}</label>
           <input type='email' placeholder='Email' onChange={e => setEmail(e.target.value)}></input>
           <input className='form-submit' type='submit' value='Reset Password' onClick={handleSubmit}></input>
         </form>
       </div>
-      <u onClick={e => setView('login')}>Back to Login</u>
+      <div className='form-content'>
+        <p style={{fontSize: 'smaller'}}><u onClick={e => setView('login')}>Back to Login</u></p>
+      </div>      
     </div>
   )
 }

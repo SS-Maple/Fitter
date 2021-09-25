@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS dailyData;
 DROP TABLE IF EXISTS friendMessages;
 DROP TABLE IF EXISTS publicMessages;
 DROP TABLE IF EXISTS notifications;
+DROP TABLE IF EXISTS comments;
 
 CREATE TABLE users (
   id                  SERIAL    UNIQUE   PRIMARY KEY,

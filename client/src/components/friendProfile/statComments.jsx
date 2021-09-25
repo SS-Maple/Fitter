@@ -28,6 +28,8 @@ const StatComments = (props) => {
 
     return (
       <div>
+        <div className='feed-bottom'></div>
+        <div className='feed-bottom' style={{marginTop:'5%'}}></div>
         <div className='pic-tile-friend-header'>
           <img
             className='icon'
@@ -50,6 +52,7 @@ const StatComments = (props) => {
           </div>
         </div>
         ))}
+      <div className='feed-bottom'></div>
       </div>
       )
 }

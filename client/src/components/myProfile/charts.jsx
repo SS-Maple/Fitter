@@ -76,7 +76,8 @@ const LineChart = () => {
   return (
     <>
     <div className='header'>
-      <h1 className='title'>{text} Chart</h1>
+      <div className='feed-bottom'></div>
+      <h1 className='title' style={{color:'white', textAlign:'center'}}>{text} Chart</h1>
       <form>
         <label htmlFor='chart-selection'> Select Chart </label>
       <select name='charts' id='chart-selection' onChange={(e) => handleChange(e)}>
