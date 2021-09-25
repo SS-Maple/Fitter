@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS goals;
 DROP TABLE IF EXISTS dailyData;
 DROP TABLE IF EXISTS friendMessages;
 DROP TABLE IF EXISTS publicMessages;
+DROP TABLE IF EXISTS notifications;
 
 CREATE TABLE users (
   id                  SERIAL    UNIQUE   PRIMARY KEY,
@@ -23,9 +24,7 @@ CREATE TABLE users (
   userPassword        VARCHAR   NOT NULL,
   shareBirthday       BOOLEAN   DEFAULT FALSE,
   birthday            VARCHAR,
-  picture             VARCHAR,
-  securityQuestion    VARCHAR   NOT NULL,
-  securityAnswer      VARCHAR   NOT NULL
+  picture             VARCHAR
 );
 
 CREATE TABLE friends (
@@ -66,16 +65,24 @@ CREATE TABLE comments (
   userID         INT       NOT NULL      REFERENCES users(id),
   friendID       INT       NOT NULL      REFERENCES users(id),
   comment        VARCHAR    ,
-  tileId         INT      NOT NULL
+  timestamp       TIMESTAMP DEFAULT now()
+);
+
+CREATE TABLE notifications (
+  id                     SERIAL    NOT NULL    PRIMARY KEY,
+  userId                 INT       NOT NULL    REFERENCES users(id),
+  notificationText       VARCHAR   NOT NULL,
+  new                    BOOLEAN   DEFAULT true
 );
 
 -- DATA LOAD
-\COPY users(firstName,lastName,email,username,descriptionMessage,userPassword,shareBirthday,birthday,picture,securityQuestion,securityAnswer) FROM 'data/fitterUsers.csv' DELIMITER ',' CSV HEADER;
+\COPY users(firstName,lastName,email,username,descriptionMessage,userPassword,shareBirthday,birthday,picture) FROM 'data/fitterUsers.csv' DELIMITER ',' CSV HEADER;
 \COPY friends(userID,friendID) FROM 'data/fitterFriends.csv' DELIMITER ',' CSV HEADER;
 \COPY goals(userId,waterGoal,calorieGoal,weightGoal,shareBoolean) FROM 'data/goals.csv' DELIMITER ',' CSV HEADER;
 \COPY dailyData(userId,timestamp,water,calories,weight,shareBoolean) FROM 'data/dailyData.csv' DELIMITER ',' CSV HEADER;
 \COPY friendMessages(userID,friendID,message,timestamp) FROM 'data/friendMessages.csv' DELIMITER ',' CSV HEADER;
-
+\COPY comments(userID,friendID,comment,timestamp) FROM 'data/comment.csv' DELIMITER ',' CSV HEADER;
+\COPY notifications(id,userId,notificationText,new) FROM 'data/notifications.csv' DELIMITER ',' CSV HEADER;
 
 
 -- STRETCH GOALS: public forum

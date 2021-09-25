@@ -11,7 +11,9 @@ const BottomNav = ({ handleClick }) => {
         </Link>
       </div>
       <div className='nav-icon chat' onClick={(e) => handleClick(e)}>
-        <img alt='Chat' className='icon' src='https://cdn4.iconfinder.com/data/icons/top-search-6/128/_chat_communication_message_typing_launcher_conversation_talk_bubble-512.png'></img>
+        <Link to={{ pathname: '/chat' }}>
+          <img alt='Chat' className='icon' src='https://cdn4.iconfinder.com/data/icons/top-search-6/128/_chat_communication_message_typing_launcher_conversation_talk_bubble-512.png'></img>
+        </Link>
       </div>
       <div className='nav-icon profile' onClick={(e) => handleClick(e)}>
         <Link to={{ pathname: '/userprofile'}}>

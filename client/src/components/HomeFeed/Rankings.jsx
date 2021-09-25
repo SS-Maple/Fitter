@@ -14,58 +14,35 @@ function Rankings({ id }) {
 
   useEffect(() => {
     axios.get(`/rankings?friendId=${userId}`)
-      .then(response => setFriends(response.data))
+      .then(response => {
+        setFriends(response.data)
+        response.data.forEach(user => {
+          if (user.id === userId) {
+            setRank(user.ranks)
+          }
+        })
+      })
       .catch(error => error)
-  }, []);
-
-  function sortFriends() {
-    console.log('calling sort')
-    friends.forEach((friend, index) => {
-      // returns negative if they missed the goal
-      let water = Math.abs(100 - (friend['userdata'][index]['wateraverage'] * 100))
-      // returns negative if goal is exceeded
-      let calories = Math.abs(100 - (friend['userdata'][index]['caloriesaverage'] * 100))
-      let calculate = water + calories;
-      friend['sorting'] = calculate.toFixed(2);
-      friend['wateraverage'] = friend['userdata'][index]['wateraverage'];
-      friend['caloriesaverage'] = friend['userdata'][index]['caloriesaverage'];
-    })
-    final();
-  }
-
-  function ranking() {
-    return friends.sort((a, b) => a.sorting - b.sorting)
-      .forEach((user, index) => user['ranks'] = (index + 1))
-  }
-
-  function final() {
-    ranking();
-    return friends.filter(user => user.id === userId).map(user => user.ranks).toString()
-  }
+    }, []);
 
   if (friends) {
     if (friends.length > 1) {
-      sortFriends();
       return <div data-testid='home-page' id='home-page'>
         {/* Friend Information */}
-        <div
-          className='pic-tile-friend-tile'
-          onClick={() => console.log('On click needs to route to', friend.friendfirst)}
-        >
+        <div className='pic-tile-friend-tile'>
           <div className='pic-tile-friend-right-info'>
-            You're currently ranked <b>#{final()}</b> amongst friends.
+            You're currently ranked <b>#{rank}</b> amongst friends.
           </div>
         </div>
         <h4>Your Friend's Rankings: </h4>
         {/* Friend's List Tile */}
         {friends.sort((a, b) => a.sorting - b.sorting)
           .map((friend, index) => (
-            <Link to={`/friendProfile?friendid=${friend.id}&userid=${userId}`} key={index} >
-              <div
-                className='pic-tile-friend-tile'
-                key={index}
-                onClick={() => console.log('On click needs to route to', friend.firstname)}
-              >
+            <Link to={`/friendProfile?friendid=${friend.id}&userid=${userId}`}
+              key={index}
+              style={{textDecoration:"none", color:'black'}}
+            >
+              <div className='pic-tile-friend-tile' key={index}>
                 <div className='pic-tile-ranking'>
                   #{index + 1}
                 </div>
@@ -81,6 +58,9 @@ function Rankings({ id }) {
                   </li>
                   <li>
                     Reached {Math.round(friend.caloriesaverage * 100)}% of my calories goal.
+                  </li>
+                  <li>
+                    {Math.round(friend.weightaverage * 100)}% of the way to my weight goal.
                   </li>
                 </div>
             </div>

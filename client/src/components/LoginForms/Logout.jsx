@@ -6,8 +6,22 @@ function Logout() {
   const history = useHistory();
   const auth = useAuth();
 
-  return auth.user ? (
-    <p className='logout'>
+  // return auth.user ? (
+  //   <p>
+  //     Welcome! {`User ${auth.userId}`}
+  //     <button
+  //       onClick={() => {
+  //         auth.signout(() => history.push("/"));
+  //       }}
+  //     >
+  //       Sign out
+  //     </button>
+  //   </p>
+  // ) : (
+  //   <p>You are not logged in.</p>
+  // );
+  return (
+    <p>
       Welcome! {`User ${auth.userId}`}
       <button
         onClick={() => {
@@ -17,8 +31,6 @@ function Logout() {
         Sign out
       </button>
     </p>
-  ) : (
-    <p>You are not logged in.</p>
   );
 }
 
