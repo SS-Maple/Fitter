@@ -95,3 +95,4 @@ CREATE TABLE notifications (
 
 
 -- SELECT setval(pg_get_serial_sequence(users, users.id), max(users.id)) FROM users;
+-- SELECT pg_catalog.setval(pg_get_serial_sequence('notifications', 'id'), MAX(id)) FROM notifications;

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import TodaysGoals from '../myProfile/todaysGoal.jsx';
 import Rankings from './Rankings.jsx';
 import { useAuth } from '../user-auth.js';
-import generateNewNotifications from '../notifications/notificationHelpers/generateNewNotifications.js';
 
 function HomeFeed() {
   const auth = useAuth();
@@ -21,10 +20,8 @@ function HomeFeed() {
         let info = data.data[0]
         setGoals(info.goals)
       })
-      .then(() => {
-        generateNewNotifications(id);
-      })
       .catch(error => error)
+
   }, []);
 
   return (
