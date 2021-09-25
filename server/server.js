@@ -457,7 +457,7 @@ app.post('/login', (req, res) => {
   let password = req.body.password;
   console.log('/login email: ', email);
   // check if the email is in the db
-  db.client.query(`SELECT id FROM users WHERE email = 'privcan@live.com'`)
+  db.client.query(`SELECT id FROM users WHERE email = '${email}'`)
   .then(data => {
     if (!data.rowCount) {
       throw new Error('email does not exist');
