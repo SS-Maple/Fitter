@@ -353,12 +353,12 @@ app.get('/isfriend', (req, res) => {
 
   var friendId = req.headers.referer.split('?')[1].split('=')[1].split('&')[0]
   var userId = req.headers.referer.split('&')[1].split('=')[1]
-  console.log(`friend ${friendId}, user ${userId}`)
   db.client.query(`
     SELECT * from friends WHERE userID=${userId} AND friendID=${friendId}`, (err, data) => {
     if (err) {
       res.send(err);
     } else {
+      console.log(data.rows)
       if(data.rows.length === 0) {
         res.send(false);
       } else {
@@ -395,6 +395,7 @@ app.delete('/removefriend', (req, res) => {
     if (err) {
       res.send(err);
     } else {
+      console.log('success')
       res.sendStatus(204);
     }
   })
