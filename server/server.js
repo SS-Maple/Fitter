@@ -455,9 +455,9 @@ app.post('/signin', (req, res) => {
 app.post('/login', (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
-
+  console.log('/login email: ', email);
   // check if the email is in the db
-  db.client.query(`SELECT id FROM users WHERE users.email = '${email}'`)
+  db.client.query(`SELECT id FROM users WHERE email = 'privcan@live.com'`)
   .then(data => {
     if (!data.rowCount) {
       throw new Error('email does not exist');
@@ -467,7 +467,7 @@ app.post('/login', (req, res) => {
       userId: data.rows[0].id
     })
   })
-  .catch(err => console.log('Error logging in', err))
+  .catch(err => console.log('Error logging in in /login: ', err))
 })
 
 // GET chat user's info
