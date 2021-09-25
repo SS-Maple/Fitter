@@ -8,6 +8,16 @@ import NotificationIcon from '../../client/src/components/SharedComponents/TopBa
 import 'regenerator-runtime';
 import { BrowserRouter } from 'react-router-dom';
 
+describe('Renders TopBar', () => {
+  test('renders component', () => {
+    // render (
+    //   <BrowserRouter>
+    //     <TopBar />
+    //   </BrowserRouter>
+    // );
+  });
+});
+
 describe('Renders emptyDiv', () => {
   test('renders emptyDiv', () => {
     render (
