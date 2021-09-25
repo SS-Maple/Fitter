@@ -239,6 +239,19 @@ body {
 
 /* Friend's List ----> */
 
+.logout {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 11;
+  margin-top: .2rem;
+  padding-left: .2rem;
+}
+
 /*User Profile*/
 .my-profile-container {
 margin-top: 10.5vh;
