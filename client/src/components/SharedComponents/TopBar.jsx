@@ -19,7 +19,7 @@ const TopBar = (props) => {
           setNewNotifications(true);
         }, []);
       }
-    }
+  }
 
   return (
     <div className="topbar">

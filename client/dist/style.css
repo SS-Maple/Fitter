@@ -80,7 +80,7 @@ body {
 }
 
 .notificationBoxes {
-  background-color: white;
+  background-color: #6ec0c3;
   border-radius: 5px;
   justify-content: center;
   padding: 2px;
@@ -92,18 +92,18 @@ body {
   font-size: 3vh;
   text-align: center;
   justify-content: center;
-  color: #494949;
+  color: white;
   font-family: sans-serif, monospace;
 }
 
 #notificationsTile {
-  background-color: #494949;
-  color: white;
+  background-color: white;
+  color: #494949;
   padding: 3px;
   border-radius: 5px;
   display: flex;
   align-items: center;
-  margin: 5px;
+  margin: 5%;
   font-family: sans-serif, monospace;
 }
 
