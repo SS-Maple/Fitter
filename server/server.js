@@ -369,6 +369,7 @@ app.get('/isfriend', (req, res) => {
 app.post('/addfriend', (req, res) => {
   var friendId = req.headers.referer.split('?')[1].split('=')[1].split('')[0]
   var userId = req.headers.referer.split('&')[1].split('=')[1]
+  console.log('friendid:', friendId, 'userId:', userId)
   db.client.query(`
     INSERT INTO friends (userID, friendID)
     VALUES (${userId}, ${friendId})
@@ -377,6 +378,7 @@ app.post('/addfriend', (req, res) => {
       console.log('error from server', err)
       res.send(err);
     } else {
+      console.log('success')
       res.sendStatus(204);
     }
   })
@@ -392,6 +394,7 @@ app.delete('/removefriend', (req, res) => {
     if (err) {
       res.send(err);
     } else {
+      console.log('success')
       res.sendStatus(204);
     }
   })
