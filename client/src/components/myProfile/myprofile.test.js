@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow, configure} from 'enzyme';
+import {shallow, configure, mount} from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 configure({adapter: new Adapter()});
 import MockAdapter from 'axios-mock-adapter'
@@ -23,8 +23,10 @@ let data = {
 
 it ('Renders MyProfile', () => {
   const myProfile = shallow(<MyProfile  />)
+  myProfile.find('div.more-details').simulate('click')
   expect(myProfile.exists()).toBe(true);
 })
+
 
 it ('Renders MyGoals', () => {
   const myGoals = shallow(<MyGoals goals={[]}  />)
@@ -48,6 +50,7 @@ it ('Renders EditGoalsModal', () => {
 
 it('Renders Charts', () => {
   const lineChart = shallow(<LineChart />)
+  lineChart.find('select').simulate('click')
   expect(lineChart.exists()).toBe(true);
 
 })
