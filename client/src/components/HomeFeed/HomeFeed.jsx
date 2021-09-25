@@ -30,6 +30,7 @@ function HomeFeed() {
   return (
     <div id='home-page' data-testid='home-page'>
       <div className='feed-bottom'></div>
+      <div className='feed-bottom' style={{marginTop:'5%'}}></div>
       <div style={{textAlign: 'center', fontSize: '20px', color:'white'}}><b>Welcome {userName}!</b></div>
       {/* Home Feed Search */}
       <SearchUsernames />

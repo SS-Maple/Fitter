@@ -25,12 +25,11 @@ function FriendsList() {
       .catch((error) => error);
   }, [])
 
-  console.log('->', friendId, userId, friends)
-
   return (
     <div data-testid='friends'>
       {/* Friend's List Header */}
       <div className='feed-bottom'></div>
+      <div className='feed-bottom' style={{marginTop:'5%'}}></div>
       <div data-testid='pic-tile-friend-header' className='pic-tile-friend-header'>
         <img
           className='icon'
