@@ -14,7 +14,6 @@ class CommentModal extends React.Component {
     this.handleSubmitComment=this.handleSubmitComment.bind(this)
   }
   handleInputChange(event) {
-    console.log(event.target)
     const target = event.target;
     const value = target.value;
     const name = target.name;
@@ -25,7 +24,6 @@ class CommentModal extends React.Component {
   }
   handleSubmitComment() {
     event.preventDefault()
-    console.log('in submit comment', )
     axios.post('/comment', {comment: this.state.comment, friendid: this.props.friendid, userid: this.props.userid, commentid: this.props.statid})
     .then(result => {
       this.props.onClose();
@@ -51,8 +49,8 @@ class CommentModal extends React.Component {
           <br></br>
         </div>
         <div className="c-modal-footer">
-          <button className="c-button" onClick={this.props.onClose}>Close</button>
-          <button className="c-button" onClick={this.handleSubmitComment}>Submit Comment </button>
+          <button className='profile-btn' onClick={this.props.onClose}>Close</button>
+          <button className="profile-btn" onClick={this.handleSubmitComment}>Submit Comment </button>
         </div>
       </div>
     </div>
@@ -60,3 +58,6 @@ class CommentModal extends React.Component {
 }
 
 export default CommentModal;
+
+
+

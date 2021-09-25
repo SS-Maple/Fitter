@@ -1,36 +1,16 @@
-import React from 'react';
-import { useAuth } from '../user-auth.js';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import ConfirmLogout from './ConfirmLogout.jsx';
 
-function Logout() {
-  const history = useHistory();
-  const auth = useAuth();
+const Logout = () => {
+  const [show, setShow] = useState(false);
 
-  // return auth.user ? (
-  //   <p>
-  //     Welcome! {`User ${auth.userId}`}
-  //     <button
-  //       onClick={() => {
-  //         auth.signout(() => history.push("/"));
-  //       }}
-  //     >
-  //       Sign out
-  //     </button>
-  //   </p>
-  // ) : (
-  //   <p>You are not logged in.</p>
-  // );
   return (
-    <p>
-      Welcome! {`User ${auth.userId}`}
-      <button
-        onClick={() => {
-          auth.signout(() => history.push("/"));
-        }}
-      >
-        Sign out
-      </button>
-    </p>
+    <div className='logout'>
+      <div className='nav-icon home' onClick={() => setShow(true)}>
+          <img alt='Logout' id='logout-icon' src='https://cdn2.iconfinder.com/data/icons/user-interface-line-38/24/Untitled-5-11-1024.png'></img>
+      </div>
+      <ConfirmLogout show={show} setShow={setShow}/>
+    </div>
   );
 }
 

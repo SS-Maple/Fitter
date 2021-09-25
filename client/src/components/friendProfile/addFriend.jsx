@@ -1,14 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import { Link, useLocation, useHistory, useParams } from 'react-router-dom';
+import { useAuth } from '../user-auth.js';
 
+const AddFriend = () => {
+  const location = useLocation();
+  const auth = useAuth();
+  const [userId, setId] = useState(auth.userId);
+  const [friendId, setFriendId] = useState(location.search.split('')[10]);
 
-const AddFriend = (props) => {
+  const [friended, setFriend] = useState();
 
-  const [friended, setFriend] = useState(props.isFriend);
+  useEffect(() => {
+    axios.get(`/isfriend?friendID=${friendId}&userID=${userId}`)
+    .then(results => {
+      console.log('res in isfriend', results.data)
+      setFriend(results.data)
+    })
+    .catch(err => {
+      console.log('ERROR', err)
+    })
+  }, []);
 
   const addFriend = () => {
-    axios.post('/addfriend', {friendID: props.friendid, userID: props.userid})
+    axios.post(`/addfriend?friendID=${friendId}&userID=${userId}`)
     .then(result => {
       setFriend(true)
     })
@@ -16,9 +32,8 @@ const AddFriend = (props) => {
       console.log('ERROR in axios post to /addFriend catch block: ', err)
     })
   };
-
   const removeFriend = () => {
-    axios.delete('/removefriend', {friendID: props.friendid, userID: props.userid})
+    axios.delete(`/removefriend?friendID=${friendId}&userID=${userId}`)
     .then(result => {
       setFriend(false)
     })

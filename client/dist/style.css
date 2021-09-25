@@ -23,6 +23,7 @@ body {
   left: 0;
   right: 0;
   top: 0;
+  z-index: 10;
 }
 
 #emptyDiv {
@@ -80,7 +81,7 @@ body {
 }
 
 .notificationBoxes {
-  background-color: white;
+  background-color: #6ec0c3;
   border-radius: 5px;
   justify-content: center;
   padding: 2px;
@@ -92,18 +93,18 @@ body {
   font-size: 3vh;
   text-align: center;
   justify-content: center;
-  color: #494949;
+  color: white;
   font-family: sans-serif, monospace;
 }
 
 #notificationsTile {
-  background-color: #494949;
-  color: white;
+  background-color: white;
+  color: #494949;
   padding: 3px;
   border-radius: 5px;
   display: flex;
   align-items: center;
-  margin: 5px;
+  margin: 5%;
   font-family: sans-serif, monospace;
 }
 
@@ -238,6 +239,19 @@ body {
 }
 
 /* Friend's List ----> */
+
+.logout {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 11;
+  margin-top: .2rem;
+  padding-left: .2rem;
+}
 
 /*User Profile*/
 .my-profile-container {
@@ -702,6 +716,8 @@ svg {
   left: 0;
   right: 0;
   bottom: 0;
+  font-family: sans-serif;
+  font-size: 14px;
   background: rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
@@ -716,24 +732,32 @@ svg {
   background: #fff;
   overflow: auto;
   cursor: default;
+  font-family: sans-serif;
+  font-size: 14px;
 }
 
 .c-modal-header,
 .c-modal-footer {
   padding: 10px;
   background: var(--lightgray);
+  font-family: sans-serif;
+  font-size: 14px;
 }
 
 .c-modal-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-family: sans-serif;
+  font-size: 14px;
 }
 
 .c-modal-body {
   padding: 10px;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
+  font-family: sans-serif;
+  font-size: 14px;
 }
 .security-select {
   border-radius: 5px;
@@ -771,4 +795,30 @@ svg {
 
 .forgot-label {
   margin: 2px;
+}
+
+.l-modal-content {
+  border-radius: .7rem;
+  width: 80vw;
+  height: 15vh;
+  background-color: white;
+}
+
+.l-modal-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content:center;
+  align-self: flex-end;
+  margin-top: 4vh;
+}
+
+#logout-icon {
+  color: #494949;
+  display: flex;
+  width: 7vw;
+  height: 3vh;
+  margin-top: 1vh;
+  margin-left: 2vw;
 }

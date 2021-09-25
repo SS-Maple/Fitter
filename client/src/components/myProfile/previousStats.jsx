@@ -8,14 +8,14 @@ const PreviousStats = ({ stats, goals, handleShare }) => {
       let weightGoal = ((stat.weight / goals.weightgoal) * 100).toFixed(0);
       let share = stat.shareboolean ? '[ Unshare ]' : '[ Share ]';
       return (
-        <div className='previous-stat-container' key={i} >
-          <div className='stat-header'>
+        <div className='previous-stat-container' key={i} style={{margin:'5% 0', fontSize:'14px'}}>
+          <div className='stat-header' >
             <p>{stat.date}</p>
             <div className='share' data-id={stat.id} data-bool={stat.shareboolean} onClick={(e) => handleShare(e)}>{share}</div>
           </div>
-          <p>You've reached {calorieGoal}% of your calorie intake!</p>
-          <p>You've reached {waterGoal}% of your water intake!</p>
-          <p>You're {weightGoal}% of your weight goal!</p>
+          <li>You've reached {calorieGoal}% of your calorie intake!</li>
+          <li>You've reached {waterGoal}% of your water intake!</li>
+          <li>You're {weightGoal}% of your weight goal!</li>
         </div>
       )
     }

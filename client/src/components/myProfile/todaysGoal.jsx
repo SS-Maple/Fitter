@@ -7,8 +7,8 @@ import { useAuth } from '../user-auth.js';
 
 
 const TodaysGoals = ({ userid, goals }) => {
-  const {caloriegoal, watergoal, weightgoal} = goals
-
+  // const {caloriegoal, watergoal, weightgoal} = goals
+// console.log("goal",goals)
   const [calories, setCalories] = useState(0);
   const [water, setWater] = useState(0);
   const [weight, setWeight] = useState(0);
@@ -26,27 +26,48 @@ const TodaysGoals = ({ userid, goals }) => {
     return axios.get('/todaysgoals', {params: {userid}})
     .then(results =>
       {
+        if (!results.data.calories) {
+          setCalories(0)
+        } else {
         setCalories(results.data.calories)
+        }
+        if (!results.data.water) {
+          setWater(0)
+        } else {
         setWater(results.data.water)
+        }
+        if (!results.data.weight) {
+          setWeight(0)
+        } else {
         setWeight(results.data.weight)
+        }
+
+        // setCalories(results.data.calories)
+        // setWater(results.data.water)
+        // setWeight(results.data.weight)
       })
     .catch(err => console.log('No Records for today'))
   };
 
   function pct(v,category){
-    if(!v) {
+    let cg = goals ? goals.caloriegoal : 0
+    let waterg = goals ? goals.watergoal : 0
+    let wg = goals ? goals.weightgoal : 0
+
+
+    if(!v || v === 0) {
       return '0%'
     } else {
       if (category === 'caloriegoal') {
-        let pctvalue = ((v/caloriegoal) * 100).toFixed(0)
+        let pctvalue = ((v/cg) * 100).toFixed(0)
         return `${pctvalue}%`
       }
       if (category === 'watergoal') {
-        let pctvalue = ((v/watergoal) * 100).toFixed(0)
+        let pctvalue = ((v/waterg) * 100).toFixed(0)
         return `${pctvalue}%`
       }
       if (category === 'weightgoal') {
-        let pctvalue = ((v/weightgoal) * 100).toFixed(0)
+        let pctvalue = ((v/wg) * 100).toFixed(0)
         return `${pctvalue}%`
       }
     }

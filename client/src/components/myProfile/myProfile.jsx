@@ -16,10 +16,9 @@ const MyProfile = () => {
   const [picture, setPicture] = useState('');
   const [intro, setIntro] = useState('');
   const [stats, setStats] = useState([]);
-  const [goals, setGoals] = useState('');
+  const [goals, setGoals] = useState({});
   const [friendCount, setFriendCount] = useState('');
   const [editGoals, setEditGoals] = useState(false);
-
   const auth = useAuth();
 
   useEffect(() => {
@@ -30,15 +29,29 @@ const MyProfile = () => {
     axios.get('/userdata', { params: {userId: userid}})
     .then(data => {
       let info = data.data[0]
+      console.log('test', info)
         setUserId(info.id)
         setFirstName(info.firstname)
         setLastName(info.lastname)
         setBirthDay(info.birthday)
         setPicture(info.picture)
         setIntro(info.intro)
-        setStats(info.stats)
-        setGoals(info.goals)
         setFriendCount(info.friendcount)
+
+        if (info.stats) {
+          setStats(info.stats)
+        } else {
+          setStats([])
+        }
+
+        if (info.goals) {
+          setGoals(info.goals)
+        } else {
+          setGoals({})
+        }
+
+        // setStats(info.stats)
+        // setGoals(info.goals)
     })
   }
 
@@ -71,7 +84,7 @@ const MyProfile = () => {
       url: '/updategoals',
       data: `userid=${userid}&watergoal=${water}&caloriegoal=${calorie}&weightgoal=${weight}&share=${share}`
     })
-    .then(() => getUserData())
+    .then(() => getUserData(userid))
   }
 
   function handleShare(e){
@@ -94,15 +107,15 @@ const MyProfile = () => {
 
   }
   return(
-          <div className='my-profile-container'>
-            <div className='my-profile'>
+          <div className='my-profile-container' >
+            <div className='my-profile' style={{margin:'0% 2%', paddingRight:'2%'}}>
               <div className='profile-info'>
                 <div className='profile-pic'>
                   <img className='profile-img' src={picture}></img>
                 </div>
                 <div className='profile-desc'>
                   <p className='user-details'>Name: {firstName} {lastName}</p>
-                  <p className='user-details'>Birthday: {birthday}</p>
+                  <p className='user-details'></p>
                 </div>
                 <Link to={`/friends?friendId=${userid}`}>
                 <div className='user-profile-friends'>
@@ -120,16 +133,18 @@ const MyProfile = () => {
                 <button className='profile-btn edit-goal-btn' onClick={() => handleClick()} >Edit Goals</button>
               </div>
             </div>
-            <div className='goal-header'>Your Goals:</div>
+            <div style={{margin:'0% 5%'}}>
+            <div className='goal-header'><b>Your Goals:</b></div>
             <MyGoals goals={goals} />
-            <div className='goal-header' >Today's Status:</div>
+            <div className='goal-header' ><b>Today's Status:</b></div>
             <TodaysGoals userid={userid} goals={goals} />
             <Link to={{ pathname:'/chart' }}>
               <div className='more-details'>Tap for more details</div>
             </Link>
-            <div className='goal-header'>Your Previous Status:</div>
+              <div className='goal-header'><b>Your Previous Status:</b></div>
             <PreviousStats stats={stats} goals={goals} handleShare={handleShare} />
             <EditGoals show={editGoals} close={handleClick} userid={userid} handleGoalSubmit={handleGoalSubmit} />
+          </div>
           </div>
         )
 

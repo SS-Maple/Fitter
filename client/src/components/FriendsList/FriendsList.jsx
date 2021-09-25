@@ -9,14 +9,15 @@ function FriendsList() {
   const [userId, setId] = useState(auth.userId);
 
   const [name, setName] = useState('');
-  const [friendId, setFriendId] = useState(location.search.split('')[10]);
+  const [friendId, setFriendId] = useState((location.search.split('')).slice(10));
   const [friends, setFriends] = useState([]);
 
   useEffect(() => {
-    axios.get(`/friends?friendId=${friendId}`)
+    let temp = friendId.join('');
+    axios.get(`/friends?friendId=${temp}`)
       .then((response) => setName(response.data[0].firstname))
       .catch((error) => error);
-    axios.get(`/friends?friendId=${friendId}`)
+    axios.get(`/friends?friendId=${temp}`)
       .then((response) => response.data)
       .then((result) => result[0].friends)
       .then((list) => setFriends(list))
@@ -27,6 +28,7 @@ function FriendsList() {
     <div data-testid='friends'>
       {/* Friend's List Header */}
       <div className='feed-bottom'></div>
+      <div className='feed-bottom' style={{marginTop:'5%'}}></div>
       <div data-testid='pic-tile-friend-header' className='pic-tile-friend-header'>
         <img
           className='icon'

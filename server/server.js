@@ -48,6 +48,7 @@ app.get('/user', (req, res) => {
 // get current user's friends
 app.get('/friends', (req, res) => {
   let friendId = req.query.friendId;
+  console.log('infriends', friendId)
   db.client.query(`
       select id, firstname, lastname, picture, descriptionmessage,
       (
@@ -170,7 +171,7 @@ app.put('/updatephoto', (req,res) => {
 
 app.put('/updategoals', (req, res) => {
   const {userid, watergoal, caloriegoal, weightgoal, share} = req.body;
-
+  console.log(req.body)
   return db.client.query(`
   INSERT INTO goals (userId, waterGoal, calorieGoal, weightGoal, shareBoolean) VALUES (${userid}, ${watergoal}, ${caloriegoal}, ${weightgoal}, ${share})
   ON CONFLICT (userId)
@@ -262,19 +263,19 @@ app.get(`/rankings`, (req, res) => {
                // console.log(queryString)
                res.send(err);
              } else {
-               // console.log('rows from server /users - ', data.rows)
+              //  console.log('rows from server /users - ', data.rows)
                let rankingInfo = data.rows;
                  rankingInfo.forEach((friend, index) => {
                  // returns negative if they missed the goal
-                 let water = Math.abs(100 - (friend['userdata'][index]['wateraverage'] * 100))
+                 let water = friend['userdata'][index] ? Math.abs(100 - (friend['userdata'][index]['wateraverage'] * 100)) : 0;
                  // returns negative if goal is exceeded
-                 let calories = Math.abs(100 - (friend['userdata'][index]['caloriesaverage'] * 100))
+                 let calories = friend['userdata'][index] ? Math.abs(100 - (friend['userdata'][index]['caloriesaverage'] * 100)) : 0;
                  let calculate = water + calories;
-                 friend['newId'] = friend['userdata'][index]['userid'];
+                //  friend['newId'] = friend['userdata'][index]['userid'];
                  friend['sorting'] = calculate.toFixed(2);
-                 friend['wateraverage'] = friend['userdata'][index]['wateraverage'];
-                 friend['caloriesaverage'] = friend['userdata'][index]['caloriesaverage'];
-                 friend['weightaverage'] = friend['userdata'][index]['weightaverage'];
+                 friend['wateraverage'] = friend['userdata'][index] ? friend['userdata'][index]['wateraverage'] : 0;
+                 friend['caloriesaverage'] = friend['userdata'][index] ? friend['userdata'][index]['caloriesaverage'] : 0;
+                 friend['weightaverage'] = friend['userdata'][index] ? friend['userdata'][index]['weightaverage'] : 0;
                  delete friend['userdata'];
                })
                rankingInfo.sort((a, b) => a.sorting - b.sorting).forEach((user, index) => user['ranks'] = (index + 1))
@@ -293,15 +294,12 @@ app.get(`/rankings`, (req, res) => {
 // WHERE userID = ${friendId} AND shareBoolean=true
 // ORDER BY timestamp
 app.get('/friendProfile', (req, res) => {
-  console.log('madeit')
-
-  var params = req.headers.referer.split('?')[1].split('=')[1].split('')[0]
+  var params = req.headers.referer.split('?')[1].split('=')[1].split('&')[0]
   var useridparams = req.headers.referer.split('&')[1].split('=')[1]
-
-  console.log('rq', params, useridparams)
   // let friendId = parseInt(req.query);
   let friendId = parseInt(params);
   let userId = parseInt(useridparams);
+  console.log(friendId, userId)
   db.client.query(`
       SELECT username, firstName, lastName, descriptionMessage, picture,
         (
@@ -327,15 +325,6 @@ app.get('/friendProfile', (req, res) => {
           ) e
         ) as goals,
         (
-          select row_to_json(f)
-          from (
-            SELECT userID,
-            friendID
-            from friends
-            WHERE userID=${userId} AND friendID=${friendId}
-          ) f
-        ) as isFriend,
-        (
           select array_to_json(array_agg(row_to_json(g)))
           from (
             SELECT userID,
@@ -343,7 +332,7 @@ app.get('/friendProfile', (req, res) => {
             from friends
             WHERE userID=${friendId}
           ) g
-        ) as fiends
+        ) as friends
       from users
       WHERE users.id=${friendId}`,
     (err, data) => {
@@ -354,82 +343,99 @@ app.get('/friendProfile', (req, res) => {
         var returnRes = data.rows[0]
         returnRes['userid'] = userId
         returnRes['friendid'] = friendId
-        // console.log('rows from server /friendprofile - ', data.rows[0])
+        if(returnRes.friends === null){
+          returnRes.friends = []
+        }
         res.send(returnRes);
       }
     })
 });
 app.get('/isfriend', (req, res) => {
-  let friendId = 7;
-  let userId = 1;
-  // let friendId = req.body.friendID
-  // let userId = req.body.userID
+
+  var friendId = req.headers.referer.split('?')[1].split('=')[1].split('&')[0]
+  var userId = req.headers.referer.split('&')[1].split('=')[1]
   db.client.query(`
     SELECT * from friends WHERE userID=${userId} AND friendID=${friendId}`, (err, data) => {
     if (err) {
-      // console.log('error from server', err)
       res.send(err);
     } else {
+      console.log(data.rows)
+      if(data.rows.length === 0) {
+        res.send(false);
+      } else {
 
-      console.log('success in isfriend', data)
-      res.send(data);
+        res.send(true);
+      }
     }
   })
 });
 app.post('/addfriend', (req, res) => {
-  let friendId = 7;
-  let userId = 1;
-  // let friendId = req.body.friendID
-  // let userId = req.body.userID
+  var friendId = req.headers.referer.split('?')[1].split('=')[1].split('')[0]
+  var userId = req.headers.referer.split('&')[1].split('=')[1]
   db.client.query(`
     INSERT INTO friends (userID, friendID)
     VALUES (${userId}, ${friendId})
   `, (err, data) => {
     if (err) {
-      // console.log('error from server', err)
+      console.log('error from server', err)
       res.send(err);
     } else {
-      // console.log('success in add friend')
+      console.log('success')
       res.sendStatus(204);
     }
   })
 });
 
 app.delete('/removefriend', (req, res) => {
-  let friendId = 7;
-  let userId = 1;
-
-  // let friendId = req.body.friendID
-  // let userId = req.body.userID
+  var friendId = req.headers.referer.split('?')[1].split('=')[1].split('')[0]
+  var userId = req.headers.referer.split('&')[1].split('=')[1]
   db.client.query(`
     DELETE from friends
     WHERE userID=${userId} AND friendID=${friendId}
   `, (err, data) => {
     if (err) {
-      // console.log('error from server', err)
       res.send(err);
     } else {
+      console.log('success')
       res.sendStatus(204);
     }
   })
 });
 app.post('/comment', (req, res) => {
-  console.log('looking for this', typeof(req.body['comment']))
-
   var userId = parseInt(req.body['userid'])
   var friendId = parseInt(req.body['friendid'])
   var comment = req.body['comment']
-  var tileId = parseInt(req.body['commentid'])
-  console.log(userId, friendId, comment, tileId)
-  db.client.query(`
-    INSERT INTO comments (userID, friendID, comment, tileId) VALUES (${userId}, ${friendId},'', ${tileId});`, (err, data) => {
-      if (err) {
-        console.log('error from server', err)
-        res.send(err);
-      } else {
-        res.sendStatus(204);
-      }
+
+  let text = `INSERT INTO comments (userID, friendID, comment, timestamp) VALUES ($1, $2, $3, now())`
+  let values = [userId, friendId, comment]
+  db.client.query(text, values)
+  .then(result => {
+    res.sendStatus(204);
+  })
+  .catch(err => console.log('error from server', err))
+})
+
+app.get('/statComment', (req, res) => {
+  var friendId = req.headers.referer.split('?')[1].split('=')[1].split('&')[0]
+
+  db.client.query(`SELECT (comments.userid, comments.comment, comments.friendid, users.username, users.picture, to_char(comments.timestamp, 'Month DD, YYYY')) FROM comments INNER JOIN users ON comments.userid=users.id WHERE comments.friendid=${friendId}`)
+  .then(result => {
+    var data = []
+    result.rows.map((roww, i) => {
+      var temp = roww.row.split(',')
+      var obj = {}
+      obj['comment'] = temp[1].split('"')[1]
+      obj['username'] = temp[3]
+      obj['photo'] = temp[4]
+      obj['date'] = temp[5].split('"')[1]
+      data.push(obj)
     })
+
+
+    res.send(data)
+  })
+  .catch(err => console.log(err))
+
 })
 
 
@@ -496,9 +502,9 @@ app.get('/notifications/users/goals', (req, res) => {
     if (err) {
       res.send(err);
     } else {
-      goals.water = data.rows[0].watergoal;
-      goals.calories = data.rows[0].caloriegoal;
-      goals.weight = data.rows[0].weightgoal;
+      goals.water = data.rows[0] ? data.rows[0].watergoal : 0;
+      goals.calories = data.rows[0] ? data.rows[0].caloriegoal : 0;
+      goals.weight = data.rows[0] ? data.rows[0].weightgoal : 0;
       res.send(goals);
     }
   })
@@ -587,3 +593,12 @@ app.listen(port, function () {
 });
 
 
+// (
+//   select row_to_json(f)
+//   from (
+//     SELECT userID,
+//     friendID
+//     from friends
+//     WHERE userID=${userId} AND friendID=${friendId}
+//   ) f
+// ) as isFriend,

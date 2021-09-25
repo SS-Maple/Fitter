@@ -15,12 +15,11 @@ import SharedStats from './sharedStats.jsx'
 
 class FriendProfile extends React.Component {
   constructor(props){
-    console.log('0')
     super(props);
     this.state ={
       username: '',
-      userid: 1,
-      friendid: 1,
+      userid: null,
+      friendid: null,
       profilephoto: 'https://cdn0.iconfinder.com/data/icons/users-34/24/user_symbol_person-1024.png',
       firstName: '',
       lastName: '',
@@ -28,22 +27,24 @@ class FriendProfile extends React.Component {
       stats: [],
       goals: {},
       friends: [],
-      isFriend: null
+      // isFriend: null
     }
   }
   componentDidMount(){
-    console.log('1', )
     this.getFriendData()
   }
 
   getFriendData() {
-    console.log('2')
     axios.get('/friendProfile')
     .then(result => {
-      console.log('3')
+      console.log('what is this', result.data);
       var userData = result.data
-      console.log('userdata', userData)
-      console.log('isfriend', userData.isfriend)
+      if(userData.fiends===null){
+        userData[fiends]= []
+      }
+      if (result.data.goals === null) {
+        userData[goals] === {}
+      }
       this.setState({
         friendid: userData.friendid,
         userid: userData.userid,
@@ -54,41 +55,31 @@ class FriendProfile extends React.Component {
         description: userData.descriptionmessage,
         stats: userData.dlydata,
         goals: userData.goals,
-        friends: userData.fiends.length || 0,
-        isFriend: (userData.isfriend !== null) ? true : false
+        friends: userData.friends.length,
+        // isFriend: (userData.isfriend !== null) ? true : false
       })
-      console.log('state', this.state)
     })
     .catch(err => {
-      console.log('3')
       console.log(err)
     })
   }
-  // const [friend, setFriend] = useState(props.friend)
-
-  // useEffect(() => {
-  //   console.log('hi')
-  //   axios.get('/friendProfile')
-  //   .then(result => {
-  //     console.log('in friendProfile', result)
-
-  //   })
-  // })
-
+  
   render() {
     return(
-
-        <div>
+      
+      <div className='my-profile-container'> 
           <div className='my-profile'>
             <div className='profile-info'>
               <div className='profile-pic'>
                 <img className='profile-img' src={this.state.profilephoto}></img>
               </div>
+              
               <div className='profile-desc'>
                 <p className='user-details'>{this.state.username}</p>
                 {/* {friend.firstName} {friend.lastName} */}
               </div>
-              <div className='user-profile-friends'
+
+              <div className='user-profile-friends' 
                 onClick={() => console.log('On click needs to route to friendList', this.state.friendid)}>
               <Link to={`/friends?friendId=${this.state.friendid}`}>
                 <div className='friend-count'>{this.state.friends}</div>
@@ -96,18 +87,21 @@ class FriendProfile extends React.Component {
               </Link>
             </div>
             </div>
-            <div className='profile-intro'>
-              <h4>{this.state.firstName} {this.state.lastName}</h4>
+            <div className='profile-intro' >
+              <div style={{fontSize:'18px'}}><b>{this.state.firstName} {this.state.lastName}</b><br/></div>
               <p>{this.state.description}</p>
             </div>
             <div className='profile-btn-container'>
-              <AddFriend isFriend={this.state.isFriend}/>
-              <MessageButton />
+              <AddFriend />
+              <Link to={`/statComment?friendId=${this.state.friendid}`}>
+              <button className='profile-btn' onClick={() => console.log('On click needs to route to', this.state.friendid)}> Comments </button>
+              </Link>
             </div>
           </div>
           <div>
             <SharedStats picture={this.state.profilephoto} username={this.state.username} stats={this.state.stats} goals={this.state.goals} userid={this.state.userid} friendid={this.state.friendid}/>
           </div>
+          <div className='feed-bottom'></div>
         </div>
 
     )
