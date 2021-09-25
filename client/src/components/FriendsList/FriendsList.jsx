@@ -14,7 +14,6 @@ function FriendsList() {
 
   useEffect(() => {
     let temp = friendId.join('');
-    console.log('temp', temp)
     axios.get(`/friends?friendId=${temp}`)
       .then((response) => setName(response.data[0].firstname))
       .catch((error) => error);

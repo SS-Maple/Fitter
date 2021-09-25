@@ -8,7 +8,7 @@ import { useAuth } from '../user-auth.js';
 
 const TodaysGoals = ({ userid, goals }) => {
   // const {caloriegoal, watergoal, weightgoal} = goals
-console.log("goal",goals)
+// console.log("goal",goals)
   const [calories, setCalories] = useState(0);
   const [water, setWater] = useState(0);
   const [weight, setWeight] = useState(0);
