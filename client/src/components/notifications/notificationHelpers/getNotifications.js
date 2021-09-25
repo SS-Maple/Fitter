@@ -19,8 +19,6 @@ const getNotifications = (userId) => {
       throw new Error(err);
     });
 
-    console.log('data in getNotifs', notifications);
-
     return notifications;
 }
 

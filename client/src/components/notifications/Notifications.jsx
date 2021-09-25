@@ -3,12 +3,14 @@ import axios from 'axios';
 import { useAuth } from '../user-auth.js';
 const getNotifications = require('./notificationHelpers/getNotifications.js');
 const deleteNotifications = require('./notificationHelpers/deleteNotifications.js');
+const generateNewNotifications = require('./notificationHelpers/generateNewNotifications.js');
 
 const Notifications = () => {
   const auth = useAuth();
   const [ userId, setUserId ] = useState(auth.userId);
-  const [ newNotifications, setNewNotifications ] = useState(['Hello', 'Hey you']);
-  const [ oldNotifications, setOldNotifications ] = useState(['Old stuff', 'More old Stuff']);
+  const [ newNotifications, setNewNotifications ] = useState([]);
+  const [ oldNotifications, setOldNotifications ] = useState([]);
+  const [ numTimes, setNumTimes ] = useState(0);
   let updateDbBoolean = false;
   let labels = {
     new: 'New Notifications',
@@ -17,12 +19,16 @@ const Notifications = () => {
     none: 'You have no notifications to display'
   };
 
+  if (numTimes < 1) {
+    setNumTimes(numTimes + 1);
+    generateNewNotifications(userId);
+  }
+
   React.useEffect(() => {
     let notifications = [[],[]];
 
     axios.get(`/notifications?userId=${userId}`)
       .then(data => {
-        console.log('data in Notif', data);
         if (data.data.length > 0) {
           for (var i = 0; i < data.data.length; i++) {
             if (data.data[i].new === true) {
@@ -35,20 +41,16 @@ const Notifications = () => {
         return notifications;
       })
       .then((notifications) => {
-        setNewNotifications(notifications[0])
-        setOldNotifications(notifications[1])
+        setNewNotifications(notifications[0]);
+        setOldNotifications(notifications[1]);
       })
       .then(() => {
-        updateDbBoolean = true;
+        axios.put(`/notifications?userId=${userId}`)
       })
       .catch(err => {
         throw new Error(err);
       });
   }, []);
-
-  if (updateDbBoolean) {
-    axios.put(`/notifications?userId=${userId}`)
-  }
 
   if (newNotifications || oldNotifications) {
     return (

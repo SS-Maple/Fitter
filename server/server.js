@@ -430,7 +430,7 @@ app.get('/notifications/users/goals', (req, res) => {
     } else {
       goals.water = data.rows[0] ? data.rows[0].watergoal : 0;
       goals.calories = data.rows[0] ? data.rows[0].caloriegoal : 0;
-      goals.weight = data.rows[0] ? data.rows[0].weightgoal: 0;
+      goals.weight = data.rows[0] ? data.rows[0].weightgoal : 0;
       res.send(goals);
     }
   })
