@@ -20,8 +20,8 @@ const Notifications = () => {
   };
 
   if (numTimes < 1) {
-    setNumTimes(numTimes + 1);
     generateNewNotifications(userId);
+    setNumTimes(numTimes + 1);
   }
 
   React.useEffect(() => {
