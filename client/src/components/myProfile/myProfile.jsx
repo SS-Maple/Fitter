@@ -16,7 +16,7 @@ const MyProfile = () => {
   const [picture, setPicture] = useState('');
   const [intro, setIntro] = useState('');
   const [stats, setStats] = useState([]);
-  const [goals, setGoals] = useState('');
+  const [goals, setGoals] = useState({});
   const [friendCount, setFriendCount] = useState('');
   const [editGoals, setEditGoals] = useState(false);
   const auth = useAuth();
@@ -29,6 +29,7 @@ const MyProfile = () => {
     axios.get('/userdata', { params: {userId: userid}})
     .then(data => {
       let info = data.data[0]
+      console.log(info)
         setUserId(info.id)
         setFirstName(info.firstname)
         setLastName(info.lastname)
@@ -46,7 +47,7 @@ const MyProfile = () => {
         if (info.goals) {
           setGoals(info.goals)
         } else {
-          setGoals('')
+          setGoals({})
         }
 
         // setStats(info.stats)
