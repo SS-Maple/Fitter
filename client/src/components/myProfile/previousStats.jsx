@@ -2,13 +2,18 @@ import React from 'react';
 
 const PreviousStats = ({stats, goals, handleShare}) => {
 
-   return stats.map((stat, i) =>{
+  if (stats === null) {
+    return null;
+  } else {
+
+
+    return stats.map((stat, i) =>{
       let waterGoal = ((stat.water/ goals.watergoal) * 100).toFixed(0);
       let calorieGoal = ((stat.calories/ goals.caloriegoal) * 100).toFixed(0);
       let weightGoal = ((stat.weight/goals.weightgoal) * 100).toFixed(0);
       let share = stat.shareboolean ? '[ Unshare ]' : '[ Share ]';
-    return(
-      <div className='previous-stat-container' key={i} >
+      return(
+        <div className='previous-stat-container' key={i} >
         <div className='stat-header'>
           <p>{stat.date}</p>
           <div className='share' data-id={stat.id} data-bool={stat.shareboolean} onClick={(e) => handleShare(e)}>{share}</div>
@@ -19,7 +24,8 @@ const PreviousStats = ({stats, goals, handleShare}) => {
       </div>
        )
       }
-    )
-}
+      )
+    }
+  }
 
 export default PreviousStats;

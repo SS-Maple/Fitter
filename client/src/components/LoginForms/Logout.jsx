@@ -7,7 +7,7 @@ function Logout() {
   const auth = useAuth();
 
   return auth.user ? (
-    <p>
+    <p className='logout'>
       Welcome! {`User ${auth.userId}`}
       <button
         onClick={() => {
