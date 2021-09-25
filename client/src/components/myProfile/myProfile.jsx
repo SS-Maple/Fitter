@@ -16,10 +16,9 @@ const MyProfile = () => {
   const [picture, setPicture] = useState('');
   const [intro, setIntro] = useState('');
   const [stats, setStats] = useState([]);
-  const [goals, setGoals] = useState('');
+  const [goals, setGoals] = useState({});
   const [friendCount, setFriendCount] = useState('');
   const [editGoals, setEditGoals] = useState(false);
-
   const auth = useAuth();
 
   useEffect(() => {
@@ -30,15 +29,29 @@ const MyProfile = () => {
     axios.get('/userdata', { params: {userId: userid}})
     .then(data => {
       let info = data.data[0]
+      console.log(info)
         setUserId(info.id)
         setFirstName(info.firstname)
         setLastName(info.lastname)
         setBirthDay(info.birthday)
         setPicture(info.picture)
         setIntro(info.intro)
-        setStats(info.stats)
-        setGoals(info.goals)
         setFriendCount(info.friendcount)
+
+        if (info.stats) {
+          setStats(info.stats)
+        } else {
+          setStats([])
+        }
+
+        if (info.goals) {
+          setGoals(info.goals)
+        } else {
+          setGoals({})
+        }
+
+        // setStats(info.stats)
+        // setGoals(info.goals)
     })
   }
 
