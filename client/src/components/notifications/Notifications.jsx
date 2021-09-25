@@ -6,39 +6,10 @@ const deleteNotifications = require('./notificationHelpers/deleteNotifications.j
 
 const Notifications = () => {
   const auth = useAuth();
-
   const [ userId, setUserId ] = useState(auth.userId);
   const [ newNotifications, setNewNotifications ] = useState(['Hello', 'Hey you']);
   const [ oldNotifications, setOldNotifications ] = useState(['Old stuff', 'More old Stuff']);
-
-  React.useEffect(() => {
-      let notifications = [[],[]];
-
-      axios.get(`/notifications?userId=${userId}`)
-        .then(data => {
-          if (data.data.length > 0) {
-            for (var i = 0; i < data.data.length; i++) {
-              if (data.data[i].new === true) {
-                notifications[0].push(data.data[i]);
-              } else {
-                notifications[1].push(data.data[i])
-              }
-            }
-          }
-          return notifications;
-        })
-        .then((notifications) => {
-          setNewNotifications(notifications[0])
-          setOldNotifications(notifications[1])
-        })
-        .then(() => {
-          axios.put(`/notifications?userId=${userId}`)
-        })
-        .catch(err => {
-          throw new Error(err);
-        });
-  }, []);
-
+  let updateDbBoolean = false;
   let labels = {
     new: 'New Notifications',
     old: 'Old Notifications',
@@ -46,12 +17,37 @@ const Notifications = () => {
     none: 'You have no notifications to display'
   };
 
-  const handleDeleteClick = () => {
-    deleteNotifications(userId);
-    React.useEffect(() => {
-      setNewNotifications([]);
-      setOldNotifications([]);
-    }, []);
+  React.useEffect(() => {
+    let notifications = [[],[]];
+
+    axios.get(`/notifications?userId=${userId}`)
+      .then(data => {
+        console.log('data in Notif', data);
+        if (data.data.length > 0) {
+          for (var i = 0; i < data.data.length; i++) {
+            if (data.data[i].new === true) {
+              notifications[0].push(data.data[i]);
+            } else {
+              notifications[1].push(data.data[i])
+            }
+          }
+        }
+        return notifications;
+      })
+      .then((notifications) => {
+        setNewNotifications(notifications[0])
+        setOldNotifications(notifications[1])
+      })
+      .then(() => {
+        updateDbBoolean = true;
+      })
+      .catch(err => {
+        throw new Error(err);
+      });
+  }, []);
+
+  if (updateDbBoolean) {
+    axios.put(`/notifications?userId=${userId}`)
   }
 
   if (newNotifications || oldNotifications) {

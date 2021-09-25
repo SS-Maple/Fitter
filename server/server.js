@@ -428,9 +428,9 @@ app.get('/notifications/users/goals', (req, res) => {
     if (err) {
       res.send(err);
     } else {
-      goals.water = data.rows[0].watergoal;
-      goals.calories = data.rows[0].caloriegoal;
-      goals.weight = data.rows[0].weightgoal;
+      goals.water = data.rows[0] ? data.rows[0].watergoal : 0;
+      goals.calories = data.rows[0] ? data.rows[0].caloriegoal : 0;
+      goals.weight = data.rows[0] ? data.rows[0].weightgoal: 0;
       res.send(goals);
     }
   })

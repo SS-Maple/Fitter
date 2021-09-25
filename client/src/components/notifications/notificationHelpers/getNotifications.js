@@ -15,12 +15,11 @@ const getNotifications = (userId) => {
         }
       }
     })
-    .then(() => {
-      axios.put(`/notifications?userId=${userId}`)
-    })
     .catch(err => {
       throw new Error(err);
     });
+
+    console.log('data in getNotifs', notifications);
 
     return notifications;
 }

@@ -14,3 +14,7 @@ id,userId,notificationText,notificationTimestamp
 13,8,"You forgot to fill out your weight goals!",true
 14,8,"You have met your water goals!",true
 15,8,"You have exceeded your calorie goals!",true
+16,1,"This is a new notification",true
+17,1,"This is another new notification",true
+18,1,"This is an old notification", false
+19,1,"This is another old notification",false
