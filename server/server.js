@@ -351,12 +351,12 @@ app.get('/isfriend', (req, res) => {
 
   var friendId = req.headers.referer.split('?')[1].split('=')[1].split('&')[0]
   var userId = req.headers.referer.split('&')[1].split('=')[1]
-
   db.client.query(`
     SELECT * from friends WHERE userID=${userId} AND friendID=${friendId}`, (err, data) => {
     if (err) {
       res.send(err);
     } else {
+      console.log(data.rows)
       if(data.rows.length === 0) {
         res.send(false);
       } else {
@@ -369,7 +369,6 @@ app.get('/isfriend', (req, res) => {
 app.post('/addfriend', (req, res) => {
   var friendId = req.headers.referer.split('?')[1].split('=')[1].split('')[0]
   var userId = req.headers.referer.split('&')[1].split('=')[1]
-  console.log('friendid:', friendId, 'userId:', userId)
   db.client.query(`
     INSERT INTO friends (userID, friendID)
     VALUES (${userId}, ${friendId})
