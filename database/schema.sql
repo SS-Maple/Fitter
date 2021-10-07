@@ -36,7 +36,7 @@ CREATE TABLE friends (
 
 CREATE TABLE goals (
   id                  SERIAL      UNIQUE     PRIMARY KEY,
-  userId                INT       NOT NULL   REFERENCES users(id),
+  userId                INT       UNIQUE   REFERENCES users(id),
   waterGoal             INT       DEFAULT 0,
   calorieGoal           INT       DEFAULT 0,
   weightGoal            INT       DEFAULT 0,

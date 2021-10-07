@@ -76,7 +76,7 @@ const LineChart = () => {
   return (
     <>
     <div className='header'>
-      <div className='feed-bottom'></div>
+      <div className='feed-bottom' style={{marginTop: '20%'}}></div>
       <h1 className='title' style={{color:'white', textAlign:'center'}}>{text} Chart</h1>
       <form>
         <label htmlFor='chart-selection'> Select Chart </label>
